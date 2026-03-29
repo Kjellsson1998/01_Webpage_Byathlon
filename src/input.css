@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch  */
+
+
+@theme {
+  --color-YellowC-50: #fdf9ec;
+  --color-YellowC-100: #fbf1d5;
+  --color-YellowC-200: #f7e4ab;
+  --color-YellowC-300: #f3d886;
+  --color-YellowC-400: #efca5c;
+  --color-YellowC-500: #ebbd33;
+  --color-YellowC-600: #d1a215;
+  --color-YellowC-700: #9e7a10;
+  --color-YellowC-800: #664f0a;
+  --color-YellowC-900: #332805;
+  --color-YellowC-950: #1c1603;
+  --color-GreenC-50: #f0f3e7;
+  --color-GreenC-100: #e1e7d0;
+  --color-GreenC-200: #c6d0a4;
+  --color-GreenC-300: #a8b875;
+  --color-GreenC-400: #899a50;
+  --color-GreenC-500: #606c38;
+  --color-GreenC-600: #4e572d;
+  --color-GreenC-700: #394021;
+  --color-GreenC-800: #272c17;
+  --color-GreenC-900: #12140a;
+  --color-GreenC-950: #090a05;
+  --color-RedC-50: #fbe9e9;
+  --color-RedC-100: #f7d4d4;
+  --color-RedC-200: #eea5a5;
+  --color-RedC-300: #e67979;
+  --color-RedC-400: #de4a4a;
+  --color-RedC-500: #cf2626;
+  --color-RedC-600: #a41e1e;
+  --color-RedC-700: #7d1717;
+  --color-RedC-800: #520f0f;
+  --color-RedC-900: #2b0808;
+  --color-RedC-950: #160404;
+  --color-BlueC-50: #f1f6f9;
+  --color-BlueC-100: #dfeaf1;
+  --color-BlueC-200: #c3d8e5;
+  --color-BlueC-300: #a3c3d7;
+  --color-BlueC-400: #86b0ca;
+  --color-BlueC-500: #669bbc;
+  --color-BlueC-600: #4780a3;
+  --color-BlueC-700: #355f79;
+  --color-BlueC-800: #244052;
+  --color-BlueC-900: #111f27;
+  --color-BlueC-950: #091115;
+  --color-BrownC-50: #f2f0ee;
+  --color-BrownC-100: #e7e3df;
+  --color-BrownC-200: #ccc4bc;
+  --color-BrownC-300: #b4a89d;
+  --color-BrownC-400: #9c8c7d;
+  --color-BrownC-500: #7e6f60;
+  --color-BrownC-600: #65594d;
+  --color-BrownC-700: #4b4239;
+  --color-BrownC-800: #312b25;
+  --color-BrownC-900: #1a1714;
+  --color-BrownC-950: #0c0a09;
+  --color-TanC-50: #efe8e0;
+  --color-TanC-100: #eae1d7;
+  --color-TanC-200: #e3d7c9;
+  --color-TanC-300: #dbcbb8;
+  --color-TanC-400: #d2bea8;
+  --color-TanC-500: #c7af93;
+  --color-TanC-600: #bda07f;
+  --color-TanC-700: #af8c64;
+  --color-TanC-800: #97754e;
+  --color-TanC-900: #765b3d;
+  --color-TanC-950: #624c32;
+  --color-DGreenC-50: #efeeeb;
+  --color-DGreenC-100: #dfded8;
+  --color-DGreenC-200: #c1bfb3;
+  --color-DGreenC-300: #a29d8b;
+  --color-DGreenC-400: #7f7a67;
+  --color-DGreenC-500: #595648;
+  --color-DGreenC-600: #474439;
+  --color-DGreenC-700: #36342b;
+  --color-DGreenC-800: #25231e;
+  --color-DGreenC-900: #11100e;
+  --color-DGreenC-950: #080807; 
+}
+
+

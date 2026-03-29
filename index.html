@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Byathlon</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      href="Image/HK logo Master Version.svg"
+      type="image/svg+xml"
+    />
+    <link rel="apple-touch-icon" href="Image/HK-logo_liten3.png" />
+    <link rel="shortcut icon" href="Image/HK-logo_liten5.png" />
+  </head>
+
+  <body class="bg-TanC-50 text-DGreenC-800 font-sans">
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3">
+          <img src="Image/HK-logo_liten5.png" alt="Byathlon logo" class="h-10 w-10" />
+          <span class="text-TanC-100 text-xl font-bold tracking-wide">Byathlon</span>
+        </a>
+        <div class="hidden md:flex gap-8 text-TanC-200 text-sm font-medium">
+          <a href="#om" class="hover:text-YellowC-400 transition-colors">Om evenemanget</a>
+          <a href="#distanser" class="hover:text-YellowC-400 transition-colors">Distanser</a>
+          <a href="#info" class="hover:text-YellowC-400 transition-colors">Praktisk info</a>
+          <a href="#anmalan" class="hover:text-YellowC-400 transition-colors">Anmälan</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-DGreenC-700 via-DGreenC-600 to-GreenC-500 text-white overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-YellowC-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-BlueC-400 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative text-center px-6 max-w-4xl mx-auto">
+        <p class="text-YellowC-400 font-semibold tracking-widest uppercase mb-4">Simma &middot; Cykla &middot; Spring</p>
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-6">Byathlon</h1>
+        <p class="text-xl md:text-2xl text-TanC-200 mb-4 max-w-2xl mx-auto">
+          Ett triathlon-evenemang med två distanser &mdash; välj din utmaning!
+        </p>
+        <p class="text-lg text-TanC-300 mb-10">Datum och plats meddelas snart</p>
+        <a href="#distanser" class="inline-block bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold px-8 py-4 rounded-lg text-lg transition-colors shadow-lg">
+          Se distanserna
+        </a>
+      </div>
+    </header>
+
+    <!-- OM EVENEMANGET -->
+    <section id="om" class="py-24 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-DGreenC-700 mb-6">Om evenemanget</h2>
+        <p class="text-lg text-DGreenC-500 leading-relaxed max-w-2xl mx-auto">
+          Byathlon är ett triathlon-evenemang för alla nivåer. Oavsett om du är nybörjare eller erfaren
+          multisportare finns det en distans som passar dig. Välj mellan en kortare och en längre bana
+          och utmana dig själv i simning, cykling och löpning.
+        </p>
+      </div>
+    </section>
+
+    <!-- DISTANSER -->
+    <section id="distanser" class="py-24 px-6 bg-DGreenC-700">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">Välj din distans</h2>
+        <p class="text-center text-TanC-300 mb-16 text-lg">Två banor &mdash; samma fantastiska upplevelse</p>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+          <!-- KORT DISTANS -->
+          <div class="bg-TanC-50 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-GreenC-500 px-8 py-6">
+              <h3 class="text-2xl font-bold text-white">Kort distans</h3>
+              <p class="text-GreenC-100 mt-1">Perfekt för nybörjare</p>
+            </div>
+            <div class="px-8 py-8 space-y-6">
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7 text-BlueC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 18l3-3 2 2 4-7 3 5h4" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Simning</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">200 m</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7 text-GreenC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 18V6l-3 4h4"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Cykel</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">1 mil <span class="text-base font-normal text-DGreenC-400">(10 km)</span></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7 text-RedC-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Löpning</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">2 km</p>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-TanC-200">
+                <p class="text-DGreenC-500 font-semibold">Totalt: 12,2 km</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- LÅNG DISTANS -->
+          <div class="bg-TanC-50 rounded-2xl shadow-xl overflow-hidden ring-2 ring-YellowC-400">
+            <div class="bg-YellowC-500 px-8 py-6">
+              <h3 class="text-2xl font-bold text-DGreenC-800">Lång distans</h3>
+              <p class="text-DGreenC-600 mt-1">För dig som vill ha en extra utmaning</p>
+            </div>
+            <div class="px-8 py-8 space-y-6">
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7 text-BlueC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 18l3-3 2 2 4-7 3 5h4" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Simning</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">400 m</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7 text-GreenC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 18V6l-3 4h4"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Cykel</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">3,5 mil <span class="text-base font-normal text-DGreenC-400">(35 km)</span></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7 text-RedC-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Löpning</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">3,5 km</p>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-TanC-200">
+                <p class="text-DGreenC-500 font-semibold">Totalt: 38,9 km</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PRAKTISK INFO -->
+    <section id="info" class="py-24 px-6">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-center text-DGreenC-700 mb-16">Praktisk information</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white rounded-xl p-8 shadow-md">
+            <div class="w-12 h-12 rounded-lg bg-BlueC-100 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-BlueC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Datum</h3>
+            <p class="text-DGreenC-400">Meddelas snart</p>
+          </div>
+          <div class="bg-white rounded-xl p-8 shadow-md">
+            <div class="w-12 h-12 rounded-lg bg-GreenC-100 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-GreenC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"/><circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Plats</h3>
+            <p class="text-DGreenC-400">Meddelas snart</p>
+          </div>
+          <div class="bg-white rounded-xl p-8 shadow-md">
+            <div class="w-12 h-12 rounded-lg bg-YellowC-100 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-YellowC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Start</h3>
+            <p class="text-DGreenC-400">Meddelas snart</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANMÄLAN -->
+    <section id="anmalan" class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-4xl font-bold text-white mb-6 text-center">Anmälan</h2>
+        <p class="text-GreenC-100 text-lg mb-10 text-center">
+          Fyll i dina uppgifter och klicka på "Skicka anmälan" &mdash; ett förifylt e-postmeddelande öppnas i din e-postklient.
+        </p>
+
+        <form id="anmalan-form" class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 space-y-6">
+          <!-- Namn -->
+          <div>
+            <label for="namn" class="block text-TanC-100 font-semibold mb-2">Namn *</label>
+            <input type="text" id="namn" required
+              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
+              placeholder="Förnamn Efternamn" />
+          </div>
+
+          <!-- E-post -->
+          <div>
+            <label for="epost" class="block text-TanC-100 font-semibold mb-2">E-post *</label>
+            <input type="email" id="epost" required
+              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
+              placeholder="din@epost.se" />
+          </div>
+
+          <!-- Telefon -->
+          <div>
+            <label for="telefon" class="block text-TanC-100 font-semibold mb-2">Telefon</label>
+            <input type="tel" id="telefon"
+              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
+              placeholder="070-123 45 67" />
+          </div>
+
+          <!-- Distans -->
+          <div>
+            <label class="block text-TanC-100 font-semibold mb-3">Välj distans *</label>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="cursor-pointer">
+                <input type="radio" name="distans" value="kort" required class="peer hidden" />
+                <div class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20">
+                  <p class="text-white font-bold text-lg">Kort</p>
+                  <p class="text-TanC-300 text-sm mt-1">200m + 1 mil + 2km</p>
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="distans" value="lang" class="peer hidden" />
+                <div class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20">
+                  <p class="text-white font-bold text-lg">Lång</p>
+                  <p class="text-TanC-300 text-sm mt-1">400m + 3,5 mil + 3,5km</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Meddelande -->
+          <div>
+            <label for="meddelande" class="block text-TanC-100 font-semibold mb-2">Övrig information</label>
+            <textarea id="meddelande" rows="3"
+              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
+              placeholder="Allergier, frågor, eller annat vi bör veta..."></textarea>
+          </div>
+
+          <!-- Skicka -->
+          <button type="submit"
+            class="w-full bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold py-4 rounded-lg text-lg transition-colors shadow-lg cursor-pointer">
+            Skicka anmälan via e-post
+          </button>
+          <p class="text-TanC-300 text-sm text-center">
+            Din e-postklient öppnas med ett förifylt meddelande. Tryck "Skicka" i din e-post för att slutföra anmälan.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      document.getElementById('anmalan-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const namn = document.getElementById('namn').value.trim();
+        const epost = document.getElementById('epost').value.trim();
+        const telefon = document.getElementById('telefon').value.trim();
+        const distansEl = document.querySelector('input[name="distans"]:checked');
+        const meddelande = document.getElementById('meddelande').value.trim();
+
+        if (!distansEl) {
+          alert('Vänligen välj en distans.');
+          return;
+        }
+
+        const distans = distansEl.value === 'kort'
+          ? 'Kort distans (Simning 200m, Cykel 1 mil, Löpning 2km)'
+          : 'Lång distans (Simning 400m, Cykel 3,5 mil, Löpning 3,5km)';
+
+        const subject = 'Anmälan till Byathlon – ' + namn;
+        let body = 'Hej!\n\n';
+        body += 'Jag vill anmäla mig till Byathlon.\n\n';
+        body += '--- Uppgifter ---\n';
+        body += 'Namn: ' + namn + '\n';
+        body += 'E-post: ' + epost + '\n';
+        if (telefon) body += 'Telefon: ' + telefon + '\n';
+        body += 'Distans: ' + distans + '\n';
+        if (meddelande) body += '\nÖvrigt: ' + meddelande + '\n';
+        body += '\nMvh,\n' + namn;
+
+        const mailto = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        window.location.href = mailto;
+      });
+    </script>
+
+    <!-- FOOTER -->
+    <footer class="bg-DGreenC-800 text-TanC-400 py-12 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <img src="Image/HK-logo_liten5.png" alt="Byathlon logo" class="h-12 w-12 mx-auto mb-4 opacity-70" />
+        <p class="font-semibold text-TanC-200 text-lg mb-2">Byathlon</p>
+        <p class="text-sm text-TanC-500">&copy; 2026 Byathlon. Alla rättigheter förbehållna.</p>
+      </div>
+    </footer>
+  </body>
+</html>

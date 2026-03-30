@@ -1,0 +1,48 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "_gpxType": "trk",
+        "name": "Custom route",
+        "coordinateProperties": {}
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            18.32862,
+            63.3007,
+            94.5
+          ],
+          [
+            18.32802,
+            63.30079,
+            85.7
+          ],
+          [
+            18.32802,
+            63.30079,
+            85.7
+          ],
+          [
+            18.32849,
+            63.30115,
+            90.33
+          ],
+          [
+            18.32849,
+            63.30115,
+            90.33
+          ],
+          [
+            18.32901,
+            63.30095,
+            90.6
+          ]
+        ]
+      }
+    }
+  ]
+}

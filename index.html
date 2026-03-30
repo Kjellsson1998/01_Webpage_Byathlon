@@ -10,41 +10,100 @@
       href="Image/HK logo Master Version.svg"
       type="image/svg+xml"
     />
-    <link rel="apple-touch-icon" href="Image/HK-logo_liten3.png" />
-    <link rel="shortcut icon" href="Image/HK-logo_liten5.png" />
+    <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
+    <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+      .glowing-dot {
+        box-shadow: 0 0 10px 4px rgba(234, 179, 8, 0.7);
+        border-radius: 50%;
+      }
+      .glowing-dot-green {
+        box-shadow: 0 0 10px 4px rgba(34, 197, 94, 0.7);
+        border-radius: 50%;
+      }
+      @keyframes flowLang { to { stroke-dashoffset: -40; } }
+      @keyframes flowKort { to { stroke-dashoffset: -30; } }
+      .flow-lang { stroke-dasharray: 14, 26; animation: flowLang 1.6s linear infinite; }
+      .flow-kort { stroke-dasharray: 10, 20; animation: flowKort 1.2s linear infinite; }
+      .km-tip { background: rgba(10,18,10,0.92) !important; border: 1px solid rgba(255,255,255,0.15) !important; color: #fde047; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; box-shadow: none !important; }
+      .km-tip.green { color: #86efac; }
+      .km-tip::before { display: none !important; }
+    </style>
   </head>
 
   <body class="bg-TanC-50 text-DGreenC-800 font-sans">
     <!-- NAV -->
-    <nav class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav
+      class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg"
+    >
+      <div
+        class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
         <a href="#" class="flex items-center gap-3">
-          <img src="Image/HK-logo_liten5.png" alt="Byathlon logo" class="h-10 w-10" />
-          <span class="text-TanC-100 text-xl font-bold tracking-wide">Byathlon</span>
+          <img
+            src="Image/Byathlon_Loga.png"
+            alt="Byathlon logo"
+            class="h-10 w-10"
+          />
+          <span class="text-TanC-100 text-xl font-bold tracking-wide"
+            >Byathlon</span
+          >
         </a>
         <div class="hidden md:flex gap-8 text-TanC-200 text-sm font-medium">
-          <a href="#om" class="hover:text-YellowC-400 transition-colors">Om evenemanget</a>
-          <a href="#distanser" class="hover:text-YellowC-400 transition-colors">Distanser</a>
-          <a href="#info" class="hover:text-YellowC-400 transition-colors">Praktisk info</a>
-          <a href="#anmalan" class="hover:text-YellowC-400 transition-colors">Anmälan</a>
+          <a href="#om" class="hover:text-YellowC-400 transition-colors"
+            >Om evenemanget</a
+          >
+          <a href="#distanser" class="hover:text-YellowC-400 transition-colors"
+            >Distanser</a
+          >
+          <a href="#info" class="hover:text-YellowC-400 transition-colors"
+            >Praktisk info</a
+          >
+          <a href="#anmalan" class="hover:text-YellowC-400 transition-colors"
+            >Anmälan</a
+          >
+          <a href="#sponsorer" class="hover:text-YellowC-400 transition-colors"
+            >Sponsorer</a
+          >
         </div>
       </div>
     </nav>
 
     <!-- HERO -->
-    <header class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-DGreenC-700 via-DGreenC-600 to-GreenC-500 text-white overflow-hidden">
+    <header
+      class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-DGreenC-700 via-DGreenC-600 to-GreenC-500 text-white overflow-hidden"
+    >
       <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-YellowC-400 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-BlueC-400 rounded-full blur-3xl"></div>
+        <div
+          class="absolute top-20 left-10 w-72 h-72 bg-YellowC-400 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-20 right-10 w-96 h-96 bg-BlueC-400 rounded-full blur-3xl"
+        ></div>
       </div>
       <div class="relative text-center px-6 max-w-4xl mx-auto">
-        <p class="text-YellowC-400 font-semibold tracking-widest uppercase mb-4">Simma &middot; Cykla &middot; Spring</p>
-        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-6">Byathlon</h1>
+        <p
+          class="text-YellowC-400 font-semibold tracking-widest uppercase mb-4"
+        >
+          Simma &middot; Cykla &middot; Spring
+        </p>
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-6">
+          Byathlon
+        </h1>
         <p class="text-xl md:text-2xl text-TanC-200 mb-4 max-w-2xl mx-auto">
           Ett triathlon-evenemang med två distanser &mdash; välj din utmaning!
         </p>
-        <p class="text-lg text-TanC-300 mb-10">Datum och plats meddelas snart</p>
-        <a href="#distanser" class="inline-block bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold px-8 py-4 rounded-lg text-lg transition-colors shadow-lg">
+        <p class="text-lg text-TanC-300 mb-10">
+          29 juli 2026 &middot; Sidensjö &middot; Sidensjöveckan
+        </p>
+        <a
+          href="#distanser"
+          class="inline-block bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold px-8 py-4 rounded-lg text-lg transition-colors shadow-lg"
+        >
           Se distanserna
         </a>
       </div>
@@ -55,9 +114,12 @@
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-4xl font-bold text-DGreenC-700 mb-6">Om evenemanget</h2>
         <p class="text-lg text-DGreenC-500 leading-relaxed max-w-2xl mx-auto">
-          Byathlon är ett triathlon-evenemang för alla nivåer. Oavsett om du är nybörjare eller erfaren
-          multisportare finns det en distans som passar dig. Välj mellan en kortare och en längre bana
-          och utmana dig själv i simning, cykling och löpning.
+          Byathlon är ett triathlon-evenemang för alla nivåer, arrangerat av
+          <strong>By intresseförening</strong>
+          under Sidensjöveckan. Oavsett om du är nybörjare eller erfaren
+          multisportare finns det en distans som passar dig. Välj mellan en
+          kortare och en längre bana och utmana dig själv i simning, cykling och
+          löpning.
         </p>
       </div>
     </section>
@@ -65,11 +127,14 @@
     <!-- DISTANSER -->
     <section id="distanser" class="py-24 px-6 bg-DGreenC-700">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">Välj din distans</h2>
-        <p class="text-center text-TanC-300 mb-16 text-lg">Två banor &mdash; samma fantastiska upplevelse</p>
+        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">
+          Välj din distans
+        </h2>
+        <p class="text-center text-TanC-300 mb-16 text-lg">
+          Tre klasser &mdash; välj din utmaning
+        </p>
 
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <!-- KORT DISTANS -->
           <div class="bg-TanC-50 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-GreenC-500 px-8 py-6">
@@ -78,35 +143,82 @@
             </div>
             <div class="px-8 py-8 space-y-6">
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0">
-                  <svg class="w-7 h-7 text-BlueC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 18l3-3 2 2 4-7 3 5h4" />
+                <div
+                  class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-BlueC-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 18l3-3 2 2 4-7 3 5h4"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Simning</p>
-                  <p class="text-2xl font-bold text-DGreenC-700">200 m</p>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Simning
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">50 m</p>
                 </div>
               </div>
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0">
-                  <svg class="w-7 h-7 text-GreenC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 18V6l-3 4h4"/>
+                <div
+                  class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-GreenC-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="5" cy="18" r="3" />
+                    <circle cx="19" cy="18" r="3" />
+                    <path d="M12 18V6l-3 4h4" />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Cykel</p>
-                  <p class="text-2xl font-bold text-DGreenC-700">1 mil <span class="text-base font-normal text-DGreenC-400">(10 km)</span></p>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Cykel
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">
+                    1 mil
+                    <span class="text-base font-normal text-DGreenC-400"
+                      >(10 km)</span
+                    >
+                  </p>
                 </div>
               </div>
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0">
-                  <svg class="w-7 h-7 text-RedC-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"/>
+                <div
+                  class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-RedC-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Löpning</p>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Löpning
+                  </p>
                   <p class="text-2xl font-bold text-DGreenC-700">2 km</p>
                 </div>
               </div>
@@ -117,42 +229,93 @@
           </div>
 
           <!-- LÅNG DISTANS -->
-          <div class="bg-TanC-50 rounded-2xl shadow-xl overflow-hidden ring-2 ring-YellowC-400">
+          <div
+            class="bg-TanC-50 rounded-2xl shadow-xl overflow-hidden ring-2 ring-YellowC-400"
+          >
             <div class="bg-YellowC-500 px-8 py-6">
               <h3 class="text-2xl font-bold text-DGreenC-800">Lång distans</h3>
-              <p class="text-DGreenC-600 mt-1">För dig som vill ha en extra utmaning</p>
+              <p class="text-DGreenC-600 mt-1">
+                För dig som vill ha en extra utmaning
+              </p>
             </div>
             <div class="px-8 py-8 space-y-6">
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0">
-                  <svg class="w-7 h-7 text-BlueC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 18l3-3 2 2 4-7 3 5h4" />
+                <div
+                  class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-BlueC-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M14 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM4 18l3-3 2 2 4-7 3 5h4"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Simning</p>
-                  <p class="text-2xl font-bold text-DGreenC-700">400 m</p>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Simning
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">100 m</p>
                 </div>
               </div>
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0">
-                  <svg class="w-7 h-7 text-GreenC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 18V6l-3 4h4"/>
+                <div
+                  class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-GreenC-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="5" cy="18" r="3" />
+                    <circle cx="19" cy="18" r="3" />
+                    <path d="M12 18V6l-3 4h4" />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Cykel</p>
-                  <p class="text-2xl font-bold text-DGreenC-700">3,5 mil <span class="text-base font-normal text-DGreenC-400">(35 km)</span></p>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Cykel
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">
+                    3,5 mil
+                    <span class="text-base font-normal text-DGreenC-400"
+                      >(35 km)</span
+                    >
+                  </p>
                 </div>
               </div>
               <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0">
-                  <svg class="w-7 h-7 text-RedC-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"/>
+                <div
+                  class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-RedC-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide">Löpning</p>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Löpning
+                  </p>
                   <p class="text-2xl font-bold text-DGreenC-700">3,5 km</p>
                 </div>
               </div>
@@ -162,6 +325,183 @@
             </div>
           </div>
 
+          <!-- MOTION -->
+          <div class="bg-TanC-50 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-BlueC-500 px-8 py-6">
+              <h3 class="text-2xl font-bold text-white">Motion</h3>
+              <p class="text-BlueC-100 mt-1">Avslappnat &mdash; för alla</p>
+            </div>
+            <div class="px-8 py-8 space-y-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-GreenC-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="5" cy="18" r="3" />
+                    <circle cx="19" cy="18" r="3" />
+                    <path d="M12 18V6l-3 4h4" />
+                  </svg>
+                </div>
+                <div>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Cykel
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">
+                    1 mil
+                    <span class="text-base font-normal text-DGreenC-400"
+                      >(10 km)</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-RedC-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 21l3-9 2 3 4-8"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Löpning / Gång
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">500 m</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 rounded-full bg-YellowC-100 flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-7 h-7 text-YellowC-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M12 12c0-3 2.5-6 2.5-6s2.5 3 2.5 6a2.5 2.5 0 0 1-5 0Z"
+                    />
+                    <path
+                      d="M7 15c0-2 1.5-4 1.5-4s1.5 2 1.5 4a1.5 1.5 0 0 1-3 0Z"
+                    />
+                    <rect x="2" y="18" width="20" height="4" rx="1" />
+                  </svg>
+                </div>
+                <div>
+                  <p
+                    class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
+                  >
+                    Bastu &amp; Bad
+                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">Dopp</p>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-TanC-200">
+                <p class="text-DGreenC-500 font-semibold">
+                  Totalt: 10,5 km + bastu &amp; bad
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KARTANIMERING – CYKELSTRÄCKORNA -->
+    <section id="karta" class="py-24 px-6 bg-DGreenC-800">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">Cykelsträckorna</h2>
+        <p class="text-center text-TanC-300 mb-8 text-lg">Båda sträckorna genom Sidensjöbygden</p>
+
+        <div class="bg-DGreenC-700 rounded-2xl shadow-2xl overflow-hidden p-4 md:p-6">
+
+          <!-- Legend + knapp -->
+          <div class="flex flex-wrap justify-between items-center gap-4 mb-5 px-1">
+            <div class="flex flex-wrap gap-5">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-2 rounded-full" style="background:#eab308;"></div>
+                <span class="text-TanC-200 text-sm font-semibold">Lång &mdash; 35 km</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-2 rounded-full" style="background:#22c55e;"></div>
+                <span class="text-TanC-200 text-sm font-semibold">Kort &mdash; 10 km</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full border-2 border-white" style="background:#22c55e;"></div>
+                <span class="text-TanC-400 text-xs">Start</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full border-2 border-white" style="background:#ef4444;"></div>
+                <span class="text-TanC-400 text-xs">Mål</span>
+              </div>
+            </div>
+            <button id="startAnimation"
+              class="bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold py-2 px-6 rounded-full transition-colors flex items-center gap-2 shadow-lg shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+              </svg>
+              Spela upp
+            </button>
+          </div>
+
+          <!-- Karta -->
+          <div id="cykelkarta" class="w-full rounded-xl" style="height: 480px;"></div>
+
+          <!-- Höjdprofiler sida vid sida -->
+          <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 px-1">
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-xs font-semibold uppercase tracking-widest" style="color:#eab308;">Lång distans &mdash; höjdprofil</p>
+                <div class="flex gap-3 text-TanC-500 text-xs">
+                  <span id="elev-max-lang"></span><span id="elev-min-lang"></span>
+                </div>
+              </div>
+              <div class="relative" style="height:68px;">
+                <svg class="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                  <defs><clipPath id="elev-clip-lang"><rect id="elev-clip-rect-lang" x="0" y="0" width="0" height="100"/></clipPath></defs>
+                  <path id="elev-bg-lang" fill="rgba(234,179,8,0.1)" stroke="rgba(234,179,8,0.25)" stroke-width="1" d=""/>
+                  <path id="elev-fill-lang" fill="rgba(234,179,8,0.4)" stroke="#eab308" stroke-width="1.5" clip-path="url(#elev-clip-lang)" d=""/>
+                  <line id="elev-cursor-lang" x1="0" y1="0" x2="0" y2="100" stroke="#fde047" stroke-width="2" opacity="0"/>
+                </svg>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-xs font-semibold uppercase tracking-widest" style="color:#22c55e;">Kort distans &mdash; höjdprofil</p>
+                <div class="flex gap-3 text-TanC-500 text-xs">
+                  <span id="elev-max-kort"></span><span id="elev-min-kort"></span>
+                </div>
+              </div>
+              <div class="relative" style="height:68px;">
+                <svg class="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                  <defs><clipPath id="elev-clip-kort"><rect id="elev-clip-rect-kort" x="0" y="0" width="0" height="100"/></clipPath></defs>
+                  <path id="elev-bg-kort" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.25)" stroke-width="1" d=""/>
+                  <path id="elev-fill-kort" fill="rgba(34,197,94,0.4)" stroke="#22c55e" stroke-width="1.5" clip-path="url(#elev-clip-kort)" d=""/>
+                  <line id="elev-cursor-kort" x1="0" y1="0" x2="0" y2="100" stroke="#86efac" stroke-width="2" opacity="0"/>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -169,88 +509,186 @@
     <!-- PRAKTISK INFO -->
     <section id="info" class="py-24 px-6">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-bold text-center text-DGreenC-700 mb-16">Praktisk information</h2>
+        <h2 class="text-4xl font-bold text-center text-DGreenC-700 mb-16">
+          Praktisk information
+        </h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="bg-white rounded-xl p-8 shadow-md">
-            <div class="w-12 h-12 rounded-lg bg-BlueC-100 flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-BlueC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+            <div
+              class="w-12 h-12 rounded-lg bg-BlueC-100 flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-BlueC-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
               </svg>
             </div>
             <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Datum</h3>
-            <p class="text-DGreenC-400">Meddelas snart</p>
+            <p class="text-DGreenC-700 font-semibold">Onsdag 29 juli 2026</p>
+            <p class="text-DGreenC-400 text-sm mt-1">
+              Sidensjöveckan, vecka 31
+            </p>
           </div>
           <div class="bg-white rounded-xl p-8 shadow-md">
-            <div class="w-12 h-12 rounded-lg bg-GreenC-100 flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-GreenC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"/><circle cx="12" cy="9" r="2.5"/>
+            <div
+              class="w-12 h-12 rounded-lg bg-GreenC-100 flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-GreenC-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"
+                />
+                <circle cx="12" cy="9" r="2.5" />
               </svg>
             </div>
             <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Plats</h3>
-            <p class="text-DGreenC-400">Meddelas snart</p>
+            <p class="text-DGreenC-700 font-semibold">Sidensjö</p>
+            <a
+              href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8"
+              target="_blank"
+              rel="noopener"
+              class="text-BlueC-500 hover:text-BlueC-600 text-sm mt-1 inline-block underline"
+              >Visa på karta</a
+            >
           </div>
           <div class="bg-white rounded-xl p-8 shadow-md">
-            <div class="w-12 h-12 rounded-lg bg-YellowC-100 flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-YellowC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            <div
+              class="w-12 h-12 rounded-lg bg-YellowC-100 flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-YellowC-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
               </svg>
             </div>
             <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Start</h3>
-            <p class="text-DGreenC-400">Meddelas snart</p>
+            <p class="text-DGreenC-700 font-semibold">Kl. 17:00</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ANMÄLAN -->
-    <section id="anmalan" class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600">
+    <section
+      id="anmalan"
+      class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600"
+    >
       <div class="max-w-2xl mx-auto">
         <h2 class="text-4xl font-bold text-white mb-6 text-center">Anmälan</h2>
         <p class="text-GreenC-100 text-lg mb-10 text-center">
-          Fyll i dina uppgifter och klicka på "Skicka anmälan" &mdash; ett förifylt e-postmeddelande öppnas i din e-postklient.
+          Fyll i dina uppgifter och klicka på "Skicka anmälan" &mdash; ett
+          förifylt e-postmeddelande öppnas i din e-postklient.
         </p>
 
-        <form id="anmalan-form" class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 space-y-6">
+        <form
+          id="anmalan-form"
+          class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 space-y-6"
+        >
           <!-- Namn -->
           <div>
-            <label for="namn" class="block text-TanC-100 font-semibold mb-2">Namn *</label>
-            <input type="text" id="namn" required
+            <label for="namn" class="block text-TanC-100 font-semibold mb-2"
+              >Namn *</label
+            >
+            <input
+              type="text"
+              id="namn"
+              required
               class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="Förnamn Efternamn" />
+              placeholder="Förnamn Efternamn"
+            />
           </div>
 
           <!-- E-post -->
           <div>
-            <label for="epost" class="block text-TanC-100 font-semibold mb-2">E-post *</label>
-            <input type="email" id="epost" required
+            <label for="epost" class="block text-TanC-100 font-semibold mb-2"
+              >E-post *</label
+            >
+            <input
+              type="email"
+              id="epost"
+              required
               class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="din@epost.se" />
+              placeholder="din@epost.se"
+            />
           </div>
 
           <!-- Telefon -->
           <div>
-            <label for="telefon" class="block text-TanC-100 font-semibold mb-2">Telefon</label>
-            <input type="tel" id="telefon"
+            <label for="telefon" class="block text-TanC-100 font-semibold mb-2"
+              >Telefon</label
+            >
+            <input
+              type="tel"
+              id="telefon"
               class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="070-123 45 67" />
+              placeholder="070-123 45 67"
+            />
           </div>
 
           <!-- Distans -->
           <div>
-            <label class="block text-TanC-100 font-semibold mb-3">Välj distans *</label>
-            <div class="grid grid-cols-2 gap-4">
+            <label class="block text-TanC-100 font-semibold mb-3"
+              >Välj distans *</label
+            >
+            <div class="grid grid-cols-3 gap-3">
               <label class="cursor-pointer">
-                <input type="radio" name="distans" value="kort" required class="peer hidden" />
-                <div class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20">
-                  <p class="text-white font-bold text-lg">Kort</p>
-                  <p class="text-TanC-300 text-sm mt-1">200m + 1 mil + 2km</p>
+                <input
+                  type="radio"
+                  name="distans"
+                  value="kort"
+                  required
+                  class="peer hidden"
+                />
+                <div
+                  class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20"
+                >
+                  <p class="text-white font-bold">Kort</p>
+                  <p class="text-TanC-300 text-xs mt-1">200m + 1 mil + 2km</p>
                 </div>
               </label>
               <label class="cursor-pointer">
-                <input type="radio" name="distans" value="lang" class="peer hidden" />
-                <div class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20">
-                  <p class="text-white font-bold text-lg">Lång</p>
-                  <p class="text-TanC-300 text-sm mt-1">400m + 3,5 mil + 3,5km</p>
+                <input
+                  type="radio"
+                  name="distans"
+                  value="lang"
+                  class="peer hidden"
+                />
+                <div
+                  class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20"
+                >
+                  <p class="text-white font-bold">Lång</p>
+                  <p class="text-TanC-300 text-xs mt-1">
+                    400m + 3,5 mil + 3,5km
+                  </p>
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  name="distans"
+                  value="motion"
+                  class="peer hidden"
+                />
+                <div
+                  class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20"
+                >
+                  <p class="text-white font-bold">Motion</p>
+                  <p class="text-TanC-300 text-xs mt-1">1 mil + 500m + bastu</p>
                 </div>
               </label>
             </div>
@@ -258,65 +696,316 @@
 
           <!-- Meddelande -->
           <div>
-            <label for="meddelande" class="block text-TanC-100 font-semibold mb-2">Övrig information</label>
-            <textarea id="meddelande" rows="3"
+            <label
+              for="meddelande"
+              class="block text-TanC-100 font-semibold mb-2"
+              >Övrig information</label
+            >
+            <textarea
+              id="meddelande"
+              rows="3"
               class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="Allergier, frågor, eller annat vi bör veta..."></textarea>
+              placeholder="Allergier, frågor, eller annat vi bör veta..."
+            ></textarea>
           </div>
 
           <!-- Skicka -->
-          <button type="submit"
-            class="w-full bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold py-4 rounded-lg text-lg transition-colors shadow-lg cursor-pointer">
+          <button
+            type="submit"
+            class="w-full bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold py-4 rounded-lg text-lg transition-colors shadow-lg cursor-pointer"
+          >
             Skicka anmälan via e-post
           </button>
           <p class="text-TanC-300 text-sm text-center">
-            Din e-postklient öppnas med ett förifylt meddelande. Tryck "Skicka" i din e-post för att slutföra anmälan.
+            Din e-postklient öppnas med ett förifylt meddelande. Tryck "Skicka"
+            i din e-post för att slutföra anmälan.
           </p>
         </form>
       </div>
     </section>
 
     <script>
-      document.getElementById('anmalan-form').addEventListener('submit', function(e) {
-        e.preventDefault();
+      document
+        .getElementById("anmalan-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        const namn = document.getElementById('namn').value.trim();
-        const epost = document.getElementById('epost').value.trim();
-        const telefon = document.getElementById('telefon').value.trim();
-        const distansEl = document.querySelector('input[name="distans"]:checked');
-        const meddelande = document.getElementById('meddelande').value.trim();
+          const namn = document.getElementById("namn").value.trim();
+          const epost = document.getElementById("epost").value.trim();
+          const telefon = document.getElementById("telefon").value.trim();
+          const distansEl = document.querySelector(
+            'input[name="distans"]:checked',
+          );
+          const meddelande = document.getElementById("meddelande").value.trim();
 
-        if (!distansEl) {
-          alert('Vänligen välj en distans.');
-          return;
+          if (!distansEl) {
+            alert("Vänligen välj en distans.");
+            return;
+          }
+
+          const distansMap = {
+            kort: "Kort distans (Simning 200m, Cykel 1 mil, Löpning 2km)",
+            lang: "Lång distans (Simning 400m, Cykel 3,5 mil, Löpning 3,5km)",
+            motion: "Motion (Cykel 1 mil, Löpning/Gång 500m, Bastu & Bad)",
+          };
+          const distans = distansMap[distansEl.value];
+
+          const subject = "Anmälan till Byathlon – " + namn;
+          let body = "Hej!\n\n";
+          body += "Jag vill anmäla mig till Byathlon.\n\n";
+          body += "--- Uppgifter ---\n";
+          body += "Namn: " + namn + "\n";
+          body += "E-post: " + epost + "\n";
+          if (telefon) body += "Telefon: " + telefon + "\n";
+          body += "Distans: " + distans + "\n";
+          if (meddelande) body += "\nÖvrigt: " + meddelande + "\n";
+          body += "\nMvh,\n" + namn;
+
+          const mailto =
+            "mailto:?subject=" +
+            encodeURIComponent(subject) +
+            "&body=" +
+            encodeURIComponent(body);
+          window.location.href = mailto;
+        });
+    </script>
+
+    <!-- SPONSORER -->
+    <section id="sponsorer" class="py-24 px-6 bg-TanC-100">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-DGreenC-700 mb-4">
+          Sponsorer
+        </h2>
+        <p class="text-center text-DGreenC-400 mb-16">
+          Tack till våra sponsorer som gör Byathlon möjligt
+        </p>
+
+        <!-- Huvudsponsorer -->
+        <div class="mb-12">
+          <p
+            class="text-sm font-semibold text-DGreenC-400 uppercase tracking-widest text-center mb-8"
+          >
+            Huvudsponsorer
+          </p>
+          <div class="flex flex-wrap justify-center items-center gap-10">
+            <img
+              src="Image/Vagtrummor.webp"
+              alt="HK Vägtrummor"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
+            />
+            <div
+              class="w-48 h-24 rounded-xl bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
+            >
+              <img
+                src="Image/Loggo-ISBOXEN.png"
+                alt="ISBOXEN"
+                class="h-20 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
+              />
+            </div>
+            <div
+              class="w-48 h-24 rounded-xl bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
+            >
+              Logotyp
+            </div>
+          </div>
+        </div>
+
+        <!-- Övriga sponsorer -->
+        <div>
+          <p
+            class="text-sm font-semibold text-DGreenC-400 uppercase tracking-widest text-center mb-8"
+          >
+            Övriga sponsorer
+          </p>
+          <div class="flex flex-wrap justify-center items-center gap-8">
+            <a href="https://sponsor.se" target="_blank" rel="noopener">
+              <img
+                src="Image/Vagtrummor.webp"
+                alt="HK Vägtrummor"
+                class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
+              />
+            </a>
+
+            <div
+              class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
+            >
+              Logotyp
+            </div>
+            <div
+              class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
+            >
+              Logotyp
+            </div>
+            <div
+              class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
+            >
+              Logotyp
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaflet JS + Kartanimeringar -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      // ── KOORDINATER ──────────────────────────────────────────────────────────
+      const langRaw = [
+        [18.33049,63.301,91.08],[18.33049,63.301,91.08],[18.33195,63.30272,99.97],[18.33225,63.30297,99.04],[18.33225,63.30297,99.04],[18.33251,63.30318,102.29],[18.33329,63.30358,110.47],[18.33423,63.30394,106.2],[18.3352,63.30417,99.2],[18.33546,63.30422,97.57],[18.33546,63.30422,97.57],[18.33586,63.30428,99.06],[18.33724,63.30439,101.98],[18.33779,63.3044,101.69],[18.33922,63.30433,95.51],[18.3441,63.30356,97.01],[18.34729,63.30304,110.01],[18.34729,63.30304,110.01],[18.34746,63.30301,110.06],[18.35036,63.30271,114.63],[18.35242,63.30263,114.82],[18.35603,63.30263,106.48],[18.36246,63.30279,106.22],[18.36538,63.30279,103.94],[18.36615,63.30277,101.69],[18.3673,63.30266,98.14],[18.36824,63.30251,94.44],[18.36933,63.30225,90.22],[18.37031,63.30191,90.38],[18.37101,63.30152,86.39],[18.37157,63.30114,83.83],[18.37197,63.30082,82.2],[18.37225,63.30051,87.42],[18.37241,63.30025,84.9],[18.37264,63.29974,81.22],[18.3727,63.29937,88.08],[18.37269,63.29888,87.95],[18.37274,63.29857,96.91],[18.37285,63.29826,98.92],[18.37295,63.2981,98.04],[18.37302,63.29799,97.87],[18.37328,63.29774,97.46],[18.37366,63.29744,99.24],[18.37405,63.29719,94.4],[18.37475,63.29688,91.25],[18.3754,63.29666,94.16],[18.37841,63.29576,97.06],[18.38464,63.29394,108.89],[18.38854,63.29275,108.95],[18.38968,63.29242,107.99],[18.39257,63.29164,110.17],[18.39462,63.29101,105.04],[18.39666,63.29046,98.09],[18.3978,63.29023,99.64],[18.3986,63.29014,101.48],[18.3986,63.29014,101.48],[18.39894,63.2901,101.8],[18.40066,63.28998,100.3],[18.40797,63.2898,109.03],[18.40797,63.2898,109.03],[18.4132,63.28968,100.15],[18.4132,63.28968,100.15],[18.42343,63.28943,84.18],[18.42343,63.28943,84.18],[18.43151,63.28924,63.06],[18.43151,63.28924,63.06],[18.43643,63.28912,59.5],[18.43643,63.28912,59.5],[18.43892,63.28907,56.34],[18.44172,63.28902,57.02],[18.44247,63.28899,54.29],[18.44545,63.28891,52.71],[18.44955,63.28882,49.88],[18.45111,63.28884,53.82],[18.45168,63.28888,54.89],[18.45264,63.28898,52.69],[18.4543,63.28925,49.16],[18.45682,63.28983,50.1],[18.45873,63.29022,41.85],[18.45873,63.29022,41.85],[18.46017,63.29052,51.77],[18.45977,63.28962,37.87],[18.45977,63.28962,37.87],[18.45773,63.2848,37.66],[18.45746,63.28427,51.27],[18.45713,63.2834,64.64],[18.45694,63.28303,63.97],[18.45698,63.28245,60.03],[18.45723,63.28164,62.49],[18.45731,63.28123,68.59],[18.45723,63.28083,70.89],[18.45691,63.28048,75.73],[18.45661,63.2801,83.76],[18.45631,63.27966,79.11],[18.45608,63.27913,89.95],[18.45566,63.27833,98.91],[18.45529,63.27791,101.63],[18.45515,63.27756,96.54],[18.45509,63.27721,94.38],[18.45537,63.27675,96.87],[18.45582,63.27646,94.58],[18.4577,63.27551,85.28],[18.45813,63.27533,85.02],[18.45865,63.27504,81.72],[18.45918,63.27459,79.57],[18.45959,63.27415,86.16],[18.45988,63.27371,90.4],[18.46018,63.27316,80.63],[18.46033,63.27269,83.33],[18.46048,63.27232,85.92],[18.46046,63.27199,88.02],[18.46038,63.27164,91.97],[18.46031,63.27144,91.37],[18.46017,63.27118,91.2],[18.45961,63.27061,92.68],[18.45884,63.26991,89.82],[18.45869,63.26973,84.98],[18.45838,63.26932,83.41],[18.45833,63.26884,82.16],[18.45839,63.26852,83.18],[18.45892,63.26656,71.67],[18.45924,63.26565,63.94],[18.45956,63.26513,59.19],[18.46114,63.26338,66.63],[18.46135,63.26284,59.3],[18.46141,63.26221,44],[18.46128,63.26069,52.24],[18.46129,63.26028,59.79],[18.46162,63.25961,49.27],[18.46217,63.25857,50.24],[18.46266,63.25701,53.18],[18.46265,63.25651,44.02],[18.4625,63.25615,45],[18.46201,63.25581,52.95],[18.46139,63.25558,54.92],[18.4606,63.25543,52.14],[18.45998,63.25529,50.09],[18.45881,63.25507,56.32],[18.45843,63.255,58.3],[18.458,63.25494,59.57],[18.4572,63.25487,59.7],[18.45629,63.25487,57.58],[18.45521,63.25493,58.49],[18.45444,63.25501,56.24],[18.4535,63.25519,52.79],[18.4468,63.25665,54.06],[18.44577,63.25679,57.78],[18.4448,63.25684,61.01],[18.44374,63.25681,63.57],[18.44343,63.25678,62.57],[18.44343,63.25678,62.57],[18.44275,63.25672,63.52],[18.44194,63.25659,63.56],[18.44127,63.2564,67.43],[18.44077,63.2562,65.64],[18.43868,63.2552,57.52],[18.43711,63.25449,67.14],[18.43551,63.25369,73.9],[18.43386,63.25292,79.72],[18.43287,63.25245,78.84],[18.43033,63.25126,83.07],[18.43033,63.25126,83.07],[18.42961,63.25092,76.4],[18.4293,63.25068,68.26],[18.42902,63.25035,54.42],[18.42899,63.24999,48.22],[18.42911,63.24964,46.51],[18.42938,63.24916,51.77],[18.42967,63.24872,50.29],[18.42974,63.24851,49.28],[18.4298,63.24804,49.71],[18.42975,63.24765,48.19],[18.42945,63.2471,38.36],[18.42921,63.24681,36.33],[18.42854,63.24574,32.09],[18.42825,63.24514,32.33],[18.42811,63.24464,36.57],[18.42796,63.24448,35.78],[18.42796,63.24448,35.78],[18.42778,63.24429,31.67],[18.42469,63.24411,29.18],[18.41981,63.24385,36.4],[18.41801,63.24387,37.02],[18.41646,63.24397,35.84],[18.41522,63.24411,34.34],[18.41398,63.24431,32.25],[18.41377,63.24435,32.53],[18.41377,63.24435,32.53],[18.4123,63.24465,35.98],[18.40895,63.2457,32.37],[18.40268,63.24785,56.27],[18.40138,63.24824,46.32],[18.3999,63.24857,41.83],[18.39665,63.24911,39.56],[18.394,63.24954,45.41],[18.39263,63.24984,46.16],[18.39145,63.25018,45.7],[18.38981,63.25061,46.4],[18.38917,63.25079,46.54],[18.38826,63.25108,49.2],[18.38618,63.25161,46.94],[18.3825,63.25244,49.41],[18.37903,63.25324,39],[18.37223,63.25478,28.21],[18.37047,63.25519,25.7],[18.36754,63.25578,29.5],[18.3648,63.2564,34.5],[18.36334,63.25673,29.93],[18.36317,63.25678,30.63],[18.36121,63.2572,35.09],[18.3588,63.25767,33.56],[18.35683,63.25789,35.69],[18.35113,63.25856,35.86],[18.34974,63.2587,34.28],[18.34899,63.25881,36.84],[18.34808,63.25893,35.36],[18.34629,63.2592,34.89],[18.33729,63.26073,43.43],[18.33155,63.26169,64.97],[18.32885,63.26202,71.82],[18.32786,63.26211,72.67],[18.32173,63.26249,75.54],[18.31897,63.26268,77.89],[18.31839,63.26274,78.94],[18.31777,63.26282,77.88],[18.31679,63.263,74.89],[18.31636,63.26311,72.88],[18.31588,63.26326,68.85],[18.31351,63.26421,71.56],[18.31273,63.26451,72.37],[18.31273,63.26451,72.37],[18.3113,63.26506,72.29],[18.30952,63.26576,70.74],[18.30851,63.2661,63.64],[18.3074,63.26637,65.85],[18.3059,63.26669,69.5],[18.30377,63.26701,65.36],[18.29965,63.26761,65.55],[18.29757,63.26802,64.12],[18.29602,63.2685,59],[18.29402,63.26945,63],[18.29145,63.27069,59.59],[18.29061,63.27121,61.07],[18.29014,63.27152,59.77],[18.28941,63.27213,59.59],[18.28879,63.27273,56.69],[18.28849,63.27306,58.87],[18.28833,63.27341,59.99],[18.28824,63.27382,54.24],[18.28814,63.27467,74.74],[18.28814,63.2749,73.86],[18.28821,63.27512,69.62],[18.28832,63.27538,67.31],[18.28854,63.27573,68.32],[18.2892,63.27671,73.88],[18.28985,63.2777,69.72],[18.29011,63.27806,65.95],[18.2911,63.27923,82.43],[18.29149,63.27959,84.86],[18.29166,63.27972,85.02],[18.29199,63.27992,86.26],[18.29232,63.28009,85.88],[18.29605,63.28193,82.01],[18.29631,63.2821,82.31],[18.29657,63.28233,80.98],[18.29677,63.28254,76.61],[18.29711,63.28304,59.97],[18.29719,63.28333,58.24],[18.29721,63.28358,59.86],[18.29716,63.28389,66.02],[18.29673,63.28462,62.81],[18.29636,63.28513,67.78],[18.29617,63.28544,67.75],[18.29611,63.28561,68.38],[18.29603,63.28595,75.26],[18.29604,63.28621,76.2],[18.2964,63.2871,73.04],[18.29692,63.2882,74.82],[18.29771,63.28994,89.65],[18.29779,63.29017,90.62],[18.29781,63.2904,91.56],[18.29781,63.29057,92.12],[18.29777,63.29075,92.02],[18.29761,63.29102,91.93],[18.29724,63.29138,92.9],[18.29674,63.2917,95.58],[18.29454,63.29261,94.07],[18.29853,63.29457,106.64],[18.30091,63.2958,119.8],[18.30285,63.29668,130],[18.30341,63.29692,128.22],[18.30729,63.29836,128.92],[18.30869,63.29887,117.42],[18.30976,63.2992,115.18],[18.31071,63.29939,120.58],[18.31152,63.29954,115.87],[18.31272,63.29962,119.21],[18.31428,63.29966,120.83],[18.32633,63.29962,102.9],[18.32727,63.29966,104.66],[18.32813,63.29982,105.56],[18.32955,63.30029,104.76],[18.33019,63.30067,97.04],[18.33019,63.30067,97.04],[18.33018,63.30067,97.03],[18.33023,63.3007,96.26],[18.33033,63.30082,93.51]
+      ];
+      const kortRaw = [
+        [18.3305,63.30101,91],[18.3305,63.30101,91],[18.33023,63.3007,96.26],[18.32955,63.30029,104.76],[18.32823,63.29985,105.71],[18.32823,63.29985,105.71],[18.32813,63.29982,105.56],[18.32727,63.29966,104.66],[18.32633,63.29962,102.9],[18.31512,63.29966,115.56],[18.31512,63.29966,115.56],[18.31428,63.29966,120.83],[18.31272,63.29962,119.21],[18.31152,63.29954,115.87],[18.31071,63.29939,120.58],[18.30976,63.2992,115.18],[18.30869,63.29887,117.42],[18.30729,63.29836,128.92],[18.30341,63.29692,128.22],[18.30285,63.29668,130],[18.30123,63.29595,122.88],[18.30123,63.29595,122.88],[18.30091,63.2958,119.8],[18.29853,63.29457,106.64],[18.29456,63.29262,93.76],[18.29456,63.29262,93.76],[18.29454,63.29261,94.07],[18.29326,63.29309,96.75],[18.29195,63.29362,92.79],[18.29195,63.29362,92.79],[18.29129,63.29387,91.03],[18.29044,63.29435,90.39],[18.28968,63.29486,93],[18.28864,63.2956,93],[18.28804,63.29599,87.71],[18.28607,63.29736,81.38],[18.28607,63.29736,81.38],[18.28492,63.29816,87.48],[18.2835,63.29902,98.84],[18.28177,63.29991,93.68],[18.28095,63.30042,97.44],[18.28064,63.30064,93.18],[18.27998,63.30119,101.88],[18.27929,63.30189,94.84],[18.27786,63.30403,95.45],[18.27733,63.30473,92.48],[18.27658,63.30536,88.84],[18.27588,63.30579,88.3],[18.2748,63.30635,86.28],[18.27388,63.30694,87.1],[18.27268,63.30781,86.55],[18.27161,63.30844,83.21],[18.27042,63.30898,79.33],[18.26898,63.3096,89.13],[18.26709,63.31046,87.69],[18.26709,63.31046,87.69],[18.26592,63.31099,91.25],[18.26421,63.31174,100.8],[18.26341,63.31212,91.49],[18.26241,63.31265,99.15],[18.26139,63.31338,90.49],[18.26036,63.31419,88.61],[18.25904,63.31595,86.33],[18.2587,63.31661,81.75],[18.25864,63.31728,76.31],[18.25921,63.31937,90.38],[18.25921,63.31937,90.38],[18.25922,63.31938,90.38],[18.25965,63.31934,90.91],[18.25989,63.31927,89.2],[18.26059,63.31903,86.17],[18.26178,63.31843,92.51],[18.26287,63.31779,97.43],[18.26352,63.31749,106.82],[18.26433,63.31733,110.42],[18.26537,63.31725,115.43],[18.26537,63.31725,115.43],[18.2659,63.3172,116],[18.26624,63.31712,115.59],[18.26647,63.31701,115.29],[18.26698,63.31672,119.51],[18.26733,63.31649,122.15],[18.26817,63.31615,121.37],[18.26838,63.31605,118.1],[18.26853,63.31605,117.32],[18.26884,63.31609,117.62],[18.26907,63.31617,118.39],[18.26928,63.31611,115.17],[18.26981,63.31593,111.04],[18.26998,63.31593,111.04],[18.27013,63.31593,111.67],[18.27033,63.31593,112.58],[18.27044,63.31591,112.69],[18.27181,63.31559,104.79],[18.27259,63.3155,112.58],[18.27421,63.31553,116.36],[18.27494,63.3155,117.18],[18.2774,63.31523,117.95],[18.27812,63.31521,118.54],[18.27974,63.31522,117.23],[18.28155,63.31516,121.46],[18.28203,63.31515,122.86],[18.28244,63.31518,126.22],[18.2832,63.31525,127.93],[18.28398,63.31535,125.47],[18.28543,63.31559,120.78],[18.28654,63.31573,113.82],[18.28685,63.31576,111.35],[18.2884,63.31582,104.7],[18.28849,63.31582,104.68],[18.28849,63.31582,104.68],[18.28943,63.31578,104.6],[18.29042,63.3157,109.78],[18.29254,63.31566,110.23],[18.29361,63.31556,115.9],[18.29461,63.31533,113],[18.29646,63.31483,114.55],[18.29947,63.31381,112.66],[18.30216,63.31301,116.18],[18.30548,63.3124,105.58],[18.30687,63.31213,109.43],[18.30879,63.31175,110.14],[18.31273,63.31099,96.43],[18.31441,63.31063,94.03],[18.31569,63.31032,88.02],[18.3168,63.30993,84.59],[18.31808,63.3096,93.83],[18.31923,63.30948,98.38],[18.32006,63.30933,96.44],[18.32067,63.30916,95.98],[18.32123,63.30895,95.09],[18.3222,63.30841,92.33],[18.32293,63.30811,100.52],[18.32373,63.30802,105.88],[18.32461,63.30801,107.84],[18.32546,63.30804,110.51],[18.32643,63.30805,111.11],[18.32728,63.30793,112.5],[18.32811,63.30777,108.89],[18.32959,63.30734,99.33],[18.33098,63.30684,99.41],[18.3314,63.30654,104.51],[18.33172,63.30622,106.19],[18.33203,63.3058,104.08],[18.33245,63.30538,106.42],[18.33404,63.30486,94.58],[18.33495,63.30445,91.66],[18.3351,63.30428,96.67],[18.3351,63.30428,96.67],[18.3352,63.30417,99.2],[18.33423,63.30394,106.2],[18.33329,63.30358,110.47],[18.33251,63.30318,102.29],[18.33195,63.30272,99.97],[18.3306,63.30113,90.22]
+      ];
+
+      const langCoords = langRaw.map(c => [c[1], c[0]]);
+      const langElev   = langRaw.map(c => c[2]);
+      const kortCoords = kortRaw.map(c => [c[1], c[0]]);
+      const kortElev   = kortRaw.map(c => c[2]);
+      const langN = langCoords.length, kortN = kortCoords.length;
+
+      // ── KARTA ────────────────────────────────────────────────────────────────
+      const TILE = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+      const ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>';
+
+      const map = L.map('cykelkarta', { zoomControl: false, scrollWheelZoom: false });
+      L.tileLayer(TILE, { attribution: ATTR, maxZoom: 19 }).addTo(map);
+      map.fitBounds(L.latLngBounds([...langCoords, ...kortCoords]), { padding: [44, 44] });
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      // Bakgrundslinjer
+      L.polyline(langCoords, { color: '#78350f', weight: 4, opacity: 0.4, dashArray: '6,12' }).addTo(map);
+      L.polyline(kortCoords, { color: '#14532d', weight: 3, opacity: 0.4, dashArray: '6,12' }).addTo(map);
+
+      // Start/mål
+      L.circleMarker(langCoords[0], { radius: 8, fillColor: '#22c55e', color: '#fff', weight: 2.5, fillOpacity: 1 })
+        .bindTooltip('Start', { direction: 'top' }).addTo(map);
+      L.circleMarker(langCoords[langN - 1], { radius: 8, fillColor: '#ef4444', color: '#fff', weight: 2.5, fillOpacity: 1 })
+        .bindTooltip('Mål – Lång', { direction: 'top' }).addTo(map);
+      L.circleMarker(kortCoords[kortN - 1], { radius: 8, fillColor: '#ef4444', color: '#fff', weight: 2.5, fillOpacity: 1 })
+        .bindTooltip('Mål – Kort', { direction: 'top' }).addTo(map);
+
+      // ── HÖJDPROFILER ─────────────────────────────────────────────────────────
+      function buildElevPath(elevs) {
+        const mn = Math.min(...elevs), mx = Math.max(...elevs), n = elevs.length;
+        const pts = elevs.map((e, i) => [(i / (n - 1)) * 1000, 93 - ((e - mn) / (mx - mn)) * 83]);
+        return { d: 'M0,100 L' + pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' L') + ' L1000,100 Z', mn, mx };
+      }
+
+      const langEP = buildElevPath(langElev);
+      const kortEP = buildElevPath(kortElev);
+      document.getElementById('elev-bg-lang').setAttribute('d', langEP.d);
+      document.getElementById('elev-fill-lang').setAttribute('d', langEP.d);
+      document.getElementById('elev-bg-kort').setAttribute('d', kortEP.d);
+      document.getElementById('elev-fill-kort').setAttribute('d', kortEP.d);
+      document.getElementById('elev-max-lang').textContent = '↑ ' + Math.round(langEP.mx) + ' m';
+      document.getElementById('elev-min-lang').textContent = '↓ ' + Math.round(langEP.mn) + ' m';
+      document.getElementById('elev-max-kort').textContent = '↑ ' + Math.round(kortEP.mx) + ' m';
+      document.getElementById('elev-min-kort').textContent = '↓ ' + Math.round(kortEP.mn) + ' m';
+
+      // ── HJÄLPFUNKTIONER ───────────────────────────────────────────────────────
+      function haversine(a, b) {
+        const R = 6371000, dLat = (b[0]-a[0])*Math.PI/180, dLon = (b[1]-a[1])*Math.PI/180;
+        const lat1 = a[0]*Math.PI/180, lat2 = b[0]*Math.PI/180;
+        return R * 2 * Math.asin(Math.sqrt(Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2));
+      }
+
+      function addKmMarkers(coords, fillColor, tipClass) {
+        let dist = 0, next = 5000;
+        for (let i = 1; i < coords.length; i++) {
+          dist += haversine(coords[i-1], coords[i]);
+          if (dist >= next) {
+            const km = Math.round(next / 1000);
+            L.circleMarker(coords[i], {
+              radius: 9, fillColor, color: '#0a120a', weight: 1.5, fillOpacity: 0.95
+            }).bindTooltip(km + ' km', {
+              permanent: true, direction: 'top', className: 'km-tip' + (tipClass ? ' ' + tipClass : '')
+            }).addTo(map);
+            next += 5000;
+          }
         }
+      }
 
-        const distans = distansEl.value === 'kort'
-          ? 'Kort distans (Simning 200m, Cykel 1 mil, Löpning 2km)'
-          : 'Lång distans (Simning 400m, Cykel 3,5 mil, Löpning 3,5km)';
+      // ── ANIMATION ─────────────────────────────────────────────────────────────
+      let langPoly = null, langDot = null, kortPoly = null, kortDot = null;
+      let flowLangPoly = null, flowKortPoly = null;
+      let isAnimating = false;
 
-        const subject = 'Anmälan till Byathlon – ' + namn;
-        let body = 'Hej!\n\n';
-        body += 'Jag vill anmäla mig till Byathlon.\n\n';
-        body += '--- Uppgifter ---\n';
-        body += 'Namn: ' + namn + '\n';
-        body += 'E-post: ' + epost + '\n';
-        if (telefon) body += 'Telefon: ' + telefon + '\n';
-        body += 'Distans: ' + distans + '\n';
-        if (meddelande) body += '\nÖvrigt: ' + meddelande + '\n';
-        body += '\nMvh,\n' + namn;
+      function onComplete() {
+        isAnimating = false;
+        // Dölj cursors
+        document.getElementById('elev-cursor-lang').setAttribute('opacity', '0');
+        document.getElementById('elev-cursor-kort').setAttribute('opacity', '0');
 
-        const mailto = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        window.location.href = mailto;
+        // 5 km-markeringar
+        addKmMarkers(langCoords, '#eab308', '');
+        addKmMarkers(kortCoords, '#22c55e', 'green');
+
+        // Flödeslinjer (animerade dashade pilar)
+        if (flowLangPoly) map.removeLayer(flowLangPoly);
+        if (flowKortPoly) map.removeLayer(flowKortPoly);
+        flowLangPoly = L.polyline(langCoords, { color: '#fde047', weight: 3, opacity: 0.65, className: 'flow-lang' }).addTo(map);
+        flowKortPoly = L.polyline(kortCoords, { color: '#86efac', weight: 2.5, opacity: 0.65, className: 'flow-kort' }).addTo(map);
+
+        const btn = document.getElementById('startAnimation');
+        btn.textContent = 'Spela igen';
+        btn.disabled = false;
+      }
+
+      document.getElementById('startAnimation').addEventListener('click', () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        const btn = document.getElementById('startAnimation');
+        btn.textContent = 'Animerar…';
+        btn.disabled = true;
+
+        // Rensa gamla lager
+        [langPoly, langDot, kortPoly, kortDot, flowLangPoly, flowKortPoly].forEach(l => { if (l) map.removeLayer(l); });
+
+        langPoly = L.polyline([], { color: '#eab308', weight: 5, opacity: 0.95 }).addTo(map);
+        langDot  = L.circleMarker(langCoords[0], { radius: 8, fillColor: '#fde047', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot' }).addTo(map);
+        kortPoly = L.polyline([], { color: '#22c55e', weight: 4, opacity: 0.95 }).addTo(map);
+        kortDot  = L.circleMarker(kortCoords[0], { radius: 7, fillColor: '#86efac', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot-green' }).addTo(map);
+
+        const lcr = document.getElementById('elev-clip-rect-lang');
+        const kcr = document.getElementById('elev-clip-rect-kort');
+        const lcu = document.getElementById('elev-cursor-lang');
+        const kcu = document.getElementById('elev-cursor-kort');
+        lcr.setAttribute('width', '0'); kcr.setAttribute('width', '0');
+        lcu.setAttribute('opacity', '1'); kcu.setAttribute('opacity', '1');
+
+        // Båda sträckorna avslutas samtidigt (proportionell hastighet, 1 punkt/frame på lång)
+        let lastL = 0, lastK = 0, frame = 0;
+
+        function drawFrame() {
+          const t = Math.min(frame / langN, 1);
+          const tL = Math.floor(t * langN), tK = Math.floor(t * kortN);
+          while (lastL < tL) { langPoly.addLatLng(langCoords[lastL]); langDot.setLatLng(langCoords[lastL]); lastL++; }
+          while (lastK < tK) { kortPoly.addLatLng(kortCoords[lastK]); kortDot.setLatLng(kortCoords[lastK]); lastK++; }
+
+          const lw = (lastL / langN * 1000).toFixed(1), kw = (lastK / kortN * 1000).toFixed(1);
+          lcr.setAttribute('width', lw); lcu.setAttribute('x1', lw); lcu.setAttribute('x2', lw);
+          kcr.setAttribute('width', kw); kcu.setAttribute('x1', kw); kcu.setAttribute('x2', kw);
+
+          frame++;
+          if (t < 1) requestAnimationFrame(drawFrame);
+          else onComplete();
+        }
+        drawFrame();
       });
+
     </script>
 
     <!-- FOOTER -->
     <footer class="bg-DGreenC-800 text-TanC-400 py-12 px-6">
       <div class="max-w-4xl mx-auto text-center">
-        <img src="Image/HK-logo_liten5.png" alt="Byathlon logo" class="h-12 w-12 mx-auto mb-4 opacity-70" />
+        <img
+          src="Image/Byathlon_Loga.png"
+          alt="Byathlon logo"
+          class="h-12 w-12 mx-auto mb-4 opacity-70"
+        />
         <p class="font-semibold text-TanC-200 text-lg mb-2">Byathlon</p>
-        <p class="text-sm text-TanC-500">&copy; 2026 Byathlon. Alla rättigheter förbehållna.</p>
+        <p class="text-sm text-TanC-500">Arrangeras av By intresseförening</p>
+        <p class="text-sm text-TanC-600 mt-1">&copy; 2026 Byathlon</p>
       </div>
     </footer>
   </body>

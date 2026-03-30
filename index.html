@@ -1131,7 +1131,7 @@
 
         const map = L.map('sim-lop-karta-map', MAP_LOCK);
         L.tileLayer(TILE, { attribution: ATTR, maxZoom: 19 }).addTo(map);
-        map.fitBounds(L.latLngBounds([...simCoords, ...langCoords, ...kortCoords]), { padding: [44, 44] });
+        map.fitBounds(L.latLngBounds(simCoords), { padding: [80, 80] });
 
         // Spöklinjer (syns direkt, tonas ut)
         L.polyline(simCoords, { color: '#1e3a8a', weight: 5, opacity: 0.35, dashArray: '6,12' }).addTo(map);
@@ -1209,11 +1209,10 @@
         })
         .to(simProg, {
           p: 1,
-          duration: 8,
-          ease: 'power3.inOut',
+          duration: 4,
+          ease: 'none',
           onStart() {
             simDot = L.circleMarker(simCoords[0], { radius: 8, fillColor: '#93c5fd', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot-blue' }).addTo(map);
-            map.flyToBounds(L.latLngBounds(simCoords), { padding: [80, 80], duration: 2, easeLinearity: 0.25 });
           },
           onUpdate() {
             const tS = Math.floor(simProg.p * simN);

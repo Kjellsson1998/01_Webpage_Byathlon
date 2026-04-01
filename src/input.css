@@ -80,7 +80,25 @@
   --color-DGreenC-700: #36342b;
   --color-DGreenC-800: #25231e;
   --color-DGreenC-900: #11100e;
-  --color-DGreenC-950: #080807; 
+  --color-DGreenC-950: #080807;
 }
+
+/* Frosted glass panel */
+.glass {
+  background: rgba(239, 232, 224, 0.45);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(27,58,45,0.03), 0 4px 24px rgba(27,58,45,0.06);
+}
+
+/* ── LIGHT MODE karta ──
+   Voyager bas. Färgglad och ljus med tydliga vägar.
+   Hög saturate för starka färger, lätt sepia för värme. */
+#info-bg-map .leaflet-tile-pane {
+  filter: saturate(2.5) contrast(1.1) brightness(1.05) sepia(0.06);
+}
+
 
 

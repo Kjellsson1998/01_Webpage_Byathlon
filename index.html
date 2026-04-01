@@ -14,7 +14,10 @@
     <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
 
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
 
     <style>
       .glowing-dot {
@@ -25,26 +28,94 @@
         box-shadow: 0 0 10px 4px rgba(34, 197, 94, 0.7);
         border-radius: 50%;
       }
-      @keyframes flowLang { to { stroke-dashoffset: -40; } }
-      @keyframes flowKort { to { stroke-dashoffset: -30; } }
-      .flow-lang { stroke-dasharray: 14, 26; animation: flowLang 1.6s linear infinite; }
-      .flow-kort { stroke-dasharray: 10, 20; animation: flowKort 1.2s linear infinite; }
-      .km-tip { background: rgba(10,18,10,0.92) !important; border: 1px solid rgba(255,255,255,0.15) !important; color: #fde047; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; box-shadow: none !important; }
-      .km-tip.green { color: #86efac; }
-      .km-tip::before { display: none !important; }
-      .glowing-dot-orange { box-shadow: 0 0 10px 4px rgba(249, 115, 22, 0.7); border-radius: 50%; }
-      .glowing-dot-pink   { box-shadow: 0 0 10px 4px rgba(248, 113, 113, 0.7); border-radius: 50%; }
-      .glowing-dot-blue   { box-shadow: 0 0 10px 4px rgba(59, 130, 246, 0.7); border-radius: 50%; }
-      @keyframes flowSim  { to { stroke-dashoffset: -20; } }
-      .flow-sim { stroke-dasharray: 8, 14; animation: flowSim 1s linear infinite; }
+      @keyframes flowLang {
+        to {
+          stroke-dashoffset: -40;
+        }
+      }
+      @keyframes flowKort {
+        to {
+          stroke-dashoffset: -30;
+        }
+      }
+      .flow-lang {
+        stroke-dasharray: 14, 26;
+        animation: flowLang 1.6s linear infinite;
+      }
+      .flow-kort {
+        stroke-dasharray: 10, 20;
+        animation: flowKort 1.2s linear infinite;
+      }
+      .km-tip {
+        background: rgba(10, 18, 10, 0.92) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #fde047;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 4px;
+        box-shadow: none !important;
+      }
+      .km-tip.green {
+        color: #86efac;
+      }
+      .km-tip::before {
+        display: none !important;
+      }
+      .glowing-dot-orange {
+        box-shadow: 0 0 10px 4px rgba(249, 115, 22, 0.7);
+        border-radius: 50%;
+      }
+      .glowing-dot-pink {
+        box-shadow: 0 0 10px 4px rgba(248, 113, 113, 0.7);
+        border-radius: 50%;
+      }
+      .glowing-dot-blue {
+        box-shadow: 0 0 10px 4px rgba(102, 155, 188, 0.7);
+        border-radius: 50%;
+      }
+      /* Kartmarkör: statisk glow */
+      .pulse-marker {
+        box-shadow: 0 0 16px 6px rgba(102,155,188,0.6);
+        border-radius: 50%;
+      }
+      /* Tidslinje: diagonal-delad gul/grön dot (Kort & Lång) */
+      .dot-split {
+        border-radius: 50%;
+        background: linear-gradient(135deg, #efca5c 50%, #606c38 50%);
+        box-shadow: 0 0 8px 2px rgba(234,179,8,0.35);
+      }
+      /* Tidslinje: blå dot (Motion) */
+      .dot-blue-static {
+        border-radius: 50%;
+        box-shadow: 0 0 8px 2px rgba(102,155,188,0.35);
+      }
+      @keyframes flowSim {
+        to {
+          stroke-dashoffset: -20;
+        }
+      }
+      .flow-sim {
+        stroke-dasharray: 8, 14;
+        animation: flowSim 1s linear infinite;
+      }
       /* Höjdprofil: monospace siffror */
-      #elev-max-lang, #elev-min-lang, #elev-max-kort, #elev-min-kort,
-      #sl-elev-max-lang, #sl-elev-min-lang, #sl-elev-max-kort, #sl-elev-min-kort {
-        font-family: ui-monospace, 'Cascadia Code', monospace;
+      #elev-max-lang,
+      #elev-min-lang,
+      #elev-max-kort,
+      #elev-min-kort,
+      #sl-elev-max-lang,
+      #sl-elev-min-lang,
+      #sl-elev-max-kort,
+      #sl-elev-min-kort {
+        font-family: ui-monospace, "Cascadia Code", monospace;
         letter-spacing: 0.04em;
       }
       /* Kartrubriker: sportig tracking */
-      #karta h2, #sim-lop-karta h2 { letter-spacing: 0.1em; }
+      #karta h2,
+      #sim-lop-karta h2 {
+        letter-spacing: 0.1em;
+      }
     </style>
   </head>
 
@@ -171,7 +242,7 @@
                     <path d="M12 18V6l-3 4h4" />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -179,6 +250,19 @@
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700">10,6 km</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 140"
+                  class="w-20 h-14 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M180.8,81.9 L176.6,84.3 L168.8,85.3 L152.1,85.2 L136.4,85.4 L123.4,88.9 L110.8,93.9 L100.7,99.0 L93.5,101.9 L84.4,98.0 L76.4,92.5 L67.1,86.4 L58.6,80.9 L52.9,73.0 L43.3,66.8 L33.1,61.5 L16.8,53.8 L8.8,45.7 L8.4,41.3 L10.6,38.0 L19.2,42.2 L28.9,44.8 L38.4,46.7 L53.1,47.8 L67.0,47.8 L81.8,46.5 L99.7,49.1 L117.8,54.1 L142.0,58.9 L158.4,62.9 L174.3,65.6 L185.3,71.4 L190.5,73.3 L185.8,76.6 L181.6,80.9"
+                    stroke="#22c55e"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
               <div class="flex items-center gap-4">
                 <div
@@ -196,14 +280,27 @@
                     />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
                     Simning
                   </p>
-                  <p class="text-2xl font-bold text-DGreenC-700">50 m</p>
+                  <p class="text-2xl font-bold text-DGreenC-700">100 m</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 140"
+                  class="w-20 h-14 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M123.7,112.1 L67.6,103.3 L25.5,99.8 L13.3,98.0 L8.0,94.5 L8.0,92.8 L13.3,87.5 L23.8,82.3 L58.8,57.7 L85.1,38.5 L93.9,31.4 L102.6,27.9 L113.1,29.7 L118.4,36.7 L128.9,42.0 L164.0,56.0 L192.0,68.2"
+                    stroke="#3b82f6"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
               <div class="flex items-center gap-4">
                 <div
@@ -221,7 +318,7 @@
                     />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -229,6 +326,19 @@
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700">2,3 km</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 140"
+                  class="w-20 h-14 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M8.0,38.7 L29.7,42.5 L41.1,47.4 L47.3,59.0 L78.3,70.2 L99.6,85.3 L131.1,104.7 L158.4,114.8 L178.9,110.2 L192.0,102.7 L185.2,88.9 L160.9,80.0 L144.8,82.0 L134.7,73.4 L150.8,65.5 L165.6,55.7 L160.3,51.8 L129.9,46.6 L96.4,45.6 L68.2,41.4 L38.6,36.6 L19.8,28.8 L19.2,24.3"
+                    stroke="#ef4444"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
               <div class="pt-4 border-t border-TanC-200">
                 <p class="text-DGreenC-500 font-semibold">Totalt: 13 km</p>
@@ -247,7 +357,6 @@
               </p>
             </div>
             <div class="px-8 py-8 space-y-6">
-              <!-- Cykel first -->
               <div class="flex items-center gap-4">
                 <div
                   class="w-14 h-14 rounded-full bg-GreenC-100 flex items-center justify-center shrink-0"
@@ -264,7 +373,7 @@
                     <path d="M12 18V6l-3 4h4" />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -272,8 +381,20 @@
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700">26,6 km</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 110"
+                  class="w-20 h-14 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M52.5,41.8 L60.2,38.1 L75.5,39.9 L91.6,39.9 L97.8,45.1 L112.0,49.8 L129.2,53.3 L157.2,54.0 L184.1,53.8 L188.9,53.7 L186.0,60.7 L184.7,65.4 L189.1,70.5 L187.9,77.5 L191.9,87.8 L184.0,90.2 L166.7,90.0 L157.2,94.5 L155.7,100.8 L127.4,97.3 L95.3,90.1 L71.7,86.1 L43.2,82.3 L31.2,79.1 L14.9,75.3 L8.1,69.0 L16.6,61.6 L17.1,55.4 L18.3,48.8 L29.0,44.2 L48.3,43.1"
+                    stroke="#22c55e"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
-              <!-- Simning second -->
               <div class="flex items-center gap-4">
                 <div
                   class="w-14 h-14 rounded-full bg-BlueC-100 flex items-center justify-center shrink-0"
@@ -290,7 +411,7 @@
                     />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -298,8 +419,20 @@
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700">100 m</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 140"
+                  class="w-20 h-14 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M123.7,112.1 L67.6,103.3 L25.5,99.8 L13.3,98.0 L8.0,94.5 L8.0,92.8 L13.3,87.5 L23.8,82.3 L58.8,57.7 L85.1,38.5 L93.9,31.4 L102.6,27.9 L113.1,29.7 L118.4,36.7 L128.9,42.0 L164.0,56.0 L192.0,68.2"
+                    stroke="#3b82f6"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
-              <!-- Löpning third -->
               <div class="flex items-center gap-4">
                 <div
                   class="w-14 h-14 rounded-full bg-RedC-100 flex items-center justify-center shrink-0"
@@ -316,7 +449,7 @@
                     />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -324,6 +457,19 @@
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700">3 km</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 110"
+                  class="w-20 h-14 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M8.0,45.7 L21.8,48.2 L29.0,51.2 L33.0,58.6 L52.6,65.7 L66.2,75.3 L86.2,87.6 L108.2,92.1 L125.9,92.2 L137.5,101.4 L153.7,103.4 L162.5,100.7 L164.1,97.2 L171.5,93.0 L181.6,83.9 L181.3,72.8 L190.9,61.9 L182.9,52.6 L170.7,50.2 L148.0,52.0 L131.0,54.2 L104.9,54.2 L85.4,50.7 L64.1,50.1 L46.2,47.5 L27.4,44.4 L15.5,39.5 L15.1,36.6"
+                    stroke="#ef4444"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
               <div class="pt-4 border-t border-TanC-200">
                 <p class="text-DGreenC-500 font-semibold">Totalt: 29,7 km</p>
@@ -354,19 +500,27 @@
                     <path d="M12 18V6l-3 4h4" />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
                     Cykel
                   </p>
-                  <p class="text-2xl font-bold text-DGreenC-700">
-                    1 mil
-                    <span class="text-base font-normal text-DGreenC-400"
-                      >(10 km)</span
-                    >
-                  </p>
+                  <p class="text-2xl font-bold text-DGreenC-700">10,6 km</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 140"
+                  class="w-20 h-16 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M180.8,81.9 L176.6,84.3 L168.8,85.3 L152.1,85.2 L136.4,85.4 L123.4,88.9 L110.8,93.9 L100.7,99.0 L93.5,101.9 L84.4,98.0 L76.4,92.5 L67.1,86.4 L58.6,80.9 L52.9,73.0 L43.3,66.8 L33.1,61.5 L16.8,53.8 L8.8,45.7 L8.4,41.3 L10.6,38.0 L19.2,42.2 L28.9,44.8 L38.4,46.7 L53.1,47.8 L67.0,47.8 L81.8,46.5 L99.7,49.1 L117.8,54.1 L142.0,58.9 L158.4,62.9 L174.3,65.6 L185.3,71.4 L190.5,73.3 L185.8,76.6 L181.6,80.9"
+                    stroke="#22c55e"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
               <div class="flex items-center gap-4">
                 <div
@@ -384,7 +538,7 @@
                     />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -392,6 +546,19 @@
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700">600 m</p>
                 </div>
+                <svg
+                  viewBox="0 0 200 140"
+                  class="w-20 h-16 opacity-70 shrink-0"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M8.0,71.6 L25.1,75.0 L60.8,80.9 L87.6,89.8 L100.4,100.3 L124.1,104.2 L149.3,106.1 L168.7,104.2 L187.0,92.9 L192.0,90.2 L190.4,85.5 L178.0,80.9 L159.8,75.0 L109.7,68.1 L67.4,60.7 L42.9,54.5 L34.4,45.9 L31.3,33.9"
+                    stroke="#ef4444"
+                    stroke-width="5"
+                  />
+                </svg>
               </div>
               <div class="flex items-center gap-4">
                 <div
@@ -413,7 +580,7 @@
                     <rect x="2" y="18" width="20" height="4" rx="1" />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p
                     class="text-sm text-DGreenC-400 font-medium uppercase tracking-wide"
                   >
@@ -436,92 +603,234 @@
     <!-- KARTANIMERING – CYKELSTRÄCKORNA -->
     <section id="karta" class="py-24 px-6 bg-DGreenC-800">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">Cykelsträckorna</h2>
-        <p class="text-center text-TanC-300 mb-8 text-lg">Båda sträckorna genom Sidensjöbygden</p>
+        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">
+          Cykelsträckorna
+        </h2>
+        <p class="text-center text-TanC-300 mb-8 text-lg">
+          Båda sträckorna genom Sidensjöbygden
+        </p>
 
-        <div class="bg-DGreenC-700 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 p-4 md:p-6">
-
+        <div
+          class="bg-DGreenC-700 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 p-4 md:p-6"
+        >
           <!-- Legend + knapp -->
-          <div class="flex flex-wrap justify-between items-center gap-4 mb-5 px-1">
+          <div
+            class="flex flex-wrap justify-between items-center gap-4 mb-5 px-1"
+          >
             <div class="flex flex-wrap gap-5">
               <div class="flex items-center gap-2">
-                <div class="w-8 h-2 rounded-full" style="background:#eab308;"></div>
-                <span class="text-TanC-200 text-sm font-semibold">Lång &mdash; 26,6 km</span>
+                <div
+                  class="w-8 h-2 rounded-full"
+                  style="background: #eab308"
+                ></div>
+                <span class="text-TanC-200 text-sm font-semibold"
+                  >Lång &mdash; 26,6 km</span
+                >
               </div>
               <div class="flex items-center gap-2">
-                <div class="w-8 h-2 rounded-full" style="background:#22c55e;"></div>
-                <span class="text-TanC-200 text-sm font-semibold">Kort &mdash; 10,6 km</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="w-3 h-3 rounded-full border-2 border-white" style="background:#22c55e;"></div>
-                <span class="text-TanC-400 text-xs">Start</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="w-3 h-3 rounded-full border-2 border-white" style="background:#ef4444;"></div>
-                <span class="text-TanC-400 text-xs">Mål</span>
+                <div
+                  class="w-8 h-2 rounded-full"
+                  style="background: #22c55e"
+                ></div>
+                <span class="text-TanC-200 text-sm font-semibold"
+                  >Kort &mdash; 10,6 km</span
+                >
               </div>
             </div>
-            <button id="startAnimation"
-              class="bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold py-2 px-6 rounded-full transition-colors flex items-center gap-2 shadow-lg shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-              </svg>
-              Spela upp
-            </button>
           </div>
 
           <!-- Karta -->
-          <div id="cykelkarta" class="w-full rounded-xl overflow-hidden ring-1 ring-white/10" style="height: 480px;"></div>
+          <div
+            id="cykelkarta"
+            class="w-full rounded-xl overflow-hidden ring-1 ring-white/10"
+            style="height: 480px"
+          ></div>
 
           <!-- Höjdprofiler sida vid sida -->
           <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 px-1">
             <div>
               <div class="flex justify-between items-center mb-1">
-                <p class="text-xs font-semibold uppercase tracking-widest" style="color:#eab308;">Lång distans &mdash; höjdprofil</p>
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest"
+                  style="color: #eab308"
+                >
+                  Lång distans &mdash; höjdprofil
+                </p>
                 <div class="flex gap-3 text-TanC-500 text-xs">
-                  <span id="elev-max-lang"></span><span id="elev-min-lang"></span>
+                  <span id="elev-max-lang"></span
+                  ><span id="elev-min-lang"></span>
                 </div>
               </div>
-              <div class="relative" style="height:68px;">
-                <svg class="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <div class="relative" style="height: 68px">
+                <svg
+                  class="w-full h-full"
+                  viewBox="0 0 1000 100"
+                  preserveAspectRatio="none"
+                >
                   <defs>
-                    <linearGradient id="grad-elev-lang" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#eab308" stop-opacity="0.55"/>
-                      <stop offset="100%" stop-color="#eab308" stop-opacity="0"/>
+                    <linearGradient
+                      id="grad-elev-lang"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#eab308"
+                        stop-opacity="0.55"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#eab308"
+                        stop-opacity="0"
+                      />
                     </linearGradient>
-                    <filter id="glow-elev-lang" x="-5%" y="-80%" width="110%" height="260%">
-                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#eab308" flood-opacity="0.75"/>
+                    <filter
+                      id="glow-elev-lang"
+                      x="-5%"
+                      y="-80%"
+                      width="110%"
+                      height="260%"
+                    >
+                      <feDropShadow
+                        dx="0"
+                        dy="0"
+                        stdDeviation="3"
+                        flood-color="#eab308"
+                        flood-opacity="0.75"
+                      />
                     </filter>
-                    <clipPath id="elev-clip-lang"><rect id="elev-clip-rect-lang" x="0" y="0" width="0" height="100"/></clipPath>
+                    <clipPath id="elev-clip-lang">
+                      <rect
+                        id="elev-clip-rect-lang"
+                        x="0"
+                        y="0"
+                        width="0"
+                        height="100"
+                      />
+                    </clipPath>
                   </defs>
-                  <path id="elev-bg-lang" fill="url(#grad-elev-lang)" stroke="rgba(234,179,8,0.2)" stroke-width="1" opacity="0.35" d=""/>
-                  <path id="elev-fill-lang" fill="url(#grad-elev-lang)" stroke="#eab308" stroke-width="2" filter="url(#glow-elev-lang)" clip-path="url(#elev-clip-lang)" d=""/>
-                  <line id="elev-cursor-lang" x1="0" y1="0" x2="0" y2="100" stroke="#fde047" stroke-width="2" opacity="0"/>
+                  <path
+                    id="elev-bg-lang"
+                    fill="url(#grad-elev-lang)"
+                    stroke="rgba(234,179,8,0.2)"
+                    stroke-width="1"
+                    opacity="0.35"
+                    d=""
+                  />
+                  <path
+                    id="elev-fill-lang"
+                    fill="url(#grad-elev-lang)"
+                    stroke="#eab308"
+                    stroke-width="2"
+                    filter="url(#glow-elev-lang)"
+                    clip-path="url(#elev-clip-lang)"
+                    d=""
+                  />
+                  <line
+                    id="elev-cursor-lang"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="100"
+                    stroke="#fde047"
+                    stroke-width="2"
+                    opacity="0"
+                  />
                 </svg>
               </div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
-                <p class="text-xs font-semibold uppercase tracking-widest" style="color:#22c55e;">Kort distans &mdash; höjdprofil</p>
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest"
+                  style="color: #22c55e"
+                >
+                  Kort distans &mdash; höjdprofil
+                </p>
                 <div class="flex gap-3 text-TanC-500 text-xs">
-                  <span id="elev-max-kort"></span><span id="elev-min-kort"></span>
+                  <span id="elev-max-kort"></span
+                  ><span id="elev-min-kort"></span>
                 </div>
               </div>
-              <div class="relative" style="height:68px;">
-                <svg class="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <div class="relative" style="height: 68px">
+                <svg
+                  class="w-full h-full"
+                  viewBox="0 0 1000 100"
+                  preserveAspectRatio="none"
+                >
                   <defs>
-                    <linearGradient id="grad-elev-kort" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.55"/>
-                      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+                    <linearGradient
+                      id="grad-elev-kort"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#22c55e"
+                        stop-opacity="0.55"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#22c55e"
+                        stop-opacity="0"
+                      />
                     </linearGradient>
-                    <filter id="glow-elev-kort" x="-5%" y="-80%" width="110%" height="260%">
-                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#22c55e" flood-opacity="0.75"/>
+                    <filter
+                      id="glow-elev-kort"
+                      x="-5%"
+                      y="-80%"
+                      width="110%"
+                      height="260%"
+                    >
+                      <feDropShadow
+                        dx="0"
+                        dy="0"
+                        stdDeviation="3"
+                        flood-color="#22c55e"
+                        flood-opacity="0.75"
+                      />
                     </filter>
-                    <clipPath id="elev-clip-kort"><rect id="elev-clip-rect-kort" x="0" y="0" width="0" height="100"/></clipPath>
+                    <clipPath id="elev-clip-kort">
+                      <rect
+                        id="elev-clip-rect-kort"
+                        x="0"
+                        y="0"
+                        width="0"
+                        height="100"
+                      />
+                    </clipPath>
                   </defs>
-                  <path id="elev-bg-kort" fill="url(#grad-elev-kort)" stroke="rgba(34,197,94,0.2)" stroke-width="1" opacity="0.35" d=""/>
-                  <path id="elev-fill-kort" fill="url(#grad-elev-kort)" stroke="#22c55e" stroke-width="2" filter="url(#glow-elev-kort)" clip-path="url(#elev-clip-kort)" d=""/>
-                  <line id="elev-cursor-kort" x1="0" y1="0" x2="0" y2="100" stroke="#86efac" stroke-width="2" opacity="0"/>
+                  <path
+                    id="elev-bg-kort"
+                    fill="url(#grad-elev-kort)"
+                    stroke="rgba(34,197,94,0.2)"
+                    stroke-width="1"
+                    opacity="0.35"
+                    d=""
+                  />
+                  <path
+                    id="elev-fill-kort"
+                    fill="url(#grad-elev-kort)"
+                    stroke="#22c55e"
+                    stroke-width="2"
+                    filter="url(#glow-elev-kort)"
+                    clip-path="url(#elev-clip-kort)"
+                    d=""
+                  />
+                  <line
+                    id="elev-cursor-kort"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="100"
+                    stroke="#86efac"
+                    stroke-width="2"
+                    opacity="0"
+                  />
                 </svg>
               </div>
             </div>
@@ -533,87 +842,248 @@
     <!-- KARTANIMERING – SIMNING & LÖPNING -->
     <section id="sim-lop-karta" class="py-24 px-6 bg-DGreenC-900">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">Simning &amp; Löpning</h2>
-        <p class="text-center text-TanC-300 mb-8 text-lg">I Sidensjöns vatten och längs stränderna</p>
+        <h2 class="text-4xl font-bold text-center text-TanC-100 mb-4">
+          Simning &amp; Löpning
+        </h2>
+        <p class="text-center text-TanC-300 mb-8 text-lg">
+          I Sidensjöns vatten och längs stränderna
+        </p>
 
-        <div class="bg-DGreenC-700 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 p-4 md:p-6">
-
+        <div
+          class="bg-DGreenC-700 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 p-4 md:p-6"
+        >
           <!-- Legend -->
           <div class="flex flex-wrap gap-5 mb-5 px-1">
             <div class="flex items-center gap-2">
-              <div class="w-8 h-2 rounded-full" style="background:#3b82f6;"></div>
-              <span class="text-TanC-200 text-sm font-semibold">Simning &mdash; 50 / 100 m</span>
+              <div
+                class="w-8 h-2 rounded-full"
+                style="background: #3b82f6"
+              ></div>
+              <span class="text-TanC-200 text-sm font-semibold"
+                >Simning &mdash; 100 m</span
+              >
             </div>
             <div class="flex items-center gap-2">
-              <div class="w-8 h-2 rounded-full" style="background:#eab308;"></div>
-              <span class="text-TanC-200 text-sm font-semibold">Lång löpning &mdash; 3 km</span>
+              <div
+                class="w-8 h-2 rounded-full"
+                style="background: #eab308"
+              ></div>
+              <span class="text-TanC-200 text-sm font-semibold"
+                >Lång löpning &mdash; 3 km</span
+              >
             </div>
             <div class="flex items-center gap-2">
-              <div class="w-8 h-2 rounded-full" style="background:#22c55e;"></div>
-              <span class="text-TanC-200 text-sm font-semibold">Kort löpning &mdash; 2,3 km</span>
+              <div
+                class="w-8 h-2 rounded-full"
+                style="background: #22c55e"
+              ></div>
+              <span class="text-TanC-200 text-sm font-semibold"
+                >Kort löpning &mdash; 2,3 km</span
+              >
             </div>
             <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-full border-2 border-white" style="background:#22c55e;"></div>
-              <span class="text-TanC-400 text-xs">Start</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-full border-2 border-white" style="background:#ef4444;"></div>
-              <span class="text-TanC-400 text-xs">Mål</span>
+              <div
+                class="w-8 h-2 rounded-full"
+                style="background: #a3c3d7"
+              ></div>
+              <span class="text-TanC-200 text-sm font-semibold"
+                >Motion &mdash; 600 m</span
+              >
             </div>
           </div>
 
           <!-- Karta -->
-          <div id="sim-lop-karta-map" class="w-full rounded-xl overflow-hidden ring-1 ring-white/10" style="height: 420px;"></div>
+          <div
+            id="sim-lop-karta-map"
+            class="w-full rounded-xl overflow-hidden ring-1 ring-white/10"
+            style="height: 420px"
+          ></div>
 
           <!-- Höjdprofiler -->
           <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 px-1">
             <div>
               <div class="flex justify-between items-center mb-1">
-                <p class="text-xs font-semibold uppercase tracking-widest" style="color:#eab308;">Lång löpning &mdash; höjdprofil</p>
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest"
+                  style="color: #eab308"
+                >
+                  Lång löpning &mdash; höjdprofil
+                </p>
                 <div class="flex gap-3 text-TanC-500 text-xs">
-                  <span id="sl-elev-max-lang"></span><span id="sl-elev-min-lang"></span>
+                  <span id="sl-elev-max-lang"></span
+                  ><span id="sl-elev-min-lang"></span>
                 </div>
               </div>
-              <div class="relative" style="height:68px;">
-                <svg class="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <div class="relative" style="height: 68px">
+                <svg
+                  class="w-full h-full"
+                  viewBox="0 0 1000 100"
+                  preserveAspectRatio="none"
+                >
                   <defs>
-                    <linearGradient id="grad-sl-lang" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#eab308" stop-opacity="0.55"/>
-                      <stop offset="100%" stop-color="#eab308" stop-opacity="0"/>
+                    <linearGradient
+                      id="grad-sl-lang"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#eab308"
+                        stop-opacity="0.55"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#eab308"
+                        stop-opacity="0"
+                      />
                     </linearGradient>
-                    <filter id="glow-sl-lang" x="-5%" y="-80%" width="110%" height="260%">
-                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#eab308" flood-opacity="0.75"/>
+                    <filter
+                      id="glow-sl-lang"
+                      x="-5%"
+                      y="-80%"
+                      width="110%"
+                      height="260%"
+                    >
+                      <feDropShadow
+                        dx="0"
+                        dy="0"
+                        stdDeviation="3"
+                        flood-color="#eab308"
+                        flood-opacity="0.75"
+                      />
                     </filter>
-                    <clipPath id="sl-elev-clip-lang"><rect id="sl-elev-clip-rect-lang" x="0" y="0" width="0" height="100"/></clipPath>
+                    <clipPath id="sl-elev-clip-lang">
+                      <rect
+                        id="sl-elev-clip-rect-lang"
+                        x="0"
+                        y="0"
+                        width="0"
+                        height="100"
+                      />
+                    </clipPath>
                   </defs>
-                  <path id="sl-elev-bg-lang" fill="url(#grad-sl-lang)" stroke="rgba(234,179,8,0.2)" stroke-width="1" opacity="0.35" d=""/>
-                  <path id="sl-elev-fill-lang" fill="url(#grad-sl-lang)" stroke="#eab308" stroke-width="2" filter="url(#glow-sl-lang)" clip-path="url(#sl-elev-clip-lang)" d=""/>
-                  <line id="sl-elev-cursor-lang" x1="0" y1="0" x2="0" y2="100" stroke="#fde047" stroke-width="2" opacity="0"/>
+                  <path
+                    id="sl-elev-bg-lang"
+                    fill="url(#grad-sl-lang)"
+                    stroke="rgba(234,179,8,0.2)"
+                    stroke-width="1"
+                    opacity="0.35"
+                    d=""
+                  />
+                  <path
+                    id="sl-elev-fill-lang"
+                    fill="url(#grad-sl-lang)"
+                    stroke="#eab308"
+                    stroke-width="2"
+                    filter="url(#glow-sl-lang)"
+                    clip-path="url(#sl-elev-clip-lang)"
+                    d=""
+                  />
+                  <line
+                    id="sl-elev-cursor-lang"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="100"
+                    stroke="#fde047"
+                    stroke-width="2"
+                    opacity="0"
+                  />
                 </svg>
               </div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-1">
-                <p class="text-xs font-semibold uppercase tracking-widest" style="color:#22c55e;">Kort löpning &mdash; höjdprofil</p>
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest"
+                  style="color: #22c55e"
+                >
+                  Kort löpning &mdash; höjdprofil
+                </p>
                 <div class="flex gap-3 text-TanC-500 text-xs">
-                  <span id="sl-elev-max-kort"></span><span id="sl-elev-min-kort"></span>
+                  <span id="sl-elev-max-kort"></span
+                  ><span id="sl-elev-min-kort"></span>
                 </div>
               </div>
-              <div class="relative" style="height:68px;">
-                <svg class="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+              <div class="relative" style="height: 68px">
+                <svg
+                  class="w-full h-full"
+                  viewBox="0 0 1000 100"
+                  preserveAspectRatio="none"
+                >
                   <defs>
-                    <linearGradient id="grad-sl-kort" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.55"/>
-                      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+                    <linearGradient
+                      id="grad-sl-kort"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#22c55e"
+                        stop-opacity="0.55"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#22c55e"
+                        stop-opacity="0"
+                      />
                     </linearGradient>
-                    <filter id="glow-sl-kort" x="-5%" y="-80%" width="110%" height="260%">
-                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#22c55e" flood-opacity="0.75"/>
+                    <filter
+                      id="glow-sl-kort"
+                      x="-5%"
+                      y="-80%"
+                      width="110%"
+                      height="260%"
+                    >
+                      <feDropShadow
+                        dx="0"
+                        dy="0"
+                        stdDeviation="3"
+                        flood-color="#22c55e"
+                        flood-opacity="0.75"
+                      />
                     </filter>
-                    <clipPath id="sl-elev-clip-kort"><rect id="sl-elev-clip-rect-kort" x="0" y="0" width="0" height="100"/></clipPath>
+                    <clipPath id="sl-elev-clip-kort">
+                      <rect
+                        id="sl-elev-clip-rect-kort"
+                        x="0"
+                        y="0"
+                        width="0"
+                        height="100"
+                      />
+                    </clipPath>
                   </defs>
-                  <path id="sl-elev-bg-kort" fill="url(#grad-sl-kort)" stroke="rgba(34,197,94,0.2)" stroke-width="1" opacity="0.35" d=""/>
-                  <path id="sl-elev-fill-kort" fill="url(#grad-sl-kort)" stroke="#22c55e" stroke-width="2" filter="url(#glow-sl-kort)" clip-path="url(#sl-elev-clip-kort)" d=""/>
-                  <line id="sl-elev-cursor-kort" x1="0" y1="0" x2="0" y2="100" stroke="#86efac" stroke-width="2" opacity="0"/>
+                  <path
+                    id="sl-elev-bg-kort"
+                    fill="url(#grad-sl-kort)"
+                    stroke="rgba(34,197,94,0.2)"
+                    stroke-width="1"
+                    opacity="0.35"
+                    d=""
+                  />
+                  <path
+                    id="sl-elev-fill-kort"
+                    fill="url(#grad-sl-kort)"
+                    stroke="#22c55e"
+                    stroke-width="2"
+                    filter="url(#glow-sl-kort)"
+                    clip-path="url(#sl-elev-clip-kort)"
+                    d=""
+                  />
+                  <line
+                    id="sl-elev-cursor-kort"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="100"
+                    stroke="#86efac"
+                    stroke-width="2"
+                    opacity="0"
+                  />
                 </svg>
               </div>
             </div>
@@ -623,268 +1093,128 @@
     </section>
 
     <!-- PRAKTISK INFO -->
-    <section id="info" class="py-24 px-6">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-bold text-center text-DGreenC-700 mb-16">
-          Praktisk information
-        </h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white rounded-xl p-8 shadow-md">
-            <div
-              class="w-12 h-12 rounded-lg bg-BlueC-100 flex items-center justify-center mb-4"
-            >
-              <svg
-                class="w-6 h-6 text-BlueC-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <rect x="3" y="4" width="18" height="18" rx="2" />
-                <path d="M16 2v4M8 2v4M3 10h18" />
-              </svg>
-            </div>
-            <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Datum</h3>
-            <p class="text-DGreenC-700 font-semibold">Onsdag 29 juli 2026</p>
-            <p class="text-DGreenC-400 text-sm mt-1">
-              Sidensjöveckan, vecka 31
-            </p>
+    <section id="info" class="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-5 overflow-hidden bg-TanC-50">
+
+      <!-- Bakgrundskarta (MapLibre) -->
+      <div id="info-bg-map" class="absolute inset-0 z-0 opacity-90" style="width:100%;height:100%;"></div>
+      <!-- Vinjett (mjuk fade bara i kanterna) -->
+      <div class="absolute inset-0 z-[1] pointer-events-none" style="background: linear-gradient(180deg, #efe8e0 0%, transparent 4%, transparent 96%, #efe8e0 100%), linear-gradient(90deg, rgba(239,232,224,0.5) 0%, transparent 8%, transparent 92%, rgba(239,232,224,0.5) 100%);"></div>
+
+      <div class="relative z-10 max-w-[60rem] mx-auto space-y-3 sm:space-y-4">
+
+        <!-- Header-panel (glass, full bredd) -->
+        <div class="glass p-5 sm:p-7">
+          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1">Praktisk information</p>
+          <div class="flex h-[3px] rounded-sm overflow-hidden mb-5">
+            <span class="flex-1 bg-BlueC-500"></span>
+            <span class="flex-1 bg-YellowC-400"></span>
+            <span class="flex-1 bg-GreenC-500"></span>
           </div>
-          <div class="bg-white rounded-xl p-8 shadow-md">
-            <div
-              class="w-12 h-12 rounded-lg bg-GreenC-100 flex items-center justify-center mb-4"
-            >
-              <svg
-                class="w-6 h-6 text-GreenC-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"
-                />
-                <circle cx="12" cy="9" r="2.5" />
-              </svg>
+          <div class="flex flex-col sm:flex-row sm:items-baseline gap-2.5 sm:gap-8 border-t border-DGreenC-200 pt-4">
+            <div>
+              <h3 class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight">Ons 29 juli 2026</h3>
+              <p class="text-xs text-DGreenC-400 mt-0.5">Sidensjöveckan, v.31</p>
             </div>
-            <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Plats</h3>
-            <p class="text-DGreenC-700 font-semibold">Sidensjö</p>
-            <a
-              href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8"
-              target="_blank"
-              rel="noopener"
-              class="text-BlueC-500 hover:text-BlueC-600 text-sm mt-1 inline-block underline"
-              >Visa på karta</a
-            >
-          </div>
-          <div class="bg-white rounded-xl p-8 shadow-md">
-            <div
-              class="w-12 h-12 rounded-lg bg-YellowC-100 flex items-center justify-center mb-4"
-            >
-              <svg
-                class="w-6 h-6 text-YellowC-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
+            <div class="hidden sm:block w-px h-9 bg-DGreenC-200 shrink-0"></div>
+            <div>
+              <h3 class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight">Sidensjö</h3>
+              <a href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8" target="_blank" rel="noopener"
+                class="text-xs text-BlueC-500 hover:text-BlueC-600 underline underline-offset-2">Visa på karta &#8599;</a>
             </div>
-            <h3 class="font-bold text-DGreenC-700 text-lg mb-2">Start</h3>
-            <p class="text-DGreenC-700 font-semibold">Kl. 17:00</p>
+            <div class="hidden sm:block w-px h-9 bg-DGreenC-200 shrink-0"></div>
+            <div>
+              <h3 class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight">Kl. 17:00</h3>
+              <p class="text-xs text-DGreenC-400 mt-0.5">Samling från 16:00</p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ANMÄLAN -->
-    <section
-      id="anmalan"
-      class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600"
-    >
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-4xl font-bold text-white mb-6 text-center">Anmälan</h2>
-        <p class="text-GreenC-100 text-lg mb-10 text-center">
-          Fyll i dina uppgifter och klicka på "Skicka anmälan" &mdash; ett
-          förifylt e-postmeddelande öppnas i din e-postklient.
-        </p>
-
-        <form
-          id="anmalan-form"
-          class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 space-y-6"
-        >
-          <!-- Namn -->
-          <div>
-            <label for="namn" class="block text-TanC-100 font-semibold mb-2"
-              >Namn *</label
-            >
-            <input
-              type="text"
-              id="namn"
-              required
-              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="Förnamn Efternamn"
-            />
-          </div>
-
-          <!-- E-post -->
-          <div>
-            <label for="epost" class="block text-TanC-100 font-semibold mb-2"
-              >E-post *</label
-            >
-            <input
-              type="email"
-              id="epost"
-              required
-              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="din@epost.se"
-            />
-          </div>
-
-          <!-- Telefon -->
-          <div>
-            <label for="telefon" class="block text-TanC-100 font-semibold mb-2"
-              >Telefon</label
-            >
-            <input
-              type="tel"
-              id="telefon"
-              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="070-123 45 67"
-            />
-          </div>
-
-          <!-- Distans -->
-          <div>
-            <label class="block text-TanC-100 font-semibold mb-3"
-              >Välj distans *</label
-            >
-            <div class="grid grid-cols-3 gap-3">
-              <label class="cursor-pointer">
-                <input
-                  type="radio"
-                  name="distans"
-                  value="kort"
-                  required
-                  class="peer hidden"
-                />
-                <div
-                  class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20"
-                >
-                  <p class="text-white font-bold">Kort</p>
-                  <p class="text-TanC-300 text-xs mt-1">10,6 km + 50m + 2,3km</p>
-                </div>
-              </label>
-              <label class="cursor-pointer">
-                <input
-                  type="radio"
-                  name="distans"
-                  value="lang"
-                  class="peer hidden"
-                />
-                <div
-                  class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20"
-                >
-                  <p class="text-white font-bold">Lång</p>
-                  <p class="text-TanC-300 text-xs mt-1">
-                    26,6 km + 100m + 3km
-                  </p>
-                </div>
-              </label>
-              <label class="cursor-pointer">
-                <input
-                  type="radio"
-                  name="distans"
-                  value="motion"
-                  class="peer hidden"
-                />
-                <div
-                  class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-white/30 bg-white/10 rounded-xl p-4 text-center transition-all hover:bg-white/20"
-                >
-                  <p class="text-white font-bold">Motion</p>
-                  <p class="text-TanC-300 text-xs mt-1">1 mil + 600m + bastu</p>
-                </div>
-              </label>
+        <!-- Tidsschema (glass, w-fit — karta syns till höger) -->
+        <div class="glass p-5 sm:p-6 w-fit">
+          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2">Tidsschema</p>
+          <div class="border-t border-DGreenC-200 pt-3">
+            <div class="relative ml-2 pl-8 border-l-2 border-DGreenC-200">
+              <div class="relative pb-4">
+                <div class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"></div>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">&nbsp 16:00</p>
+                <p class="text-sm font-semibold text-DGreenC-700">Samling &amp; nummerlappar</p>
+              </div>
+              <div class="relative pb-4">
+                <div class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"></div>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">&nbsp 16:45</p>
+                <p class="text-sm font-semibold text-DGreenC-700">Gemensam genomgång</p>
+              </div>
+              <div class="relative pb-4">
+                <div class="absolute -left-[7px] top-1 w-3 h-3 dot-split border-2 border-TanC-50"></div>
+                <p class="font-mono text-xs font-bold text-YellowC-700">&nbsp 17:00</p>
+                <p class="text-[0.95rem] font-bold text-DGreenC-800">Start &mdash; Kort &amp; Lång</p>
+              </div>
+              <div class="relative pb-4">
+                <div class="absolute -left-[7px] top-1 w-3 h-3 bg-BlueC-500 dot-blue-static border-2 border-TanC-50"></div>
+                <p class="font-mono text-xs font-bold text-BlueC-600">&nbsp 17:10</p>
+                <p class="text-sm font-bold text-DGreenC-800">Start &mdash; Motion</p>
+              </div>
+              <div class="relative">
+                <div class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"></div>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">&nbsp ~19:00</p>
+                <p class="text-sm font-semibold text-DGreenC-700">Foodtruck &mdash; Tre bröder</p>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Meddelande -->
-          <div>
-            <label
-              for="meddelande"
-              class="block text-TanC-100 font-semibold mb-2"
-              >Övrig information</label
-            >
-            <textarea
-              id="meddelande"
-              rows="3"
-              class="w-full px-4 py-3 rounded-lg bg-white/90 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400"
-              placeholder="Allergier, frågor, eller annat vi bör veta..."
-            ></textarea>
+        <!-- Detaljer (glass, full bredd) -->
+        <div class="glass p-5 sm:p-7">
+          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2.5">Detaljer</p>
+          <div class="border-t border-DGreenC-200 pt-4">
+            <div class="grid sm:grid-cols-3 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-DGreenC-200">
+              <div class="py-3 first:pt-0 last:pb-0 sm:py-0 sm:pr-5">
+                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">Ta med</h4>
+                <ul class="text-[0.8rem] text-DGreenC-500 space-y-0.5">
+                  <li>Cykel &amp; hjälm <span class="block text-[0.65rem] text-DGreenC-400 ml-2">Hjälm är obligatoriskt</span></li>
+                  <li>Badkläder &amp; handduk</li>
+                  <li>Löparskor</li>
+                  <li>Vattenflaska</li>
+                </ul>
+              </div>
+              <div class="py-3 first:pt-0 last:pb-0 sm:py-0 sm:px-5">
+                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">På platsen</h4>
+                <ul class="text-[0.8rem] text-DGreenC-500 space-y-0.5">
+                  <li>Bastu</li>
+                  <li>Volleybollnät</li>
+                  <li>Grillplats</li>
+                  <li>Omklädningshytter (dam &amp; herr)</li>
+                </ul>
+              </div>
+              <div class="py-3 first:pt-0 last:pb-0 sm:py-0 sm:pl-5">
+                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">Bra att veta</h4>
+                <ul class="text-[0.8rem] text-DGreenC-500 space-y-0.5">
+                  <li>Föranmälan krävs &mdash; stänger 14 juli</li>
+                  <li>Öppet för alla åldrar</li>
+                  <li>Elcykel tillåtet (motionsklassen)</li>
+                  <li>Anmälan ej överförbar</li>
+                </ul>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <!-- Skicka -->
-          <button
-            type="submit"
-            class="w-full bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold py-4 rounded-lg text-lg transition-colors shadow-lg cursor-pointer"
-          >
-            Skicka anmälan via e-post
-          </button>
-          <p class="text-TanC-300 text-sm text-center">
-            Din e-postklient öppnas med ett förifylt meddelande. Tryck "Skicka"
-            i din e-post för att slutföra anmälan.
-          </p>
-        </form>
       </div>
     </section>
 
-    <script>
-      document
-        .getElementById("anmalan-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
 
-          const namn = document.getElementById("namn").value.trim();
-          const epost = document.getElementById("epost").value.trim();
-          const telefon = document.getElementById("telefon").value.trim();
-          const distansEl = document.querySelector(
-            'input[name="distans"]:checked',
-          );
-          const meddelande = document.getElementById("meddelande").value.trim();
-
-          if (!distansEl) {
-            alert("Vänligen välj en distans.");
-            return;
-          }
-
-          const distansMap = {
-            kort: "Kort distans (Cykel 10,6 km, Simning 50m, Löpning 2,3km)",
-            lang: "Lång distans (Cykel 26,6 km, Simning 100m, Löpning 3km)",
-            motion: "Motion (Cykel 1 mil, Löpning/Gång 600m, Bastu & Bad)",
-          };
-          const distans = distansMap[distansEl.value];
-
-          const subject = "Anmälan till Byathlon – " + namn;
-          let body = "Hej!\n\n";
-          body += "Jag vill anmäla mig till Byathlon.\n\n";
-          body += "--- Uppgifter ---\n";
-          body += "Namn: " + namn + "\n";
-          body += "E-post: " + epost + "\n";
-          if (telefon) body += "Telefon: " + telefon + "\n";
-          body += "Distans: " + distans + "\n";
-          if (meddelande) body += "\nÖvrigt: " + meddelande + "\n";
-          body += "\nMvh,\n" + namn;
-
-          const mailto =
-            "mailto:?subject=" +
-            encodeURIComponent(subject) +
-            "&body=" +
-            encodeURIComponent(body);
-          window.location.href = mailto;
-        });
-    </script>
+    <!-- ANMÄLAN (CTA → separat sida) -->
+    <section id="anmalan" class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-white mb-4">Anmälan</h2>
+        <p class="text-GreenC-100 text-lg mb-3">Onsdag 29 juli 2026 &middot; Sidensjö</p>
+        <p class="text-GreenC-200 text-sm mb-10">Anmälan stänger 14 juli 2026</p>
+        <a href="anmalan.html"
+          class="inline-block bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold px-10 py-4 rounded-lg text-lg transition-colors shadow-lg">
+          Anmäl dig här
+        </a>
+      </div>
+    </section>
 
     <!-- SPONSORER -->
     <section id="sponsorer" class="py-24 px-6 bg-TanC-100">
@@ -934,7 +1264,7 @@
             Övriga sponsorer
           </p>
           <div class="flex flex-wrap justify-center items-center gap-8">
-            <a href="https://sponsor.se" target="_blank" rel="noopener">
+            <a href="https://hkvagtrummor.se" target="_blank" rel="noopener">
               <img
                 src="Image/Vagtrummor.webp"
                 alt="HK Vägtrummor"
@@ -945,7 +1275,12 @@
             <div
               class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
             >
-              Logotyp
+              <a href="https://kjellsson.nu" target="_blank" rel="noopener">
+              <img
+                src="Image/LOGO OsteopatiByKjellsson.png"
+                alt="Osteopati By Kjellsson"
+                class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
+              />
             </div>
             <div
               class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
@@ -962,273 +1297,616 @@
       </div>
     </section>
 
-    <!-- GSAP + ScrollTrigger (för Simning & Löpning-animeringen) -->
+    <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Leaflet JS + Kartanimeringar -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+      gsap.registerPlugin(ScrollTrigger);
+
       // ── GEMENSAMMA INSTÄLLNINGAR ──────────────────────────────────────────────
-      const TILE = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
-      const ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>';
+      const TILE =
+        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+      const ATTR =
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>';
 
       // Kartinteraktion helt låst – fungerar som statisk canvas
       const MAP_LOCK = {
-        zoomControl: false, scrollWheelZoom: false,
-        dragging: false,    touchZoom: false,
-        doubleClickZoom: false, boxZoom: false,
-        keyboard: false,    tap: false
+        zoomControl: false,
+        scrollWheelZoom: false,
+        dragging: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        tap: false,
       };
 
       // Extrahera [lat,lon]-koordinater och höjddata från GeoJSON
       function extractRoute(geoJson) {
         const raw = geoJson.features[0].geometry.coordinates;
-        return { coords: raw.map(c => [c[1], c[0]]), elevs: raw.map(c => c[2]) };
+        return {
+          coords: raw.map((c) => [c[1], c[0]]),
+          elevs: raw.map((c) => c[2]),
+        };
       }
 
       // Bygg SVG-höjdprofil
       function buildElevPath(elevs) {
-        const mn = Math.min(...elevs), mx = Math.max(...elevs), n = elevs.length;
-        const pts = elevs.map((e, i) => [(i / (n - 1)) * 1000, 93 - ((e - mn) / (mx - mn)) * 83]);
-        return { d: 'M0,100 L' + pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' L') + ' L1000,100 Z', mn, mx };
+        const mn = Math.min(...elevs),
+          mx = Math.max(...elevs),
+          n = elevs.length;
+        const pts = elevs.map((e, i) => [
+          (i / (n - 1)) * 1000,
+          93 - ((e - mn) / (mx - mn)) * 83,
+        ]);
+        return {
+          d:
+            "M0,100 L" +
+            pts.map((p) => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L") +
+            " L1000,100 Z",
+          mn,
+          mx,
+        };
       }
 
       // Haversine-formel för avstånd i meter
       function haversine(a, b) {
-        const R = 6371000, dLat = (b[0]-a[0])*Math.PI/180, dLon = (b[1]-a[1])*Math.PI/180;
-        const lat1 = a[0]*Math.PI/180, lat2 = b[0]*Math.PI/180;
-        return R * 2 * Math.asin(Math.sqrt(Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2));
+        const R = 6371000,
+          dLat = ((b[0] - a[0]) * Math.PI) / 180,
+          dLon = ((b[1] - a[1]) * Math.PI) / 180;
+        const lat1 = (a[0] * Math.PI) / 180,
+          lat2 = (b[0] * Math.PI) / 180;
+        return (
+          R *
+          2 *
+          Math.asin(
+            Math.sqrt(
+              Math.sin(dLat / 2) ** 2 +
+                Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2,
+            ),
+          )
+        );
       }
 
       // Lägg till avståndmarkeringar längs en rutt
-      function addKmMarkers(map, coords, fillColor, tipClass, intervalM = 5000) {
-        let dist = 0, next = intervalM;
+      function addKmMarkers(
+        map,
+        coords,
+        fillColor,
+        tipClass,
+        intervalM = 5000,
+      ) {
+        let dist = 0,
+          next = intervalM;
         for (let i = 1; i < coords.length; i++) {
-          dist += haversine(coords[i-1], coords[i]);
+          dist += haversine(coords[i - 1], coords[i]);
           if (dist >= next) {
-            const label = intervalM >= 1000 ? Math.round(next / 1000) + ' km' : Math.round(next) + ' m';
-            L.circleMarker(coords[i], { radius: 9, fillColor, color: '#0a120a', weight: 1.5, fillOpacity: 0.95 })
-              .bindTooltip(label, { permanent: true, direction: 'top', className: 'km-tip' + (tipClass ? ' ' + tipClass : '') })
+            const label =
+              intervalM >= 1000
+                ? Math.round(next / 1000) + " km"
+                : Math.round(next) + " m";
+            L.circleMarker(coords[i], {
+              radius: 9,
+              fillColor,
+              color: "#0a120a",
+              weight: 1.5,
+              fillOpacity: 0.95,
+            })
+              .bindTooltip(label, {
+                permanent: true,
+                direction: "top",
+                className: "km-tip" + (tipClass ? " " + tipClass : ""),
+              })
               .addTo(map);
             next += intervalM;
           }
         }
       }
 
-      // Starta animation automatiskt vid scroll in i viewporten (en gång)
-      function autoPlay(el, btnId) {
-        const obs = new IntersectionObserver(entries => {
-          if (entries[0].isIntersecting) {
-            document.getElementById(btnId).click();
-            obs.disconnect();
-          }
-        }, { threshold: 0.3 });
-        obs.observe(el);
-      }
-
       // ── LADDA RUTTER FRÅN RUTTER-MAPPEN ──────────────────────────────────────
       // Uppdatera JSON-filerna i Rutter/ för att ändra sträckorna
       Promise.all([
-        fetch(encodeURI('Rutter/Cykel Long - Byathlon.json')).then(r => r.json()),
-        fetch(encodeURI('Rutter/Cykel Kort - Byathlon.json')).then(r => r.json()),
-        fetch(encodeURI('Rutter/Löpning lång - Byathlon.json')).then(r => r.json()),
-        fetch(encodeURI('Rutter/Löpning kort - Byathlon.json')).then(r => r.json()),
-        fetch(encodeURI('Rutter/Simning - Byathlon.json')).then(r => r.json()),
-      ]).then(([cykelLangJson, cykelKortJson, lopLangJson, lopKortJson, simJson]) => {
-        initCykelKarta(extractRoute(cykelLangJson), extractRoute(cykelKortJson));
-        initSimLopKarta(extractRoute(simJson), extractRoute(lopLangJson), extractRoute(lopKortJson));
-      }).catch(err => console.error('Kunde inte ladda rutt-data:', err));
+        fetch(encodeURI("Rutter/Cykel Long - Byathlon.json")).then((r) =>
+          r.json(),
+        ),
+        fetch(encodeURI("Rutter/Cykel Kort - Byathlon.json")).then((r) =>
+          r.json(),
+        ),
+        fetch(encodeURI("Rutter/Löpning lång - Byathlon.json")).then((r) =>
+          r.json(),
+        ),
+        fetch(encodeURI("Rutter/Löpning kort - Byathlon.json")).then((r) =>
+          r.json(),
+        ),
+        fetch(encodeURI("Rutter/Simning - Byathlon.json")).then((r) =>
+          r.json(),
+        ),
+        fetch(encodeURI("Rutter/Gång - Byathlon.json")).then((r) => r.json()),
+      ])
+        .then(
+          ([
+            cykelLangJson,
+            cykelKortJson,
+            lopLangJson,
+            lopKortJson,
+            simJson,
+            gangJson,
+          ]) => {
+            initCykelKarta(
+              extractRoute(cykelLangJson),
+              extractRoute(cykelKortJson),
+            );
+            initSimLopKarta(
+              extractRoute(simJson),
+              extractRoute(lopLangJson),
+              extractRoute(lopKortJson),
+              extractRoute(gangJson),
+            );
+          },
+        )
+        .catch((err) => console.error("Kunde inte ladda rutt-data:", err));
+
+      // ── BAKGRUNDSKARTA FÖR PRAKTISK INFO (Leaflet) ────────────────────────────
+      (function() {
+        var el = document.getElementById('info-bg-map');
+        if (!el) return;
+        var infoMap = L.map(el, {
+          ...MAP_LOCK,
+          attributionControl: false
+        }).setView([63.301622, 18.3306], 14);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(infoMap);
+        L.circleMarker([63.301622, 18.3306], {
+          radius: 12, fillColor: '#669bbc', color: '#fff', weight: 3, fillOpacity: 0.9, className: 'pulse-marker'
+        }).addTo(infoMap);
+        function centerInfoMap() {
+          var schedule = document.querySelector('#info .glass.w-fit');
+          if (!schedule) { infoMap.setView([63.301622, 18.3306], 14); return; }
+          var scheduleRect = schedule.getBoundingClientRect();
+          var mapRect = el.getBoundingClientRect();
+
+          // Var vi vill att markören ska synas på skärmen (relativt kartans övre vänstra hörn):
+          // X: mitt i det fria utrymmet till höger om tidsschemat
+          var scheduleRight = scheduleRect.right - mapRect.left;
+          var targetX = scheduleRight + (mapRect.width - scheduleRight) / 2;
+          // Y: i höjd med tidsschemats vertikala mitt
+          var targetY = (scheduleRect.top - mapRect.top) + scheduleRect.height / 2;
+
+          // setView placerar markören vid kartans pixel-mitt (w/2, h/2).
+          // panBy flyttar kartan — positiv x = karta höger = markör vänster på skärm.
+          // Så vi inverterar: panBy(kartmitt - mål) flyttar markören TILL målet.
+          var panX = mapRect.width / 2 - targetX;
+          var panY = mapRect.height / 2 - targetY;
+
+          infoMap.setView([63.301622, 18.3306], 14);
+          infoMap.panBy([panX, panY], { animate: false });
+        }
+        // Vänta tills layouten är klar innan vi centrerar
+        infoMap.whenReady(function() {
+          setTimeout(centerInfoMap, 100);
+        });
+        window.addEventListener('resize', function() { setTimeout(function() { infoMap.invalidateSize(); setTimeout(centerInfoMap, 50); }, 200); });
+      })();
+
 
       // ── CYKELKARTA ────────────────────────────────────────────────────────────
       function initCykelKarta(lang, kort) {
-        const langCoords = lang.coords, langElev = lang.elevs, langN = langCoords.length;
-        const kortCoords = kort.coords, kortElev = kort.elevs, kortN = kortCoords.length;
+        const langCoords = lang.coords,
+          langElev = lang.elevs,
+          langN = langCoords.length;
+        const kortCoords = kort.coords,
+          kortElev = kort.elevs,
+          kortN = kortCoords.length;
 
-        const map = L.map('cykelkarta', MAP_LOCK);
+        const map = L.map("cykelkarta", MAP_LOCK);
         L.tileLayer(TILE, { attribution: ATTR, maxZoom: 19 }).addTo(map);
-        map.fitBounds(L.latLngBounds([...langCoords, ...kortCoords]), { padding: [44, 44] });
-
-        L.polyline(langCoords, { color: '#78350f', weight: 4, opacity: 0.4, dashArray: '6,12' }).addTo(map);
-        L.polyline(kortCoords, { color: '#14532d', weight: 3, opacity: 0.4, dashArray: '6,12' }).addTo(map);
-        L.circleMarker(langCoords[0], { radius: 8, fillColor: '#22c55e', color: '#fff', weight: 2.5, fillOpacity: 1 }).bindTooltip('Start', { direction: 'top' }).addTo(map);
-        L.circleMarker(langCoords[langN-1], { radius: 8, fillColor: '#ef4444', color: '#fff', weight: 2.5, fillOpacity: 1 }).bindTooltip('Mål – Lång', { direction: 'top' }).addTo(map);
-        L.circleMarker(kortCoords[kortN-1], { radius: 8, fillColor: '#ef4444', color: '#fff', weight: 2.5, fillOpacity: 1 }).bindTooltip('Mål – Kort', { direction: 'top' }).addTo(map);
-
-        const langEP = buildElevPath(langElev), kortEP = buildElevPath(kortElev);
-        document.getElementById('elev-bg-lang').setAttribute('d', langEP.d);
-        document.getElementById('elev-fill-lang').setAttribute('d', langEP.d);
-        document.getElementById('elev-bg-kort').setAttribute('d', kortEP.d);
-        document.getElementById('elev-fill-kort').setAttribute('d', kortEP.d);
-        document.getElementById('elev-max-lang').textContent = '↑ ' + Math.round(langEP.mx) + ' m';
-        document.getElementById('elev-min-lang').textContent = '↓ ' + Math.round(langEP.mn) + ' m';
-        document.getElementById('elev-max-kort').textContent = '↑ ' + Math.round(kortEP.mx) + ' m';
-        document.getElementById('elev-min-kort').textContent = '↓ ' + Math.round(kortEP.mn) + ' m';
-
-        let langPoly, langDot, kortPoly, kortDot, flowLangPoly, flowKortPoly, isAnimating = false;
-
-        function onComplete() {
-          isAnimating = false;
-          document.getElementById('elev-cursor-lang').setAttribute('opacity', '0');
-          document.getElementById('elev-cursor-kort').setAttribute('opacity', '0');
-          addKmMarkers(map, langCoords, '#eab308', '');
-          addKmMarkers(map, kortCoords, '#22c55e', 'green');
-          if (flowLangPoly) map.removeLayer(flowLangPoly);
-          if (flowKortPoly) map.removeLayer(flowKortPoly);
-          flowLangPoly = L.polyline(langCoords, { color: '#fde047', weight: 3, opacity: 0.65, className: 'flow-lang' }).addTo(map);
-          flowKortPoly = L.polyline(kortCoords, { color: '#86efac', weight: 2.5, opacity: 0.65, className: 'flow-kort' }).addTo(map);
-          const btn = document.getElementById('startAnimation');
-          btn.textContent = 'Spela igen';
-          btn.disabled = false;
-        }
-
-        document.getElementById('startAnimation').addEventListener('click', () => {
-          if (isAnimating) return;
-          isAnimating = true;
-          const btn = document.getElementById('startAnimation');
-          btn.textContent = 'Animerar…';
-          btn.disabled = true;
-          [langPoly, langDot, kortPoly, kortDot, flowLangPoly, flowKortPoly].forEach(l => { if (l) map.removeLayer(l); });
-
-          langPoly = L.polyline([], { color: '#eab308', weight: 5, opacity: 0.95 }).addTo(map);
-          langDot  = L.circleMarker(langCoords[0], { radius: 8, fillColor: '#fde047', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot' }).addTo(map);
-          kortPoly = L.polyline([], { color: '#22c55e', weight: 4, opacity: 0.95 }).addTo(map);
-          kortDot  = L.circleMarker(kortCoords[0], { radius: 7, fillColor: '#86efac', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot-green' }).addTo(map);
-
-          const lcr = document.getElementById('elev-clip-rect-lang');
-          const kcr = document.getElementById('elev-clip-rect-kort');
-          const lcu = document.getElementById('elev-cursor-lang');
-          const kcu = document.getElementById('elev-cursor-kort');
-          lcr.setAttribute('width', '0'); kcr.setAttribute('width', '0');
-          lcu.setAttribute('opacity', '1'); kcu.setAttribute('opacity', '1');
-
-          // 3× långsammare — episk och dramatisk känsla (~14s vid 60fps)
-          const FRAMES = langN * 3;
-          let lastL = 0, lastK = 0, frame = 0;
-          function drawFrame() {
-            const t = Math.min(frame / FRAMES, 1);
-            const tL = Math.floor(t * langN), tK = Math.floor(t * kortN);
-            while (lastL < tL) { langPoly.addLatLng(langCoords[lastL]); langDot.setLatLng(langCoords[lastL]); lastL++; }
-            while (lastK < tK) { kortPoly.addLatLng(kortCoords[lastK]); kortDot.setLatLng(kortCoords[lastK]); lastK++; }
-            const lw = (lastL / langN * 1000).toFixed(1), kw = (lastK / kortN * 1000).toFixed(1);
-            lcr.setAttribute('width', lw); lcu.setAttribute('x1', lw); lcu.setAttribute('x2', lw);
-            kcr.setAttribute('width', kw); kcu.setAttribute('x1', kw); kcu.setAttribute('x2', kw);
-            frame++;
-            if (t < 1) requestAnimationFrame(drawFrame);
-            else onComplete();
-          }
-          drawFrame();
+        map.fitBounds(L.latLngBounds([...langCoords, ...kortCoords]), {
+          padding: [44, 44],
         });
 
-        autoPlay(document.getElementById('cykelkarta'), 'startAnimation');
+        L.polyline(langCoords, {
+          color: "#78350f",
+          weight: 4,
+          opacity: 0.4,
+          dashArray: "6,12",
+        }).addTo(map);
+        L.polyline(kortCoords, {
+          color: "#14532d",
+          weight: 3,
+          opacity: 0.4,
+          dashArray: "6,12",
+        }).addTo(map);
+        L.circleMarker(langCoords[0], {
+          radius: 8,
+          fillColor: "#22c55e",
+          color: "#fff",
+          weight: 2.5,
+          fillOpacity: 1,
+        })
+          .bindTooltip("Start", { direction: "top" })
+          .addTo(map);
+        L.circleMarker(langCoords[langN - 1], {
+          radius: 8,
+          fillColor: "#ef4444",
+          color: "#fff",
+          weight: 2.5,
+          fillOpacity: 1,
+        })
+          .bindTooltip("Mål – Lång", { direction: "top" })
+          .addTo(map);
+        L.circleMarker(kortCoords[kortN - 1], {
+          radius: 8,
+          fillColor: "#ef4444",
+          color: "#fff",
+          weight: 2.5,
+          fillOpacity: 1,
+        })
+          .bindTooltip("Mål – Kort", { direction: "top" })
+          .addTo(map);
+
+        const langEP = buildElevPath(langElev),
+          kortEP = buildElevPath(kortElev);
+        document.getElementById("elev-bg-lang").setAttribute("d", langEP.d);
+        document.getElementById("elev-fill-lang").setAttribute("d", langEP.d);
+        document.getElementById("elev-bg-kort").setAttribute("d", kortEP.d);
+        document.getElementById("elev-fill-kort").setAttribute("d", kortEP.d);
+        document.getElementById("elev-max-lang").textContent =
+          "↑ " + Math.round(langEP.mx) + " m";
+        document.getElementById("elev-min-lang").textContent =
+          "↓ " + Math.round(langEP.mn) + " m";
+        document.getElementById("elev-max-kort").textContent =
+          "↑ " + Math.round(kortEP.mx) + " m";
+        document.getElementById("elev-min-kort").textContent =
+          "↓ " + Math.round(kortEP.mn) + " m";
+
+        // Animerade polylines (börjar tomma)
+        const langPoly = L.polyline([], {
+          color: "#eab308",
+          weight: 5,
+          opacity: 0.95,
+        }).addTo(map);
+        const langDot = L.circleMarker(langCoords[0], {
+          radius: 8,
+          fillColor: "#fde047",
+          color: "#fff",
+          weight: 2,
+          fillOpacity: 1,
+          className: "glowing-dot",
+        }).addTo(map);
+        const kortPoly = L.polyline([], {
+          color: "#22c55e",
+          weight: 4,
+          opacity: 0.95,
+        }).addTo(map);
+        const kortDot = L.circleMarker(kortCoords[0], {
+          radius: 7,
+          fillColor: "#86efac",
+          color: "#fff",
+          weight: 2,
+          fillOpacity: 1,
+          className: "glowing-dot-green",
+        }).addTo(map);
+
+        const lcr = document.getElementById("elev-clip-rect-lang");
+        const kcr = document.getElementById("elev-clip-rect-kort");
+        const lcu = document.getElementById("elev-cursor-lang");
+        const kcu = document.getElementById("elev-cursor-kort");
+        lcr.setAttribute("width", "0");
+        kcr.setAttribute("width", "0");
+        lcu.setAttribute("opacity", "1");
+        kcu.setAttribute("opacity", "1");
+
+        let lastL = 0,
+          lastK = 0;
+        const cykelProg = { p: 0 };
+
+        // GSAP ScrollTrigger – snabb animation (~6s)
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#cykelkarta",
+              start: "top 75%",
+              once: true,
+            },
+          })
+          .to(cykelProg, {
+            p: 1,
+            duration: 6,
+            ease: "power1.out",
+            onUpdate() {
+              const tL = Math.floor(cykelProg.p * langN);
+              const tK = Math.floor(cykelProg.p * kortN);
+              while (lastL < tL) {
+                langPoly.addLatLng(langCoords[lastL]);
+                langDot.setLatLng(langCoords[lastL]);
+                lastL++;
+              }
+              while (lastK < tK) {
+                kortPoly.addLatLng(kortCoords[lastK]);
+                kortDot.setLatLng(kortCoords[lastK]);
+                lastK++;
+              }
+              const lw = (cykelProg.p * 1000).toFixed(1);
+              lcr.setAttribute("width", lw);
+              lcu.setAttribute("x1", lw);
+              lcu.setAttribute("x2", lw);
+              kcr.setAttribute("width", lw);
+              kcu.setAttribute("x1", lw);
+              kcu.setAttribute("x2", lw);
+            },
+            onComplete() {
+              lcu.setAttribute("opacity", "0");
+              kcu.setAttribute("opacity", "0");
+              if (langDot) map.removeLayer(langDot);
+              if (kortDot) map.removeLayer(kortDot);
+              addKmMarkers(map, langCoords, "#eab308", "");
+              addKmMarkers(map, kortCoords, "#22c55e", "green");
+              L.polyline(langCoords, {
+                color: "#fde047",
+                weight: 3,
+                opacity: 0.65,
+                className: "flow-lang",
+              }).addTo(map);
+              L.polyline(kortCoords, {
+                color: "#86efac",
+                weight: 2.5,
+                opacity: 0.65,
+                className: "flow-kort",
+              }).addTo(map);
+            },
+          });
       }
 
       // ── SIMNING & LÖPNING KARTA (GSAP ScrollTrigger) ─────────────────────────
-      function initSimLopKarta(sim, lang, kort) {
-        const simCoords = sim.coords, simN = simCoords.length;
-        const langCoords = lang.coords, langElev = lang.elevs, langN = langCoords.length;
-        const kortCoords = kort.coords, kortElev = kort.elevs, kortN = kortCoords.length;
+      function initSimLopKarta(sim, lang, kort, gang) {
+        const simCoords = sim.coords,
+          simN = simCoords.length;
+        const langCoords = lang.coords,
+          langElev = lang.elevs,
+          langN = langCoords.length;
+        const kortCoords = kort.coords,
+          kortElev = kort.elevs,
+          kortN = kortCoords.length;
+        const gangCoords = gang.coords,
+          gangN = gangCoords.length;
 
-        const map = L.map('sim-lop-karta-map', MAP_LOCK);
+        const map = L.map("sim-lop-karta-map", MAP_LOCK);
         L.tileLayer(TILE, { attribution: ATTR, maxZoom: 19 }).addTo(map);
         map.fitBounds(L.latLngBounds(simCoords), { padding: [80, 80] });
 
         // Spöklinjer (syns direkt, tonas ut)
-        L.polyline(simCoords, { color: '#1e3a8a', weight: 5, opacity: 0.35, dashArray: '6,12' }).addTo(map);
-        L.polyline(langCoords, { color: '#78350f', weight: 4, opacity: 0.35, dashArray: '6,12' }).addTo(map);
-        L.polyline(kortCoords, { color: '#14532d', weight: 3, opacity: 0.35, dashArray: '6,12' }).addTo(map);
+        L.polyline(simCoords, {
+          color: "#1e3a8a",
+          weight: 5,
+          opacity: 0.35,
+          dashArray: "6,12",
+        }).addTo(map);
+        L.polyline(langCoords, {
+          color: "#78350f",
+          weight: 4,
+          opacity: 0.35,
+          dashArray: "6,12",
+        }).addTo(map);
+        L.polyline(kortCoords, {
+          color: "#14532d",
+          weight: 3,
+          opacity: 0.35,
+          dashArray: "6,12",
+        }).addTo(map);
+        L.polyline(gangCoords, {
+          color: "#1e40af",
+          weight: 3,
+          opacity: 0.35,
+          dashArray: "6,12",
+        }).addTo(map);
 
         // Start/mål-markeringar
 
         // Höjdprofiler
-        const langEP = buildElevPath(langElev), kortEP = buildElevPath(kortElev);
-        document.getElementById('sl-elev-bg-lang').setAttribute('d', langEP.d);
-        document.getElementById('sl-elev-fill-lang').setAttribute('d', langEP.d);
-        document.getElementById('sl-elev-bg-kort').setAttribute('d', kortEP.d);
-        document.getElementById('sl-elev-fill-kort').setAttribute('d', kortEP.d);
-        document.getElementById('sl-elev-max-lang').textContent = '↑ ' + Math.round(langEP.mx) + ' m';
-        document.getElementById('sl-elev-min-lang').textContent = '↓ ' + Math.round(langEP.mn) + ' m';
-        document.getElementById('sl-elev-max-kort').textContent = '↑ ' + Math.round(kortEP.mx) + ' m';
-        document.getElementById('sl-elev-min-kort').textContent = '↓ ' + Math.round(kortEP.mn) + ' m';
+        const langEP = buildElevPath(langElev),
+          kortEP = buildElevPath(kortElev);
+        document.getElementById("sl-elev-bg-lang").setAttribute("d", langEP.d);
+        document
+          .getElementById("sl-elev-fill-lang")
+          .setAttribute("d", langEP.d);
+        document.getElementById("sl-elev-bg-kort").setAttribute("d", kortEP.d);
+        document
+          .getElementById("sl-elev-fill-kort")
+          .setAttribute("d", kortEP.d);
+        document.getElementById("sl-elev-max-lang").textContent =
+          "↑ " + Math.round(langEP.mx) + " m";
+        document.getElementById("sl-elev-min-lang").textContent =
+          "↓ " + Math.round(langEP.mn) + " m";
+        document.getElementById("sl-elev-max-kort").textContent =
+          "↑ " + Math.round(kortEP.mx) + " m";
+        document.getElementById("sl-elev-min-kort").textContent =
+          "↓ " + Math.round(kortEP.mn) + " m";
 
         // Animerade polylines (börjar tomma)
-        const simPoly  = L.polyline([], { color: '#3b82f6', weight: 6, opacity: 0.95 }).addTo(map);
-        const langPoly = L.polyline([], { color: '#eab308', weight: 5, opacity: 0.95 }).addTo(map);
-        const kortPoly = L.polyline([], { color: '#22c55e', weight: 4, opacity: 0.95 }).addTo(map);
-        let simDot = null, langDot = null, kortDot = null;
+        const simPoly = L.polyline([], {
+          color: "#3b82f6",
+          weight: 6,
+          opacity: 0.95,
+        }).addTo(map);
+        const langPoly = L.polyline([], {
+          color: "#eab308",
+          weight: 5,
+          opacity: 0.95,
+        }).addTo(map);
+        const kortPoly = L.polyline([], {
+          color: "#22c55e",
+          weight: 4,
+          opacity: 0.95,
+        }).addTo(map);
+        const gangPoly = L.polyline([], {
+          color: "#669bbc",
+          weight: 4,
+          opacity: 0.95,
+        }).addTo(map);
+        let simDot = null,
+          langDot = null,
+          kortDot = null,
+          gangDot = null;
 
-        const lcr = document.getElementById('sl-elev-clip-rect-lang');
-        const kcr = document.getElementById('sl-elev-clip-rect-kort');
-        const lcu = document.getElementById('sl-elev-cursor-lang');
-        const kcu = document.getElementById('sl-elev-cursor-kort');
-        lcr.setAttribute('width', '0'); kcr.setAttribute('width', '0');
+        const lcr = document.getElementById("sl-elev-clip-rect-lang");
+        const kcr = document.getElementById("sl-elev-clip-rect-kort");
+        const lcu = document.getElementById("sl-elev-cursor-lang");
+        const kcu = document.getElementById("sl-elev-cursor-kort");
+        lcr.setAttribute("width", "0");
+        kcr.setAttribute("width", "0");
 
         // GSAP ScrollTrigger-sekvens
-        gsap.registerPlugin(ScrollTrigger);
-        let lastSim = 0, lastLang = 0, lastKort = 0;
-        const simProg = { p: 0 }, lopProg = { p: 0 };
+        let lastSim = 0,
+          lastLang = 0,
+          lastKort = 0,
+          lastGang = 0;
+        const simProg = { p: 0 },
+          lopProg = { p: 0 };
 
         function startLopAnimation() {
-          langDot = L.circleMarker(langCoords[0], { radius: 8, fillColor: '#fde047', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot' }).addTo(map);
-          kortDot = L.circleMarker(kortCoords[0], { radius: 7, fillColor: '#86efac', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot-green' }).addTo(map);
-          lcu.setAttribute('opacity', '1');
-          kcu.setAttribute('opacity', '1');
+          langDot = L.circleMarker(langCoords[0], {
+            radius: 8,
+            fillColor: "#fde047",
+            color: "#fff",
+            weight: 2,
+            fillOpacity: 1,
+            className: "glowing-dot",
+          }).addTo(map);
+          kortDot = L.circleMarker(kortCoords[0], {
+            radius: 7,
+            fillColor: "#86efac",
+            color: "#fff",
+            weight: 2,
+            fillOpacity: 1,
+            className: "glowing-dot-green",
+          }).addTo(map);
+          gangDot = L.circleMarker(gangCoords[0], {
+            radius: 7,
+            fillColor: "#a3c3d7",
+            color: "#fff",
+            weight: 2,
+            fillOpacity: 1,
+            className: "glowing-dot-blue",
+          }).addTo(map);
+          lcu.setAttribute("opacity", "1");
+          kcu.setAttribute("opacity", "1");
           gsap.to(lopProg, {
             p: 1,
             duration: 12,
-            ease: 'power1.out',
+            ease: "power1.out",
             onUpdate() {
               const tL = Math.floor(lopProg.p * langN);
               const tK = Math.floor(lopProg.p * kortN);
-              while (lastLang < tL) { langPoly.addLatLng(langCoords[lastLang]); langDot.setLatLng(langCoords[lastLang]); lastLang++; }
-              while (lastKort < tK) { kortPoly.addLatLng(kortCoords[lastKort]); kortDot.setLatLng(kortCoords[lastKort]); lastKort++; }
+              const tG = Math.floor(lopProg.p * gangN);
+              while (lastLang < tL) {
+                langPoly.addLatLng(langCoords[lastLang]);
+                langDot.setLatLng(langCoords[lastLang]);
+                lastLang++;
+              }
+              while (lastKort < tK) {
+                kortPoly.addLatLng(kortCoords[lastKort]);
+                kortDot.setLatLng(kortCoords[lastKort]);
+                lastKort++;
+              }
+              while (lastGang < tG) {
+                gangPoly.addLatLng(gangCoords[lastGang]);
+                gangDot.setLatLng(gangCoords[lastGang]);
+                lastGang++;
+              }
               const w = (lopProg.p * 1000).toFixed(1);
-              lcr.setAttribute('width', w); lcu.setAttribute('x1', w); lcu.setAttribute('x2', w);
-              kcr.setAttribute('width', w); kcu.setAttribute('x1', w); kcu.setAttribute('x2', w);
+              lcr.setAttribute("width", w);
+              lcu.setAttribute("x1", w);
+              lcu.setAttribute("x2", w);
+              kcr.setAttribute("width", w);
+              kcu.setAttribute("x1", w);
+              kcu.setAttribute("x2", w);
             },
             onComplete() {
-              lcu.setAttribute('opacity', '0');
-              kcu.setAttribute('opacity', '0');
+              lcu.setAttribute("opacity", "0");
+              kcu.setAttribute("opacity", "0");
               if (langDot) map.removeLayer(langDot);
               if (kortDot) map.removeLayer(kortDot);
-              addKmMarkers(map, langCoords, '#eab308', '', 1000);
-              addKmMarkers(map, kortCoords, '#22c55e', 'green', 1000);
-              L.polyline(langCoords, { color: '#fde047', weight: 3, opacity: 0.65, className: 'flow-lang' }).addTo(map);
-              L.polyline(kortCoords, { color: '#86efac', weight: 2.5, opacity: 0.65, className: 'flow-kort' }).addTo(map);
-            }
+              if (gangDot) map.removeLayer(gangDot);
+              addKmMarkers(map, langCoords, "#eab308", "", 1000);
+              addKmMarkers(map, kortCoords, "#22c55e", "green", 1000);
+              L.polyline(langCoords, {
+                color: "#fde047",
+                weight: 3,
+                opacity: 0.65,
+                className: "flow-lang",
+              }).addTo(map);
+              L.polyline(kortCoords, {
+                color: "#86efac",
+                weight: 2.5,
+                opacity: 0.65,
+                className: "flow-kort",
+              }).addTo(map);
+              L.polyline(gangCoords, {
+                color: "#a3c3d7",
+                weight: 2.5,
+                opacity: 0.65,
+                className: "flow-sim",
+              }).addTo(map);
+            },
           });
         }
 
         // Steg 1: Simning ritas ut (~8 s, mjuk in/ut)
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: '#sim-lop-karta-map',
-            start: 'top 75%',
-            once: true
-          }
-        })
-        .to(simProg, {
-          p: 1,
-          duration: 4,
-          ease: 'none',
-          onStart() {
-            simDot = L.circleMarker(simCoords[0], { radius: 8, fillColor: '#93c5fd', color: '#fff', weight: 2, fillOpacity: 1, className: 'glowing-dot-blue' }).addTo(map);
-          },
-          onUpdate() {
-            const tS = Math.floor(simProg.p * simN);
-            while (lastSim < tS) { simPoly.addLatLng(simCoords[lastSim]); simDot.setLatLng(simCoords[lastSim]); lastSim++; }
-          },
-          onComplete() {
-            simDot.setLatLng(simCoords[simN - 1]);
-            map.removeLayer(simDot);
-            L.polyline(simCoords, { color: '#93c5fd', weight: 4, opacity: 0.7, className: 'flow-sim' }).addTo(map);
-            // Steg 2: Zooma ut — löpningen startar först när utzoomningen är klar
-            map.flyToBounds(L.latLngBounds([...simCoords, ...langCoords, ...kortCoords]), { padding: [44, 44], duration: 2.5, easeLinearity: 0.1 });
-            map.once('moveend', startLopAnimation);
-          }
-        });
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#sim-lop-karta-map",
+              start: "top 75%",
+              once: true,
+            },
+          })
+          .to(simProg, {
+            p: 1,
+            duration: 4,
+            ease: "none",
+            onStart() {
+              simDot = L.circleMarker(simCoords[0], {
+                radius: 8,
+                fillColor: "#93c5fd",
+                color: "#fff",
+                weight: 2,
+                fillOpacity: 1,
+                className: "glowing-dot-blue",
+              }).addTo(map);
+            },
+            onUpdate() {
+              const tS = Math.floor(simProg.p * simN);
+              while (lastSim < tS) {
+                simPoly.addLatLng(simCoords[lastSim]);
+                simDot.setLatLng(simCoords[lastSim]);
+                lastSim++;
+              }
+            },
+            onComplete() {
+              simDot.setLatLng(simCoords[simN - 1]);
+              map.removeLayer(simDot);
+              L.polyline(simCoords, {
+                color: "#93c5fd",
+                weight: 4,
+                opacity: 0.7,
+                className: "flow-sim",
+              }).addTo(map);
+              // Steg 2: Zooma ut — löpningen startar först när utzoomningen är klar
+              map.flyToBounds(
+                L.latLngBounds([
+                  ...simCoords,
+                  ...langCoords,
+                  ...kortCoords,
+                  ...gangCoords,
+                ]),
+                { padding: [44, 44], duration: 2.5, easeLinearity: 0.1 },
+              );
+              map.once("moveend", startLopAnimation);
+            },
+          });
       }
-
     </script>
 
     <!-- FOOTER -->

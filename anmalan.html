@@ -254,7 +254,13 @@
           <!-- Honeypot — osynligt för människor, bottar fyller i det -->
           <div class="absolute -left-[9999px]" aria-hidden="true">
             <label for="website">Lämna tomt</label>
-            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            <input
+              type="text"
+              id="website"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
           </div>
 
           <!-- Sammanfattning & Skicka -->
@@ -358,9 +364,13 @@
 
       // ── Formatering: ta bort extra mellanrum, gör Förnamn Efternamn ──
       function capitalizeName(str) {
-        return str.replace(/\s+/g, " ").trim()
+        return str
+          .replace(/\s+/g, " ")
+          .trim()
           .toLowerCase()
-          .replace(/(?:^|\s)\S/g, function (c) { return c.toUpperCase(); });
+          .replace(/(?:^|\s)\S/g, function (c) {
+            return c.toUpperCase();
+          });
       }
 
       // ── Live-sammanfattning ──
@@ -399,13 +409,30 @@
           return;
         }
 
-        var fornamn = sanitize(capitalizeName(document.getElementById("fornamn").value));
-        var efternamn = sanitize(capitalizeName(document.getElementById("efternamn").value));
-        var epost = document.getElementById("epost").value.replace(/\s+/g, "").toLowerCase();
-        var telefon = document.getElementById("telefon").value.replace(/\s+/g, " ").trim();
-        var klubb = sanitize(document.getElementById("klubb").value.replace(/\s+/g, " ").trim());
+        var fornamn = sanitize(
+          capitalizeName(document.getElementById("fornamn").value),
+        );
+        var efternamn = sanitize(
+          capitalizeName(document.getElementById("efternamn").value),
+        );
+        var epost = document
+          .getElementById("epost")
+          .value.replace(/\s+/g, "")
+          .toLowerCase();
+        var telefon = document
+          .getElementById("telefon")
+          .value.replace(/\s+/g, " ")
+          .trim();
+        var klubb = sanitize(
+          document.getElementById("klubb").value.replace(/\s+/g, " ").trim(),
+        );
         var distansEl = document.querySelector('input[name="distans"]:checked');
-        var meddelande = sanitize(document.getElementById("meddelande").value.replace(/\s+/g, " ").trim());
+        var meddelande = sanitize(
+          document
+            .getElementById("meddelande")
+            .value.replace(/\s+/g, " ")
+            .trim(),
+        );
 
         if (!distansEl) {
           errorMsg.textContent = "Vänligen välj en klass.";

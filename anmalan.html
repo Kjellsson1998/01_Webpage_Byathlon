@@ -5,21 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anmälan — Byathlon</title>
     <link href="src/output.css" rel="stylesheet" />
-    <link rel="icon" href="Image/HK logo Master Version.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="Image/HK logo Master Version.svg"
+      type="image/svg+xml"
+    />
     <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
     <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
   </head>
 
-  <body class="bg-TanC-50 text-DGreenC-800 font-sans min-h-screen flex flex-col">
-
+  <body
+    class="bg-TanC-50 text-DGreenC-800 font-sans min-h-screen flex flex-col"
+  >
     <!-- NAV -->
-    <nav class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav
+      class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg"
+    >
+      <div
+        class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
         <a href="index.html" class="flex items-center gap-3">
-          <img src="Image/Byathlon_Loga.png" alt="Byathlon logo" class="h-10 w-10" />
-          <span class="text-TanC-100 text-xl font-bold tracking-wide">Byathlon</span>
+          <img
+            src="Image/Byathlon_Loga.png"
+            alt="Byathlon logo"
+            class="h-10 w-10"
+          />
+          <span class="text-TanC-100 text-xl font-bold tracking-wide"
+            >Byathlon</span
+          >
         </a>
-        <a href="index.html" class="text-TanC-200 text-sm font-medium hover:text-YellowC-400 transition-colors">
+        <a
+          href="index.html"
+          class="text-TanC-200 text-sm font-medium hover:text-YellowC-400 transition-colors"
+        >
           &larr; Tillbaka
         </a>
       </div>
@@ -28,157 +46,275 @@
     <!-- INNEHÅLL -->
     <main class="flex-1 pt-28 pb-16 px-4 sm:px-6">
       <div class="max-w-3xl mx-auto">
-
         <!-- Rubrik -->
         <div class="mb-10">
-          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1">Byathlon 2026</p>
-          <h1 class="text-3xl sm:text-4xl font-bold text-DGreenC-800 mb-2">Anmälan</h1>
+          <p
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+          >
+            Byathlon 2026
+          </p>
+          <h1 class="text-3xl sm:text-4xl font-bold text-DGreenC-800 mb-2">
+            Anmälan
+          </h1>
           <div class="flex h-[3px] rounded-sm overflow-hidden w-24 mb-4">
             <span class="flex-1 bg-BlueC-500"></span>
             <span class="flex-1 bg-YellowC-400"></span>
             <span class="flex-1 bg-GreenC-500"></span>
           </div>
           <p class="text-DGreenC-500 text-sm max-w-lg">
-            Fyll i formuläret nedan. När du klickar "Skicka anmälan" öppnas din e-postklient med ett förifylt meddelande.
-            Anmälan stänger <strong>14 juli 2026</strong>.
+            Fyll i formuläret nedan och klicka "Skicka anmälan". Du får en
+            bekräftelse via e-post. Anmälan stänger
+            <strong>14 juli 2026</strong>.
           </p>
         </div>
 
         <!-- Formulär -->
         <form id="anmalan-form" class="space-y-8">
-
           <!-- Sektion: Personuppgifter -->
           <fieldset class="space-y-5">
-            <legend class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1">Personuppgifter</legend>
-            <div class="border-t border-DGreenC-200 pt-4 grid sm:grid-cols-2 gap-5">
+            <legend
+              class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+            >
+              Personuppgifter
+            </legend>
+            <div
+              class="border-t border-DGreenC-200 pt-4 grid sm:grid-cols-2 gap-5"
+            >
               <div>
-                <label for="fornamn" class="block text-sm font-semibold text-DGreenC-700 mb-1.5">Förnamn *</label>
-                <input type="text" id="fornamn" required
+                <label
+                  for="fornamn"
+                  class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                  >Förnamn *</label
+                >
+                <input
+                  type="text"
+                  id="fornamn"
+                  required
                   class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
-                  placeholder="Hugo" />
+                  placeholder="Hugo"
+                />
               </div>
               <div>
-                <label for="efternamn" class="block text-sm font-semibold text-DGreenC-700 mb-1.5">Efternamn *</label>
-                <input type="text" id="efternamn" required
+                <label
+                  for="efternamn"
+                  class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                  >Efternamn *</label
+                >
+                <input
+                  type="text"
+                  id="efternamn"
+                  required
                   class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
-                  placeholder="Kjellsson" />
+                  placeholder="Kjellsson"
+                />
               </div>
               <div>
-                <label for="epost" class="block text-sm font-semibold text-DGreenC-700 mb-1.5">E-post *</label>
-                <input type="email" id="epost" required
+                <label
+                  for="epost"
+                  class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                  >E-post *</label
+                >
+                <input
+                  type="email"
+                  id="epost"
+                  required
                   class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
-                  placeholder="din@epost.se" />
+                  placeholder="din@epost.se"
+                />
               </div>
               <div>
-                <label for="telefon" class="block text-sm font-semibold text-DGreenC-700 mb-1.5">Telefon</label>
-                <input type="tel" id="telefon"
+                <label
+                  for="telefon"
+                  class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                  >Telefon</label
+                >
+                <input
+                  type="tel"
+                  id="telefon"
                   class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
-                  placeholder="070-123 45 67" />
+                  placeholder="070-123 45 67"
+                />
+              </div>
+              <div class="sm:col-span-2">
+                <label
+                  for="klubb"
+                  class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                  >Klubb
+                  <span class="font-normal text-DGreenC-400"
+                    >(valfritt)</span
+                  ></label
+                >
+                <input
+                  type="text"
+                  id="klubb"
+                  class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
+                  placeholder="T.ex. Sidensjö IF"
+                />
               </div>
             </div>
           </fieldset>
 
           <!-- Sektion: Välj klass -->
           <fieldset>
-            <legend class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1">Välj klass *</legend>
-            <div class="border-t border-DGreenC-200 pt-4 grid sm:grid-cols-3 gap-4">
-
-              <!-- Kort -->
+            <legend
+              class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+            >
+              Välj klass *
+            </legend>
+            <div
+              class="border-t border-DGreenC-200 pt-4 grid sm:grid-cols-3 gap-4"
+            >
               <label class="cursor-pointer">
-                <input type="radio" name="distans" value="kort" required class="peer hidden" />
-                <div class="peer-checked:ring-2 peer-checked:ring-GreenC-500 peer-checked:bg-GreenC-50 bg-white border border-DGreenC-200 rounded-xl p-5 text-center transition-all hover:border-GreenC-400">
-                  <div class="w-3 h-3 rounded-full bg-GreenC-500 mx-auto mb-3"></div>
+                <input
+                  type="radio"
+                  name="distans"
+                  value="Kort distans"
+                  required
+                  class="peer hidden"
+                />
+                <div
+                  class="peer-checked:ring-2 peer-checked:ring-GreenC-500 peer-checked:bg-GreenC-50 bg-white border border-DGreenC-200 rounded-xl p-5 text-center transition-all hover:border-GreenC-400"
+                >
+                  <div
+                    class="w-3 h-3 rounded-full bg-GreenC-500 mx-auto mb-3"
+                  ></div>
                   <p class="font-bold text-DGreenC-800">Kort distans</p>
                   <p class="text-DGreenC-400 text-xs mt-1.5 leading-relaxed">
-                    Cykel 10,6 km<br>Simning 50 m<br>Löpning 2,3 km
+                    Cykel 10,6 km<br />Simning 50 m<br />Löpning 2,3 km
                   </p>
                 </div>
               </label>
-
-              <!-- Lång -->
               <label class="cursor-pointer">
-                <input type="radio" name="distans" value="lang" class="peer hidden" />
-                <div class="peer-checked:ring-2 peer-checked:ring-YellowC-500 peer-checked:bg-YellowC-50 bg-white border border-DGreenC-200 rounded-xl p-5 text-center transition-all hover:border-YellowC-400">
-                  <div class="w-3 h-3 rounded-full bg-YellowC-500 mx-auto mb-3"></div>
+                <input
+                  type="radio"
+                  name="distans"
+                  value="Lång distans"
+                  class="peer hidden"
+                />
+                <div
+                  class="peer-checked:ring-2 peer-checked:ring-YellowC-500 peer-checked:bg-YellowC-50 bg-white border border-DGreenC-200 rounded-xl p-5 text-center transition-all hover:border-YellowC-400"
+                >
+                  <div
+                    class="w-3 h-3 rounded-full bg-YellowC-500 mx-auto mb-3"
+                  ></div>
                   <p class="font-bold text-DGreenC-800">Lång distans</p>
                   <p class="text-DGreenC-400 text-xs mt-1.5 leading-relaxed">
-                    Cykel 26,6 km<br>Simning 100 m<br>Löpning 3 km
+                    Cykel 26,6 km<br />Simning 100 m<br />Löpning 3 km
                   </p>
                 </div>
               </label>
-
-              <!-- Motion -->
               <label class="cursor-pointer">
-                <input type="radio" name="distans" value="motion" class="peer hidden" />
-                <div class="peer-checked:ring-2 peer-checked:ring-BlueC-500 peer-checked:bg-BlueC-50 bg-white border border-DGreenC-200 rounded-xl p-5 text-center transition-all hover:border-BlueC-400">
-                  <div class="w-3 h-3 rounded-full bg-BlueC-500 mx-auto mb-3"></div>
+                <input
+                  type="radio"
+                  name="distans"
+                  value="Motion"
+                  class="peer hidden"
+                />
+                <div
+                  class="peer-checked:ring-2 peer-checked:ring-BlueC-500 peer-checked:bg-BlueC-50 bg-white border border-DGreenC-200 rounded-xl p-5 text-center transition-all hover:border-BlueC-400"
+                >
+                  <div
+                    class="w-3 h-3 rounded-full bg-BlueC-500 mx-auto mb-3"
+                  ></div>
                   <p class="font-bold text-DGreenC-800">Motion</p>
                   <p class="text-DGreenC-400 text-xs mt-1.5 leading-relaxed">
-                    Cykel 10,6 km<br>Gång 600 m<br>Bastu &amp; bad
+                    Cykel 10,6 km<br />Gång 600 m<br />Bastu &amp; bad
                   </p>
-                  <p class="text-DGreenC-300 text-[0.6rem] mt-1">Elcykel tillåtet</p>
+                  <p class="text-DGreenC-300 text-[0.6rem] mt-1">
+                    Elcykel tillåtet
+                  </p>
                 </div>
               </label>
-
             </div>
           </fieldset>
 
           <!-- Sektion: Övrigt -->
           <fieldset class="space-y-5">
-            <legend class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1">Övrigt</legend>
+            <legend
+              class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+            >
+              Övrigt
+            </legend>
             <div class="border-t border-DGreenC-200 pt-4">
-              <label for="meddelande" class="block text-sm font-semibold text-DGreenC-700 mb-1.5">Meddelande</label>
-              <textarea id="meddelande" rows="3"
+              <label
+                for="meddelande"
+                class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                >Meddelande</label
+              >
+              <textarea
+                id="meddelande"
+                rows="3"
                 class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
-                placeholder="Allergier, frågor, eller annat vi bör veta..."></textarea>
+                placeholder="Allergier, frågor, eller annat vi bör veta..."
+              ></textarea>
             </div>
           </fieldset>
 
           <!-- Sammanfattning & Skicka -->
           <div class="border-t border-DGreenC-200 pt-6">
-            <div id="summary" class="hidden bg-DGreenC-50 rounded-lg p-4 mb-6 text-sm text-DGreenC-600">
-              <!-- Fylls av JS -->
-            </div>
+            <div
+              id="summary"
+              class="hidden bg-DGreenC-50 rounded-lg p-4 mb-6 text-sm text-DGreenC-600"
+            ></div>
 
-            <button type="submit"
-              class="w-full sm:w-auto bg-DGreenC-700 hover:bg-DGreenC-600 text-TanC-50 font-bold py-4 px-10 rounded-lg text-lg transition-colors cursor-pointer">
-              Skicka anmälan via e-post
+            <!-- Felmeddelande -->
+            <div
+              id="error-msg"
+              class="hidden bg-RedC-50 border border-RedC-200 rounded-lg p-4 mb-6 text-sm text-RedC-600"
+            ></div>
+
+            <button
+              type="submit"
+              id="submit-btn"
+              class="w-full sm:w-auto bg-DGreenC-700 hover:bg-DGreenC-600 text-TanC-50 font-bold py-4 px-10 rounded-lg text-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Skicka anmälan
             </button>
             <p class="text-DGreenC-400 text-xs mt-3">
-              Din e-postklient öppnas med ett förifylt meddelande. Tryck "Skicka" i din e-post för att slutföra.
+              Du får en bekräftelse via e-post efter att anmälan skickats.
             </p>
           </div>
-
         </form>
 
         <!-- Info-ruta -->
         <div class="mt-12 border-t border-DGreenC-200 pt-6">
-          <div class="grid sm:grid-cols-3 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-DGreenC-200 text-[0.78rem] text-DGreenC-500">
+          <div
+            class="grid sm:grid-cols-3 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-DGreenC-200 text-[0.78rem] text-DGreenC-500"
+          >
             <div class="py-3 sm:py-0 sm:pr-5">
-              <p class="font-bold text-DGreenC-700 text-[0.8rem] mb-1">Datum &amp; tid</p>
+              <p class="font-bold text-DGreenC-700 text-[0.8rem] mb-1">
+                Datum &amp; tid
+              </p>
               <p>Onsdag 29 juli 2026</p>
               <p>Start kl. 17:00 / Motion 17:10</p>
             </div>
             <div class="py-3 sm:py-0 sm:px-5">
-              <p class="font-bold text-DGreenC-700 text-[0.8rem] mb-1">Ta med</p>
+              <p class="font-bold text-DGreenC-700 text-[0.8rem] mb-1">
+                Ta med
+              </p>
               <p>Cykel &amp; hjälm (obligatoriskt)</p>
               <p>Badkläder, löparskor, vatten</p>
             </div>
             <div class="py-3 sm:py-0 sm:pl-5">
-              <p class="font-bold text-DGreenC-700 text-[0.8rem] mb-1">Bra att veta</p>
+              <p class="font-bold text-DGreenC-700 text-[0.8rem] mb-1">
+                Bra att veta
+              </p>
               <p>Anmälan stänger 14 juli</p>
               <p>Anmälan ej överförbar</p>
             </div>
           </div>
         </div>
-
       </div>
     </main>
 
     <!-- FOOTER -->
     <footer class="bg-DGreenC-800 text-TanC-400 py-8 px-6">
       <div class="max-w-4xl mx-auto text-center">
-        <img src="Image/Byathlon_Loga.png" alt="Byathlon logo" class="h-10 w-10 mx-auto mb-3 opacity-70" />
+        <img
+          src="Image/Byathlon_Loga.png"
+          alt="Byathlon logo"
+          class="h-10 w-10 mx-auto mb-3 opacity-70"
+        />
         <p class="font-semibold text-TanC-200 mb-1">Byathlon</p>
         <p class="text-sm text-TanC-500">Arrangeras av By intresseförening</p>
         <p class="text-sm text-TanC-600 mt-1">&copy; 2026 Byathlon</p>
@@ -186,65 +322,98 @@
     </footer>
 
     <script>
-      var form = document.getElementById('anmalan-form');
-      var summary = document.getElementById('summary');
+      // ═══════════════════════════════════════════════════════════════════════════
+      // KONFIGURATION — Klistra in din Power Automate webhook-URL här:
+      // ═══════════════════════════════════════════════════════════════════════════
+      var WEBHOOK_URL =
+        "https://default9804eca4e66d43bc8558a26dc51db0.16.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/fcf54075c6ea4c7b8b0c2b7a05c0fd00/triggers/manual/paths/invoke?api-version=1";
+      // ═══════════════════════════════════════════════════════════════════════════
 
-      // Visa sammanfattning när distans väljs
-      form.addEventListener('change', updateSummary);
-      form.addEventListener('input', updateSummary);
+      var form = document.getElementById("anmalan-form");
+      var summary = document.getElementById("summary");
+      var errorMsg = document.getElementById("error-msg");
+      var submitBtn = document.getElementById("submit-btn");
+
+      // Live-sammanfattning
+      form.addEventListener("change", updateSummary);
+      form.addEventListener("input", updateSummary);
 
       function updateSummary() {
         var distansEl = document.querySelector('input[name="distans"]:checked');
-        var fornamn = document.getElementById('fornamn').value.trim();
-        if (!distansEl || !fornamn) { summary.classList.add('hidden'); return; }
-
-        var distansNames = {
-          kort: 'Kort distans',
-          lang: 'Lång distans',
-          motion: 'Motion'
-        };
-        summary.classList.remove('hidden');
-        summary.innerHTML = '<strong>' + fornamn + '</strong> &mdash; ' + distansNames[distansEl.value] + ' &mdash; 29 juli 2026, kl. ' + (distansEl.value === 'motion' ? '17:10' : '17:00');
+        var fornamn = document.getElementById("fornamn").value.trim();
+        if (!distansEl || !fornamn) {
+          summary.classList.add("hidden");
+          return;
+        }
+        summary.classList.remove("hidden");
+        summary.innerHTML =
+          "<strong>" +
+          fornamn +
+          "</strong> &mdash; " +
+          distansEl.value +
+          " &mdash; 29 juli 2026, kl. " +
+          (distansEl.value === "Motion" ? "17:10" : "17:00");
       }
 
-      // Skicka via mailto
-      form.addEventListener('submit', function(e) {
+      // Skicka till Power Automate
+      form.addEventListener("submit", function (e) {
         e.preventDefault();
+        errorMsg.classList.add("hidden");
 
-        var fornamn = document.getElementById('fornamn').value.trim();
-        var efternamn = document.getElementById('efternamn').value.trim();
-        var epost = document.getElementById('epost').value.trim();
-        var telefon = document.getElementById('telefon').value.trim();
+        var fornamn = document.getElementById("fornamn").value.trim();
+        var efternamn = document.getElementById("efternamn").value.trim();
+        var epost = document.getElementById("epost").value.trim();
+        var telefon = document.getElementById("telefon").value.trim();
+        var klubb = document.getElementById("klubb").value.trim();
         var distansEl = document.querySelector('input[name="distans"]:checked');
-        var meddelande = document.getElementById('meddelande').value.trim();
+        var meddelande = document.getElementById("meddelande").value.trim();
 
         if (!distansEl) {
-          alert('Vänligen välj en klass.');
+          errorMsg.textContent = "Vänligen välj en klass.";
+          errorMsg.classList.remove("hidden");
           return;
         }
 
-        var namn = fornamn + ' ' + efternamn;
-        var distansMap = {
-          kort: 'Kort distans (Cykel 10,6 km, Simning 50m, Löpning 2,3km)',
-          lang: 'Lång distans (Cykel 26,6 km, Simning 100m, Löpning 3km)',
-          motion: 'Motion (Cykel 10,6 km, Gång 600m, Bastu & Bad)'
+        // Disable knappen under sändning
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Skickar...";
+
+        var data = {
+          fornamn: fornamn,
+          efternamn: efternamn,
+          epost: epost,
+          telefon: telefon,
+          klubb: klubb,
+          klass: distansEl.value,
+          meddelande: meddelande,
+          tidpunkt: new Date().toISOString(),
         };
-        var distans = distansMap[distansEl.value];
 
-        var subject = 'Anmälan till Byathlon – ' + namn;
-        var body = 'Hej!\n\n';
-        body += 'Jag vill anmäla mig till Byathlon.\n\n';
-        body += '--- Uppgifter ---\n';
-        body += 'Namn: ' + namn + '\n';
-        body += 'E-post: ' + epost + '\n';
-        if (telefon) body += 'Telefon: ' + telefon + '\n';
-        body += 'Klass: ' + distans + '\n';
-        if (meddelande) body += '\nÖvrigt: ' + meddelande + '\n';
-        body += '\nMvh,\n' + namn;
-
-        window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then(function (response) {
+            if (response.ok || response.status === 202) {
+              // Spara namn i sessionStorage för bekräftelsesidan
+              sessionStorage.setItem("byathlon_fornamn", fornamn);
+              sessionStorage.setItem("byathlon_klass", distansEl.value);
+              sessionStorage.setItem("byathlon_epost", epost);
+              window.location.href = "bekraftelse.html";
+            } else {
+              throw new Error("Servern svarade med status " + response.status);
+            }
+          })
+          .catch(function (err) {
+            errorMsg.textContent =
+              "Något gick fel vid anmälan. Försök igen eller kontakta arrangören.";
+            errorMsg.classList.remove("hidden");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Skicka anmälan";
+            console.error("Anmälan-fel:", err);
+          });
       });
     </script>
-
   </body>
 </html>

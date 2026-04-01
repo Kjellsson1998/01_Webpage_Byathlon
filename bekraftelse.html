@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anmälan bekräftad — Byathlon</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="icon" href="Image/HK logo Master Version.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
+    <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
+  </head>
+
+  <body class="bg-TanC-50 text-DGreenC-800 font-sans min-h-screen flex flex-col">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="Image/Byathlon_Loga.png" alt="Byathlon logo" class="h-10 w-10" />
+          <span class="text-TanC-100 text-xl font-bold tracking-wide">Byathlon</span>
+        </a>
+        <a href="index.html" class="text-TanC-200 text-sm font-medium hover:text-YellowC-400 transition-colors">
+          Tillbaka till startsidan
+        </a>
+      </div>
+    </nav>
+
+    <!-- BEKRÄFTELSE -->
+    <main class="flex-1 pt-28 pb-16 px-4 sm:px-6 flex items-center">
+      <div class="max-w-xl mx-auto text-center">
+
+        <!-- Bock-ikon -->
+        <div class="w-20 h-20 rounded-full bg-GreenC-100 flex items-center justify-center mx-auto mb-8">
+          <svg class="w-10 h-10 text-GreenC-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+
+        <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2">Anmälan mottagen</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-DGreenC-800 mb-4">
+          Tack, <span id="bekr-namn">du</span>!
+        </h1>
+        <div class="flex h-[3px] rounded-sm overflow-hidden w-24 mx-auto mb-6">
+          <span class="flex-1 bg-BlueC-500"></span>
+          <span class="flex-1 bg-YellowC-400"></span>
+          <span class="flex-1 bg-GreenC-500"></span>
+        </div>
+
+        <p class="text-DGreenC-500 text-lg mb-2">
+          Din anmälan till <strong id="bekr-klass">Byathlon</strong> är registrerad.
+        </p>
+        <p class="text-DGreenC-400 text-sm mb-8">
+          En bekräftelse skickas till <strong id="bekr-epost">din e-post</strong>.
+          Kolla skräpposten om du inte ser den inom ett par minuter.
+        </p>
+
+        <!-- Sammanfattning -->
+        <div class="bg-white border border-DGreenC-200 rounded-xl p-6 text-left mb-10 max-w-sm mx-auto">
+          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-3">Din anmälan</p>
+          <div class="border-t border-DGreenC-200 pt-3 space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-DGreenC-400">Klass</span>
+              <span class="font-semibold text-DGreenC-700" id="bekr-klass2">—</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-DGreenC-400">Datum</span>
+              <span class="font-semibold text-DGreenC-700">29 juli 2026</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-DGreenC-400">Start</span>
+              <span class="font-semibold text-DGreenC-700" id="bekr-tid">17:00</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-DGreenC-400">Plats</span>
+              <span class="font-semibold text-DGreenC-700">Sidensjö</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Påminnelse -->
+        <div class="bg-DGreenC-50 rounded-lg p-5 text-left max-w-sm mx-auto mb-10">
+          <p class="text-sm font-bold text-DGreenC-700 mb-2">Glöm inte att ta med:</p>
+          <ul class="text-sm text-DGreenC-500 space-y-1">
+            <li>Cykel &amp; hjälm (obligatoriskt)</li>
+            <li>Badkläder &amp; handduk</li>
+            <li>Löparskor</li>
+            <li>Vattenflaska</li>
+          </ul>
+        </div>
+
+        <a href="index.html"
+          class="inline-block bg-DGreenC-700 hover:bg-DGreenC-600 text-TanC-50 font-bold py-3 px-8 rounded-lg transition-colors">
+          Tillbaka till startsidan
+        </a>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-DGreenC-800 text-TanC-400 py-8 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <img src="Image/Byathlon_Loga.png" alt="Byathlon logo" class="h-10 w-10 mx-auto mb-3 opacity-70" />
+        <p class="font-semibold text-TanC-200 mb-1">Byathlon</p>
+        <p class="text-sm text-TanC-500">Arrangeras av By intresseförening</p>
+        <p class="text-sm text-TanC-600 mt-1">&copy; 2026 Byathlon</p>
+      </div>
+    </footer>
+
+    <script>
+      // Hämta data från anmälningsformuläret
+      var fornamn = sessionStorage.getItem('byathlon_fornamn');
+      var klass = sessionStorage.getItem('byathlon_klass');
+      var epost = sessionStorage.getItem('byathlon_epost');
+
+      if (fornamn) document.getElementById('bekr-namn').textContent = fornamn;
+      if (klass) {
+        document.getElementById('bekr-klass').textContent = klass;
+        document.getElementById('bekr-klass2').textContent = klass;
+        document.getElementById('bekr-tid').textContent = klass === 'Motion' ? '17:10' : '17:00';
+      }
+      if (epost) document.getElementById('bekr-epost').textContent = epost;
+
+      // Rensa sessionStorage
+      sessionStorage.removeItem('byathlon_fornamn');
+      sessionStorage.removeItem('byathlon_klass');
+      sessionStorage.removeItem('byathlon_epost');
+    </script>
+
+  </body>
+</html>

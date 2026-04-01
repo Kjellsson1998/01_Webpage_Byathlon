@@ -76,19 +76,19 @@
       }
       /* Kartmarkör: statisk glow */
       .pulse-marker {
-        box-shadow: 0 0 16px 6px rgba(102,155,188,0.6);
+        box-shadow: 0 0 16px 6px rgba(102, 155, 188, 0.6);
         border-radius: 50%;
       }
       /* Tidslinje: diagonal-delad gul/grön dot (Kort & Lång) */
       .dot-split {
         border-radius: 50%;
         background: linear-gradient(135deg, #efca5c 50%, #606c38 50%);
-        box-shadow: 0 0 8px 2px rgba(234,179,8,0.35);
+        box-shadow: 0 0 8px 2px rgba(234, 179, 8, 0.35);
       }
       /* Tidslinje: blå dot (Motion) */
       .dot-blue-static {
         border-radius: 50%;
-        box-shadow: 0 0 8px 2px rgba(102,155,188,0.35);
+        box-shadow: 0 0 8px 2px rgba(102, 155, 188, 0.35);
       }
       @keyframes flowSim {
         to {
@@ -1093,37 +1093,86 @@
     </section>
 
     <!-- PRAKTISK INFO -->
-    <section id="info" class="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-5 overflow-hidden bg-TanC-50">
-
+    <section
+      id="info"
+      class="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-5 overflow-hidden bg-TanC-50"
+    >
       <!-- Bakgrundskarta (MapLibre) -->
-      <div id="info-bg-map" class="absolute inset-0 z-0 opacity-90" style="width:100%;height:100%;"></div>
+      <div
+        id="info-bg-map"
+        class="absolute inset-0 z-0 opacity-90"
+        style="width: 100%; height: 100%"
+      ></div>
       <!-- Vinjett (mjuk fade bara i kanterna) -->
-      <div class="absolute inset-0 z-[1] pointer-events-none" style="background: linear-gradient(180deg, #efe8e0 0%, transparent 4%, transparent 96%, #efe8e0 100%), linear-gradient(90deg, rgba(239,232,224,0.5) 0%, transparent 8%, transparent 92%, rgba(239,232,224,0.5) 100%);"></div>
+      <div
+        class="absolute inset-0 z-[1] pointer-events-none"
+        style="
+          background:
+            linear-gradient(
+              180deg,
+              #efe8e0 0%,
+              transparent 4%,
+              transparent 96%,
+              #efe8e0 100%
+            ),
+            linear-gradient(
+              90deg,
+              rgba(239, 232, 224, 0.5) 0%,
+              transparent 8%,
+              transparent 92%,
+              rgba(239, 232, 224, 0.5) 100%
+            );
+        "
+      ></div>
 
       <div class="relative z-10 max-w-[60rem] mx-auto space-y-3 sm:space-y-4">
-
         <!-- Header-panel (glass, full bredd) -->
         <div class="glass p-5 sm:p-7">
-          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1">Praktisk information</p>
+          <p
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+          >
+            Praktisk information
+          </p>
           <div class="flex h-[3px] rounded-sm overflow-hidden mb-5">
             <span class="flex-1 bg-BlueC-500"></span>
             <span class="flex-1 bg-YellowC-400"></span>
             <span class="flex-1 bg-GreenC-500"></span>
           </div>
-          <div class="flex flex-col sm:flex-row sm:items-baseline gap-2.5 sm:gap-8 border-t border-DGreenC-200 pt-4">
+          <div
+            class="flex flex-col sm:flex-row sm:items-baseline gap-2.5 sm:gap-8 border-t border-DGreenC-200 pt-4"
+          >
             <div>
-              <h3 class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight">Ons 29 juli 2026</h3>
-              <p class="text-xs text-DGreenC-400 mt-0.5">Sidensjöveckan, v.31</p>
+              <h3
+                class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight"
+              >
+                Ons 29 juli 2026
+              </h3>
+              <p class="text-xs text-DGreenC-400 mt-0.5">
+                Sidensjöveckan, v.31
+              </p>
             </div>
             <div class="hidden sm:block w-px h-9 bg-DGreenC-200 shrink-0"></div>
             <div>
-              <h3 class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight">Sidensjö</h3>
-              <a href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8" target="_blank" rel="noopener"
-                class="text-xs text-BlueC-500 hover:text-BlueC-600 underline underline-offset-2">Visa på karta &#8599;</a>
+              <h3
+                class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight"
+              >
+                Sidensjö
+              </h3>
+              <a
+                href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8"
+                target="_blank"
+                rel="noopener"
+                class="text-xs text-BlueC-500 hover:text-BlueC-600 underline underline-offset-2"
+                >Visa på karta &#8599;</a
+              >
             </div>
             <div class="hidden sm:block w-px h-9 bg-DGreenC-200 shrink-0"></div>
             <div>
-              <h3 class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight">Kl. 17:00</h3>
+              <h3
+                class="text-xl sm:text-2xl lg:text-[1.7rem] font-bold text-DGreenC-800 leading-tight"
+              >
+                Kl. 17:00
+              </h3>
               <p class="text-xs text-DGreenC-400 mt-0.5">Samling från 16:00</p>
             </div>
           </div>
@@ -1131,33 +1180,67 @@
 
         <!-- Tidsschema (glass, w-fit — karta syns till höger) -->
         <div class="glass p-5 sm:p-6 w-fit">
-          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2">Tidsschema</p>
+          <p
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2"
+          >
+            Tidsschema
+          </p>
           <div class="border-t border-DGreenC-200 pt-3">
             <div class="relative ml-2 pl-8 border-l-2 border-DGreenC-200">
               <div class="relative pb-4">
-                <div class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"></div>
-                <p class="font-mono text-xs font-bold text-DGreenC-500">&nbsp 16:00</p>
-                <p class="text-sm font-semibold text-DGreenC-700">Samling &amp; nummerlappar</p>
+                <div
+                  class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"
+                ></div>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">
+                  &nbsp 16:00
+                </p>
+                <p class="text-sm font-semibold text-DGreenC-700">
+                  Samling &amp; nummerlappar
+                </p>
               </div>
               <div class="relative pb-4">
-                <div class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"></div>
-                <p class="font-mono text-xs font-bold text-DGreenC-500">&nbsp 16:45</p>
-                <p class="text-sm font-semibold text-DGreenC-700">Gemensam genomgång</p>
+                <div
+                  class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"
+                ></div>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">
+                  &nbsp 16:45
+                </p>
+                <p class="text-sm font-semibold text-DGreenC-700">
+                  Gemensam genomgång
+                </p>
               </div>
               <div class="relative pb-4">
-                <div class="absolute -left-[7px] top-1 w-3 h-3 dot-split border-2 border-TanC-50"></div>
-                <p class="font-mono text-xs font-bold text-YellowC-700">&nbsp 17:00</p>
-                <p class="text-[0.95rem] font-bold text-DGreenC-800">Start &mdash; Kort &amp; Lång</p>
+                <div
+                  class="absolute -left-[7px] top-1 w-3 h-3 dot-split border-2 border-TanC-50"
+                ></div>
+                <p class="font-mono text-xs font-bold text-YellowC-700">
+                  &nbsp 17:00
+                </p>
+                <p class="text-[0.95rem] font-bold text-DGreenC-800">
+                  Start &mdash; Kort &amp; Lång
+                </p>
               </div>
               <div class="relative pb-4">
-                <div class="absolute -left-[7px] top-1 w-3 h-3 bg-BlueC-500 dot-blue-static border-2 border-TanC-50"></div>
-                <p class="font-mono text-xs font-bold text-BlueC-600">&nbsp 17:10</p>
-                <p class="text-sm font-bold text-DGreenC-800">Start &mdash; Motion</p>
+                <div
+                  class="absolute -left-[7px] top-1 w-3 h-3 bg-BlueC-500 dot-blue-static border-2 border-TanC-50"
+                ></div>
+                <p class="font-mono text-xs font-bold text-BlueC-600">
+                  &nbsp 17:10
+                </p>
+                <p class="text-sm font-bold text-DGreenC-800">
+                  Start &mdash; Motion
+                </p>
               </div>
               <div class="relative">
-                <div class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"></div>
-                <p class="font-mono text-xs font-bold text-DGreenC-500">&nbsp ~19:00</p>
-                <p class="text-sm font-semibold text-DGreenC-700">Foodtruck &mdash; Tre bröder</p>
+                <div
+                  class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"
+                ></div>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">
+                  &nbsp ~19:00
+                </p>
+                <p class="text-sm font-semibold text-DGreenC-700">
+                  Foodtruck &mdash; Tre bröder
+                </p>
               </div>
             </div>
           </div>
@@ -1165,20 +1248,35 @@
 
         <!-- Detaljer (glass, full bredd) -->
         <div class="glass p-5 sm:p-7">
-          <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2.5">Detaljer</p>
+          <p
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2.5"
+          >
+            Detaljer
+          </p>
           <div class="border-t border-DGreenC-200 pt-4">
-            <div class="grid sm:grid-cols-3 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-DGreenC-200">
+            <div
+              class="grid sm:grid-cols-3 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-DGreenC-200"
+            >
               <div class="py-3 first:pt-0 last:pb-0 sm:py-0 sm:pr-5">
-                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">Ta med</h4>
+                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">
+                  Ta med
+                </h4>
                 <ul class="text-[0.8rem] text-DGreenC-500 space-y-0.5">
-                  <li>Cykel &amp; hjälm <span class="block text-[0.65rem] text-DGreenC-400 ml-2">Hjälm är obligatoriskt</span></li>
+                  <li>
+                    Cykel &amp; hjälm
+                    <span class="block text-[0.65rem] text-DGreenC-400 ml-2"
+                      >Hjälm är obligatoriskt</span
+                    >
+                  </li>
                   <li>Badkläder &amp; handduk</li>
                   <li>Löparskor</li>
                   <li>Vattenflaska</li>
                 </ul>
               </div>
               <div class="py-3 first:pt-0 last:pb-0 sm:py-0 sm:px-5">
-                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">På platsen</h4>
+                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">
+                  På platsen
+                </h4>
                 <ul class="text-[0.8rem] text-DGreenC-500 space-y-0.5">
                   <li>Bastu</li>
                   <li>Volleybollnät</li>
@@ -1187,30 +1285,39 @@
                 </ul>
               </div>
               <div class="py-3 first:pt-0 last:pb-0 sm:py-0 sm:pl-5">
-                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">Bra att veta</h4>
+                <h4 class="text-[0.8rem] font-bold text-DGreenC-700 mb-1.5">
+                  Bra att veta
+                </h4>
                 <ul class="text-[0.8rem] text-DGreenC-500 space-y-0.5">
                   <li>Föranmälan krävs &mdash; stänger 14 juli</li>
                   <li>Öppet för alla åldrar</li>
-                  <li>Elcykel tillåtet (motionsklassen)</li>
+                  <li>Elcykel tillåtet i motionsklassen</li>
                   <li>Anmälan ej överförbar</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-
     <!-- ANMÄLAN (CTA → separat sida) -->
-    <section id="anmalan" class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600">
+    <section
+      id="anmalan"
+      class="py-24 px-6 bg-gradient-to-br from-GreenC-500 to-DGreenC-600"
+    >
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-4xl font-bold text-white mb-4">Anmälan</h2>
-        <p class="text-GreenC-100 text-lg mb-3">Onsdag 29 juli 2026 &middot; Sidensjö</p>
-        <p class="text-GreenC-200 text-sm mb-10">Anmälan stänger 14 juli 2026</p>
-        <a href="anmalan.html"
-          class="inline-block bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold px-10 py-4 rounded-lg text-lg transition-colors shadow-lg">
+        <p class="text-GreenC-100 text-lg mb-3">
+          Onsdag 29 juli 2026 &middot; Sidensjö
+        </p>
+        <p class="text-GreenC-200 text-sm mb-10">
+          Anmälan stänger 14 juli 2026
+        </p>
+        <a
+          href="anmalan.html"
+          class="inline-block bg-YellowC-500 hover:bg-YellowC-400 text-DGreenC-800 font-bold px-10 py-4 rounded-lg text-lg transition-colors shadow-lg"
+        >
           Anmäl dig här
         </a>
       </div>
@@ -1227,71 +1334,137 @@
         </p>
 
         <!-- Huvudsponsorer -->
-        <div class="mb-12">
+        <div class="mb-16">
           <p
-            class="text-sm font-semibold text-DGreenC-400 uppercase tracking-widest text-center mb-8"
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 text-center mb-8"
           >
             Huvudsponsorer
           </p>
-          <div class="flex flex-wrap justify-center items-center gap-10">
-            <img
-              src="Image/Vagtrummor.webp"
-              alt="HK Vägtrummor"
-              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
-            />
-            <div
-              class="w-48 h-24 rounded-xl bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
-            >
+          <div class="flex flex-wrap justify-center items-center gap-12">
+            <a href="https://hkvagtrummor.se" target="_blank" rel="noopener">
               <img
-                src="Image/Loggo-ISBOXEN.png"
-                alt="ISBOXEN"
-                class="h-20 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
+                src="Image/Sponsorer/Vagtrummor.webp"
+                alt="HK Vägtrummor"
+                class="h-14 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
               />
-            </div>
-            <div
-              class="w-48 h-24 rounded-xl bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
-            >
-              Logotyp
-            </div>
+            </a>
+            <a href="#" target="_blank" rel="noopener">
+              <img
+                src="Image/Sponsorer/Loggo-ISBOXEN.png"
+                alt="ISBOXEN"
+                class="h-16 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+              />
+            </a>
+            <a href="https://kjellsson.nu" target="_blank" rel="noopener">
+              <img
+                src="Image/Sponsorer/LOGO OsteopatiByKjellsson.png"
+                alt="Osteopati By Kjellsson"
+                class="h-14 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+              />
+            </a>
           </div>
         </div>
 
         <!-- Övriga sponsorer -->
         <div>
           <p
-            class="text-sm font-semibold text-DGreenC-400 uppercase tracking-widest text-center mb-8"
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 text-center mb-8"
           >
             Övriga sponsorer
           </p>
-          <div class="flex flex-wrap justify-center items-center gap-8">
-            <a href="https://hkvagtrummor.se" target="_blank" rel="noopener">
-              <img
-                src="Image/Vagtrummor.webp"
-                alt="HK Vägtrummor"
-                class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
-              />
-            </a>
-
-            <div
-              class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
-            >
-              <a href="https://kjellsson.nu" target="_blank" rel="noopener">
-              <img
-                src="Image/LOGO OsteopatiByKjellsson.png"
-                alt="Osteopati By Kjellsson"
-                class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
-              />
-            </div>
-            <div
-              class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
-            >
-              Logotyp
-            </div>
-            <div
-              class="w-36 h-16 rounded-lg bg-TanC-200 flex items-center justify-center text-DGreenC-300 text-sm"
-            >
-              Logotyp
-            </div>
+          <div
+            class="flex flex-wrap justify-center items-center gap-8 sm:gap-10"
+          >
+            <img
+              src="Image/Sponsorer/red-bull-logo-transparent-background-2.png"
+              alt="Red Bull"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/Barebells.svg"
+              alt="Barebells"
+              class="h-8 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/Powerade_logo.png"
+              alt="Powerade"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/norrmejerier-logo.png"
+              alt="Norrmejerier"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/loka-logo.png"
+              alt="Loka"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/svenskalantchips400200-original.png"
+              alt="Svenska Lantchips"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/carlsberg-2-logo-transparent.png"
+              alt="Carlsberg"
+              class="h-14 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/norrlands-guld-logo-jan-2021.png"
+              alt="Norrlands Guld"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/8ff7789456e7e8a6_org.png"
+              alt="Sponsor"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/NOCCO-Logo-Vector.svg-.png"
+              alt="NOCCO"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/Maurten.webp"
+              alt="Maurten"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/vitamin-well-L.webp"
+              alt="Vitamin Well"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/Cloetta.webp"
+              alt="Cloetta"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/Extra_tugummi.webp"
+              alt="Extra"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/evy-logo.png"
+              alt="Evy"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/nyhlens Hugosons.webp"
+              alt="Nyhlens Hugosons"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/wd-40-bike-logo-png_seeklogo-504587.png"
+              alt="WD-40 Bike"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
+            <img
+              src="Image/Sponsorer/OIP.webp"
+              alt="Sponsor"
+              class="h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+            />
           </div>
         </div>
       </div>
@@ -1450,20 +1623,31 @@
         .catch((err) => console.error("Kunde inte ladda rutt-data:", err));
 
       // ── BAKGRUNDSKARTA FÖR PRAKTISK INFO (Leaflet) ────────────────────────────
-      (function() {
-        var el = document.getElementById('info-bg-map');
+      (function () {
+        var el = document.getElementById("info-bg-map");
         if (!el) return;
         var infoMap = L.map(el, {
           ...MAP_LOCK,
-          attributionControl: false
+          attributionControl: false,
         }).setView([63.301622, 18.3306], 14);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(infoMap);
+        L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+          { maxZoom: 19 },
+        ).addTo(infoMap);
         L.circleMarker([63.301622, 18.3306], {
-          radius: 12, fillColor: '#669bbc', color: '#fff', weight: 3, fillOpacity: 0.9, className: 'pulse-marker'
+          radius: 12,
+          fillColor: "#669bbc",
+          color: "#fff",
+          weight: 3,
+          fillOpacity: 0.9,
+          className: "pulse-marker",
         }).addTo(infoMap);
         function centerInfoMap() {
-          var schedule = document.querySelector('#info .glass.w-fit');
-          if (!schedule) { infoMap.setView([63.301622, 18.3306], 14); return; }
+          var schedule = document.querySelector("#info .glass.w-fit");
+          if (!schedule) {
+            infoMap.setView([63.301622, 18.3306], 14);
+            return;
+          }
           var scheduleRect = schedule.getBoundingClientRect();
           var mapRect = el.getBoundingClientRect();
 
@@ -1472,7 +1656,8 @@
           var scheduleRight = scheduleRect.right - mapRect.left;
           var targetX = scheduleRight + (mapRect.width - scheduleRight) / 2;
           // Y: i höjd med tidsschemats vertikala mitt
-          var targetY = (scheduleRect.top - mapRect.top) + scheduleRect.height / 2;
+          var targetY =
+            scheduleRect.top - mapRect.top + scheduleRect.height / 2;
 
           // setView placerar markören vid kartans pixel-mitt (w/2, h/2).
           // panBy flyttar kartan — positiv x = karta höger = markör vänster på skärm.
@@ -1484,12 +1669,16 @@
           infoMap.panBy([panX, panY], { animate: false });
         }
         // Vänta tills layouten är klar innan vi centrerar
-        infoMap.whenReady(function() {
+        infoMap.whenReady(function () {
           setTimeout(centerInfoMap, 100);
         });
-        window.addEventListener('resize', function() { setTimeout(function() { infoMap.invalidateSize(); setTimeout(centerInfoMap, 50); }, 200); });
+        window.addEventListener("resize", function () {
+          setTimeout(function () {
+            infoMap.invalidateSize();
+            setTimeout(centerInfoMap, 50);
+          }, 200);
+        });
       })();
-
 
       // ── CYKELKARTA ────────────────────────────────────────────────────────────
       function initCykelKarta(lang, kort) {

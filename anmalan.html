@@ -244,11 +244,18 @@
               <textarea
                 id="meddelande"
                 rows="3"
+                maxlength="500"
                 class="w-full px-4 py-3 rounded-lg bg-white border border-DGreenC-200 text-DGreenC-800 placeholder-DGreenC-300 focus:outline-none focus:ring-2 focus:ring-YellowC-400 focus:border-transparent transition-shadow"
                 placeholder="Allergier, frågor, eller annat vi bör veta..."
               ></textarea>
             </div>
           </fieldset>
+
+          <!-- Honeypot — osynligt för människor, bottar fyller i det -->
+          <div class="absolute -left-[9999px]" aria-hidden="true">
+            <label for="website">Lämna tomt</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
 
           <!-- Sammanfattning & Skicka -->
           <div class="border-t border-DGreenC-200 pt-6">
@@ -323,10 +330,11 @@
 
     <script>
       // ═══════════════════════════════════════════════════════════════════════════
-      // KONFIGURATION — Klistra in din Power Automate webhook-URL här:
+      // KONFIGURATION
       // ═══════════════════════════════════════════════════════════════════════════
       var WEBHOOK_URL =
         "https://default9804eca4e66d43bc8558a26dc51db0.16.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/fcf54075c6ea4c7b8b0c2b7a05c0fd00/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CTaKkeJG9kp_KcZpwfAcRwO3SCX-TsKq1ZDX4OgIgdU";
+      var DEADLINE = new Date("2026-07-14T23:59:59");
       // ═══════════════════════════════════════════════════════════════════════════
 
       var form = document.getElementById("anmalan-form");
@@ -334,7 +342,28 @@
       var errorMsg = document.getElementById("error-msg");
       var submitBtn = document.getElementById("submit-btn");
 
-      // Live-sammanfattning
+      // ── Deadline-check: Stäng formuläret om deadline passerat ──
+      if (new Date() > DEADLINE) {
+        form.innerHTML =
+          '<div class="text-center py-12">' +
+          '<p class="text-2xl font-bold text-DGreenC-800 mb-3">Anmälan är stängd</p>' +
+          '<p class="text-DGreenC-500">Anmälan stängde den 14 juli 2026. Kontakta arrangören för frågor.</p>' +
+          "</div>";
+      }
+
+      // ── Sanering: rensa apostrofer som kan krascha Power Automate ──
+      function sanitize(str) {
+        return str.replace(/'/g, "\u2019").replace(/"/g, "\u201D");
+      }
+
+      // ── Formatering: ta bort extra mellanrum, gör Förnamn Efternamn ──
+      function capitalizeName(str) {
+        return str.replace(/\s+/g, " ").trim()
+          .toLowerCase()
+          .replace(/(?:^|\s)\S/g, function (c) { return c.toUpperCase(); });
+      }
+
+      // ── Live-sammanfattning ──
       form.addEventListener("change", updateSummary);
       form.addEventListener("input", updateSummary);
 
@@ -355,18 +384,28 @@
           (distansEl.value === "Motion" ? "17:10" : "17:00");
       }
 
-      // Skicka till Power Automate
+      // ── Skicka till Power Automate ──
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         errorMsg.classList.add("hidden");
 
-        var fornamn = document.getElementById("fornamn").value.trim();
-        var efternamn = document.getElementById("efternamn").value.trim();
-        var epost = document.getElementById("epost").value.trim();
-        var telefon = document.getElementById("telefon").value.trim();
-        var klubb = document.getElementById("klubb").value.trim();
+        // Honeypot-check: om botfältet är ifyllt, låtsas att det gick bra
+        if (document.getElementById("website").value) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Skickar...";
+          setTimeout(function () {
+            window.location.href = "bekraftelse.html";
+          }, 1500);
+          return;
+        }
+
+        var fornamn = sanitize(capitalizeName(document.getElementById("fornamn").value));
+        var efternamn = sanitize(capitalizeName(document.getElementById("efternamn").value));
+        var epost = document.getElementById("epost").value.replace(/\s+/g, "").toLowerCase();
+        var telefon = document.getElementById("telefon").value.replace(/\s+/g, " ").trim();
+        var klubb = sanitize(document.getElementById("klubb").value.replace(/\s+/g, " ").trim());
         var distansEl = document.querySelector('input[name="distans"]:checked');
-        var meddelande = document.getElementById("meddelande").value.trim();
+        var meddelande = sanitize(document.getElementById("meddelande").value.replace(/\s+/g, " ").trim());
 
         if (!distansEl) {
           errorMsg.textContent = "Vänligen välj en klass.";
@@ -374,7 +413,7 @@
           return;
         }
 
-        // Disable knappen under sändning
+        // Disable knappen (dubbelklick-skydd)
         submitBtn.disabled = true;
         submitBtn.textContent = "Skickar...";
 
@@ -396,11 +435,16 @@
         })
           .then(function (response) {
             if (response.ok || response.status === 202) {
-              // Spara namn i sessionStorage för bekräftelsesidan
-              sessionStorage.setItem("byathlon_fornamn", fornamn);
-              sessionStorage.setItem("byathlon_klass", distansEl.value);
-              sessionStorage.setItem("byathlon_epost", epost);
-              window.location.href = "bekraftelse.html";
+              return response.json().then(function (body) {
+                sessionStorage.setItem("byathlon_fornamn", fornamn);
+                sessionStorage.setItem("byathlon_klass", distansEl.value);
+                sessionStorage.setItem("byathlon_epost", epost);
+                if (body && body.status === "duplicate") {
+                  window.location.href = "redan-anmald.html";
+                } else {
+                  window.location.href = "bekraftelse.html";
+                }
+              });
             } else {
               throw new Error("Servern svarade med status " + response.status);
             }

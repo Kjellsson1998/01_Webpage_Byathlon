@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redan anmäld — Byathlon</title>
+    <link href="src/output.css" rel="stylesheet" />
+    <link rel="icon" href="Image/HK logo Master Version.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
+    <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
+  </head>
+
+  <body class="bg-TanC-50 text-DGreenC-800 font-sans min-h-screen flex flex-col">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full bg-DGreenC-700/95 backdrop-blur-sm z-50 shadow-lg">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="Image/Byathlon_Loga.png" alt="Byathlon logo" class="h-10 w-10" />
+          <span class="text-TanC-100 text-xl font-bold tracking-wide">Byathlon</span>
+        </a>
+        <a href="index.html" class="text-TanC-200 text-sm font-medium hover:text-YellowC-400 transition-colors">
+          Tillbaka till startsidan
+        </a>
+      </div>
+    </nav>
+
+    <!-- INNEHÅLL -->
+    <main class="flex-1 pt-28 pb-16 px-4 sm:px-6 flex items-center">
+      <div class="max-w-xl mx-auto text-center">
+
+        <!-- Info-ikon -->
+        <div class="w-20 h-20 rounded-full bg-YellowC-100 flex items-center justify-center mx-auto mb-8">
+          <svg class="w-10 h-10 text-YellowC-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M12 3a9 9 0 100 18 9 9 0 000-18z" />
+          </svg>
+        </div>
+
+        <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-2">Redan registrerad</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-DGreenC-800 mb-4">
+          Du är redan anmäld, <span id="redan-namn">du</span>!
+        </h1>
+        <div class="flex h-[3px] rounded-sm overflow-hidden w-24 mx-auto mb-6">
+          <span class="flex-1 bg-BlueC-500"></span>
+          <span class="flex-1 bg-YellowC-400"></span>
+          <span class="flex-1 bg-GreenC-500"></span>
+        </div>
+
+        <p class="text-DGreenC-500 text-lg mb-2">
+          <strong id="redan-namn2">Detta förnamn</strong> med e-postadressen <strong id="redan-epost">din e-post</strong> är redan anmäld.
+        </p>
+        <p class="text-DGreenC-700 text-sm font-semibold mb-2">
+          Din anmälan har uppdaterats med de senast inskickade uppgifterna.
+        </p>
+        <p class="text-DGreenC-400 text-sm mb-10">
+          Ett nytt bekräftelsemejl har skickats till dig. Kolla skräpposten om du inte ser det inom ett par minuter.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="index.html"
+            class="inline-block bg-DGreenC-700 hover:bg-DGreenC-600 text-TanC-50 font-bold py-3 px-8 rounded-lg transition-colors">
+            Tillbaka till startsidan
+          </a>
+          <a href="anmalan.html"
+            class="inline-block bg-white border border-DGreenC-200 hover:border-DGreenC-400 text-DGreenC-700 font-bold py-3 px-8 rounded-lg transition-colors">
+            Anmäl annan person
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-DGreenC-800 text-TanC-400 py-8 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <img src="Image/Byathlon_Loga.png" alt="Byathlon logo" class="h-10 w-10 mx-auto mb-3 opacity-70" />
+        <p class="font-semibold text-TanC-200 mb-1">Byathlon</p>
+        <p class="text-sm text-TanC-500">Arrangeras av By intresseförening</p>
+        <p class="text-sm text-TanC-600 mt-1">&copy; 2026 Byathlon</p>
+      </div>
+    </footer>
+
+    <script>
+      var fornamn = sessionStorage.getItem('byathlon_fornamn');
+      var epost = sessionStorage.getItem('byathlon_epost');
+
+      if (fornamn) {
+        document.getElementById('redan-namn').textContent = fornamn;
+        document.getElementById('redan-namn2').textContent = fornamn;
+      }
+      if (epost) document.getElementById('redan-epost').textContent = epost;
+
+      sessionStorage.removeItem('byathlon_fornamn');
+      sessionStorage.removeItem('byathlon_klass');
+      sessionStorage.removeItem('byathlon_epost');
+    </script>
+
+  </body>
+</html>

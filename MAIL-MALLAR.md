@@ -62,7 +62,7 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
       <table style="width:100%; border-collapse:collapse;">
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px; width:80px;">Datum</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Onsdag 29 juli 2026</td>
+          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Lördag 25 juli 2026</td>
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Start</td>
@@ -165,7 +165,7 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
       <table style="width:100%; border-collapse:collapse;">
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px; width:80px;">Datum</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Onsdag 29 juli 2026</td>
+          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Lördag 25 juli 2026</td>
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Start</td>

@@ -132,7 +132,7 @@ Power Automate webhook
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Datum</td>
-    <td style="padding:6px 0;">Onsdag 29 juli 2026</td>
+    <td style="padding:6px 0;">Lördag 25 juli 2026</td>
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Start</td>
@@ -209,7 +209,7 @@ Power Automate webhook
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Datum</td>
-    <td style="padding:6px 0;">Onsdag 29 juli 2026</td>
+    <td style="padding:6px 0;">Lördag 25 juli 2026</td>
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Start</td>

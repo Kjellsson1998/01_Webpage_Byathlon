@@ -221,3 +221,148 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
 | Tri-bar blå | BlueC-500 | `#669bbc` |
 | Tri-bar gul | YellowC-400 | `#efca5c` |
 | Tri-bar grön | GreenC-500 | `#606c38` |
+
+---
+
+# Sponsor-mail (manuella utskick)
+
+Dessa mail skickas **inte** via Power Automate utan kopieras in i Outlook/Gmail
+och anpassas per företag. Två nivåer erbjuds: **Huvudsponsor** och **Sponsor**.
+
+Fyll i fält inom `{{...}}` per mottagare. Ta bort fält du inte använder.
+
+## Sponsorpaket — översikt
+
+**Huvudsponsor**
+- Stor logga i sektionen "Huvudsponsorer" på byathlon.se
+- Logga med i hero-raden "I samarbete med" på startsidan
+- Omnämnande i deltagar-mail (bekräftelse + utskick före och efter event)
+- Möjlighet till banderoll/skylt i målområdet
+- Möjlighet att vara på plats med eget bord under eventet
+- Bidrag: produkter till goodiebag och/eller pengainsats efter överenskommelse
+
+**Sponsor**
+- Logga i sektionen "Sponsorer" på byathlon.se
+- Omnämnande i goodiebag-flyer
+- Bidrag: produkter till goodiebag (ca 150 deltagare) och/eller pengainsats
+
+---
+
+## MAIL: Förfrågan – Huvudsponsor
+
+**Till:** `{{epost}}`
+**Ämne:** `Huvudsponsor till Byathlon 2026 — norrländsk premiär i Sidensjö`
+
+**Body (klartext):**
+
+```
+Hej!
+
+Den 25 juli 2026 är det premiär för Byathlon —
+ett triathlon-evenemang med simning, cykling och löpning som arrangeras av By Intresseförening under Sidensjöveckan. Start och målgång sker vid By badplats.
+Eventet vänder sig till både nybörjare och erfarna
+multisportare då anmälan sker till två olika distanser.
+
+Byathlon arrangeras av en lokal
+intresseförening i Sidensjö. För oss representerar ni på {{företagsnamn}} {{personlig vinkel — t.ex. "den norrländska andan", "kvalitet hos motionssvensken", "återhämtning på riktigt"}}. Jag hör av mig till er på {{företagsnamn}} eftersom vi ser er som en given samarbetspartner, gärna som huvudsponsor, i premiären av Byathlon.
+
+Som HUVUDSPONSOR får ni:
+ • Stor logga på byathlon.se under rubriken "Huvudsponsorer"
+ • Logga på startsidan under rubriken "I samarbete med"
+ • Omnämnande i alla deltagar-mail (bekräftelse + utskick före/efter event)
+ • Plats för banderoll/skylt vid målområdet
+ • Möjlighet att vara på plats med eget bord under eventet
+
+Vi söker ett ekonomiskt bidrag och/eller produkter till en goodiebag som deltagarna kommer att få när de går i mål.
+
+Låter detta intressant? Jag berättar gärna mer
+över telefon, men för att kunna börja marknadsföra eventet och ge våra sponsorer så mycket synlighet som möjligt behöver vi er återkoppling snarast.
+
+Förhandsvisning av sidan: https://{{länk-till-sidan}}
+
+Tack på förhand!
+
+Vänliga hälsningar
+Hugo Kjellsson
+By Intresseförening — Byathlon 2026
+hugo@kjellsson.nu | {{ditt-telefonnummer}}
+byathlon.se
+```
+
+---
+
+## MAIL: Förfrågan – Sponsor (goodiebag)
+
+**Till:** `{{epost}}`
+**Ämne:** `Sponsorsamarbete till Byathlon 2026 — produkter till goodiebag`
+
+**Body (klartext):**
+
+```
+Hej!
+
+Den 25 juli 2026 är det premiär för Byathlon —
+ett triathlon-evenemang med simning, cykling och löpning som arrangeras av By Intresseförening under Sidensjöveckan. Start och målgång sker vid By badplats.
+Eventet vänder sig till både nybörjare och erfarna
+multisportare då anmälan sker till två olika distanser.
+
+Byathlon arrangeras av en lokal
+intresseförening i Sidensjö. För oss representerar ni på {{företagsnamn}} {{personlig vinkel — t.ex. "perfekt efter målgång", "stark närvaro i Norrland"}}. Jag hör av mig till er på {{företagsnamn}} eftersom vi ser er som en given samarbetspartner i premiären av Byathlon.
+
+Som SPONSOR får ni:
+ • Logga på byathlon.se under rubriken "Sponsorer"
+ • Omnämnande i goodiebag-flyern som följer med varje deltagare
+ • Möjlighet att lägga med eget reklammaterial (flyers, prover, klistermärken) i goodiebagen
+
+Vi söker ett ekonomiskt bidrag och/eller produkter till en goodiebag som deltagarna kommer att få när de går i mål — t.ex. ca {{antal}} st {{produkt}}. Har ni något annat förslag är vi öppna för det också.
+
+Låter detta intressant? Jag berättar gärna mer
+över telefon, men för att kunna börja marknadsföra eventet och ge våra sponsorer så mycket synlighet som möjligt behöver vi er återkoppling snarast.
+
+Förhandsvisning av sidan: https://{{länk-till-sidan}}
+
+Tack på förhand!
+
+Vänliga hälsningar
+Hugo Kjellsson
+By Intresseförening — Byathlon 2026
+hugo@kjellsson.nu | {{ditt-telefonnummer}}
+byathlon.se
+```
+
+---
+
+## MAIL: Påminnelse (efter ~5 vardagar utan svar)
+
+**Ämne:** `Re: {{ursprungsämne}}`
+
+**Body (klartext):**
+
+```
+Hej {{förnamn}},
+
+Jag hörde av mig förra veckan om sponsorsamarbete kring Byathlon
+den 25 juli — bara en vänlig knuff ifall mailet hamnat fel.
+
+Säg till om det är något ni vill veta mer om, eller om vi ska prata
+kort i telefon.
+
+Vänliga hälsningar
+Hugo Kjellsson
+hugo@kjellsson.nu
+```
+
+---
+
+## Tips för effektiv hantering
+
+1. **Spårning** — använd ett kalkylblad med kolumner:
+   `Företag | Kategori | Kontakt | E-post | Status | Skickat | Påminnelse | Svar | Logga mottagen?`
+2. **Vattenfall** — fråga förstaval i varje produktkategori först, vänta
+   5–7 vardagar, sen andraval. Undviker att konkurrenter hamnar samtidigt.
+3. **Påminnelse** — max två. Sen släpp.
+4. **Logga** — be om logga i samma svar där de tackar ja, så slipper du
+   en separat mailrunda. PNG med transparent bakgrund är bäst.
+5. **Deadline** — sätt 1 juni 2026 som sista svarsdag i mailet. Då vet
+   företaget att det brådskar och du får planeringsbara svar.
+

@@ -218,47 +218,61 @@
           >
         </p>
 
-        <!-- Diskret sponsor-rad under "Läs mer om distanserna" -->
-        <div
-          class="mt-12 flex flex-col items-center gap-4 opacity-70 hover:opacity-100 transition-opacity duration-300"
-        >
-          <p
-            class="font-mono text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-TanC-300"
-          >
-            I samarbete med
-          </p>
+        <!-- Huvudsponsorer (premium-strip i hjälten) -->
+        <div class="mt-16 flex flex-col items-center gap-6">
+          <div class="flex items-center gap-4 w-full max-w-sm">
+            <span
+              class="h-px flex-1 bg-linear-to-r from-transparent to-TanC-300/40"
+            ></span>
+            <p
+              class="font-mono text-[0.6rem] font-semibold tracking-[0.35em] uppercase text-TanC-300/90 whitespace-nowrap"
+            >
+              Huvudsponsorer
+            </p>
+            <span
+              class="h-px flex-1 bg-linear-to-l from-transparent to-TanC-300/40"
+            ></span>
+          </div>
+
+          <div class="flex flex-wrap items-stretch justify-center gap-3 sm:gap-4">
+            <a
+              href="https://hkvagtrummor.se"
+              target="_blank"
+              rel="noopener"
+              class="group relative flex items-center justify-center bg-white rounded-xl px-7 py-4 min-w-42.5 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              aria-label="HK Vägtrummor"
+            >
+              <img
+                src="Image/Sponsorer/Vagtrummor.webp"
+                alt="HK Vägtrummor"
+                class="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
+            </a>
+            <a
+              href="https://si-construction.com/"
+              target="_blank"
+              rel="noopener"
+              class="group relative flex items-center justify-center bg-DGreenC-900 rounded-xl px-7 py-4 min-w-42.5 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ring-1 ring-white/10"
+              aria-label="SI Construction"
+              title="SI Construction — Making a greener planet your business?"
+            >
+              <img
+                src="Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
+                alt="SI Construction"
+                class="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
+            </a>
+          </div>
+
           <a
             href="#sponsorer"
-            class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 max-w-3xl"
-            aria-label="Se alla sponsorer"
+            class="group inline-flex items-center gap-2 font-mono text-[0.6rem] font-semibold tracking-[0.3em] uppercase text-TanC-300/70 hover:text-YellowC-400 transition-colors duration-200"
           >
-            <img
-              src="Image/Sponsorer/Vagtrummor.webp"
-              alt="HK Vägtrummor"
-              class="h-8 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
-            />
-            <!-- Lägg till fler bekräftade sponsorer ovanför denna kommentar.
-                 Ta bort en "Sponsorplats ledig"-ruta nedan för varje sponsor som tillkommer. -->
+            Se alla sponsorer
             <span
-              class="flex items-center justify-center h-8 w-32 rounded-md border border-dashed border-TanC-300/50 font-mono text-[0.5rem] font-semibold tracking-[0.18em] uppercase text-TanC-300/70"
+              class="transition-transform duration-200 group-hover:translate-x-1"
+              >→</span
             >
-              Sponsorplats ledig
-            </span>
-            <span
-              class="flex items-center justify-center h-8 w-32 rounded-md border border-dashed border-TanC-300/50 font-mono text-[0.5rem] font-semibold tracking-[0.18em] uppercase text-TanC-300/70"
-            >
-              Sponsorplats ledig
-            </span>
-            <span
-              class="flex items-center justify-center h-8 w-32 rounded-md border border-dashed border-TanC-300/50 font-mono text-[0.5rem] font-semibold tracking-[0.18em] uppercase text-TanC-300/70"
-            >
-              Sponsorplats ledig
-            </span>
-            <span
-              class="flex items-center justify-center h-8 w-32 rounded-md border border-dashed border-TanC-300/50 font-mono text-[0.5rem] font-semibold tracking-[0.18em] uppercase text-TanC-300/70"
-            >
-              Sponsorplats ledig
-            </span>
           </a>
         </div>
       </div>
@@ -1424,49 +1438,53 @@
     </section>
 
     <!-- SPONSORER -->
-    <section id="sponsorer" class="py-24 px-6 bg-TanC-100">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-DGreenC-700 mb-4">
-          Sponsorer
-        </h2>
-        <p class="text-center text-DGreenC-400 mb-16">
-          Tack till våra sponsorer som gör Byathlon möjligt
-        </p>
+    <section id="sponsorer" class="py-14 px-6 bg-TanC-100">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-DGreenC-700 mb-2">
+            Sponsorer
+          </h2>
+          <div class="w-12 h-1 bg-YellowC-400 mx-auto mb-3 rounded-full"></div>
+          <p class="text-DGreenC-400 text-sm">
+            Tack till våra sponsorer som gör Byathlon möjligt
+          </p>
+        </div>
 
-        <!-- Huvudsponsorer -->
-        <div class="mb-16">
+        <!-- HUVUDSPONSORER (alltid synliga, större plats) -->
+        <div class="mb-12">
           <p
-            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 text-center mb-8"
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.25em] uppercase text-DGreenC-400 text-center mb-8"
           >
             Huvudsponsorer
           </p>
-          <div class="flex flex-wrap justify-center items-center gap-8">
+          <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8">
             <a
               href="https://hkvagtrummor.se"
               target="_blank"
               rel="noopener"
-              class="flex items-center justify-center h-28 w-56 bg-white rounded-xl shadow-sm px-6"
+              class="group flex items-center justify-center h-36 w-72 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 px-8"
             >
               <img
                 src="Image/Sponsorer/Vagtrummor.webp"
                 alt="HK Vägtrummor"
-                class="max-h-16 max-w-full"
+                class="max-h-20 max-w-full transition-transform duration-300 group-hover:scale-105"
+              />
+            </a>
+            <a
+              href="https://si-construction.com/"
+              target="_blank"
+              rel="noopener"
+              class="group flex items-center justify-center h-36 w-72 bg-DGreenC-700 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 px-8"
+              title="SI Construction — Making a greener planet your business? Welcome to our business."
+            >
+              <img
+                src="Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
+                alt="SI Construction"
+                class="max-h-20 max-w-full transition-transform duration-300 group-hover:scale-105"
               />
             </a>
             <div
-              class="flex items-center justify-center h-28 w-56 rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
-            >
-              <div class="text-center px-4">
-                <p
-                  class="font-mono text-[0.6rem] font-semibold tracking-[0.2em] uppercase mb-1"
-                >
-                  Sponsorplats ledig
-                </p>
-                <p class="text-xs">Bli huvudsponsor</p>
-              </div>
-            </div>
-            <div
-              class="flex items-center justify-center h-28 w-56 rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="flex items-center justify-center h-36 w-72 rounded-2xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 transition-colors hover:border-YellowC-400 hover:text-DGreenC-600"
             >
               <div class="text-center px-4">
                 <p
@@ -1480,86 +1498,88 @@
           </div>
         </div>
 
-        <!-- Övriga sponsorer -->
-        <div class="mb-12">
+        <!-- ÖVRIGA SPONSORER (alla synliga, spotlight roterar) -->
+        <div class="sponsor-spotlight-wrap">
           <p
-            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 text-center mb-8"
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.25em] uppercase text-DGreenC-400 text-center mb-6"
           >
             Sponsorer
           </p>
           <div
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-items-center"
+            class="sponsor-grid grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto justify-items-stretch"
           >
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
+                Sponsorplats 1
               </p>
             </div>
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
+                Sponsorplats 2
               </p>
             </div>
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
+                Sponsorplats 3
               </p>
             </div>
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
+                Sponsorplats 4
+              </p>
+            </div>
+            <!-- Tom mittruta dit aktivt kort flyger -->
+            <div class="sponsor-center" aria-hidden="true"></div>
+            <div
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
+            >
+              <p
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
+              >
+                Sponsorplats 5
               </p>
             </div>
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
+                Sponsorplats 6
               </p>
             </div>
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
+                Sponsorplats 7
               </p>
             </div>
             <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
+              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border-2 border-dashed border-DGreenC-300 text-DGreenC-400 bg-white shadow-sm will-change-transform"
             >
               <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
+                class="font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-center px-3"
               >
-                Sponsorplats ledig
-              </p>
-            </div>
-            <div
-              class="flex items-center justify-center h-20 w-full max-w-44 rounded-lg border-2 border-dashed border-DGreenC-300 text-DGreenC-400"
-            >
-              <p
-                class="font-mono text-[0.55rem] font-semibold tracking-[0.18em] uppercase text-center px-2"
-              >
-                Sponsorplats ledig
+                Sponsorplats 8
               </p>
             </div>
           </div>
@@ -2194,6 +2214,156 @@
             },
           });
       }
+    </script>
+
+    <!-- SPONSOR-SPOTLIGHT (in/ut korsar varandra, slumpmässig ordning) -->
+    <script>
+      (function () {
+        if (typeof gsap === "undefined") return;
+        const grid = document.querySelector(".sponsor-grid");
+        if (!grid) return;
+        const cards = Array.from(grid.querySelectorAll(".sponsor-spot"));
+        if (cards.length === 0) return;
+
+        const N = cards.length;
+        const FLY = 0.8; // sek att flyga till/från centrum
+        const HOLD = 0.9; // sek paus i centrum
+        const SPOT_SHADOW = "0 35px 70px -18px rgba(15, 47, 36, 0.55)";
+        const REST_SHADOW = "0 1px 2px 0 rgba(15, 47, 36, 0.06)";
+
+        const recentIdxs = [];
+        const AVOID_RECENT = Math.min(3, Math.max(1, N - 2));
+        let running = false;
+        let crossTimer = null;
+        let paused = false;
+
+        gsap.set(cards, {
+          transformOrigin: "50% 50%",
+          x: 0,
+          y: 0,
+          scale: 1,
+        });
+
+        const centerCell = grid.querySelector(".sponsor-center");
+
+        function getSpotScale() {
+          return window.innerWidth < 640 ? 1.35 : 1.6;
+        }
+
+        function computeOffsets() {
+          const target = centerCell || grid;
+          const tR = target.getBoundingClientRect();
+          const gcx = tR.left + tR.width / 2;
+          const gcy = tR.top + tR.height / 2;
+          cards.forEach((card) => {
+            const r = card.getBoundingClientRect();
+            card._dx = gcx - (r.left + r.width / 2);
+            card._dy = gcy - (r.top + r.height / 2);
+          });
+        }
+
+        function nextIndex() {
+          // Pure slump som undviker de senaste AVOID_RECENT korten — ingen runda-gräns
+          let idx;
+          do {
+            idx = Math.floor(Math.random() * N);
+          } while (recentIdxs.includes(idx));
+          recentIdxs.push(idx);
+          if (recentIdxs.length > AVOID_RECENT) {
+            recentIdxs.shift();
+          }
+          return idx;
+        }
+
+        function spotlight(i) {
+          const c = cards[i];
+
+          // Flyger in: symmetrisk easing, ingen linger
+          gsap.to(c, {
+            x: c._dx,
+            y: c._dy,
+            scale: getSpotScale(),
+            zIndex: 10,
+            boxShadow: SPOT_SHADOW,
+            duration: FLY,
+            ease: "power2.inOut",
+            overwrite: "auto",
+          });
+
+          // Efter (FLY + HOLD): börjar flyga hem SAMTIDIGT som nästa kort flyger in
+          clearTimeout(crossTimer);
+          crossTimer = setTimeout(() => {
+            crossTimer = null;
+
+            // Flyger hem: samma easing — passerar mitt-punkten snabbt
+            gsap.to(c, {
+              x: 0,
+              y: 0,
+              scale: 1,
+              boxShadow: REST_SHADOW,
+              duration: FLY,
+              ease: "power2.inOut",
+              overwrite: "auto",
+              onComplete: () => {
+                gsap.set(c, { zIndex: 0 });
+              },
+            });
+
+            // Starta nästa kort SAMTIDIGT — det flyger in medan detta åker hem
+            if (!paused) {
+              spotlight(nextIndex());
+            } else {
+              running = false;
+            }
+          }, (FLY + HOLD) * 1000);
+        }
+
+        function start() {
+          paused = false;
+          if (!running) {
+            running = true;
+            spotlight(nextIndex());
+          }
+        }
+        function stop() {
+          paused = true;
+          // Pågående cykel får slutföras, men ingen ny startas
+        }
+
+        computeOffsets();
+        start();
+
+        grid.addEventListener("mouseenter", stop);
+        grid.addEventListener("mouseleave", start);
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) stop();
+          else start();
+        });
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            const wasPaused = paused;
+            paused = true;
+            clearTimeout(crossTimer);
+            crossTimer = null;
+            gsap.killTweensOf(cards);
+            gsap.set(cards, {
+              x: 0,
+              y: 0,
+              scale: 1,
+              zIndex: 0,
+              boxShadow: REST_SHADOW,
+            });
+            computeOffsets();
+            running = false;
+            paused = wasPaused;
+            if (!paused) start();
+          }, 150);
+        });
+      })();
     </script>
 
     <!-- ANMÄLAN CTA -->

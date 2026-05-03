@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css)"
+      "Bash(npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css)",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(npm install *)",
+      "Bash(node -e \"const {loadExamples} = require\\('./server/examples'\\); const ex = loadExamples\\(\\); console.log\\('Loaded', ex.length, 'examples'\\); console.log\\('First:', ex[0].company, '/', ex[0].level, '/ subject:', ex[0].subject\\);\")",
+      "Bash(node -e \"const sdk = require\\('@anthropic-ai/sdk'\\); console.log\\('Has default:', typeof sdk.default\\); console.log\\('Top-level:', typeof sdk\\); console.log\\('Constructor name:', sdk.default ? sdk.default.name : sdk.name\\);\")",
+      "Bash(ANTHROPIC_API_KEY=dummy node -e \"require\\('./server/claude'\\); console.log\\('claude.js laddas utan syntaxfel'\\);\")",
+      "Bash(ANTHROPIC_API_KEY=dummy PORT=5174 node server/index.js)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:5174/)",
+      "Bash(kill %1)",
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Write-Output 'cleaned'\")"
     ]
   }
 }

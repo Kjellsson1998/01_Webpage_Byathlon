@@ -136,7 +136,7 @@ Power Automate webhook
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Start</td>
-    <td style="padding:6px 0;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 17:10','Kl. 17:00')}</td>
+    <td style="padding:6px 0;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}</td>
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Plats</td>
@@ -213,7 +213,7 @@ Power Automate webhook
   </tr>
   <tr>
     <td style="padding:6px 16px 6px 0; color:#666;">Start</td>
-    <td style="padding:6px 0;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 17:10','Kl. 17:00')}</td>
+    <td style="padding:6px 0;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}</td>
   </tr>
 </table>
 

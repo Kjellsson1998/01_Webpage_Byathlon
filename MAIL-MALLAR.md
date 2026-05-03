@@ -66,7 +66,7 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Start</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 17:10','Kl. 17:00')}</td>
+          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}</td>
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Plats</td>
@@ -74,7 +74,7 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Samling</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px;">Från kl. 16:00</td>
+          <td style="padding:4px 0; color:#25231e; font-size:14px;">Från kl. 15:00</td>
         </tr>
       </table>
     </div>
@@ -169,7 +169,7 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Start</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 17:10','Kl. 17:00')}</td>
+          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}</td>
         </tr>
         <tr>
           <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Plats</td>

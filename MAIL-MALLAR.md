@@ -19,7 +19,9 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
 
   <!-- Header -->
   <div style="background:#36342b; padding:24px 32px; border-radius:12px 12px 0 0; text-align:center;">
-    <h1 style="margin:0; color:#eae1d7; font-size:22px; font-weight:700; letter-spacing:1px;">BYATHLON 2026</h1>
+    <a href="https://byathlon.se" style="text-decoration:none;">
+      <h1 style="margin:0; color:#eae1d7; font-size:22px; font-weight:700; letter-spacing:1px;">BYATHLON 2026</h1>
+    </a>
     <div style="margin:12px auto 0; width:80px; height:3px; display:flex;">
       <span style="flex:1; background:#669bbc;"></span>
       <span style="flex:1; background:#efca5c;"></span>
@@ -88,13 +90,50 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
       <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Vattenflaska</td></tr>
     </table>
 
-    <p style="margin:0; color:#595648; font-size:14px;">Vi ses i Sidensjö!</p>
+    <p style="margin:0 0 28px; color:#595648; font-size:14px;">Vi ses i Sidensjö!</p>
+
+    <!-- Sponsorer -->
+    <div style="border-top:1px solid #dfded8; padding-top:24px;">
+      <p style="margin:0 0 14px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Huvudsponsorer</p>
+      <table align="center" style="border-collapse:collapse; margin:0 auto 18px;">
+        <tr>
+          <td align="center" valign="middle" style="padding:8px 18px;">
+            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
+              <img src="https://byathlon.se/Image/Sponsorer/Vagtrummor.webp" alt="HK Vägtrummor" height="44" style="height:44px; width:auto; border:0; display:block;">
+            </a>
+          </td>
+          <td align="center" valign="middle" style="padding:8px 18px;">
+            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
+              <img src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg" alt="SI Construction" height="44" style="height:44px; width:auto; border:0; display:block;">
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <p style="margin:0 0 12px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Sponsor</p>
+      <table align="center" style="border-collapse:collapse; margin:0 auto;">
+        <tr>
+          <td align="center" valign="middle" style="padding:4px 18px;">
+            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
+              <img src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.JPG" alt="Polarbröd" height="38" style="height:38px; width:auto; border:0; display:block;">
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
   <!-- Footer -->
   <div style="background:#efeeeb; padding:20px 32px; border-radius:0 0 12px 12px; border:1px solid #c1bfb3; border-top:none; text-align:center;">
-    <p style="margin:0 0 4px; color:#7f7a67; font-size:12px;">Arrangör: By intresseförening</p>
+    <p style="margin:0 0 10px; color:#7f7a67; font-size:12px;">Arrangör: By Intresseförening</p>
+    <p style="margin:0 0 10px;">
+      <a href="https://www.facebook.com/profile.php?id=61589342865676" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Facebook</a>
+      <span style="color:#c1bfb3; font-size:12px;">·</span>
+      <a href="https://www.instagram.com/byathlon/" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Instagram</a>
+      <span style="color:#c1bfb3; font-size:12px;">·</span>
+      <a href="https://byathlon.se" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">byathlon.se</a>
+    </p>
     <p style="margin:0; color:#a29d8b; font-size:11px;">Vid frågor, svara på detta mejl.</p>
   </div>
 
@@ -115,7 +154,9 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
 
   <!-- Header -->
   <div style="background:#36342b; padding:24px 32px; border-radius:12px 12px 0 0; text-align:center;">
-    <h1 style="margin:0; color:#eae1d7; font-size:22px; font-weight:700; letter-spacing:1px;">BYATHLON 2026</h1>
+    <a href="https://byathlon.se" style="text-decoration:none;">
+      <h1 style="margin:0; color:#eae1d7; font-size:22px; font-weight:700; letter-spacing:1px;">BYATHLON 2026</h1>
+    </a>
     <div style="margin:12px auto 0; width:80px; height:3px; display:flex;">
       <span style="flex:1; background:#669bbc;"></span>
       <span style="flex:1; background:#efca5c;"></span>
@@ -187,13 +228,50 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
       <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Vattenflaska</td></tr>
     </table>
 
-    <p style="margin:0; color:#595648; font-size:14px;">Vi ses i Sidensjö!</p>
+    <p style="margin:0 0 28px; color:#595648; font-size:14px;">Vi ses i Sidensjö!</p>
+
+    <!-- Sponsorer -->
+    <div style="border-top:1px solid #dfded8; padding-top:24px;">
+      <p style="margin:0 0 14px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Huvudsponsorer</p>
+      <table align="center" style="border-collapse:collapse; margin:0 auto 18px;">
+        <tr>
+          <td align="center" valign="middle" style="padding:8px 18px;">
+            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
+              <img src="https://byathlon.se/Image/Sponsorer/Vagtrummor.webp" alt="HK Vägtrummor" height="44" style="height:44px; width:auto; border:0; display:block;">
+            </a>
+          </td>
+          <td align="center" valign="middle" style="padding:8px 18px;">
+            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
+              <img src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg" alt="SI Construction" height="44" style="height:44px; width:auto; border:0; display:block;">
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <p style="margin:0 0 12px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Sponsor</p>
+      <table align="center" style="border-collapse:collapse; margin:0 auto;">
+        <tr>
+          <td align="center" valign="middle" style="padding:4px 18px;">
+            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
+              <img src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.JPG" alt="Polarbröd" height="38" style="height:38px; width:auto; border:0; display:block;">
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
   <!-- Footer -->
   <div style="background:#efeeeb; padding:20px 32px; border-radius:0 0 12px 12px; border:1px solid #c1bfb3; border-top:none; text-align:center;">
-    <p style="margin:0 0 4px; color:#7f7a67; font-size:12px;">Arrangör: By intresseförening</p>
+    <p style="margin:0 0 10px; color:#7f7a67; font-size:12px;">Arrangör: By Intresseförening</p>
+    <p style="margin:0 0 10px;">
+      <a href="https://www.facebook.com/profile.php?id=61589342865676" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Facebook</a>
+      <span style="color:#c1bfb3; font-size:12px;">·</span>
+      <a href="https://www.instagram.com/byathlon/" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Instagram</a>
+      <span style="color:#c1bfb3; font-size:12px;">·</span>
+      <a href="https://byathlon.se" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">byathlon.se</a>
+    </p>
     <p style="margin:0; color:#a29d8b; font-size:11px;">Vid frågor, svara på detta mejl.</p>
   </div>
 

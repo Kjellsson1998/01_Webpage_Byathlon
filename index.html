@@ -416,7 +416,7 @@
                     Löpning
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700 relative z-10">
-                    2,3 km
+                    2,2 km
                   </p>
                   <svg
                     viewBox="0 0 200 140"
@@ -434,7 +434,7 @@
                 </div>
               </div>
               <div class="pt-4 border-t border-TanC-200">
-                <p class="text-DGreenC-500 font-semibold">Totalt: 13 km</p>
+                <p class="text-DGreenC-500 font-semibold">Totalt: 12,9 km</p>
               </div>
             </div>
             <svg
@@ -562,7 +562,7 @@
                     Löpning
                   </p>
                   <p class="text-2xl font-bold text-DGreenC-700 relative z-10">
-                    3 km
+                    3,1 km
                   </p>
                   <svg
                     viewBox="0 0 200 110"
@@ -580,7 +580,7 @@
                 </div>
               </div>
               <div class="pt-4 border-t border-TanC-200">
-                <p class="text-DGreenC-500 font-semibold">Totalt: 29,7 km</p>
+                <p class="text-DGreenC-500 font-semibold">Totalt: 29,8 km</p>
               </div>
             </div>
             <svg
@@ -1005,7 +1005,7 @@
                 style="background: #eab308"
               ></div>
               <span class="text-TanC-200 text-sm font-semibold"
-                >Lång löpning &mdash; 3 km</span
+                >Lång löpning &mdash; 3,1 km</span
               >
             </div>
             <div class="flex items-center gap-2">
@@ -1014,7 +1014,7 @@
                 style="background: #22c55e"
               ></div>
               <span class="text-TanC-200 text-sm font-semibold"
-                >Kort löpning &mdash; 2,3 km</span
+                >Kort löpning &mdash; 2,2 km</span
               >
             </div>
             <div class="flex items-center gap-2">
@@ -1372,10 +1372,10 @@
                   class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-TanC-50"
                 ></div>
                 <p class="font-mono text-xs font-bold text-DGreenC-500">
-                  &nbsp ~18:00
+                  &nbsp ~17:00
                 </p>
                 <p class="text-sm font-semibold text-DGreenC-700">
-                  Foodtruck &mdash; Tre bröder
+                  Foodtruck
                 </p>
               </div>
             </div>
@@ -1625,6 +1625,30 @@
           coords: raw.map((c) => [c[1], c[0]]),
           elevs: raw.map((c) => c[2]),
         };
+      }
+
+      // Förladda kart-tiles i webbläsarens cache för smidigare zoom-out
+      function preloadTiles(map, tileLayer, bounds, zoom) {
+        const size = tileLayer.getTileSize().x;
+        const nw = map
+          .project(bounds.getNorthWest(), zoom)
+          .divideBy(size)
+          .floor();
+        const se = map
+          .project(bounds.getSouthEast(), zoom)
+          .divideBy(size)
+          .floor();
+        const x0 = Math.min(nw.x, se.x),
+          x1 = Math.max(nw.x, se.x);
+        const y0 = Math.min(nw.y, se.y),
+          y1 = Math.max(nw.y, se.y);
+        // En tile-radie extra runt om för säkerhetsmarginal
+        for (let x = x0 - 1; x <= x1 + 1; x++) {
+          for (let y = y0 - 1; y <= y1 + 1; y++) {
+            const img = new Image();
+            img.src = tileLayer.getTileUrl({ x, y, z: zoom });
+          }
+        }
       }
 
       // Bygg SVG-höjdprofil
@@ -1983,8 +2007,22 @@
           gangN = gangCoords.length;
 
         const map = L.map("sim-lop-karta-map", MAP_LOCK);
-        L.tileLayer(TILE, { attribution: ATTR, maxZoom: 19 }).addTo(map);
+        const tiles = L.tileLayer(TILE, {
+          attribution: ATTR,
+          maxZoom: 19,
+          keepBuffer: 4,
+        }).addTo(map);
         map.fitBounds(L.latLngBounds(simCoords), { padding: [80, 80] });
+
+        // Förladda tiles för utzoomade läget så flyToBounds blir mjuk
+        const wideBounds = L.latLngBounds([
+          ...simCoords,
+          ...langCoords,
+          ...kortCoords,
+          ...gangCoords,
+        ]);
+        const wideZoom = map.getBoundsZoom(wideBounds, false, [44, 44]);
+        preloadTiles(map, tiles, wideBounds, wideZoom);
 
         // Spöklinjer (syns direkt, tonas ut)
         L.polyline(simCoords, {

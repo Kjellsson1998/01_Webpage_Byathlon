@@ -5,6 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anmälan — Byathlon</title>
     <link href="src/output.css" rel="stylesheet" />
+    <style>
+      /* Submit-knapp: standardläge + processing-läge */
+      .submit-btn {
+        transition:
+          width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          background-color 0.4s ease-out;
+      }
+      .btn-label {
+        display: block;
+        transition: opacity 0.2s ease-out;
+      }
+      .btn-processing-content {
+        display: none;
+      }
+      .submit-btn.processing {
+        width: 100% !important;
+        padding-top: 1.75rem !important;
+        padding-bottom: 1.5rem !important;
+        background-color: #0f2f24 !important;
+        cursor: default;
+        opacity: 1 !important;
+      }
+      .submit-btn.processing .btn-label {
+        display: none;
+      }
+      .submit-btn.processing .btn-processing-content {
+        display: block;
+        animation: btn-content-in 0.35s ease-out;
+      }
+      @keyframes btn-content-in {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .btn-status {
+        min-height: 1.4em;
+        text-align: center;
+      }
+      .btn-progress-seg {
+        height: 2px;
+        background: currentColor;
+        opacity: 0.18;
+        transition: opacity 0.4s ease-out;
+      }
+      .btn-progress-seg.blue {
+        color: #669bbc;
+      }
+      .btn-progress-seg.yellow {
+        color: #eab308;
+      }
+      .btn-progress-seg.green {
+        color: #22c55e;
+      }
+      .btn-progress-seg.active {
+        opacity: 1;
+      }
+      .proc-cursor::after {
+        content: "▌";
+        display: inline-block;
+        margin-left: 1px;
+        color: #eab308;
+        font-weight: 300;
+        animation: proc-blink 0.7s steps(2) infinite;
+      }
+      @keyframes proc-blink {
+        to {
+          opacity: 0;
+        }
+      }
+      /* Valideringsfel — röd ram + skak */
+      .field-error,
+      .field-error:focus {
+        border-color: #dc2626 !important;
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18) !important;
+      }
+      .radio-group-error label > div {
+        border-color: #dc2626 !important;
+        background-color: rgba(254, 226, 226, 0.45);
+      }
+      .field-shake {
+        animation: field-shake 0.45s ease-out;
+      }
+      @keyframes field-shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-5px);
+        }
+        40% {
+          transform: translateX(5px);
+        }
+        60% {
+          transform: translateX(-3px);
+        }
+        80% {
+          transform: translateX(2px);
+        }
+      }
+    </style>
     <link
       rel="icon"
       href="Image/HK logo Master Version.svg"
@@ -69,7 +176,7 @@
         </div>
 
         <!-- Formulär -->
-        <form id="anmalan-form" class="space-y-8">
+        <form id="anmalan-form" class="space-y-8" novalidate>
           <!-- Sektion: Personuppgifter -->
           <fieldset class="space-y-5">
             <legend
@@ -151,6 +258,46 @@
                   placeholder="T.ex. Sidensjö IK"
                 />
               </div>
+              <div class="sm:col-span-2">
+                <p
+                  class="block text-sm font-semibold text-DGreenC-700 mb-1.5"
+                >
+                  Ålder*
+                </p>
+                <div id="alder-cards" class="grid grid-cols-2 gap-3">
+                  <label class="cursor-pointer">
+                    <input
+                      type="radio"
+                      name="alder"
+                      value="18 eller äldre"
+                      required
+                      class="peer hidden"
+                    />
+                    <div
+                      class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-YellowC-50 bg-white border border-DGreenC-200 rounded-lg px-4 py-3 text-center transition-all hover:border-YellowC-400"
+                    >
+                      <p class="text-sm font-semibold text-DGreenC-800">
+                        18 år eller äldre
+                      </p>
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input
+                      type="radio"
+                      name="alder"
+                      value="Under 18"
+                      class="peer hidden"
+                    />
+                    <div
+                      class="peer-checked:ring-2 peer-checked:ring-YellowC-400 peer-checked:bg-YellowC-50 bg-white border border-DGreenC-200 rounded-lg px-4 py-3 text-center transition-all hover:border-YellowC-400"
+                    >
+                      <p class="text-sm font-semibold text-DGreenC-800">
+                        Under 18 år
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
             </div>
           </fieldset>
 
@@ -162,6 +309,7 @@
               Välj klass *
             </legend>
             <div
+              id="distans-cards"
               class="border-t border-DGreenC-200 pt-4 grid sm:grid-cols-3 gap-4"
             >
               <label class="cursor-pointer">
@@ -279,9 +427,21 @@
             <button
               type="submit"
               id="submit-btn"
-              class="w-full sm:w-auto bg-DGreenC-700 hover:bg-DGreenC-600 text-TanC-50 font-bold py-4 px-10 rounded-lg text-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              class="submit-btn w-full sm:w-auto bg-DGreenC-700 hover:bg-DGreenC-600 text-TanC-50 font-bold py-4 px-10 rounded-lg text-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
             >
-              Skicka anmälan
+              <span class="btn-label">Skicka anmälan</span>
+              <div class="btn-processing-content">
+                <p
+                  class="btn-status proc-cursor font-mono text-sm tracking-[0.18em] uppercase font-semibold text-TanC-100"
+                >
+                  &nbsp;
+                </p>
+                <div class="btn-progress flex gap-1.5 mt-5">
+                  <span class="btn-progress-seg blue flex-1"></span>
+                  <span class="btn-progress-seg yellow flex-1"></span>
+                  <span class="btn-progress-seg green flex-1"></span>
+                </div>
+              </div>
             </button>
             <p class="text-DGreenC-400 text-xs mt-3">
               Du får en bekräftelse via e-post efter att anmälan skickats.
@@ -318,6 +478,7 @@
           </div>
         </div>
       </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -473,6 +634,80 @@
       var summary = document.getElementById("summary");
       var errorMsg = document.getElementById("error-msg");
       var submitBtn = document.getElementById("submit-btn");
+      var btnStatus = submitBtn.querySelector(".btn-status");
+      var btnSegments = submitBtn.querySelectorAll(".btn-progress-seg");
+
+      // ── Knapp-animering vid submit ──
+      function showProcessing() {
+        btnSegments.forEach(function (s) {
+          s.classList.remove("active");
+        });
+        btnStatus.innerHTML = "&nbsp;";
+        submitBtn.classList.add("processing");
+        submitBtn.disabled = true;
+      }
+      function hideProcessing() {
+        submitBtn.classList.remove("processing");
+        submitBtn.disabled = false;
+      }
+      function typewriter(el, text, speed) {
+        return new Promise(function (resolve) {
+          var i = 0;
+          el.textContent = "";
+          (function tick() {
+            if (i < text.length) {
+              el.textContent = text.substring(0, ++i);
+              setTimeout(tick, speed);
+            } else {
+              resolve();
+            }
+          })();
+        });
+      }
+      function wait(ms) {
+        return new Promise(function (r) {
+          setTimeout(r, ms);
+        });
+      }
+      function lightSegment(color) {
+        submitBtn
+          .querySelector(".btn-progress-seg." + color)
+          .classList.add("active");
+      }
+      function runProcessingAnimation(gate) {
+        return Promise.resolve()
+          .then(function () {
+            lightSegment("blue");
+            // 17 tecken × 25 ms + 350 ms paus = ~775 ms
+            return typewriter(btnStatus, "Validerar anmälan", 25);
+          })
+          .then(function () {
+            return wait(350);
+          })
+          .then(function () {
+            lightSegment("yellow");
+            // 23 tecken × 25 ms + 350 ms paus = ~925 ms
+            return typewriter(btnStatus, "Skickar till arrangören", 25);
+          })
+          .then(function () {
+            return wait(350);
+          })
+          .then(function () {
+            return Promise.all([
+              // 20 tecken × 25 ms + 350 ms paus + 290 ms grön-hold = ~1140 ms
+              typewriter(btnStatus, "Bekräftar mottagning", 25).then(
+                function () {
+                  return wait(350);
+                },
+              ),
+              gate || Promise.resolve(),
+            ]);
+          })
+          .then(function () {
+            lightSegment("green");
+            return wait(290);
+          });
+      }
 
       // ── Deadline-check: Stäng formuläret om deadline passerat ──
       if (new Date() > DEADLINE) {
@@ -520,18 +755,122 @@
           (distansEl.value === "Motion" ? "16:10" : "16:00");
       }
 
+      // ── Validering av obligatoriska fält ──
+      function applyShake(el) {
+        el.classList.remove("field-shake");
+        void el.offsetWidth; // tvinga reflow så animationen kan spelas igen
+        el.classList.add("field-shake");
+        setTimeout(function () {
+          el.classList.remove("field-shake");
+        }, 500);
+      }
+
+      function validateForm() {
+        var errors = [];
+        var checks = [
+          { id: "fornamn", label: "Förnamn" },
+          { id: "efternamn", label: "Efternamn" },
+        ];
+        checks.forEach(function (c) {
+          var el = document.getElementById(c.id);
+          if (!el.value.trim()) errors.push({ el: el, label: c.label });
+        });
+
+        var epostEl = document.getElementById("epost");
+        if (!epostEl.value.trim()) {
+          errors.push({ el: epostEl, label: "E-post" });
+        } else if (!epostEl.checkValidity()) {
+          errors.push({ el: epostEl, label: "Ogiltig e-post" });
+        }
+
+        if (!document.querySelector('input[name="distans"]:checked')) {
+          errors.push({
+            el: document.getElementById("distans-cards"),
+            label: "Klass",
+            isRadio: true,
+          });
+        }
+        if (!document.querySelector('input[name="alder"]:checked')) {
+          errors.push({
+            el: document.getElementById("alder-cards"),
+            label: "Ålder",
+            isRadio: true,
+          });
+        }
+        return errors;
+      }
+
+      function showFieldErrors(errors) {
+        errors.forEach(function (e) {
+          if (e.isRadio) {
+            e.el.classList.add("radio-group-error");
+          } else {
+            e.el.classList.add("field-error");
+          }
+          applyShake(e.el);
+        });
+        var first = errors[0].el;
+        first.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (!errors[0].isRadio) {
+          setTimeout(function () {
+            first.focus({ preventScroll: true });
+          }, 450);
+        }
+      }
+
+      // Rensa felmarkeringar när användaren fyller i/väljer
+      ["fornamn", "efternamn", "epost"].forEach(function (id) {
+        var el = document.getElementById(id);
+        el.addEventListener("input", function () {
+          if (el.value.trim()) el.classList.remove("field-error");
+        });
+      });
+      document
+        .querySelectorAll('input[name="distans"]')
+        .forEach(function (i) {
+          i.addEventListener("change", function () {
+            document
+              .getElementById("distans-cards")
+              .classList.remove("radio-group-error");
+          });
+        });
+      document.querySelectorAll('input[name="alder"]').forEach(function (i) {
+        i.addEventListener("change", function () {
+          document
+            .getElementById("alder-cards")
+            .classList.remove("radio-group-error");
+        });
+      });
+
       // ── Skicka till Power Automate ──
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         errorMsg.classList.add("hidden");
 
+        // Kör validering först — visa tydliga fel om något saknas
+        var validationErrors = validateForm();
+        if (validationErrors.length > 0) {
+          showFieldErrors(validationErrors);
+          var labels = validationErrors
+            .map(function (er) {
+              return er.label;
+            })
+            .join(", ");
+          errorMsg.textContent =
+            validationErrors.length === 1
+              ? "Fyll i fältet markerat i rött: " + labels
+              : "Fyll i fälten markerade i rött: " + labels;
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
         // Honeypot-check: om botfältet är ifyllt, låtsas att det gick bra
         if (document.getElementById("website").value) {
           submitBtn.disabled = true;
-          submitBtn.textContent = "Skickar...";
-          setTimeout(function () {
+          showProcessing();
+          runProcessingAnimation(wait(1200)).then(function () {
             window.location.href = "bekraftelse.html";
-          }, 1500);
+          });
           return;
         }
 
@@ -553,6 +892,7 @@
           document.getElementById("klubb").value.replace(/\s+/g, " ").trim(),
         );
         var distansEl = document.querySelector('input[name="distans"]:checked');
+        var alderEl = document.querySelector('input[name="alder"]:checked');
         var meddelande = sanitize(
           document
             .getElementById("meddelande")
@@ -560,15 +900,8 @@
             .trim(),
         );
 
-        if (!distansEl) {
-          errorMsg.textContent = "Vänligen välj en klass.";
-          errorMsg.classList.remove("hidden");
-          return;
-        }
-
         // Disable knappen (dubbelklick-skydd)
         submitBtn.disabled = true;
-        submitBtn.textContent = "Skickar...";
 
         var data = {
           fornamn: fornamn,
@@ -577,37 +910,44 @@
           telefon: telefon,
           klubb: klubb,
           klass: distansEl.value,
+          alder: alderEl.value,
           meddelande: meddelande,
           tidpunkt: new Date().toISOString(),
         };
 
-        fetch(WEBHOOK_URL, {
+        showProcessing();
+
+        var fetchPromise = fetch(WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
-        })
-          .then(function (response) {
-            if (response.ok || response.status === 202) {
-              return response.json().then(function (body) {
-                sessionStorage.setItem("byathlon_fornamn", fornamn);
-                sessionStorage.setItem("byathlon_klass", distansEl.value);
-                sessionStorage.setItem("byathlon_epost", epost);
-                if (body && body.status === "duplicate") {
-                  window.location.href = "redan-anmald.html";
-                } else {
-                  window.location.href = "bekraftelse.html";
-                }
-              });
-            } else {
-              throw new Error("Servern svarade med status " + response.status);
-            }
+        }).then(function (response) {
+          if (response.ok || response.status === 202) {
+            return response.json().then(function (body) {
+              sessionStorage.setItem("byathlon_fornamn", fornamn);
+              sessionStorage.setItem("byathlon_klass", distansEl.value);
+              sessionStorage.setItem("byathlon_epost", epost);
+              return body && body.status === "duplicate"
+                ? "redan-anmald.html"
+                : "bekraftelse.html";
+            });
+          }
+          throw new Error("Servern svarade med status " + response.status);
+        });
+
+        runProcessingAnimation(fetchPromise)
+          .then(function () {
+            return fetchPromise;
+          })
+          .then(function (url) {
+            window.location.href = url;
           })
           .catch(function (err) {
+            hideProcessing();
             errorMsg.textContent =
               "Något gick fel vid anmälan. Försök igen eller kontakta arrangören.";
             errorMsg.classList.remove("hidden");
             submitBtn.disabled = false;
-            submitBtn.textContent = "Skicka anmälan";
             console.error("Anmälan-fel:", err);
           });
       });

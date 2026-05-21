@@ -5,6 +5,19 @@ Välj **Is HTML: Yes** (klicka "Show advanced options" om du inte ser det).
 
 Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med motsvarande fält från triggern.
 
+## Förutsättningar i flödet
+
+Mailen nedan refererar till följande som måste finnas i Power Automate-flödet **före** "Send an email"-steget:
+
+| Referens | Vad är det | Hur skapas det |
+|---|---|---|
+| `triggerBody()?['alder']` | Användarens åldersval ("18 eller äldre" / "Under 18") | Ny `alder`-property i Parse JSON-schemat |
+| `body('HTTP_Swish_QR')` | Base64-encoded PNG av Swish QR-koden | HTTP-action POST mot `https://mpc.getswish.net/qrg-swish/api/v1/prefilled` |
+| `variables('System_SwishLink')` | Klickbar Swish-länk (`https://app.swish.nu/...`) | Initialize variable med `concat(...)` |
+| `variables('System_SwishMeddelande')` | Förinskrivet meddelande i Swish | Initialize variable: `concat('Byathlon - ', fornamn, ' ', efternamn)` |
+
+Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
+
 ---
 
 ## MAIL 1: Ny anmälan (False-sidan)
@@ -15,128 +28,473 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
 **Body (HTML):**
 
 ```html
-<div style="max-width:560px; margin:0 auto; font-family:Arial, Helvetica, sans-serif; color:#25231e; line-height:1.6;">
-
-  <!-- Header -->
-  <div style="background:#36342b; padding:24px 32px; border-radius:12px 12px 0 0; text-align:center;">
-    <a href="https://byathlon.se" style="text-decoration:none;">
-      <h1 style="margin:0; color:#eae1d7; font-size:22px; font-weight:700; letter-spacing:1px;">BYATHLON 2026</h1>
-    </a>
-    <div style="margin:12px auto 0; width:80px; height:3px; display:flex;">
-      <span style="flex:1; background:#669bbc;"></span>
-      <span style="flex:1; background:#efca5c;"></span>
-      <span style="flex:1; background:#606c38;"></span>
-    </div>
-  </div>
-
-  <!-- Body -->
-  <div style="background:#ffffff; padding:32px; border:1px solid #c1bfb3; border-top:none;">
-
-    <h2 style="margin:0 0 8px; color:#25231e; font-size:20px;">Hej @{triggerBody()?['fornamn']}!</h2>
-    <p style="margin:0 0 24px; color:#595648; font-size:15px;">Din anmälan till Byathlon är mottagen. Här är dina uppgifter:</p>
-
-    <!-- Uppgifter -->
-    <table style="width:100%; border-collapse:collapse; margin:0 0 24px;">
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px; width:120px;">Namn</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px; font-weight:600;">@{triggerBody()?['fornamn']} @{triggerBody()?['efternamn']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">Klass</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px; font-weight:600;">@{triggerBody()?['klass']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">E-post</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px;">@{triggerBody()?['epost']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">Telefon</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px;">@{triggerBody()?['telefon']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">Klubb</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px;">@{triggerBody()?['klubb']}</td>
-      </tr>
-    </table>
-
-    <!-- Eventinfo -->
-    <div style="background:#efeeeb; border-radius:8px; padding:20px; margin:0 0 24px;">
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px; width:80px;">Datum</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Lördag 25 juli 2026</td>
-        </tr>
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Start</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}</td>
-        </tr>
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Plats</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Sidensjö</td>
-        </tr>
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Samling</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px;">Från kl. 15:00</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Checklista -->
-    <h3 style="margin:0 0 8px; color:#36342b; font-size:15px;">Ta med till tävlingen:</h3>
-    <table style="margin:0 0 24px; border-collapse:collapse;">
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Cykel &amp; hjälm <span style="color:#a41e1e; font-size:12px; font-weight:600;">(obligatoriskt)</span></td></tr>
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Badkläder &amp; handduk</td></tr>
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Löparskor</td></tr>
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Vattenflaska</td></tr>
-    </table>
-
-    <p style="margin:0 0 28px; color:#595648; font-size:14px;">Vi ses i Sidensjö!</p>
-
-    <!-- Sponsorer -->
-    <div style="border-top:1px solid #dfded8; padding-top:24px;">
-      <p style="margin:0 0 14px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Huvudsponsorer</p>
-      <table align="center" style="border-collapse:collapse; margin:0 auto 18px;">
-        <tr>
-          <td align="center" valign="middle" style="padding:8px 18px;">
-            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
-              <img src="https://byathlon.se/Image/Sponsorer/Vagtrummor.webp" alt="HK Vägtrummor" height="44" style="height:44px; width:auto; border:0; display:block;">
-            </a>
-          </td>
-          <td align="center" valign="middle" style="padding:8px 18px;">
-            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
-              <img src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg" alt="SI Construction" height="44" style="height:44px; width:auto; border:0; display:block;">
-            </a>
+<table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+    font-family: Arial, Helvetica, sans-serif;">
+  <tbody><tr>
+    <td style="background: #f5f4ef; padding: 24px 16px">
+      <!-- Yttre mail-container (max 600px) -->
+      <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+          mso-table-rspace: 0pt;
+          max-width: 600px;
+          width: 100%;
+          background: #ffffff;
+          border: 1px solid #c1bfb3;">
+        <!-- Header -->
+        <tbody><tr>
+          <td style="background: #36342b; padding: 28px 32px; text-align: center">
+            <div style="margin: 0 0 12px;
+                color: #eae1d7;
+                font-size: 22px;
+                font-weight: bold;
+                letter-spacing: 1px;">
+              <a href="https://byathlon.se" style="color: #eae1d7; text-decoration: none">BYATHLON 2026</a>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 auto;">
+              <tbody><tr>
+                <td style="background: #669bbc; font-size: 0; line-height: 0">
+                  &nbsp;
+                </td>
+                <td style="background: #efca5c; font-size: 0; line-height: 0">
+                  &nbsp;
+                </td>
+                <td style="background: #606c38; font-size: 0; line-height: 0">
+                  &nbsp;
+                </td>
+              </tr>
+            </tbody></table>
           </td>
         </tr>
-      </table>
 
-      <p style="margin:0 0 12px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Sponsor</p>
-      <table align="center" style="border-collapse:collapse; margin:0 auto;">
+        <!-- Body -->
         <tr>
-          <td align="center" valign="middle" style="padding:4px 18px;">
-            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
-              <img src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.JPG" alt="Polarbröd" height="38" style="height:38px; width:auto; border:0; display:block;">
-            </a>
+          <td style="padding: 32px">
+            <!-- Hälsning -->
+            <div style="margin: 0 0 8px;
+                color: #25231e;
+                font-size: 20px;
+                font-weight: bold;">
+              Hej @{triggerBody()?['fornamn']}!
+            </div>
+            <div style="margin: 0 0 24px;
+                color: #595648;
+                font-size: 15px;
+                line-height: 1.55;">
+              Din anmälan till Byathlon 2026 är mottagen. Här är dina uppgifter:
+            </div>
+
+            <!-- Uppgifter -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;">
+              <tbody><tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Namn
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;
+                    font-weight: bold;">
+                  @{triggerBody()?['fornamn']} @{triggerBody()?['efternamn']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Klass
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;
+                    font-weight: bold;">
+                  @{triggerBody()?['klass']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Ålder
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['alder']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  E-post
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['epost']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Telefon
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['telefon']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Klubb
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['klubb']}
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Swish-betalning -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;
+                width: 100%;">
+              <tbody><tr>
+                <td style="background: #efeeeb; padding: 24px; text-align: center">
+                  <div style="margin: 0 0 6px;
+                      color: #7f7a67;
+                      font-size: 11px;
+                      font-weight: bold;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;">
+                    Betala anmälningsavgift
+                  </div>
+                  <div style="margin: 0 0 4px;
+                      color: #25231e;
+                      font-size: 26px;
+                      font-weight: bold;">
+                    300 kr
+                  </div>
+                  <div style="margin: 0 0 16px;
+                      color: #595648;
+                      font-size: 13px;
+                      line-height: 1.55;">
+                    Gärna mer — överskott går till välgörenhet.
+                  </div>
+
+                  <!-- QR-kod -->
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto 12px;">
+                    <tbody><tr>
+                      <td style="background: #ffffff; padding: 12px">
+                        <img src="data:image/png;base64,@{body('HTTP_Swish_QR')}" alt="Swish QR-kod" width="200" height="200" style="width: 200px;
+                            height: 200px;
+                            border: 0;
+                            display: block;">
+                      </td>
+                    </tr>
+                  </tbody></table>
+
+                  <div style="margin: 0 0 16px;
+                      color: #7f7a67;
+                      font-size: 12px;">
+                    Skanna med Swish-appen
+                  </div>
+
+                  <!-- Knapp -->
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto;">
+                    <tbody><tr>
+                      <td style="background: #EE2364;
+                          padding: 12px 28px;
+                          text-align: center;">
+                        <a href="@{variables('System_SwishLink')}" style="color: #ffffff;
+                            text-decoration: none;
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-size: 14px;
+                            font-weight: bold;">
+                          Öppna i Swish
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody></table>
+
+                  <div style="margin: 10px 0 0;
+                      color: #7f7a67;
+                      font-size: 11px;">
+                    Knappen funkar på mobil med Swish-appen installerad.
+                  </div>
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Eventinfo -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;
+                width: 100%;">
+              <tbody><tr>
+                <td style="background: #efeeeb; padding: 20px">
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt">
+                    <tbody><tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Datum
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;
+                          font-weight: bold;">
+                        Lördag 25 juli 2026
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Start
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;
+                          font-weight: bold;">
+                        @{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Plats
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;
+                          font-weight: bold;">
+                        Sidensjö
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Samling
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;">
+                        Från kl. 15:00
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Checklista -->
+            <div style="margin: 0 0 8px;
+                color: #36342b;
+                font-size: 15px;
+                font-weight: bold;">
+              Ta med till tävlingen:
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;">
+              <tbody><tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;
+                    width: 18px;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Cykel &amp; hjälm
+                  <span style="color: #a41e1e; font-size: 12px; font-weight: bold">(obligatoriskt)</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Badkläder &amp; handduk
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Löparskor
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Vattenflaska
+                </td>
+              </tr>
+            </tbody></table>
+
+            <div style="margin: 0 0 28px;
+                color: #595648;
+                font-size: 14px;
+                line-height: 1.55;">
+              Vi ses i Sidensjö!
+            </div>
+
+            <!-- Sponsorer -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                border-top: 1px solid #dfded8;
+                width: 100%;">
+              <tbody><tr>
+                <td style="padding: 24px 0 0">
+                  <div style="margin: 0 0 14px;
+                      color: #7f7a67;
+                      font-size: 10px;
+                      font-weight: bold;
+                      letter-spacing: 2px;
+                      text-align: center;
+                      text-transform: uppercase;">
+                    Huvudsponsorer
+                  </div>
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto 18px;">
+                    <tbody><tr>
+                      <td style="padding: 8px 18px">
+                        <a href="https://byathlon.se/#sponsorer" style="text-decoration: none">
+                          <img src="https://byathlon.se/Image/Sponsorer/Vagtrummor.webp" alt="HK Vägtrummor" height="44" style="height: 44px;
+                              width: auto;
+                              border: 0;
+                              display: block;">
+                        </a>
+                      </td>
+                      <td style="padding: 8px 18px">
+                        <a href="https://byathlon.se/#sponsorer" style="text-decoration: none">
+                          <img src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg" alt="SI Construction" height="44" style="height: 44px;
+                              width: auto;
+                              border: 0;
+                              display: block;">
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody></table>
+
+                  <div style="margin: 0 0 12px;
+                      color: #7f7a67;
+                      font-size: 10px;
+                      font-weight: bold;
+                      letter-spacing: 2px;
+                      text-align: center;
+                      text-transform: uppercase;">
+                    Sponsor
+                  </div>
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto;">
+                    <tbody><tr>
+                      <td style="padding: 4px 18px">
+                        <a href="https://byathlon.se/#sponsorer" style="text-decoration: none">
+                          <img src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.JPG" alt="Polarbröd" height="38" style="height: 38px;
+                              width: auto;
+                              border: 0;
+                              display: block;">
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+            </tbody></table>
           </td>
         </tr>
-      </table>
-    </div>
 
+        <!-- Footer -->
+        <tr>
+          <td style="background: #efeeeb;
+              padding: 20px 32px;
+              border-top: 1px solid #c1bfb3;
+              text-align: center;">
+            <div style="margin: 0 0 10px; color: #7f7a67; font-size: 12px">
+              Arrangör: By Intresseförening
+            </div>
+            <div style="margin: 0 0 10px; color: #7f7a67; font-size: 12px">
+              <a href="https://www.facebook.com/profile.php?id=61589342865676" style="color: #595648; text-decoration: none">Facebook</a>
+              <span style="color: #c1bfb3">&nbsp;·&nbsp;</span>
+              <a href="https://www.instagram.com/byathlon/" style="color: #595648; text-decoration: none">Instagram</a>
+              <span style="color: #c1bfb3">&nbsp;·&nbsp;</span>
+              <a href="https://byathlon.se" style="color: #595648; text-decoration: none">byathlon.se</a>
+            </div>
+            <div style="margin: 0; color: #a29d8b; font-size: 11px">
+              Vid frågor, skicka mail till daga@kjellsson.nu.
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- Automatiserat meddelande - utanför mail-omslaget -->
+<div style="font-family: Arial, Helvetica, sans-serif;
+    color: #595959;
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 16px 0 8px;">
+  <div style="margin: 0 0 4px; font-weight: bold">
+    Automatiserat meddelande – svara inte
   </div>
-
-  <!-- Footer -->
-  <div style="background:#efeeeb; padding:20px 32px; border-radius:0 0 12px 12px; border:1px solid #c1bfb3; border-top:none; text-align:center;">
-    <p style="margin:0 0 10px; color:#7f7a67; font-size:12px;">Arrangör: By Intresseförening</p>
-    <p style="margin:0 0 10px;">
-      <a href="https://www.facebook.com/profile.php?id=61589342865676" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Facebook</a>
-      <span style="color:#c1bfb3; font-size:12px;">·</span>
-      <a href="https://www.instagram.com/byathlon/" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Instagram</a>
-      <span style="color:#c1bfb3; font-size:12px;">·</span>
-      <a href="https://byathlon.se" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">byathlon.se</a>
-    </p>
-    <p style="margin:0; color:#a29d8b; font-size:11px;">Vid frågor, svara på detta mejl.</p>
+  <div style="margin: 0 0 4px">
+    This is an automated message. Replies are not monitored.
   </div>
-
+  <div style="margin: 0">
+    Eventuell signatur nedan tillhör företaget, inte avsändaren av detta automatutskick.
+  </div>
 </div>
 ```
 
@@ -150,131 +508,480 @@ Dynamiska fält (blixt-ikonen): ersätt `@{triggerBody()?['faltnamn']}` med mots
 **Body (HTML):**
 
 ```html
-<div style="max-width:560px; margin:0 auto; font-family:Arial, Helvetica, sans-serif; color:#25231e; line-height:1.6;">
-
-  <!-- Header -->
-  <div style="background:#36342b; padding:24px 32px; border-radius:12px 12px 0 0; text-align:center;">
-    <a href="https://byathlon.se" style="text-decoration:none;">
-      <h1 style="margin:0; color:#eae1d7; font-size:22px; font-weight:700; letter-spacing:1px;">BYATHLON 2026</h1>
-    </a>
-    <div style="margin:12px auto 0; width:80px; height:3px; display:flex;">
-      <span style="flex:1; background:#669bbc;"></span>
-      <span style="flex:1; background:#efca5c;"></span>
-      <span style="flex:1; background:#606c38;"></span>
-    </div>
-  </div>
-
-  <!-- Body -->
-  <div style="background:#ffffff; padding:32px; border:1px solid #c1bfb3; border-top:none;">
-
-    <h2 style="margin:0 0 8px; color:#25231e; font-size:20px;">Hej @{triggerBody()?['fornamn']}!</h2>
-    <p style="margin:0 0 24px; color:#595648; font-size:15px;">Din anmälan har uppdaterats med dina senaste uppgifter:</p>
-
-    <!-- Uppgifter -->
-    <table style="width:100%; border-collapse:collapse; margin:0 0 24px;">
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px; width:120px;">Namn</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px; font-weight:600;">@{triggerBody()?['fornamn']} @{triggerBody()?['efternamn']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">Klass</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px; font-weight:600;">@{triggerBody()?['klass']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">E-post</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px;">@{triggerBody()?['epost']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">Telefon</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px;">@{triggerBody()?['telefon']}</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#7f7a67; font-size:13px;">Klubb</td>
-        <td style="padding:10px 12px; border-bottom:1px solid #dfded8; color:#25231e; font-size:14px;">@{triggerBody()?['klubb']}</td>
-      </tr>
-    </table>
-
-    <!-- Info-ruta -->
-    <div style="background:#fdf9ec; border-left:3px solid #efca5c; padding:12px 16px; border-radius:4px; margin:0 0 24px;">
-      <p style="margin:0; color:#664f0a; font-size:13px;">
-        <strong>OBS:</strong> Denna anmälan ersätter din tidigare registrering. Inga andra ändringar behövs.
-      </p>
-    </div>
-
-    <!-- Eventinfo -->
-    <div style="background:#efeeeb; border-radius:8px; padding:20px; margin:0 0 24px;">
-      <table style="width:100%; border-collapse:collapse;">
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px; width:80px;">Datum</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Lördag 25 juli 2026</td>
-        </tr>
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Start</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">@{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}</td>
-        </tr>
-        <tr>
-          <td style="padding:4px 0; color:#7f7a67; font-size:13px;">Plats</td>
-          <td style="padding:4px 0; color:#25231e; font-size:14px; font-weight:600;">Sidensjö</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Checklista -->
-    <h3 style="margin:0 0 8px; color:#36342b; font-size:15px;">Påminnelse — ta med:</h3>
-    <table style="margin:0 0 24px; border-collapse:collapse;">
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Cykel &amp; hjälm <span style="color:#a41e1e; font-size:12px; font-weight:600;">(obligatoriskt)</span></td></tr>
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Badkläder &amp; handduk</td></tr>
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Löparskor</td></tr>
-      <tr><td style="padding:3px 8px 3px 0; color:#606c38; font-size:14px;">&#10003;</td><td style="padding:3px 0; color:#474439; font-size:14px;">Vattenflaska</td></tr>
-    </table>
-
-    <p style="margin:0 0 28px; color:#595648; font-size:14px;">Vi ses i Sidensjö!</p>
-
-    <!-- Sponsorer -->
-    <div style="border-top:1px solid #dfded8; padding-top:24px;">
-      <p style="margin:0 0 14px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Huvudsponsorer</p>
-      <table align="center" style="border-collapse:collapse; margin:0 auto 18px;">
-        <tr>
-          <td align="center" valign="middle" style="padding:8px 18px;">
-            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
-              <img src="https://byathlon.se/Image/Sponsorer/Vagtrummor.webp" alt="HK Vägtrummor" height="44" style="height:44px; width:auto; border:0; display:block;">
-            </a>
-          </td>
-          <td align="center" valign="middle" style="padding:8px 18px;">
-            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
-              <img src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg" alt="SI Construction" height="44" style="height:44px; width:auto; border:0; display:block;">
-            </a>
+<table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+    font-family: Arial, Helvetica, sans-serif;">
+  <tbody><tr>
+    <td style="background: #f5f4ef; padding: 24px 16px">
+      <!-- Yttre mail-container (max 600px) -->
+      <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+          mso-table-rspace: 0pt;
+          max-width: 600px;
+          width: 100%;
+          background: #ffffff;
+          border: 1px solid #c1bfb3;">
+        <!-- Header -->
+        <tbody><tr>
+          <td style="background: #36342b; padding: 28px 32px; text-align: center">
+            <div style="margin: 0 0 12px;
+                color: #eae1d7;
+                font-size: 22px;
+                font-weight: bold;
+                letter-spacing: 1px;">
+              <a href="https://byathlon.se" style="color: #eae1d7; text-decoration: none">BYATHLON 2026</a>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 auto;">
+              <tbody><tr>
+                <td style="background: #669bbc; font-size: 0; line-height: 0">
+                  &nbsp;
+                </td>
+                <td style="background: #efca5c; font-size: 0; line-height: 0">
+                  &nbsp;
+                </td>
+                <td style="background: #606c38; font-size: 0; line-height: 0">
+                  &nbsp;
+                </td>
+              </tr>
+            </tbody></table>
           </td>
         </tr>
-      </table>
 
-      <p style="margin:0 0 12px; color:#7f7a67; font-size:10px; font-weight:700; letter-spacing:2px; text-align:center; text-transform:uppercase;">Sponsor</p>
-      <table align="center" style="border-collapse:collapse; margin:0 auto;">
+        <!-- Body -->
         <tr>
-          <td align="center" valign="middle" style="padding:4px 18px;">
-            <a href="https://byathlon.se/#sponsorer" style="text-decoration:none;">
-              <img src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.JPG" alt="Polarbröd" height="38" style="height:38px; width:auto; border:0; display:block;">
-            </a>
+          <td style="padding: 32px">
+            <!-- Hälsning -->
+            <div style="margin: 0 0 8px;
+                color: #25231e;
+                font-size: 20px;
+                font-weight: bold;">
+              Hej @{triggerBody()?['fornamn']}!
+            </div>
+            <div style="margin: 0 0 24px;
+                color: #595648;
+                font-size: 15px;
+                line-height: 1.55;">
+              Din anmälan har uppdaterats med dina senaste uppgifter:
+            </div>
+
+            <!-- Uppgifter -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;">
+              <tbody><tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Namn
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;
+                    font-weight: bold;">
+                  @{triggerBody()?['fornamn']} @{triggerBody()?['efternamn']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Klass
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;
+                    font-weight: bold;">
+                  @{triggerBody()?['klass']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Ålder
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['alder']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  E-post
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['epost']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Telefon
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['telefon']}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #7f7a67;
+                    font-size: 13px;">
+                  Klubb
+                </td>
+                <td style="padding: 10px 12px;
+                    border-bottom: 1px solid #dfded8;
+                    color: #25231e;
+                    font-size: 14px;">
+                  @{triggerBody()?['klubb']}
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Info-ruta (OBS) -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;">
+              <tbody><tr>
+                <td style="background: #fdf9ec;
+                    border-left: 3px solid #efca5c;
+                    padding: 12px 16px;
+                    color: #664f0a;
+                    font-size: 13px;
+                    line-height: 1.55;">
+                  <strong>OBS:</strong> Denna anmälan ersätter din tidigare
+                  registrering. Inga andra ändringar behövs.
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Swish-betalning -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;
+                width: 100%;">
+              <tbody><tr>
+                <td style="background: #efeeeb; padding: 24px; text-align: center">
+                  <div style="margin: 0 0 6px;
+                      color: #7f7a67;
+                      font-size: 11px;
+                      font-weight: bold;
+                      letter-spacing: 2px;
+                      text-transform: uppercase;">
+                    Betala anmälningsavgift
+                  </div>
+                  <div style="margin: 0 0 4px;
+                      color: #25231e;
+                      font-size: 26px;
+                      font-weight: bold;">
+                    300 kr
+                  </div>
+                  <div style="margin: 0 0 16px;
+                      color: #595648;
+                      font-size: 13px;
+                      line-height: 1.55;">
+                    Gärna mer — överskott går till välgörenhet. Bortse om du redan betalat.
+                  </div>
+
+                  <!-- QR-kod -->
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto 12px;">
+                    <tbody><tr>
+                      <td style="background: #ffffff; padding: 12px">
+                        <img src="data:image/png;base64,@{body('HTTP_Swish_QR')}" alt="Swish QR-kod" width="200" height="200" style="width: 200px;
+                            height: 200px;
+                            border: 0;
+                            display: block;">
+                      </td>
+                    </tr>
+                  </tbody></table>
+
+                  <div style="margin: 0 0 16px;
+                      color: #7f7a67;
+                      font-size: 12px;">
+                    Skanna med Swish-appen
+                  </div>
+
+                  <!-- Knapp -->
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto;">
+                    <tbody><tr>
+                      <td style="background: #EE2364;
+                          padding: 12px 28px;
+                          text-align: center;">
+                        <a href="@{variables('System_SwishLink')}" style="color: #ffffff;
+                            text-decoration: none;
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-size: 14px;
+                            font-weight: bold;">
+                          Öppna i Swish
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody></table>
+
+                  <div style="margin: 10px 0 0;
+                      color: #7f7a67;
+                      font-size: 11px;">
+                    Knappen funkar på mobil med Swish-appen installerad.
+                  </div>
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Eventinfo -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;
+                width: 100%;">
+              <tbody><tr>
+                <td style="background: #efeeeb; padding: 20px">
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt">
+                    <tbody><tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Datum
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;
+                          font-weight: bold;">
+                        Lördag 25 juli 2026
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Start
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;
+                          font-weight: bold;">
+                        @{if(equals(triggerBody()?['klass'],'Motion'),'Kl. 16:10','Kl. 16:00')}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 0; color: #7f7a67; font-size: 13px">
+                        Plats
+                      </td>
+                      <td style="padding: 4px 0;
+                          color: #25231e;
+                          font-size: 14px;
+                          font-weight: bold;">
+                        Sidensjö
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+            </tbody></table>
+
+            <!-- Checklista -->
+            <div style="margin: 0 0 8px;
+                color: #36342b;
+                font-size: 15px;
+                font-weight: bold;">
+              Påminnelse — ta med:
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                margin: 0 0 24px;">
+              <tbody><tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;
+                    width: 18px;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Cykel &amp; hjälm
+                  <span style="color: #a41e1e; font-size: 12px; font-weight: bold">(obligatoriskt)</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Badkläder &amp; handduk
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Löparskor
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 3px 8px 3px 0;
+                    color: #606c38;
+                    font-size: 15px;
+                    line-height: 1.5;">
+                  ✓
+                </td>
+                <td style="padding: 3px 0;
+                    color: #474439;
+                    font-size: 14px;
+                    line-height: 1.5;">
+                  Vattenflaska
+                </td>
+              </tr>
+            </tbody></table>
+
+            <div style="margin: 0 0 28px;
+                color: #595648;
+                font-size: 14px;
+                line-height: 1.55;">
+              Vi ses i Sidensjö!
+            </div>
+
+            <!-- Sponsorer -->
+            <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                border-top: 1px solid #dfded8;
+                width: 100%;">
+              <tbody><tr>
+                <td style="padding: 24px 0 0">
+                  <div style="margin: 0 0 14px;
+                      color: #7f7a67;
+                      font-size: 10px;
+                      font-weight: bold;
+                      letter-spacing: 2px;
+                      text-align: center;
+                      text-transform: uppercase;">
+                    Huvudsponsorer
+                  </div>
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto 18px;">
+                    <tbody><tr>
+                      <td style="padding: 8px 18px">
+                        <a href="https://byathlon.se/#sponsorer" style="text-decoration: none">
+                          <img src="https://byathlon.se/Image/Sponsorer/Vagtrummor.webp" alt="HK Vägtrummor" height="44" style="height: 44px;
+                              width: auto;
+                              border: 0;
+                              display: block;">
+                        </a>
+                      </td>
+                      <td style="padding: 8px 18px">
+                        <a href="https://byathlon.se/#sponsorer" style="text-decoration: none">
+                          <img src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg" alt="SI Construction" height="44" style="height: 44px;
+                              width: auto;
+                              border: 0;
+                              display: block;">
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody></table>
+
+                  <div style="margin: 0 0 12px;
+                      color: #7f7a67;
+                      font-size: 10px;
+                      font-weight: bold;
+                      letter-spacing: 2px;
+                      text-align: center;
+                      text-transform: uppercase;">
+                    Sponsor
+                  </div>
+                  <table cellpadding="0" cellspacing="0" border="0" style="mso-table-lspace: 0pt;
+                      mso-table-rspace: 0pt;
+                      margin: 0 auto;">
+                    <tbody><tr>
+                      <td style="padding: 4px 18px">
+                        <a href="https://byathlon.se/#sponsorer" style="text-decoration: none">
+                          <img src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.JPG" alt="Polarbröd" height="38" style="height: 38px;
+                              width: auto;
+                              border: 0;
+                              display: block;">
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody></table>
+                </td>
+              </tr>
+            </tbody></table>
           </td>
         </tr>
-      </table>
-    </div>
 
+        <!-- Footer -->
+        <tr>
+          <td style="background: #efeeeb;
+              padding: 20px 32px;
+              border-top: 1px solid #c1bfb3;
+              text-align: center;">
+            <div style="margin: 0 0 10px; color: #7f7a67; font-size: 12px">
+              Arrangör: By Intresseförening
+            </div>
+            <div style="margin: 0 0 10px; color: #7f7a67; font-size: 12px">
+              <a href="https://www.facebook.com/profile.php?id=61589342865676" style="color: #595648; text-decoration: none">Facebook</a>
+              <span style="color: #c1bfb3">&nbsp;·&nbsp;</span>
+              <a href="https://www.instagram.com/byathlon/" style="color: #595648; text-decoration: none">Instagram</a>
+              <span style="color: #c1bfb3">&nbsp;·&nbsp;</span>
+              <a href="https://byathlon.se" style="color: #595648; text-decoration: none">byathlon.se</a>
+            </div>
+            <div style="margin: 0; color: #a29d8b; font-size: 11px">
+              Vid frågor, skicka mail till daga@kjellsson.nu.
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- Automatiserat meddelande - utanför mail-omslaget -->
+<div style="font-family: Arial, Helvetica, sans-serif;
+    color: #595959;
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 16px 0 8px;">
+  <div style="margin: 0 0 4px; font-weight: bold">
+    Automatiserat meddelande – svara inte
   </div>
-
-  <!-- Footer -->
-  <div style="background:#efeeeb; padding:20px 32px; border-radius:0 0 12px 12px; border:1px solid #c1bfb3; border-top:none; text-align:center;">
-    <p style="margin:0 0 10px; color:#7f7a67; font-size:12px;">Arrangör: By Intresseförening</p>
-    <p style="margin:0 0 10px;">
-      <a href="https://www.facebook.com/profile.php?id=61589342865676" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Facebook</a>
-      <span style="color:#c1bfb3; font-size:12px;">·</span>
-      <a href="https://www.instagram.com/byathlon/" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">Instagram</a>
-      <span style="color:#c1bfb3; font-size:12px;">·</span>
-      <a href="https://byathlon.se" style="color:#595648; font-size:12px; text-decoration:none; margin:0 6px;">byathlon.se</a>
-    </p>
-    <p style="margin:0; color:#a29d8b; font-size:11px;">Vid frågor, svara på detta mejl.</p>
+  <div style="margin: 0 0 4px">
+    This is an automated message. Replies are not monitored.
   </div>
-
+  <div style="margin: 0">
+    Eventuell signatur nedan tillhör företaget, inte avsändaren av detta automatutskick.
+  </div>
 </div>
 ```
 

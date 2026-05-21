@@ -927,6 +927,12 @@
               sessionStorage.setItem("byathlon_fornamn", fornamn);
               sessionStorage.setItem("byathlon_klass", distansEl.value);
               sessionStorage.setItem("byathlon_epost", epost);
+              if (body && body.qrCode) {
+                sessionStorage.setItem("byathlon_qrcode", body.qrCode);
+              }
+              if (body && body.swishLink) {
+                sessionStorage.setItem("byathlon_swishlink", body.swishLink);
+              }
               return body && body.status === "duplicate"
                 ? "redan-anmald.html"
                 : "bekraftelse.html";

@@ -12,8 +12,8 @@ Mailen nedan refererar till följande som måste finnas i Power Automate-flödet
 | Referens | Vad är det | Hur skapas det |
 |---|---|---|
 | `triggerBody()?['alder']` | Användarens åldersval ("18 eller äldre" / "Under 18") | Ny `alder`-property i Parse JSON-schemat |
-| `body('HTTP_Swish_QR')` | Base64-encoded PNG av Swish QR-koden | HTTP-action POST mot `https://mpc.getswish.net/qrg-swish/api/v1/prefilled` |
-| `variables('System_SwishLink')` | Klickbar Swish-länk (`https://app.swish.nu/...`) | Initialize variable med `concat(...)` |
+| `base64(body('HTTP'))` | Base64-encoded PNG av Swish QR-koden | HTTP-action POST mot `https://mpc.getswish.net/qrg-swish/api/v1/prefilled` (action heter "HTTP" i flödet). **OBS:** `body('HTTP')` ensamt returnerar rå binär — alltid wrappa med `base64()` när det ska in i ett HTML img-tag eller en JSON-sträng. |
+| `variables('System_SwishLink')` | Klickbar Swish-länk (`swish://payment?data=...`) | Initialize variable som bygger officiell Swish-deeplink: `swish://payment?data=@{encodeUriComponent(concat('{"version":1,"payee":{"value":"1235867544","editable":false},"amount":{"value":300,"editable":true},"message":{"value":"', variables('System_SwishMeddelande'), '","editable":false}}'))}`. **OBS:** `amount.value` är ett nummer (300), inte en sträng ("300") — Swish-appen kräver det. |
 | `variables('System_SwishMeddelande')` | Förinskrivet meddelande i Swish | Initialize variable: `concat('Byathlon - ', fornamn, ' ', efternamn)` |
 
 Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
@@ -211,7 +211,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                       margin: 0 auto 12px;">
                     <tbody><tr>
                       <td style="background: #ffffff; padding: 12px">
-                        <img src="data:image/png;base64,@{body('HTTP_Swish_QR')}" alt="Swish QR-kod" width="200" height="200" style="width: 200px;
+                        <img src="data:image/png;base64,@{base64(body('HTTP'))}" alt="Swish QR-kod" width="200" height="200" style="width: 200px;
                             height: 200px;
                             border: 0;
                             display: block;">
@@ -708,7 +708,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                       margin: 0 auto 12px;">
                     <tbody><tr>
                       <td style="background: #ffffff; padding: 12px">
-                        <img src="data:image/png;base64,@{body('HTTP_Swish_QR')}" alt="Swish QR-kod" width="200" height="200" style="width: 200px;
+                        <img src="data:image/png;base64,@{base64(body('HTTP'))}" alt="Swish QR-kod" width="200" height="200" style="width: 200px;
                             height: 200px;
                             border: 0;
                             display: block;">

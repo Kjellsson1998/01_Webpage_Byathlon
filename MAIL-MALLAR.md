@@ -622,16 +622,16 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                               border-radius: 8px;"
                                 >
                                   <tr>
-                                    <td style="padding: 10px 18px;">
+                                    <td style="padding: 8px 14px;">
                                       <a
                                         href="https://byathlon.se/#sponsorer"
                                         style="text-decoration: none"
                                       >
                                         <img
-                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
+                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
                                           alt="SI Construction"
-                                          height="32"
-                                          style="height: 32px;
+                                          height="40"
+                                          style="height: 40px;
                               width: auto;
                               border: 0;
                               display: block;"
@@ -1465,16 +1465,16 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                               border-radius: 8px;"
                                 >
                                   <tr>
-                                    <td style="padding: 10px 18px;">
+                                    <td style="padding: 8px 14px;">
                                       <a
                                         href="https://byathlon.se/#sponsorer"
                                         style="text-decoration: none"
                                       >
                                         <img
-                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
+                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
                                           alt="SI Construction"
-                                          height="32"
-                                          style="height: 32px;
+                                          height="40"
+                                          style="height: 40px;
                               width: auto;
                               border: 0;
                               display: block;"

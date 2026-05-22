@@ -468,98 +468,6 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                   </tbody>
                 </table>
 
-                <!-- Lägg till i kalender -->
-                <table
-                  cellpadding="0"
-                  cellspacing="0"
-                  border="0"
-                  style="mso-table-lspace: 0pt;
-                mso-table-rspace: 0pt;
-                margin: 0 0 24px;
-                width: 100%;"
-                >
-                  <tbody>
-                    <tr>
-                      <td style="text-align: center; padding: 0 0 10px;">
-                        <span
-                          style="color: #7f7a67;
-                      font-size: 11px;
-                      font-weight: bold;
-                      letter-spacing: 2px;
-                      text-transform: uppercase;"
-                        >
-                          Lägg till i kalender
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center">
-                        <table
-                          cellpadding="0"
-                          cellspacing="0"
-                          border="0"
-                          align="center"
-                          style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; margin: 0 auto;"
-                        >
-                          <tr>
-                            <td style="padding: 0 6px">
-                              <a
-                                href="https://www.google.com/calendar/render?action=TEMPLATE&text=Byathlon%202026&dates=20260725T130000Z%2F20260725T163000Z&details=Triathlon-evenemang%20i%20Sidensj%C3%B6.%20Samling%2015%3A00%2C%20genomg%C3%A5ng%2015%3A45%2C%20start%20kl.%2016%3A00%20(L%C3%A5ng)%20%2F%2016%3A10%20(Kort%20%26%20Motion).%20Mer%20info%3A%20https%3A%2F%2Fbyathlon.se&location=By%20badplats%2C%20Sidensj%C3%B6"
-                                style="display: inline-block;
-                            padding: 8px 14px;
-                            background: #ffffff;
-                            border: 1px solid #c1bfb3;
-                            border-radius: 4px;
-                            color: #25231e;
-                            text-decoration: none;
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 12px;
-                            font-weight: bold;"
-                              >
-                                Google
-                              </a>
-                            </td>
-                            <td style="padding: 0 6px">
-                              <a
-                                href="https://outlook.office.com/calendar/0/deeplink/compose?subject=Byathlon%202026&startdt=2026-07-25T15%3A00%3A00%2B02%3A00&enddt=2026-07-25T18%3A30%3A00%2B02%3A00&body=Triathlon-evenemang%20i%20Sidensj%C3%B6.%20Samling%2015%3A00%2C%20genomg%C3%A5ng%2015%3A45%2C%20start%20kl.%2016%3A00%20(L%C3%A5ng)%20%2F%2016%3A10%20(Kort%20%26%20Motion).%20Mer%20info%3A%20https%3A%2F%2Fbyathlon.se&location=By%20badplats%2C%20Sidensj%C3%B6&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent"
-                                style="display: inline-block;
-                            padding: 8px 14px;
-                            background: #ffffff;
-                            border: 1px solid #c1bfb3;
-                            border-radius: 4px;
-                            color: #25231e;
-                            text-decoration: none;
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 12px;
-                            font-weight: bold;"
-                              >
-                                Outlook
-                              </a>
-                            </td>
-                            <td style="padding: 0 6px">
-                              <a
-                                href="https://byathlon.se/byathlon-2026.ics"
-                                style="display: inline-block;
-                            padding: 8px 14px;
-                            background: #ffffff;
-                            border: 1px solid #c1bfb3;
-                            border-radius: 4px;
-                            color: #25231e;
-                            text-decoration: none;
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 12px;
-                            font-weight: bold;"
-                              >
-                                Apple / iCal
-                              </a>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
                 <!-- Checklista -->
                 <div
                   style="margin: 0 0 8px;
@@ -718,34 +626,20 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 </a>
                               </td>
                               <td style="padding: 8px 18px">
-                                <table
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  border="0"
-                                  style="mso-table-lspace: 0pt;
-                              mso-table-rspace: 0pt;
-                              background-color: #11100e;
-                              border-radius: 8px;"
+                                <a
+                                  href="https://byathlon.se/#sponsorer"
+                                  style="text-decoration: none"
                                 >
-                                  <tr>
-                                    <td style="padding: 8px 14px;">
-                                      <a
-                                        href="https://byathlon.se/#sponsorer"
-                                        style="text-decoration: none"
-                                      >
-                                        <img
-                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
-                                          alt="SI Construction"
-                                          height="40"
-                                          style="height: 40px;
+                                  <img
+                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
+                                    alt="SI Construction"
+                                    height="44"
+                                    style="height: 44px;
                               width: auto;
                               border: 0;
                               display: block;"
-                                        />
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
+                                  />
+                                </a>
                               </td>
                             </tr>
                           </tbody>
@@ -1431,98 +1325,6 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                   </tbody>
                 </table>
 
-                <!-- Lägg till i kalender -->
-                <table
-                  cellpadding="0"
-                  cellspacing="0"
-                  border="0"
-                  style="mso-table-lspace: 0pt;
-                mso-table-rspace: 0pt;
-                margin: 0 0 24px;
-                width: 100%;"
-                >
-                  <tbody>
-                    <tr>
-                      <td style="text-align: center; padding: 0 0 10px;">
-                        <span
-                          style="color: #7f7a67;
-                      font-size: 11px;
-                      font-weight: bold;
-                      letter-spacing: 2px;
-                      text-transform: uppercase;"
-                        >
-                          Lägg till i kalender
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center">
-                        <table
-                          cellpadding="0"
-                          cellspacing="0"
-                          border="0"
-                          align="center"
-                          style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; margin: 0 auto;"
-                        >
-                          <tr>
-                            <td style="padding: 0 6px">
-                              <a
-                                href="https://www.google.com/calendar/render?action=TEMPLATE&text=Byathlon%202026&dates=20260725T130000Z%2F20260725T163000Z&details=Triathlon-evenemang%20i%20Sidensj%C3%B6.%20Samling%2015%3A00%2C%20genomg%C3%A5ng%2015%3A45%2C%20start%20kl.%2016%3A00%20(L%C3%A5ng)%20%2F%2016%3A10%20(Kort%20%26%20Motion).%20Mer%20info%3A%20https%3A%2F%2Fbyathlon.se&location=By%20badplats%2C%20Sidensj%C3%B6"
-                                style="display: inline-block;
-                            padding: 8px 14px;
-                            background: #ffffff;
-                            border: 1px solid #c1bfb3;
-                            border-radius: 4px;
-                            color: #25231e;
-                            text-decoration: none;
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 12px;
-                            font-weight: bold;"
-                              >
-                                Google
-                              </a>
-                            </td>
-                            <td style="padding: 0 6px">
-                              <a
-                                href="https://outlook.office.com/calendar/0/deeplink/compose?subject=Byathlon%202026&startdt=2026-07-25T15%3A00%3A00%2B02%3A00&enddt=2026-07-25T18%3A30%3A00%2B02%3A00&body=Triathlon-evenemang%20i%20Sidensj%C3%B6.%20Samling%2015%3A00%2C%20genomg%C3%A5ng%2015%3A45%2C%20start%20kl.%2016%3A00%20(L%C3%A5ng)%20%2F%2016%3A10%20(Kort%20%26%20Motion).%20Mer%20info%3A%20https%3A%2F%2Fbyathlon.se&location=By%20badplats%2C%20Sidensj%C3%B6&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent"
-                                style="display: inline-block;
-                            padding: 8px 14px;
-                            background: #ffffff;
-                            border: 1px solid #c1bfb3;
-                            border-radius: 4px;
-                            color: #25231e;
-                            text-decoration: none;
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 12px;
-                            font-weight: bold;"
-                              >
-                                Outlook
-                              </a>
-                            </td>
-                            <td style="padding: 0 6px">
-                              <a
-                                href="https://byathlon.se/byathlon-2026.ics"
-                                style="display: inline-block;
-                            padding: 8px 14px;
-                            background: #ffffff;
-                            border: 1px solid #c1bfb3;
-                            border-radius: 4px;
-                            color: #25231e;
-                            text-decoration: none;
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 12px;
-                            font-weight: bold;"
-                              >
-                                Apple / iCal
-                              </a>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
                 <!-- Checklista -->
                 <div
                   style="margin: 0 0 8px;
@@ -1681,34 +1483,20 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 </a>
                               </td>
                               <td style="padding: 8px 18px">
-                                <table
-                                  cellpadding="0"
-                                  cellspacing="0"
-                                  border="0"
-                                  style="mso-table-lspace: 0pt;
-                              mso-table-rspace: 0pt;
-                              background-color: #11100e;
-                              border-radius: 8px;"
+                                <a
+                                  href="https://byathlon.se/#sponsorer"
+                                  style="text-decoration: none"
                                 >
-                                  <tr>
-                                    <td style="padding: 8px 14px;">
-                                      <a
-                                        href="https://byathlon.se/#sponsorer"
-                                        style="text-decoration: none"
-                                      >
-                                        <img
-                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
-                                          alt="SI Construction"
-                                          height="40"
-                                          style="height: 40px;
+                                  <img
+                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
+                                    alt="SI Construction"
+                                    height="44"
+                                    style="height: 44px;
                               width: auto;
                               border: 0;
                               display: block;"
-                                        />
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
+                                  />
+                                </a>
                               </td>
                             </tr>
                           </tbody>

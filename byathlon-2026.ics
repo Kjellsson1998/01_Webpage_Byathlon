@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Byathlon//Byathlon 2026//SV
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:byathlon-2026-2026-07-25@byathlon.se
+DTSTAMP:20260522T120000Z
+DTSTART:20260725T130000Z
+DTEND:20260725T163000Z
+SUMMARY:Byathlon 2026
+LOCATION:By badplats\, Sidensjö
+DESCRIPTION:Triathlon-evenemang i Sidensjö.\n\nSamling: 15:00\nGenomgång: 15:45\nStart Lång: 16:00\nStart Kort & Motion: 16:10\n\nMer info: https://byathlon.se
+URL:https://byathlon.se
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

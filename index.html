@@ -342,6 +342,7 @@
         </p>
         <a
           href="anmalan.html"
+          data-tap-anim
           class="group relative inline-block bg-YellowC-400 hover:bg-YellowC-500 rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-1.5 shadow-lg hover:shadow-2xl"
         >
           <span
@@ -2758,6 +2759,7 @@
         </p>
         <a
           href="anmalan.html"
+          data-tap-anim
           class="group relative inline-block bg-YellowC-400 hover:bg-YellowC-500 rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-1.5 shadow-lg hover:shadow-2xl"
         >
           <span
@@ -2990,5 +2992,36 @@
         </div>
       </div>
     </footer>
+
+    <style>
+      a[data-tap-anim].is-tap {
+        background-color: var(--color-YellowC-500);
+        transform: translateY(-0.375rem);
+        box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+      }
+      a[data-tap-anim].is-tap svg path {
+        stroke-dashoffset: 0 !important;
+        transition-duration: 280ms !important;
+      }
+    </style>
+    <script>
+      (function () {
+        document.querySelectorAll('a[data-tap-anim]').forEach((btn) => {
+          let lastPointerType = 'mouse';
+          btn.addEventListener('pointerdown', (e) => {
+            lastPointerType = e.pointerType;
+          });
+          btn.addEventListener('click', (e) => {
+            if (lastPointerType === 'mouse') return;
+            if (btn.dataset.tapping === '1') return;
+            e.preventDefault();
+            btn.dataset.tapping = '1';
+            btn.classList.add('is-tap');
+            const href = btn.getAttribute('href');
+            setTimeout(() => { window.location.href = href; }, 300);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

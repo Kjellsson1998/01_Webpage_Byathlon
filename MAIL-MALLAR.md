@@ -612,20 +612,34 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 </a>
                               </td>
                               <td style="padding: 8px 18px">
-                                <a
-                                  href="https://byathlon.se/#sponsorer"
-                                  style="text-decoration: none"
+                                <table
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                  style="mso-table-lspace: 0pt;
+                              mso-table-rspace: 0pt;
+                              background-color: #11100e;
+                              border-radius: 8px;"
                                 >
-                                  <img
-                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
-                                    alt="SI Construction"
-                                    height="44"
-                                    style="height: 44px;
+                                  <tr>
+                                    <td style="padding: 10px 18px;">
+                                      <a
+                                        href="https://byathlon.se/#sponsorer"
+                                        style="text-decoration: none"
+                                      >
+                                        <img
+                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
+                                          alt="SI Construction"
+                                          height="32"
+                                          style="height: 32px;
                               width: auto;
                               border: 0;
                               display: block;"
-                                  />
-                                </a>
+                                        />
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
                               </td>
                             </tr>
                           </tbody>
@@ -1441,20 +1455,34 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 </a>
                               </td>
                               <td style="padding: 8px 18px">
-                                <a
-                                  href="https://byathlon.se/#sponsorer"
-                                  style="text-decoration: none"
+                                <table
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  border="0"
+                                  style="mso-table-lspace: 0pt;
+                              mso-table-rspace: 0pt;
+                              background-color: #11100e;
+                              border-radius: 8px;"
                                 >
-                                  <img
-                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
-                                    alt="SI Construction"
-                                    height="44"
-                                    style="height: 44px;
+                                  <tr>
+                                    <td style="padding: 10px 18px;">
+                                      <a
+                                        href="https://byathlon.se/#sponsorer"
+                                        style="text-decoration: none"
+                                      >
+                                        <img
+                                          src="https://byathlon.se/Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
+                                          alt="SI Construction"
+                                          height="32"
+                                          style="height: 32px;
                               width: auto;
                               border: 0;
                               display: block;"
-                                  />
-                                </a>
+                                        />
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
                               </td>
                             </tr>
                           </tbody>

@@ -660,7 +660,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                   style="text-decoration: none"
                                 >
                                   <img
-                                    src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.PNG"
+                                    src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.png"
                                     alt="Polarbröd"
                                     height="32"
                                     style="height: 32px;
@@ -1489,7 +1489,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                   style="text-decoration: none"
                                 >
                                   <img
-                                    src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.PNG"
+                                    src="https://byathlon.se/Image/Sponsorer/PolarbrodTB.png"
                                     alt="Polarbröd"
                                     height="32"
                                     style="height: 32px;

@@ -3,7 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Byathlon</title>
+
+    <!-- Primary SEO -->
+    <title>Byathlon 2026 – Triathlon i Sidensjö 25 juli | Cykla, Simma, Spring</title>
+    <meta
+      name="description"
+      content="Byathlon är ett triathlon-evenemang för alla nivåer i Sidensjö 25 juli 2026. Välj mellan kort distans (12,9 km), lång distans (29,8 km) eller motionsklass. Anmäl dig idag!"
+    />
+    <meta
+      name="keywords"
+      content="Byathlon, triathlon, Sidensjö, Sidensjöveckan, By badplats, cykling, simning, löpning, motionslopp 2026, By intresseförening, Ångermanland, Örnsköldsvik"
+    />
+    <meta name="author" content="By intresseförening" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#283618" />
+    <link rel="canonical" href="https://byathlon.se/" />
+
+    <!-- Open Graph (Facebook, Messenger, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Byathlon" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:url" content="https://byathlon.se/" />
+    <meta
+      property="og:title"
+      content="Byathlon 2026 – Triathlon i Sidensjö 25 juli"
+    />
+    <meta
+      property="og:description"
+      content="Triathlon för alla nivåer under Sidensjöveckan. Cykla, simma, spring – välj din distans och anmäl dig till Byathlon 25 juli 2026."
+    />
+    <meta property="og:image" content="https://byathlon.se/Image/Byathlon_Loga.png" />
+    <meta property="og:image:alt" content="Byathlon logotyp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Byathlon 2026 – Triathlon i Sidensjö 25 juli"
+    />
+    <meta
+      name="twitter:description"
+      content="Triathlon för alla nivåer under Sidensjöveckan. Cykla, simma, spring – välj din distans och anmäl dig idag."
+    />
+    <meta name="twitter:image" content="https://byathlon.se/Image/Byathlon_Loga.png" />
+    <meta name="twitter:image:alt" content="Byathlon logotyp" />
+
+    <!-- Stylesheets & icons -->
     <link href="src/output.css" rel="stylesheet" />
     <link
       rel="icon"
@@ -13,11 +61,95 @@
     <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
     <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
 
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="dns-prefetch" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
+
     <!-- Leaflet CSS -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
+
+    <!-- Structured Data: SportsEvent -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Byathlon 2026",
+        "description": "Triathlon-evenemang med kort distans, lång distans och motionsklass under Sidensjöveckan. Cykla, simma och spring genom Sidensjöbygden.",
+        "startDate": "2026-07-25T16:00:00+02:00",
+        "endDate": "2026-07-25T20:00:00+02:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "sport": "Triathlon",
+        "url": "https://byathlon.se/",
+        "image": "https://byathlon.se/Image/Byathlon_Loga.png",
+        "location": {
+          "@type": "Place",
+          "name": "By badplats",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Sidensjö",
+            "addressRegion": "Västernorrland",
+            "addressCountry": "SE"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "By intresseförening",
+          "url": "https://byathlon.se/"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://byathlon.se/anmalan.html",
+          "availability": "https://schema.org/InStock",
+          "validThrough": "2026-07-14T23:59:00+02:00",
+          "category": "Anmälan"
+        }
+      }
+    </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "By intresseförening",
+        "url": "https://byathlon.se/",
+        "logo": "https://byathlon.se/Image/Byathlon_Loga.png",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "name": "Daga Kjellsson",
+            "telephone": "+46-70-390-91-02",
+            "email": "daga@kjellsson.nu",
+            "contactType": "customer service",
+            "availableLanguage": ["Swedish"]
+          },
+          {
+            "@type": "ContactPoint",
+            "name": "Vega Kjellsson",
+            "telephone": "+46-70-390-91-90",
+            "email": "vega@kjellsson.nu",
+            "contactType": "customer service",
+            "availableLanguage": ["Swedish"]
+          }
+        ]
+      }
+    </script>
+
+    <!-- Structured Data: WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Byathlon",
+        "url": "https://byathlon.se/",
+        "inLanguage": "sv-SE"
+      }
+    </script>
 
     <style>
       .glowing-dot {
@@ -130,8 +262,12 @@
         <a href="#" class="flex items-center gap-3">
           <img
             src="Image/Byathlon_Loga.png"
-            alt="Byathlon logo"
+            alt="Byathlon logotyp"
             class="h-10 w-10"
+            width="40"
+            height="40"
+            decoding="async"
+            fetchpriority="high"
           />
           <span class="text-TanC-100 text-xl font-bold tracking-wide"
             >Byathlon</span
@@ -246,8 +382,10 @@
             >
               <img
                 src="Image/Sponsorer/Vagtrummor.webp"
-                alt="HK Vägtrummor"
+                alt="HK Vägtrummor – huvudsponsor"
                 class="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -260,8 +398,10 @@
             >
               <img
                 src="Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
-                alt="SI Construction"
+                alt="SI Construction – huvudsponsor"
                 class="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
             </a>
           </div>
@@ -294,6 +434,8 @@
                 src="Image/Sponsorer/PolarbrodTB.PNG"
                 alt="Polarbröd"
                 class="max-h-5 max-w-full object-contain scale-125"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -307,6 +449,8 @@
                 src="Image/Sponsorer/norrmejerier-logo.png"
                 alt="Norrmejerier"
                 class="max-h-5 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -320,6 +464,8 @@
                 src="Image/Sponsorer/norrlands-guld-logo-jan-2021.png"
                 alt="Norrlands Guld"
                 class="max-h-5 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -333,6 +479,8 @@
                 src="Image/Sponsorer/LOGO%20OsteopatiByKjellsson.png"
                 alt="Osteopati by Kjellsson"
                 class="max-h-5 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <div
@@ -343,6 +491,8 @@
                 src="Image/Sponsorer/Anna-wellbeing.JPG"
                 alt="Wellbeing by Anna"
                 class="max-h-5 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div
@@ -353,6 +503,8 @@
                 src="Image/Sponsorer/Vestins_EkoLantbrukTB.png"
                 alt="Vestins Ekolantbruk"
                 class="max-h-5 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -1548,8 +1700,10 @@
             >
               <img
                 src="Image/Sponsorer/Vagtrummor.webp"
-                alt="HK Vägtrummor"
+                alt="HK Vägtrummor – huvudsponsor"
                 class="max-h-20 max-w-full transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -1561,8 +1715,10 @@
             >
               <img
                 src="Image/Sponsorer/sic-logo-logo-full-color-negative-rgb-1.svg"
-                alt="SI Construction"
+                alt="SI Construction – huvudsponsor"
                 class="max-h-20 max-w-full transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
             </a>
           </div>
@@ -1588,6 +1744,8 @@
                 src="Image/Sponsorer/PolarbrodTB.PNG"
                 alt="Polarbröd"
                 class="sponsor-logo h-full w-auto max-w-full object-contain scale-125"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -1600,6 +1758,8 @@
                 src="Image/Sponsorer/norrmejerier-logo.png"
                 alt="Norrmejerier"
                 class="sponsor-logo h-full w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -1612,6 +1772,8 @@
                 src="Image/Sponsorer/norrlands-guld-logo-jan-2021.png"
                 alt="Norrlands Guld"
                 class="sponsor-logo h-full w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <a
@@ -1624,6 +1786,8 @@
                 src="Image/Sponsorer/LOGO%20OsteopatiByKjellsson.png"
                 alt="Osteopati by Kjellsson"
                 class="sponsor-logo h-full w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <div
@@ -1633,6 +1797,8 @@
                 src="Image/Sponsorer/Anna-wellbeing.JPG"
                 alt="Wellbeing by Anna"
                 class="sponsor-logo h-full w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div
@@ -1642,6 +1808,8 @@
                 src="Image/Sponsorer/Vestins_EkoLantbrukTB.png"
                 alt="Vestins Ekolantbruk"
                 class="sponsor-logo h-full w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -2530,8 +2698,12 @@
           <div class="flex items-center gap-3 mb-2">
             <img
               src="Image/Byathlon_Loga.png"
-              alt="Byathlon"
+              alt="Byathlon logotyp"
               class="h-8 w-8 sm:h-10 sm:w-10 opacity-90"
+              width="40"
+              height="40"
+              loading="lazy"
+              decoding="async"
             />
             <span class="text-2xl font-bold text-TanC-100">Byathlon</span>
           </div>

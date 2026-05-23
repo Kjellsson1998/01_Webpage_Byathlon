@@ -744,7 +744,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 style="padding: 6px 14px; vertical-align: middle"
                               >
                                 <a
-                                  href="https://byathlon.se/#sponsorer"
+                                  href="https://www.facebook.com/profile.php?id=61581438246045"
                                   style="text-decoration: none"
                                 >
                                   <img
@@ -762,7 +762,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 style="padding: 6px 14px; vertical-align: middle"
                               >
                                 <a
-                                  href="https://byathlon.se/#sponsorer"
+                                  href="https://www.facebook.com/profile.php?id=100054220372412"
                                   style="text-decoration: none"
                                 >
                                   <img
@@ -1601,7 +1601,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 style="padding: 6px 14px; vertical-align: middle"
                               >
                                 <a
-                                  href="https://byathlon.se/#sponsorer"
+                                  href="https://www.facebook.com/profile.php?id=61581438246045"
                                   style="text-decoration: none"
                                 >
                                   <img
@@ -1619,7 +1619,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                 style="padding: 6px 14px; vertical-align: middle"
                               >
                                 <a
-                                  href="https://byathlon.se/#sponsorer"
+                                  href="https://www.facebook.com/profile.php?id=100054220372412"
                                   style="text-decoration: none"
                                 >
                                   <img

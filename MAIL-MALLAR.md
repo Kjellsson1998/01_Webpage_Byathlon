@@ -13,7 +13,7 @@ Mailen nedan refererar till följande som måste finnas i Power Automate-flödet
 | ------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `triggerBody()?['alder']`             | Användarens åldersval ("18 eller äldre" / "Under 18") | Ny `alder`-property i Parse JSON-schemat                                                                                                                                                                                                                                                                                                                                                              |
 | `base64(body('HTTP'))`                | Base64-encoded PNG av Swish QR-koden                  | HTTP-action POST mot `https://mpc.getswish.net/qrg-swish/api/v1/prefilled` (action heter "HTTP" i flödet). **OBS:** `body('HTTP')` ensamt returnerar rå binär — alltid wrappa med `base64()` när det ska in i ett HTML img-tag eller en JSON-sträng.                                                                                                                                                  |
-| `variables('System_SwishLink')`       | Klickbar Swish-länk (`swish://payment?data=...`)      | Initialize variable som bygger officiell Swish-deeplink: `swish://payment?data=@{encodeUriComponent(concat('{"version":1,"payee":{"value":"1235867544","editable":false},"amount":{"value":300,"editable":true},"message":{"value":"', variables('System_SwishMeddelande'), '","editable":false}}'))}`. **OBS:** `amount.value` är ett nummer (300), inte en sträng ("300") — Swish-appen kräver det. |
+| `variables('System_SwishLink')`       | Klickbar Swish-länk (`swish://payment?data=...`)      | Initialize variable som bygger officiell Swish-deeplink: `swish://payment?data=@{encodeUriComponent(concat('{"version":1,"payee":{"value":"1235867544","editable":false},"amount":{"value":', if(equals(triggerBody()?['alder'],'Under 18'),'100','300'), ',"editable":true},"message":{"value":"', variables('System_SwishMeddelande'), '","editable":false}}'))}`. **OBS:** `amount.value` är ett nummer (100/300), inte en sträng — Swish-appen kräver det. Beloppet är 100 kr för under 18, annars 300 kr. Samma villkor måste sättas på `amount`-fältet i HTTP-anropet som genererar QR-koden. |
 | `variables('System_SwishMeddelande')` | Förinskrivet meddelande i Swish                       | Initialize variable: `concat('Byathlon - ', fornamn, ' ', efternamn)`                                                                                                                                                                                                                                                                                                                                 |
 
 Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
@@ -278,7 +278,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                       font-size: 26px;
                       font-weight: bold;"
                         >
-                          300 kr
+                          @{if(equals(triggerBody()?['alder'],'Under 18'),'100 kr','300 kr')}
                         </div>
                         <div
                           style="margin: 0 0 16px;
@@ -1134,7 +1134,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                       font-size: 26px;
                       font-weight: bold;"
                         >
-                          300 kr
+                          @{if(equals(triggerBody()?['alder'],'Under 18'),'100 kr','300 kr')}
                         </div>
                         <div
                           style="margin: 0 0 16px;

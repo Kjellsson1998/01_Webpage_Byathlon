@@ -88,7 +88,7 @@
           <p class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-3">Betala anmälningsavgift</p>
           <div class="border-t border-DGreenC-200 pt-4">
             <p class="text-DGreenC-700 text-sm mb-1">
-              <strong>300 kr</strong> via Swish
+              <strong id="swish-belopp">300 kr</strong> via Swish
             </p>
             <p class="text-DGreenC-400 text-xs mb-4">
               Gärna mer &mdash; hela överskottet går till
@@ -153,7 +153,7 @@
           <p
             class="font-mono text-[0.6rem] font-semibold tracking-[0.35em] uppercase text-YellowC-400 mb-5"
           >
-            Cykla &middot; Simma &middot; Spring
+            Simma &middot; Cykla &middot; Spring
           </p>
           <p class="text-sm text-TanC-300">
             Lördag 25 juli 2026 &middot;
@@ -315,6 +315,17 @@
           >
         </p>
 
+        <p
+          class="text-center text-xs text-DGreenC-400 leading-relaxed mb-7"
+        >
+          Avanmälan kan göras fram till 25 juli via mail till
+          <a
+            href="mailto:daga@kjellsson.nu"
+            class="text-TanC-300 hover:text-YellowC-400 underline underline-offset-2 transition-colors"
+            >daga@kjellsson.nu</a
+          >
+        </p>
+
         <!-- Copyright -->
         <p
           class="text-center text-[0.65rem] tracking-wide text-DGreenC-500 border-t border-DGreenC-700/60 pt-6"
@@ -341,6 +352,7 @@
       // Hämta data från anmälningsformuläret
       var fornamn = sessionStorage.getItem('byathlon_fornamn');
       var klass = sessionStorage.getItem('byathlon_klass');
+      var alder = sessionStorage.getItem('byathlon_alder');
       var epost = sessionStorage.getItem('byathlon_epost');
       var qrCode = sessionStorage.getItem('byathlon_qrcode');
       var swishLink = sessionStorage.getItem('byathlon_swishlink');
@@ -350,6 +362,9 @@
         document.getElementById('bekr-klass').textContent = klass;
         document.getElementById('bekr-klass2').textContent = klass;
         document.getElementById('bekr-tid').textContent = klass === 'Lång distans' ? '16:00' : '16:10';
+      }
+      if (alder === 'Under 18') {
+        document.getElementById('swish-belopp').textContent = '100 kr';
       }
       if (epost) document.getElementById('bekr-epost').textContent = epost;
 
@@ -362,6 +377,7 @@
       // Rensa sessionStorage
       sessionStorage.removeItem('byathlon_fornamn');
       sessionStorage.removeItem('byathlon_klass');
+      sessionStorage.removeItem('byathlon_alder');
       sessionStorage.removeItem('byathlon_epost');
       sessionStorage.removeItem('byathlon_qrcode');
       sessionStorage.removeItem('byathlon_swishlink');

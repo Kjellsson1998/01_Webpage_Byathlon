@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZG424Y5TYS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZG424Y5TYS');
+    </script>
+
     <!-- Primary SEO -->
     <title>Byathlon 2026 – Triathlon i Sidensjö 25 juli | Simma, Cykla, Spring</title>
     <meta
@@ -2087,10 +2097,13 @@
               extractRoute(cykelLangJson),
               extractRoute(cykelKortJson),
             );
+            const gangRoute = extractRoute(gangJson);
+            gangRoute.coords.reverse();
+            gangRoute.elevs.reverse();
             initSimLopKarta(
               extractRoute(lopLangJson),
               extractRoute(lopKortJson),
-              extractRoute(gangJson),
+              gangRoute,
             );
           },
         )

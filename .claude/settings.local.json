@@ -11,7 +11,21 @@
       "Bash(ANTHROPIC_API_KEY=dummy PORT=5174 node server/index.js)",
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:5174/)",
       "Bash(kill %1)",
-      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Write-Output 'cleaned'\")"
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Write-Output 'cleaned'\")",
+      "Bash(pdftoppm -png -r 300 Image/PmP.pdf __TRACKED_VAR__/pmp_hi)",
+      "Bash(convert __TRACKED_VAR__/pmp_hi-1.png -fuzz 3% -trim +repage __TRACKED_VAR__/pmp_trim_white.png)",
+      "Bash(convert __TRACKED_VAR__/pmp_trim_white.png -bordercolor white -border 10 -fuzz 8% -fill none -draw 'color 0,0 floodfill' -draw 'color %[fx:w-1],0 floodfill' -draw 'color 0,%[fx:h-1] floodfill' -draw 'color %[fx:w-1],%[fx:h-1] floodfill' -trim +repage __TRACKED_VAR__/pmp_trim_transparent.png)",
+      "Bash(identify -format 'white: %wx%h\\\\n' __TRACKED_VAR__/pmp_trim_white.png)",
+      "Bash(identify -format 'transp: %wx%h\\\\n' __TRACKED_VAR__/pmp_trim_transparent.png)",
+      "Bash(SC=\"C:/Users/HK/AppData/Local/Temp/claude/c--Users-HK-OneDrive-00-Kjellsson-07-Arrangemang-01-Byathlon-01-Webpage-Byathlon/38293158-d411-49f1-8246-2ac2f15febf1/scratchpad\" *)",
+      "Bash(grep -c 'mt-1\\\\\\\\\\\\.5' src/output.css)",
+      "Bash(grep -oE 'mt-1[^;{ ]{0,4}' src/output.css)",
+      "WebFetch(domain:nicks.se)",
+      "WebSearch",
+      "Bash(timeout 90 '/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --virtual-time-budget=8000 --window-size=1280,1400 --screenshot=C:/Users/HK/AppData/Local/Temp/claude/c--Users-HK-OneDrive-00-Kjellsson-07-Arrangemang-01-Byathlon-01-Webpage-Byathlon/38293158-d411-49f1-8246-2ac2f15febf1/scratchpad/nicks_site.png https://nicks.se/)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\HK\\OneDrive\\00 Kjellsson\\07_Arrangemang\\01_Byathlon\\01_Webpage_Byathlon\\Image"
     ]
   }
 }

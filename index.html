@@ -259,20 +259,58 @@
       #sim-lop-karta h2 {
         letter-spacing: 0.1em;
       }
-      /* Hero sponsor-karusell: fade-övergång, klick endast på aktiv slide */
-      .hero-sponsor-slide {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.5s ease-in-out;
+      /* Hero sponsor-remsa: loggorna löper förbi i en oändlig loop, alla synliga över tid */
+      .hero-sponsor-marquee {
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 12%,
+          black 88%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 12%,
+          black 88%,
+          transparent
+        );
       }
-      .hero-sponsor-slide.is-active {
-        opacity: 1;
-        pointer-events: auto;
+      .hero-sponsor-track {
+        width: max-content;
+        animation: hero-sponsor-scroll 28s linear infinite;
+      }
+      .hero-sponsor-marquee:hover .hero-sponsor-track,
+      .hero-sponsor-marquee:focus-within .hero-sponsor-track {
+        animation-play-state: paused;
+      }
+      @keyframes hero-sponsor-scroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
       }
       @media (prefers-reduced-motion: reduce) {
-        .hero-sponsor-slide {
-          transition: none;
+        .hero-sponsor-track {
+          animation: none;
         }
+      }
+      /* Sponsor-cirkel: loggor placerade runt en cirkel, GSAP flyger in/ut ur mitten */
+      .sponsor-circle-stage {
+        position: relative;
+        width: clamp(17rem, 62vw, 27rem);
+        aspect-ratio: 1 / 1;
+        margin-inline: auto;
+        --spot-size: clamp(4.5rem, 16vw, 6.5rem);
+      }
+      .sponsor-circle-stage .sponsor-spot {
+        position: absolute;
+        width: var(--spot-size);
+        height: var(--spot-size);
+        margin-left: calc(var(--spot-size) / -2);
+        margin-top: calc(var(--spot-size) / -2);
       }
     </style>
   </head>
@@ -451,25 +489,22 @@
             ></span>
           </div>
 
-          <div class="flex flex-col items-center gap-3">
-            <div
-              id="hero-sponsor-carousel"
-              class="relative w-64 sm:w-72 h-20"
-              aria-label="Sponsorer"
-              aria-roledescription="carousel"
-            >
+          <div
+            class="hero-sponsor-marquee relative w-full max-w-md sm:max-w-xl overflow-hidden"
+            aria-label="Sponsorer"
+          >
+            <div class="hero-sponsor-track flex items-center gap-10 sm:gap-14">
               <a
                 href="https://www.polarbrod.se/"
                 target="_blank"
                 rel="noopener"
-                class="hero-sponsor-slide group absolute inset-0 flex items-center justify-center"
+                class="shrink-0 flex items-center justify-center"
                 aria-label="Polarbröd"
-                aria-hidden="true"
               >
                 <img
                   src="Image/Sponsorer/PolarbrodTB.png"
                   alt="Polarbröd"
-                  class="h-full w-auto object-contain"
+                  class="h-8 sm:h-9 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -478,14 +513,13 @@
                 href="https://www.norrmejerier.se/"
                 target="_blank"
                 rel="noopener"
-                class="hero-sponsor-slide group absolute inset-0 flex items-center justify-center"
+                class="shrink-0 flex items-center justify-center"
                 aria-label="Norrmejerier"
-                aria-hidden="true"
               >
                 <img
                   src="Image/Sponsorer/norrmejerier-logo.png"
                   alt="Norrmejerier"
-                  class="h-full w-auto object-contain"
+                  class="h-8 sm:h-9 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -494,14 +528,13 @@
                 href="https://www.norrlandsguld.se/"
                 target="_blank"
                 rel="noopener"
-                class="hero-sponsor-slide group absolute inset-0 flex items-center justify-center"
+                class="shrink-0 flex items-center justify-center"
                 aria-label="Norrlands Guld"
-                aria-hidden="true"
               >
                 <img
                   src="Image/Sponsorer/norrlands-guld-logo-jan-2021.png"
                   alt="Norrlands Guld"
-                  class="h-full w-auto object-contain"
+                  class="h-8 sm:h-9 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -510,14 +543,13 @@
                 href="https://kjellsson.nu"
                 target="_blank"
                 rel="noopener"
-                class="hero-sponsor-slide group absolute inset-0 flex items-center justify-center"
+                class="shrink-0 flex items-center justify-center"
                 aria-label="Osteopati by Kjellsson"
-                aria-hidden="true"
               >
                 <img
                   src="Image/Sponsorer/LOGO%20OsteopatiByKjellsson.png"
                   alt="Osteopati by Kjellsson"
-                  class="h-full w-auto object-contain"
+                  class="h-8 sm:h-9 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -526,14 +558,13 @@
                 href="https://www.facebook.com/profile.php?id=61581438246045"
                 target="_blank"
                 rel="noopener"
-                class="hero-sponsor-slide group absolute inset-0 flex items-center justify-center"
+                class="shrink-0 flex items-center justify-center"
                 aria-label="Wellbeing by Anna"
-                aria-hidden="true"
               >
                 <img
                   src="Image/Sponsorer/Anna-wellbeing.JPG"
                   alt="Wellbeing by Anna"
-                  class="h-full w-auto object-contain"
+                  class="h-8 sm:h-9 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -542,14 +573,141 @@
                 href="https://www.facebook.com/profile.php?id=100054220372412"
                 target="_blank"
                 rel="noopener"
-                class="hero-sponsor-slide group absolute inset-0 flex items-center justify-center"
+                class="shrink-0 flex items-center justify-center"
                 aria-label="Vestins Ekolantbruk"
-                aria-hidden="true"
               >
                 <img
                   src="Image/Sponsorer/Vestins_EkoLantbrukTB.png"
                   alt="Vestins Ekolantbruk"
-                  class="h-full w-auto object-contain"
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://nicks.se/"
+                target="_blank"
+                rel="noopener"
+                class="shrink-0 flex items-center justify-center"
+                aria-label="NICKS"
+              >
+                <img
+                  src="Image/Sponsorer/NICKS-logo-pink.svg"
+                  alt="NICKS"
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <!-- Dubblett (osynlig för skärmläsare) för sömlös loop -->
+              <a
+                href="https://www.polarbrod.se/"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/PolarbrodTB.png"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://www.norrmejerier.se/"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/norrmejerier-logo.png"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://www.norrlandsguld.se/"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/norrlands-guld-logo-jan-2021.png"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://kjellsson.nu"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/LOGO%20OsteopatiByKjellsson.png"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61581438246045"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/Anna-wellbeing.JPG"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100054220372412"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/Vestins_EkoLantbrukTB.png"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://nicks.se/"
+                target="_blank"
+                rel="noopener"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="Image/Sponsorer/NICKS-logo-pink.svg"
+                  alt=""
+                  class="h-8 sm:h-9 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -1716,6 +1874,13 @@
                   &nbsp ~17:00
                 </p>
                 <p class="text-sm font-semibold text-DGreenC-700">Foodtruck</p>
+                <img
+                  src="Image/pmp-streat-food.png"
+                  alt="PMP strEAT food – foodtruck på plats"
+                  class="mt-1.5 h-9 w-auto"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </div>
@@ -1831,26 +1996,33 @@
           </div>
         </div>
 
-        <!-- ÖVRIGA SPONSORER (alla synliga, spotlight roterar) -->
+        <!-- ÖVRIGA SPONSORER (cirkel, spotlight flyger till mitten) -->
         <div class="sponsor-spotlight-wrap">
           <p
-            class="font-mono text-[0.65rem] font-semibold tracking-[0.25em] uppercase text-DGreenC-400 text-center mb-6"
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.25em] uppercase text-DGreenC-400 text-center mb-8"
           >
             Sponsorer
           </p>
-          <div
-            class="sponsor-grid grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto justify-items-stretch"
-          >
+          <div class="sponsor-grid sponsor-circle-stage">
+            <div
+              class="pointer-events-none absolute inset-0 flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <div
+                class="w-[38%] aspect-square rounded-full border border-dashed border-DGreenC-300/40"
+              ></div>
+            </div>
             <a
               href="https://www.polarbrod.se/"
               target="_blank"
               rel="noopener"
-              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 14%; left: 50%"
             >
               <img
                 src="Image/Sponsorer/PolarbrodTB.png"
                 alt="Polarbröd"
-                class="sponsor-logo h-full w-auto max-w-full object-contain"
+                class="sponsor-logo h-full w-full object-contain p-3.5"
                 loading="lazy"
                 decoding="async"
               />
@@ -1859,12 +2031,13 @@
               href="https://www.norrmejerier.se/"
               target="_blank"
               rel="noopener"
-              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 27.55%; left: 78.15%"
             >
               <img
                 src="Image/Sponsorer/norrmejerier-logo.png"
                 alt="Norrmejerier"
-                class="sponsor-logo h-full w-auto max-w-full object-contain"
+                class="sponsor-logo h-full w-full object-contain p-3.5"
                 loading="lazy"
                 decoding="async"
               />
@@ -1873,12 +2046,13 @@
               href="https://www.norrlandsguld.se/"
               target="_blank"
               rel="noopener"
-              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 58.01%; left: 85.1%"
             >
               <img
                 src="Image/Sponsorer/norrlands-guld-logo-jan-2021.png"
                 alt="Norrlands Guld"
-                class="sponsor-logo h-full w-auto max-w-full object-contain"
+                class="sponsor-logo h-full w-full object-contain p-3.5"
                 loading="lazy"
                 decoding="async"
               />
@@ -1887,12 +2061,13 @@
               href="https://kjellsson.nu"
               target="_blank"
               rel="noopener"
-              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden py-3"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 82.43%; left: 65.62%"
             >
               <img
                 src="Image/Sponsorer/LOGO%20OsteopatiByKjellsson.png"
                 alt="Osteopati by Kjellsson"
-                class="sponsor-logo h-full w-auto max-w-full object-contain"
+                class="sponsor-logo h-full w-full object-contain p-3.5"
                 loading="lazy"
                 decoding="async"
               />
@@ -1901,12 +2076,13 @@
               href="https://www.facebook.com/profile.php?id=61581438246045"
               target="_blank"
               rel="noopener"
-              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 82.43%; left: 34.38%"
             >
               <img
                 src="Image/Sponsorer/Anna-wellbeing.JPG"
                 alt="Wellbeing by Anna"
-                class="sponsor-logo h-full w-auto max-w-full object-contain"
+                class="sponsor-logo h-full w-full object-contain p-3.5"
                 loading="lazy"
                 decoding="async"
               />
@@ -1915,12 +2091,28 @@
               href="https://www.facebook.com/profile.php?id=100054220372412"
               target="_blank"
               rel="noopener"
-              class="sponsor-spot flex items-center justify-center h-24 w-full rounded-xl border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 58.01%; left: 14.9%"
             >
               <img
                 src="Image/Sponsorer/Vestins_EkoLantbrukTB.png"
                 alt="Vestins Ekolantbruk"
-                class="sponsor-logo h-full w-auto max-w-full object-contain"
+                class="sponsor-logo h-full w-full object-contain p-3.5"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <a
+              href="https://nicks.se/"
+              target="_blank"
+              rel="noopener"
+              class="sponsor-spot flex items-center justify-center rounded-full border border-DGreenC-100 bg-white shadow-sm will-change-transform overflow-hidden"
+              style="top: 27.55%; left: 21.85%"
+            >
+              <img
+                src="Image/Sponsorer/NICKS-logo-pink.svg"
+                alt="NICKS"
+                class="sponsor-logo h-full w-full object-contain p-4"
                 loading="lazy"
                 decoding="async"
               />
@@ -1957,12 +2149,45 @@
         tap: false,
       };
 
-      // Extrahera [lat,lon]-koordinater och höjddata från GeoJSON
+      // Jämna ut höjddata med ett smalt glidande medelvärde (radie i meter,
+      // längs faktiskt avstånd – inte punktindex). Tar bort det finkorniga
+      // mätbruset som ger orimligt branta enstaka hopp, men bevarar rutternas
+      // naturliga kuperade karaktär eftersom fönstret är för smalt för att
+      // platta till riktiga backar (som sträcker sig över tiotals-hundratals
+      // meter).
+      function smoothElevs(coords, elevs, radiusM = 8) {
+        const n = elevs.length;
+        const cum = [0];
+        for (let i = 1; i < n; i++) {
+          cum.push(cum[i - 1] + haversine(coords[i - 1], coords[i]));
+        }
+        const out = new Array(n);
+        let lo = 0,
+          hi = 0;
+        for (let i = 0; i < n; i++) {
+          while (cum[i] - cum[lo] > radiusM) lo++;
+          while (hi < n - 1 && cum[hi + 1] - cum[i] <= radiusM) hi++;
+          let sum = 0,
+            cnt = 0;
+          for (let k = lo; k <= hi; k++) {
+            sum += elevs[k];
+            cnt++;
+          }
+          out[i] = sum / cnt;
+        }
+        return out;
+      }
+
+      // Extrahera [lat,lon]-koordinater och (utjämnad) höjddata från GeoJSON
       function extractRoute(geoJson) {
         const raw = geoJson.features[0].geometry.coordinates;
+        const coords = raw.map((c) => [c[1], c[0]]);
         return {
-          coords: raw.map((c) => [c[1], c[0]]),
-          elevs: raw.map((c) => c[2]),
+          coords,
+          elevs: smoothElevs(
+            coords,
+            raw.map((c) => c[2]),
+          ),
         };
       }
 
@@ -2734,59 +2959,6 @@
             if (!paused) start();
           }, 150);
         });
-      })();
-    </script>
-
-    <!-- HERO SPONSOR-KARUSELL (en sponsor i taget, fade, auto-rotation) -->
-    <script>
-      (function () {
-        const wrap = document.getElementById("hero-sponsor-carousel");
-        if (!wrap) return;
-        const slides = Array.from(wrap.querySelectorAll(".hero-sponsor-slide"));
-        if (slides.length === 0) return;
-
-        const reduced = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-        const INTERVAL = 2200;
-        let idx = 0;
-        let timer = null;
-
-        function show(i) {
-          idx = (i + slides.length) % slides.length;
-          slides.forEach((s, n) => {
-            const active = n === idx;
-            s.classList.toggle("is-active", active);
-            s.setAttribute("aria-hidden", active ? "false" : "true");
-            if (s.tagName === "A") {
-              s.tabIndex = active ? 0 : -1;
-            }
-          });
-        }
-
-        function next() {
-          show(idx + 1);
-        }
-
-        function start() {
-          stop();
-          if (reduced) return;
-          timer = setInterval(next, INTERVAL);
-        }
-        function stop() {
-          if (timer) {
-            clearInterval(timer);
-            timer = null;
-          }
-        }
-
-        wrap.addEventListener("mouseenter", stop);
-        wrap.addEventListener("mouseleave", start);
-        wrap.addEventListener("focusin", stop);
-        wrap.addEventListener("focusout", start);
-
-        show(0);
-        start();
       })();
     </script>
 

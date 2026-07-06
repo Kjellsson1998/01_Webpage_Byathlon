@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZG424Y5TYS"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-ZG424Y5TYS"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-ZG424Y5TYS');
+      gtag("config", "G-ZG424Y5TYS");
     </script>
 
     <!-- Primary SEO -->
-    <title>Byathlon 2026 – Triathlon i Sidensjö 25 juli | Simma, Cykla, Spring</title>
+    <title>
+      Byathlon 2026 – Triathlon i Sidensjö 25 juli | Simma, Cykla, Spring
+    </title>
     <meta
       name="description"
       content="Byathlon är ett triathlon-evenemang för alla nivåer i Sidensjö 25 juli 2026. Välj mellan kort distans (12,9 km), lång distans (29,8 km) eller motionsklass. Anmäl dig idag!"
@@ -43,7 +50,10 @@
       property="og:description"
       content="Triathlon för alla nivåer under Sidensjöveckan. Simma, cykla, spring – välj din distans och anmäl dig till Byathlon 25 juli 2026."
     />
-    <meta property="og:image" content="https://byathlon.se/Image/Byathlon_Loga.png" />
+    <meta
+      property="og:image"
+      content="https://byathlon.se/Image/Byathlon_Loga.png"
+    />
     <meta property="og:image:alt" content="Byathlon logotyp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -58,7 +68,10 @@
       name="twitter:description"
       content="Triathlon för alla nivåer under Sidensjöveckan. Simma, cykla, spring – välj din distans och anmäl dig idag."
     />
-    <meta name="twitter:image" content="https://byathlon.se/Image/Byathlon_Loga.png" />
+    <meta
+      name="twitter:image"
+      content="https://byathlon.se/Image/Byathlon_Loga.png"
+    />
     <meta name="twitter:image:alt" content="Byathlon logotyp" />
 
     <!-- Stylesheets & icons -->
@@ -727,9 +740,7 @@
         </p>
         <div class="w-12 h-px bg-DGreenC-300 mx-auto mb-10"></div>
 
-        <p
-          class="text-base sm:text-lg text-DGreenC-500 leading-relaxed mb-12"
-        >
+        <p class="text-base sm:text-lg text-DGreenC-500 leading-relaxed mb-12">
           Byathlon är ett triathlon för alla nivåer, arrangerat av
           <strong class="text-DGreenC-700">By intresseförening</strong>
           under Sidensjöveckan. Kortare, längre &mdash; eller en motionsklass
@@ -775,9 +786,7 @@
 
         <div class="w-16 h-px bg-DGreenC-300 mx-auto mb-12"></div>
 
-        <p
-          class="text-base sm:text-lg text-DGreenC-700 leading-relaxed mb-3"
-        >
+        <p class="text-base sm:text-lg text-DGreenC-700 leading-relaxed mb-3">
           Hela överskottet från årets lopp går till
           <strong>civila i krigsdrabbade Ukraina</strong>.
         </p>
@@ -3189,9 +3198,7 @@
           >
         </p>
 
-        <p
-          class="text-center text-xs text-DGreenC-400 leading-relaxed mb-7"
-        >
+        <p class="text-center text-xs text-DGreenC-400 leading-relaxed mb-7">
           Avanmälan kan göras fram till 25 juli via mail till
           <a
             href="mailto:daga@kjellsson.nu"
@@ -3235,19 +3242,21 @@
     </style>
     <script>
       (function () {
-        document.querySelectorAll('a[data-tap-anim]').forEach((btn) => {
-          let lastPointerType = 'mouse';
-          btn.addEventListener('pointerdown', (e) => {
+        document.querySelectorAll("a[data-tap-anim]").forEach((btn) => {
+          let lastPointerType = "mouse";
+          btn.addEventListener("pointerdown", (e) => {
             lastPointerType = e.pointerType;
           });
-          btn.addEventListener('click', (e) => {
-            if (lastPointerType === 'mouse') return;
-            if (btn.dataset.tapping === '1') return;
+          btn.addEventListener("click", (e) => {
+            if (lastPointerType === "mouse") return;
+            if (btn.dataset.tapping === "1") return;
             e.preventDefault();
-            btn.dataset.tapping = '1';
-            btn.classList.add('is-tap');
-            const href = btn.getAttribute('href');
-            setTimeout(() => { window.location.href = href; }, 300);
+            btn.dataset.tapping = "1";
+            btn.classList.add("is-tap");
+            const href = btn.getAttribute("href");
+            setTimeout(() => {
+              window.location.href = href;
+            }, 300);
           });
         });
       })();

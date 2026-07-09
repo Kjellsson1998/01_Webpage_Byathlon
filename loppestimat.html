@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- RESERVVERSION (löptävling) — används om cykling ej godkänns. Originalet: loppestimat.html -->
+<!-- Löplopp 2026: Lång 13,4 km, Kort & Motion 5,5 km (samma bana), gemensam start 16:00 -->
 <html lang="sv">
   <head>
     <meta charset="UTF-8" />
@@ -31,7 +31,7 @@
       <div
         class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
       >
-        <a href="index2.html" class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3">
           <img
             src="Image/Byathlon_Loga.png"
             alt="Byathlon logo"
@@ -42,7 +42,7 @@
           >
         </a>
         <a
-          href="index2.html"
+          href="index.html"
           class="text-TanC-200 text-sm font-medium hover:text-YellowC-400 transition-colors"
         >
           &larr; Tillbaka
@@ -71,8 +71,9 @@
           <p class="text-DGreenC-500 text-sm max-w-2xl leading-relaxed">
             Förväntade måltider per klass, baserat på normalfördelade
             pace-antaganden för en bred amatörgrupp. Varje klass består av
-            ett enda löpmoment &mdash; måltiden per klass blir därmed direkt
-            normalfördelad.
+            ett enda löpmoment. Lång och Kort är direkt normalfördelade;
+            Motion modelleras som en 50/50-mix av löpare och gångare, vilket
+            ger en tvåpucklig fördelning.
           </p>
         </div>
 
@@ -80,7 +81,7 @@
         <section class="mb-14">
           <h2 class="text-xl font-bold text-DGreenC-800 mb-1">Distanser</h2>
           <p class="text-sm text-DGreenC-400 mb-5">
-            Tre klasser, tre olika utmaningar.
+            Tre klasser &mdash; Kort och Motion springer samma bana.
           </p>
           <div class="grid sm:grid-cols-3 gap-4">
             <div
@@ -93,15 +94,20 @@
               </p>
               <ul class="text-sm space-y-1.5 text-DGreenC-700">
                 <li class="flex justify-between">
-                  <span>Löpning</span><span class="font-semibold">10,6 km</span>
+                  <span>Löpning</span><span class="font-semibold">13,4 km</span>
                 </li>
-                <li class="flex justify-between text-DGreenC-400 italic">
-                  <span>Gamla korta cykelrundan</span><span>&mdash;</span>
+                <li class="flex justify-between">
+                  <span>Stigning</span
+                  ><span class="font-semibold">+199 m</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Bastu &amp; bad</span
+                  ><span class="font-semibold">Dopp</span>
                 </li>
                 <li
                   class="flex justify-between border-t border-DGreenC-100 pt-2 mt-2 font-bold text-DGreenC-800"
                 >
-                  <span>Totalt</span><span>10,6 km</span>
+                  <span>Totalt</span><span>13,4 km</span>
                 </li>
               </ul>
             </div>
@@ -115,15 +121,20 @@
               </p>
               <ul class="text-sm space-y-1.5 text-DGreenC-700">
                 <li class="flex justify-between">
-                  <span>Löpning</span><span class="font-semibold">3,1 km</span>
+                  <span>Löpning</span><span class="font-semibold">5,5 km</span>
                 </li>
-                <li class="flex justify-between text-DGreenC-400 italic">
-                  <span>Gamla långa löprundan</span><span>&mdash;</span>
+                <li class="flex justify-between">
+                  <span>Stigning</span
+                  ><span class="font-semibold">+117 m</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Bastu &amp; bad</span
+                  ><span class="font-semibold">Dopp</span>
                 </li>
                 <li
                   class="flex justify-between border-t border-DGreenC-100 pt-2 mt-2 font-bold text-DGreenC-800"
                 >
-                  <span>Totalt</span><span>3,1 km</span>
+                  <span>Totalt</span><span>5,5 km</span>
                 </li>
               </ul>
             </div>
@@ -138,16 +149,23 @@
               <ul class="text-sm space-y-1.5 text-DGreenC-700">
                 <li class="flex justify-between">
                   <span>Löpning / gång</span
-                  ><span class="font-semibold">0,6 km</span>
+                  ><span class="font-semibold">5,5 km</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Stigning</span
+                  ><span class="font-semibold">+117 m</span>
                 </li>
                 <li class="flex justify-between">
                   <span>Bastu &amp; bad</span
                   ><span class="font-semibold">Dopp</span>
                 </li>
+                <li class="flex justify-between text-DGreenC-400 italic">
+                  <span>Hund välkommen</span><span>Samma bana som Kort</span>
+                </li>
                 <li
                   class="flex justify-between border-t border-DGreenC-100 pt-2 mt-2 font-bold text-DGreenC-800"
                 >
-                  <span>Totalt</span><span>0,6 km</span>
+                  <span>Totalt</span><span>5,5 km</span>
                 </li>
               </ul>
             </div>
@@ -160,7 +178,9 @@
           <p class="text-sm text-DGreenC-400 mb-5">
             Pace per moment är normalfördelad,
             <span class="font-mono">σ</span> kalibrerad för en bred
-            amatörgrupp.
+            amatörgrupp. Effektiv pace inkluderar höjdprofilen: +199 m
+            stigning på Lång (15 m/km) och +117 m på Kort/Motion (21 m/km,
+            backe upp till 193 m).
           </p>
           <div
             class="bg-white rounded-xl shadow-sm border border-DGreenC-100 overflow-hidden"
@@ -177,21 +197,55 @@
               </thead>
               <tbody class="divide-y divide-DGreenC-100">
                 <tr>
-                  <td class="px-4 py-2.5">Löpning &mdash; Lång &amp; Kort</td>
-                  <td class="px-4 py-2.5 text-right font-mono">6:00 min/km</td>
+                  <td class="px-4 py-2.5">
+                    Löpning &mdash; Lång
+                    <span class="text-DGreenC-400">(+15 m/km)</span>
+                  </td>
+                  <td class="px-4 py-2.5 text-right font-mono">6:45 min/km</td>
                   <td
                     class="px-4 py-2.5 text-right font-mono text-DGreenC-400"
                   >
-                    1:12 min/km
+                    1:15 min/km
                   </td>
                 </tr>
                 <tr>
-                  <td class="px-4 py-2.5">Löpning / gång &mdash; Motion</td>
+                  <td class="px-4 py-2.5">
+                    Löpning &mdash; Kort
+                    <span class="text-DGreenC-400">(+21 m/km, brantast)</span>
+                  </td>
+                  <td class="px-4 py-2.5 text-right font-mono">7:00 min/km</td>
+                  <td
+                    class="px-4 py-2.5 text-right font-mono text-DGreenC-400"
+                  >
+                    1:15 min/km
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2.5">
+                    Löpare &mdash; Motion
+                    <span class="text-DGreenC-400">(50% av klassen)</span>
+                  </td>
                   <td class="px-4 py-2.5 text-right font-mono">9:00 min/km</td>
                   <td
                     class="px-4 py-2.5 text-right font-mono text-DGreenC-400"
                   >
-                    2:30 min/km
+                    1:30 min/km
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2.5">
+                    Gångare &mdash; Motion
+                    <span class="text-DGreenC-400"
+                      >(50% av klassen, ev. med hund)</span
+                    >
+                  </td>
+                  <td class="px-4 py-2.5 text-right font-mono">
+                    12:30 min/km
+                  </td>
+                  <td
+                    class="px-4 py-2.5 text-right font-mono text-DGreenC-400"
+                  >
+                    1:30 min/km
                   </td>
                 </tr>
               </tbody>
@@ -205,8 +259,8 @@
             Resultat per klass
           </h2>
           <p class="text-sm text-DGreenC-400 mb-5">
-            Ett löpmoment per klass &mdash; måltiden är direkt normalfördelad
-            kring μ med spridning σ.
+            Lång och Kort är normalfördelade kring μ. Motion är en
+            50/50-mix av löpare och gångare &mdash; tvåpucklig fördelning.
           </p>
           <div class="grid lg:grid-cols-3 gap-5">
             <!-- LÅNG -->
@@ -228,10 +282,10 @@
                 </thead>
                 <tbody class="divide-y divide-DGreenC-100">
                   <tr>
-                    <td class="py-1.5">Löpning 10,6 km</td>
-                    <td class="py-1.5 text-right font-mono">63,6</td>
+                    <td class="py-1.5">Löpning 13,4 km (+199 m)</td>
+                    <td class="py-1.5 text-right font-mono">90,5</td>
                     <td class="py-1.5 text-right font-mono text-DGreenC-400">
-                      12,7
+                      16,8
                     </td>
                   </tr>
                 </tbody>
@@ -239,10 +293,10 @@
                   <tr>
                     <td class="pt-2">Total</td>
                     <td class="pt-2 text-right font-mono text-YellowC-600">
-                      63,6 min
+                      90,5 min
                     </td>
                     <td class="pt-2 text-right font-mono text-DGreenC-500">
-                      12,7
+                      16,8
                     </td>
                   </tr>
                 </tfoot>
@@ -270,7 +324,7 @@
                   font-size="7"
                   fill="#9e7a10"
                 >
-                  μ = 1h 04min
+                  μ = 1h 30min
                 </text>
               </svg>
               <p class="text-[0.65rem] text-DGreenC-400 mt-2 italic">
@@ -298,10 +352,10 @@
                 </thead>
                 <tbody class="divide-y divide-DGreenC-100">
                   <tr>
-                    <td class="py-1.5">Löpning 3,1 km</td>
-                    <td class="py-1.5 text-right font-mono">18,6</td>
+                    <td class="py-1.5">Löpning 5,5 km (+117 m)</td>
+                    <td class="py-1.5 text-right font-mono">38,5</td>
                     <td class="py-1.5 text-right font-mono text-DGreenC-400">
-                      3,7
+                      6,9
                     </td>
                   </tr>
                 </tbody>
@@ -309,10 +363,10 @@
                   <tr>
                     <td class="pt-2">Total</td>
                     <td class="pt-2 text-right font-mono text-GreenC-700">
-                      18,6 min
+                      38,5 min
                     </td>
                     <td class="pt-2 text-right font-mono text-DGreenC-500">
-                      3,7
+                      6,9
                     </td>
                   </tr>
                 </tfoot>
@@ -340,7 +394,7 @@
                   font-size="7"
                   fill="#4e572d"
                 >
-                  μ = 19 min
+                  μ = 39 min
                 </text>
               </svg>
             </div>
@@ -364,51 +418,80 @@
                 </thead>
                 <tbody class="divide-y divide-DGreenC-100">
                   <tr>
-                    <td class="py-1.5">Löpning / gång 0,6 km</td>
-                    <td class="py-1.5 text-right font-mono">5,4</td>
+                    <td class="py-1.5">Löpare 5,5 km (50%)</td>
+                    <td class="py-1.5 text-right font-mono">49,5</td>
                     <td class="py-1.5 text-right font-mono text-DGreenC-400">
-                      1,5
+                      8,3
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-1.5">Gångare 5,5 km (50%)</td>
+                    <td class="py-1.5 text-right font-mono">68,8</td>
+                    <td class="py-1.5 text-right font-mono text-DGreenC-400">
+                      8,3
                     </td>
                   </tr>
                 </tbody>
                 <tfoot class="border-t-2 border-DGreenC-200 font-bold">
                   <tr>
-                    <td class="pt-2">Total</td>
+                    <td class="pt-2">Median (mix)</td>
                     <td class="pt-2 text-right font-mono text-BlueC-600">
-                      5,4 min
+                      ~59 min
                     </td>
                     <td class="pt-2 text-right font-mono text-DGreenC-500">
-                      1,5
+                      &mdash;
                     </td>
                   </tr>
                 </tfoot>
               </table>
               <svg viewBox="0 0 200 60" class="w-full mt-4">
                 <path
-                  d="M0,55 C45,55 65,5 100,5 C135,5 155,55 200,55"
+                  d="M0,55 C25,55 42,8 62,8 C80,8 84,38 100,38 C116,38 120,8 138,8 C158,8 175,55 200,55"
                   fill="rgba(102, 155, 188, 0.18)"
                   stroke="rgba(102, 155, 188, 0.85)"
                   stroke-width="1.5"
                 />
                 <line
-                  x1="100"
+                  x1="62"
                   y1="55"
-                  x2="100"
-                  y2="5"
+                  x2="62"
+                  y2="8"
+                  stroke="rgba(102, 155, 188, 0.55)"
+                  stroke-width="1"
+                  stroke-dasharray="2"
+                />
+                <line
+                  x1="138"
+                  y1="55"
+                  x2="138"
+                  y2="8"
                   stroke="rgba(102, 155, 188, 0.55)"
                   stroke-width="1"
                   stroke-dasharray="2"
                 />
                 <text
-                  x="100"
+                  x="62"
                   y="60"
                   text-anchor="middle"
                   font-size="7"
                   fill="#355f79"
                 >
-                  μ = 5 min
+                  löpare ~50 min
+                </text>
+                <text
+                  x="138"
+                  y="60"
+                  text-anchor="middle"
+                  font-size="7"
+                  fill="#355f79"
+                >
+                  gångare ~69 min
                 </text>
               </svg>
+              <p class="text-[0.65rem] text-DGreenC-400 mt-2 italic">
+                Tvåpucklig fördelning &mdash; ca hälften springer (~50 min)
+                och hälften går hela banan, ev. med hund (~69 min).
+              </p>
             </div>
           </div>
         </section>
@@ -441,43 +524,43 @@
                   <td class="px-4 py-3 font-semibold text-YellowC-700">
                     Lång
                   </td>
-                  <td class="px-4 py-3 text-right font-mono">43 min</td>
+                  <td class="px-4 py-3 text-right font-mono">1h 03min</td>
                   <td class="px-4 py-3 text-right font-mono font-bold">
-                    1h 04min
+                    1h 30min
                   </td>
-                  <td class="px-4 py-3 text-right font-mono">1h 25min</td>
-                  <td class="px-4 py-3 text-right font-mono">1h 33min</td>
-                  <td class="px-4 py-3 text-right font-mono">1h 43min</td>
+                  <td class="px-4 py-3 text-right font-mono">1h 58min</td>
+                  <td class="px-4 py-3 text-right font-mono">2h 09min</td>
+                  <td class="px-4 py-3 text-right font-mono">2h 22min</td>
                   <td class="px-4 py-3 text-right font-mono text-DGreenC-400">
-                    ~2h 04min
+                    ~2h 50min
                   </td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 font-semibold text-GreenC-700">Kort</td>
-                  <td class="px-4 py-3 text-right font-mono">13 min</td>
-                  <td class="px-4 py-3 text-right font-mono font-bold">
-                    19 min
-                  </td>
-                  <td class="px-4 py-3 text-right font-mono">25 min</td>
                   <td class="px-4 py-3 text-right font-mono">27 min</td>
-                  <td class="px-4 py-3 text-right font-mono">30 min</td>
+                  <td class="px-4 py-3 text-right font-mono font-bold">
+                    39 min
+                  </td>
+                  <td class="px-4 py-3 text-right font-mono">50 min</td>
+                  <td class="px-4 py-3 text-right font-mono">54 min</td>
+                  <td class="px-4 py-3 text-right font-mono">1h 00min</td>
                   <td class="px-4 py-3 text-right font-mono text-DGreenC-400">
-                    ~36 min
+                    ~1h 11min
                   </td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 font-semibold text-BlueC-600">
                     Motion
                   </td>
-                  <td class="px-4 py-3 text-right font-mono">3 min</td>
+                  <td class="px-4 py-3 text-right font-mono">39 min</td>
                   <td class="px-4 py-3 text-right font-mono font-bold">
-                    5 min
+                    59 min
                   </td>
-                  <td class="px-4 py-3 text-right font-mono">8 min</td>
-                  <td class="px-4 py-3 text-right font-mono">9 min</td>
-                  <td class="px-4 py-3 text-right font-mono">10 min</td>
+                  <td class="px-4 py-3 text-right font-mono">1h 19min</td>
+                  <td class="px-4 py-3 text-right font-mono">1h 26min</td>
+                  <td class="px-4 py-3 text-right font-mono">1h 32min</td>
                   <td class="px-4 py-3 text-right font-mono text-DGreenC-400">
-                    ~13 min
+                    ~1h 47min
                   </td>
                 </tr>
               </tbody>
@@ -497,7 +580,8 @@
             Tidslinje för eventet
           </h2>
           <p class="text-sm text-DGreenC-400 mb-5">
-            Med start 16:00 (Lång) och 16:10 (Kort/Motion).
+            Med gemensam start 16:00 för alla klasser (startled: Lång, Kort,
+            Motion).
           </p>
           <div
             class="bg-white rounded-xl shadow-sm border border-DGreenC-100 p-6"
@@ -507,18 +591,36 @@
             >
               <li class="relative">
                 <span
-                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-BlueC-500 ring-2 ring-white"
+                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-GreenC-500 ring-2 ring-white"
                 ></span>
-                <p class="font-mono text-xs font-bold text-BlueC-600">16:13</p>
+                <p class="font-mono text-xs font-bold text-GreenC-700">16:27</p>
                 <p class="text-sm text-DGreenC-700">
-                  Snabbaste 5% av Motion-klassen i mål
+                  Snabbaste 5% av Kort-klassen i mål
+                </p>
+              </li>
+              <li class="relative">
+                <span
+                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-GreenC-500 ring-2 ring-white"
+                ></span>
+                <p class="font-mono text-xs font-bold text-GreenC-700">16:39</p>
+                <p class="text-sm font-semibold text-DGreenC-800">
+                  Median Kort-deltagare i mål &middot; snabbaste 5% av Motion
                 </p>
               </li>
               <li class="relative">
                 <span
                   class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-BlueC-500 ring-2 ring-white"
                 ></span>
-                <p class="font-mono text-xs font-bold text-BlueC-600">16:15</p>
+                <p class="font-mono text-xs font-bold text-BlueC-600">16:50</p>
+                <p class="text-sm text-DGreenC-700">
+                  Motions löparvåg toppar (~50% av klassen)
+                </p>
+              </li>
+              <li class="relative">
+                <span
+                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-BlueC-500 ring-2 ring-white"
+                ></span>
+                <p class="font-mono text-xs font-bold text-BlueC-600">16:59</p>
                 <p class="text-sm font-semibold text-DGreenC-800">
                   Median Motion-deltagare i mål
                 </p>
@@ -528,36 +630,7 @@
                   class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-DGreenC-300 ring-2 ring-white"
                 ></span>
                 <p class="font-mono text-xs font-bold text-DGreenC-500">
-                  16:20
-                </p>
-                <p class="text-sm text-DGreenC-700">
-                  Motion i praktiken avslutad (99,9%)
-                </p>
-              </li>
-              <li class="relative">
-                <span
-                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-GreenC-500 ring-2 ring-white"
-                ></span>
-                <p class="font-mono text-xs font-bold text-GreenC-700">16:23</p>
-                <p class="text-sm text-DGreenC-700">
-                  Snabbaste 5% av Kort-klassen i mål
-                </p>
-              </li>
-              <li class="relative">
-                <span
-                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-GreenC-500 ring-2 ring-white"
-                ></span>
-                <p class="font-mono text-xs font-bold text-GreenC-700">16:29</p>
-                <p class="text-sm font-semibold text-DGreenC-800">
-                  Median Kort-deltagare i mål
-                </p>
-              </li>
-              <li class="relative">
-                <span
-                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-DGreenC-300 ring-2 ring-white"
-                ></span>
-                <p class="font-mono text-xs font-bold text-DGreenC-500">
-                  16:40
+                  17:00
                 </p>
                 <p class="text-sm text-DGreenC-700">
                   Kort i praktiken avslutad (99,9%)
@@ -568,7 +641,7 @@
                   class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-YellowC-400 ring-2 ring-white"
                 ></span>
                 <p class="font-mono text-xs font-bold text-YellowC-700">
-                  16:43
+                  17:03
                 </p>
                 <p class="text-sm text-DGreenC-700">
                   Snabbaste 5% av Lång-klassen i mål
@@ -576,10 +649,19 @@
               </li>
               <li class="relative">
                 <span
+                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-BlueC-500 ring-2 ring-white"
+                ></span>
+                <p class="font-mono text-xs font-bold text-BlueC-600">17:09</p>
+                <p class="text-sm text-DGreenC-700">
+                  Motions gångarvåg toppar (~50% av klassen, ev. med hund)
+                </p>
+              </li>
+              <li class="relative">
+                <span
                   class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-YellowC-400 ring-2 ring-white"
                 ></span>
                 <p class="font-mono text-xs font-bold text-YellowC-700">
-                  17:04
+                  17:30
                 </p>
                 <p class="text-sm font-semibold text-DGreenC-800">
                   Median Lång-deltagare i mål
@@ -590,7 +672,18 @@
                   class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-DGreenC-300 ring-2 ring-white"
                 ></span>
                 <p class="font-mono text-xs font-bold text-DGreenC-500">
-                  17:43
+                  17:32
+                </p>
+                <p class="text-sm text-DGreenC-700">
+                  Motion i praktiken avslutad (99,9%)
+                </p>
+              </li>
+              <li class="relative">
+                <span
+                  class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-DGreenC-300 ring-2 ring-white"
+                ></span>
+                <p class="font-mono text-xs font-bold text-DGreenC-500">
+                  18:22
                 </p>
                 <p class="text-sm text-DGreenC-700">
                   99,9% av Lång klara &mdash; eventet i praktiken slut
@@ -609,7 +702,8 @@
             Kombinerad finish-densitet över tid, viktad efter
             anmälningsfördelningen (48,9% Lång &middot; 31,1% Kort &middot;
             20% Motion) &mdash; visar när trycket vid målgången är som störst
-            och var ni behöver flest funktionärer.
+            och var ni behöver flest funktionärer. Motion syns som två vågor:
+            löparna (~50%) och gångarna (~50%, ev. med hund).
           </p>
           <div
             class="bg-white rounded-xl shadow-sm border border-DGreenC-100 p-5 sm:p-6"
@@ -650,16 +744,16 @@
               <p
                 class="font-mono text-[0.55rem] font-semibold tracking-[0.2em] uppercase text-YellowC-700 mb-1"
               >
-                Snabb start
+                Första våg
               </p>
               <p class="text-lg font-bold text-DGreenC-800 mb-1">
-                16:13 &ndash; 16:20
+                16:27 &ndash; 17:00
               </p>
               <p class="text-xs text-DGreenC-500 leading-relaxed">
-                Motion-klassen (600 m löpning/gång) är i praktiken helt i mål
-                inom 10 minuter efter start. Kort funktionärsinsats krävs, men
-                se till att <strong>mål och registrering är redo direkt</strong>
-                när starten går 16:10.
+                Kort-klassen (5,5 km, +117 m) dominerar den första vågen
+                &mdash; hela fältet kommer i mål på en dryg halvtimme, med
+                topp kring 16:39. Se till att
+                <strong>mål och tidsregistrering är redo 16:25</strong>.
               </p>
             </div>
             <div
@@ -671,14 +765,14 @@
                 Maxbemanning
               </p>
               <p class="text-lg font-bold text-DGreenC-800 mb-1">
-                16:23 &ndash; 16:40
+                16:30 &ndash; 17:20
               </p>
               <p class="text-xs text-DGreenC-500 leading-relaxed">
-                Kort-klassen (3,1 km) kommer i mål under en dryg kvart, strax
-                efter att Motion klingat av. Här behövs
+                Kort-toppen (16:39) övergår direkt i Motions löparvåg (16:50)
+                och gångarvåg (17:09), samtidigt som de första Lång-löparna
+                dyker upp 17:03. Här behövs
                 <strong>flest funktionärer</strong> vid mål, tidsregistrering
-                och vatten &mdash; och de första Lång-löparna (16:43) är redan
-                på väg in.
+                och vatten.
               </p>
             </div>
             <div
@@ -687,16 +781,16 @@
               <p
                 class="font-mono text-[0.55rem] font-semibold tracking-[0.2em] uppercase text-YellowC-600 mb-1"
               >
-                Sekundär topp
+                Utdragen svans
               </p>
               <p class="text-lg font-bold text-DGreenC-800 mb-1">
-                16:45 &ndash; 17:45
+                17:20 &ndash; 18:22
               </p>
               <p class="text-xs text-DGreenC-500 leading-relaxed">
-                Lång-deltagarna (48,9% av fältet) trillar in under en dryg
-                timme &mdash; betydligt <strong>lägre men bredare</strong>
-                topp (σ &asymp; 13 min) än Kort och Motion. Räkna med personal
-                kvar tills åtminstone 17:45.
+                Lång-deltagarna (48,9% av fältet, topp 17:30) och
+                Motion-svansen trillar in under en dryg timme &mdash;
+                <strong>lägre men bredare</strong> flöde (σ &asymp; 17 min).
+                Räkna med personal kvar tills åtminstone 18:20.
               </p>
             </div>
           </div>
@@ -719,14 +813,14 @@
                   class="font-mono text-xs font-semibold text-YellowC-600 tracking-wide"
                   >01</span
                 >
-                Foodtruck redo redan 16:15 fångar tidiga fältet
+                Foodtruck redo 16:35 fångar första vågen
               </h3>
               <p class="text-sm text-DGreenC-600 leading-relaxed">
-                Motion är i praktiken klar redan 16:20 och Kort-medianen
-                kommer 16:29. Är foodtrucken redo
-                <strong>16:15&ndash;16:30</strong> fångar den de tidiga
-                klasserna direkt, och står sedan öppen genom hela
-                Lång-fältet fram till 17:45.
+                Kort-medianen kommer i mål 16:39 och Motion-medianen 16:59.
+                Är foodtrucken redo <strong>senast 16:35</strong> fångar den
+                första vågen direkt, och står sedan öppen genom hela
+                Lång-fältet fram till ~18:20. Planerad öppning ~17:00 missar
+                nästan hela Kort-fältet.
               </p>
             </div>
             <div
@@ -739,13 +833,14 @@
                   class="font-mono text-xs font-semibold text-YellowC-600 tracking-wide"
                   >02</span
                 >
-                Kortare event än triathlon-versionen
+                Motion är inte längre en kort promenad
               </h3>
               <p class="text-sm text-DGreenC-600 leading-relaxed">
-                Utan simning, cykling och växlingar är hela eventet i
-                praktiken avslutat <strong>~17:45</strong> i stället för
-                ~18:25. Prisutdelning och gemensam avslutning kan
-                tidigareläggas i motsvarande grad.
+                Med 5,5 km kuperad bana (+117 m) och
+                <strong>~50% som går hela vägen</strong> tar Motion
+                39&ndash;92 minuter i två vågor: löparna kring 16:50 och
+                gångarna (ev. med hund) kring 17:09. Planera vätska längs
+                banan och räkna med sista motionären ~17:30.
               </p>
             </div>
             <div
@@ -758,13 +853,14 @@
                   class="font-mono text-xs font-semibold text-YellowC-600 tracking-wide"
                   >03</span
                 >
-                Stängningstid: 17:45 &plusmn; 5 min
+                Stängningstid: 18:20 &plusmn; 10 min
               </h3>
               <p class="text-sm text-DGreenC-600 leading-relaxed">
                 I ett 100&ndash;200-deltagarevent blir slöaste finishern
                 ungefär på 99-percentilen. Praktisk stängningstid är därför
-                <strong>17:45</strong> för Lång, <strong>16:45</strong> för
-                Kort och redan <strong>16:25</strong> för Motion.
+                <strong>~18:10</strong> för Lång, <strong>~16:55</strong> för
+                Kort och <strong>~17:30</strong> för Motion. Prisutdelning
+                och gemensam avslutning läggs lämpligen ~18:30.
               </p>
             </div>
             <div
@@ -780,9 +876,12 @@
                 Mest osäkra antagandet: löppacen
               </h3>
               <p class="text-sm text-DGreenC-600 leading-relaxed">
-                Om gruppen är mer otränad (μ = 7:00 min/km istället för 6:00)
-                skiftar Lång-medianen från 1h 04 till 1h 14. Viktigt att
-                kalibrera mot faktiska resultat om data finns.
+                Pacen är redan höjdjusterad (6:45 på Lång motsvarar ~6:00 på
+                platt mark), men om gruppen är mer otränad (7:30 min/km)
+                skiftar Lång-medianen från 1h 30 till 1h 40 och eventslutet
+                mot ~18:40. Gångar-pacen (12:30) är också osäker &mdash;
+                hundekipage som stannar ofta driver gångarvågen ~10 min
+                senare.
               </p>
             </div>
           </div>
@@ -943,27 +1042,27 @@
             </p>
             <nav class="flex flex-col text-sm">
               <a
-                href="index2.html#om"
+                href="index.html#om"
                 class="text-DGreenC-300 hover:text-YellowC-400 transition-colors w-fit py-1"
                 >Om</a
               >
               <a
-                href="index2.html#distanser"
+                href="index.html#distanser"
                 class="text-DGreenC-300 hover:text-YellowC-400 transition-colors w-fit py-1"
                 >Distanser</a
               >
               <a
-                href="index2.html#info"
+                href="index.html#info"
                 class="text-DGreenC-300 hover:text-YellowC-400 transition-colors w-fit py-1"
                 >Praktisk info</a
               >
               <a
-                href="anmalan2.html"
+                href="anmalan.html"
                 class="text-DGreenC-300 hover:text-YellowC-400 transition-colors w-fit py-1"
                 >Anmälan</a
               >
               <a
-                href="index2.html#sponsorer"
+                href="index.html#sponsorer"
                 class="text-DGreenC-300 hover:text-YellowC-400 transition-colors w-fit py-1"
                 >Sponsorer</a
               >
@@ -1025,37 +1124,35 @@
         if (!svg) return;
         const NS = "http://www.w3.org/2000/svg";
 
-        // Klasser: μ är tid från klassens start, startTime är offset från 16:00,
-        // weight = andel av anmälda per klass
+        // Klasser: tider i min från gemensam start 16:00,
+        // weight = andel av anmälda per klass. Motion är en 50/50-mix av
+        // löpare (9:00 min/km) och gångare (12:30 min/km, ev. med hund).
         const classes = [
           {
             name: "Lång",
-            mu: 63.6,
-            sigma: 12.7,
-            startTime: 0,
+            comps: [{ mu: 90.5, sigma: 16.75, w: 1 }],
             weight: 0.489,
             color: "#efca5c",
           },
           {
             name: "Kort",
-            mu: 18.6,
-            sigma: 3.7,
-            startTime: 10,
+            comps: [{ mu: 38.5, sigma: 6.9, w: 1 }],
             weight: 0.311,
             color: "#606c38",
           },
           {
             name: "Motion",
-            mu: 5.4,
-            sigma: 1.5,
-            startTime: 10,
+            comps: [
+              { mu: 49.5, sigma: 8.25, w: 0.5 },
+              { mu: 68.75, sigma: 8.25, w: 0.5 },
+            ],
             weight: 0.2,
             color: "#669bbc",
           },
         ];
 
         const tMin = 10,
-          tMax = 120; // 16:10 till 18:00
+          tMax = 155; // 16:10 till 18:35
         const W = 800,
           H = 280;
         const margin = { top: 30, right: 20, bottom: 50, left: 50 };
@@ -1067,20 +1164,22 @@
           return Math.exp(-(z * z) / 2) / (sigma * Math.sqrt(2 * Math.PI));
         }
 
+        // Densitet för en klass = viktad summa av dess komponenter
+        function dens(cls, t) {
+          return (
+            cls.weight *
+            cls.comps.reduce((a, c) => a + c.w * pdf(t, c.mu, c.sigma), 0)
+          );
+        }
+
         const byName = Object.fromEntries(classes.map((c) => [c.name, c]));
-        const N = 121;
+        const N = 131;
         const samples = [];
         for (let i = 0; i < N; i++) {
           const t = tMin + ((tMax - tMin) * i) / (N - 1);
-          const k =
-            byName.Kort.weight *
-            pdf(t - byName.Kort.startTime, byName.Kort.mu, byName.Kort.sigma);
-          const m =
-            byName.Motion.weight *
-            pdf(t - byName.Motion.startTime, byName.Motion.mu, byName.Motion.sigma);
-          const l =
-            byName.Lång.weight *
-            pdf(t - byName.Lång.startTime, byName.Lång.mu, byName.Lång.sigma);
+          const k = dens(byName.Kort, t);
+          const m = dens(byName.Motion, t);
+          const l = dens(byName.Lång, t);
           samples.push({ t, k, m, l, total: k + m + l });
         }
 
@@ -1103,7 +1202,7 @@
         }
 
         // Vertikala gridlinjer var 30:e min
-        for (let t = 30; t <= 120; t += 30) {
+        for (let t = 30; t <= tMax; t += 30) {
           svg.appendChild(
             el("line", {
               x1: tx(t),
@@ -1130,7 +1229,7 @@
         );
 
         // Tidslabels var 15:e min
-        for (let t = 15; t <= 120; t += 15) {
+        for (let t = 15; t <= tMax; t += 15) {
           const isMajor = t % 30 === 0;
           svg.appendChild(
             el("line", {
@@ -1224,21 +1323,23 @@
           }),
         );
 
-        // Hitta topparna för respektive klass i totalen (tre separata vågor)
-        let pMotion = { val: 0, t: 0 };
+        // Hitta topparna för respektive våg (Kort ~16:39, Lång ~17:30).
+        // Motions två komponenter (löpare μ=49,5, gångare μ=68,8) överlappar
+        // så mycket att summakurvan blir en bred platå — markera därför
+        // komponenternas centrum i stället för att söka toppar i summan.
         let pKort = { val: 0, t: 0 };
         let pLang = { val: 0, t: 0 };
         samples.forEach((s) => {
-          if (s.t < 22 && s.total > pMotion.val)
-            pMotion = { val: s.total, t: s.t };
-          if (s.t >= 22 && s.t < 45 && s.total > pKort.val)
-            pKort = { val: s.total, t: s.t };
-          if (s.t >= 45 && s.total > pLang.val) pLang = { val: s.total, t: s.t };
+          if (s.k > pKort.val) pKort = { val: s.k, t: s.t };
+          if (s.l > pLang.val) pLang = { val: s.l, t: s.t };
         });
+        const pMotionLop = { t: 49.5, val: dens(byName.Motion, 49.5) };
+        const pMotionGang = { t: 68.75, val: dens(byName.Motion, 68.75) };
 
         [
-          { ...pMotion, label: "Motion", color: "#355f79" },
           { ...pKort, label: "Kort", color: "#4e572d" },
+          { ...pMotionLop, label: "Motion löp", color: "#355f79" },
+          { ...pMotionGang, label: "Motion gång", color: "#355f79" },
           { ...pLang, label: "Lång", color: "#9e7a10" },
         ].forEach((p) => {
           // Vertikal linje från x-axel till topp

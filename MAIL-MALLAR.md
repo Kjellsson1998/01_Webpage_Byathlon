@@ -286,7 +286,8 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                       font-size: 13px;
                       line-height: 1.55;"
                         >
-                          Gärna mer — överskott går till välgörenhet.
+                          Gärna mer — hela överskottet går till civila i
+                          Ukraina. Justera beloppet uppåt direkt i Swish-appen.
                         </div>
 
                         <!-- QR-kod -->
@@ -414,8 +415,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                           font-size: 14px;
                           font-weight: bold;"
                               >
-                                @{if(equals(triggerBody()?['klass'],'Motion'),'Kl.
-                                16:10','Kl. 16:00')}
+                                Kl. 16:00 (gemensam start för alla klasser)
                               </td>
                             </tr>
                             <tr>
@@ -502,11 +502,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                     font-size: 14px;
                     line-height: 1.5;"
                       >
-                        Cykel &amp; hjälm
-                        <span
-                          style="color: #a41e1e; font-size: 12px; font-weight: bold"
-                          >(obligatoriskt)</span
-                        >
+                        Löparskor
                       </td>
                     </tr>
                     <tr>
@@ -525,24 +521,6 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                     line-height: 1.5;"
                       >
                         Badkläder &amp; handduk
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="padding: 3px 8px 3px 0;
-                    color: #606c38;
-                    font-size: 15px;
-                    line-height: 1.5;"
-                      >
-                        ✓
-                      </td>
-                      <td
-                        style="padding: 3px 0;
-                    color: #474439;
-                    font-size: 14px;
-                    line-height: 1.5;"
-                      >
-                        Löparskor
                       </td>
                     </tr>
                     <tr>
@@ -631,7 +609,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                   style="text-decoration: none"
                                 >
                                   <img
-                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
+                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.png"
                                     alt="SI Construction"
                                     height="44"
                                     style="height: 44px;
@@ -768,6 +746,24 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                   <img
                                     src="https://byathlon.se/Image/Sponsorer/Vestins_EkoLantbrukTB.png"
                                     alt="Vestins Ekolantbruk"
+                                    height="32"
+                                    style="height: 32px;
+                              width: auto;
+                              border: 0;
+                              display: block;"
+                                  />
+                                </a>
+                              </td>
+                              <td
+                                style="padding: 6px 14px; vertical-align: middle"
+                              >
+                                <a
+                                  href="https://byathlon.se/#sponsorer"
+                                  style="text-decoration: none"
+                                >
+                                  <img
+                                    src="https://byathlon.se/Image/Sponsorer/NICKS-logo-pink.png"
+                                    alt="NICKS"
                                     height="32"
                                     style="height: 32px;
                               width: auto;
@@ -1142,8 +1138,8 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                       font-size: 13px;
                       line-height: 1.55;"
                         >
-                          Gärna mer — överskott går till välgörenhet. Bortse om
-                          du redan betalat.
+                          Gärna mer — hela överskottet går till civila i
+                          Ukraina. Bortse om du redan betalat.
                         </div>
 
                         <!-- QR-kod -->
@@ -1271,8 +1267,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                           font-size: 14px;
                           font-weight: bold;"
                               >
-                                @{if(equals(triggerBody()?['klass'],'Motion'),'Kl.
-                                16:10','Kl. 16:00')}
+                                Kl. 16:00 (gemensam start för alla klasser)
                               </td>
                             </tr>
                             <tr>
@@ -1359,11 +1354,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                     font-size: 14px;
                     line-height: 1.5;"
                       >
-                        Cykel &amp; hjälm
-                        <span
-                          style="color: #a41e1e; font-size: 12px; font-weight: bold"
-                          >(obligatoriskt)</span
-                        >
+                        Löparskor
                       </td>
                     </tr>
                     <tr>
@@ -1382,24 +1373,6 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                     line-height: 1.5;"
                       >
                         Badkläder &amp; handduk
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="padding: 3px 8px 3px 0;
-                    color: #606c38;
-                    font-size: 15px;
-                    line-height: 1.5;"
-                      >
-                        ✓
-                      </td>
-                      <td
-                        style="padding: 3px 0;
-                    color: #474439;
-                    font-size: 14px;
-                    line-height: 1.5;"
-                      >
-                        Löparskor
                       </td>
                     </tr>
                     <tr>
@@ -1488,7 +1461,7 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                   style="text-decoration: none"
                                 >
                                   <img
-                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.svg"
+                                    src="https://byathlon.se/Image/Sponsorer/sic-logo-mark-only.png"
                                     alt="SI Construction"
                                     height="44"
                                     style="height: 44px;
@@ -1625,6 +1598,24 @@ Se `POWER-AUTOMATE-INSTRUKTION.md` för detaljerade steg.
                                   <img
                                     src="https://byathlon.se/Image/Sponsorer/Vestins_EkoLantbrukTB.png"
                                     alt="Vestins Ekolantbruk"
+                                    height="32"
+                                    style="height: 32px;
+                              width: auto;
+                              border: 0;
+                              display: block;"
+                                  />
+                                </a>
+                              </td>
+                              <td
+                                style="padding: 6px 14px; vertical-align: middle"
+                              >
+                                <a
+                                  href="https://byathlon.se/#sponsorer"
+                                  style="text-decoration: none"
+                                >
+                                  <img
+                                    src="https://byathlon.se/Image/Sponsorer/NICKS-logo-pink.png"
+                                    alt="NICKS"
                                     height="32"
                                     style="height: 32px;
                               width: auto;

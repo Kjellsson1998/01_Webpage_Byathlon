@@ -886,14 +886,14 @@
                   </p>
                   <svg
                     viewBox="0 0 200 110"
-                    class="absolute right-0 top-0 w-20 h-14 opacity-70"
+                    class="absolute right-0 top-0 w-28 h-20 opacity-80"
                     fill="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <path
                       d="M140.3,95.2 L142.7,92.3 L143.3,88.7 L139.7,84.0 L140.1,74.1 L145.2,61.2 L149.6,56.1 L160.5,54.2 L166.6,47.0 L161.6,42.1 L160.9,37.6 L149.2,30.6 L136.5,20.9 L131.7,11.9 L133.4,8.0 L118.9,12.1 L105.1,12.0 L86.7,13.3 L62.8,21.4 L37.3,29.0 L33.4,40.5 L39.5,47.1 L45.2,50.5 L49.2,52.4 L57.8,54.2 L68.6,54.7 L79.2,53.2 L92.5,59.4 L114.4,69.8 L124.4,75.3 L133.3,78.6 L139.7,84.4 L144.5,90.0 L140.9,94.4 L139.4,97.7 L139.0,98.5 L138.9,100.2 L139.4,101.7 L140.1,102.0"
-                      stroke="#ef4444"
+                      stroke="#eab308"
                       stroke-width="5"
                     />
                   </svg>
@@ -983,14 +983,14 @@
                   </p>
                   <svg
                     viewBox="0 0 200 110"
-                    class="absolute right-0 top-0 w-20 h-14 opacity-70"
+                    class="absolute right-0 top-0 w-28 h-20 opacity-80"
                     fill="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <path
                       d="M122.9,102.0 L127.2,97.6 L133.8,84.5 L137.4,81.4 L139.0,78.4 L136.0,75.5 L131.5,71.9 L129.5,66.8 L126.9,62.4 L130.2,53.3 L130.3,45.2 L133.4,38.8 L133.5,34.4 L135.8,28.9 L133.5,24.7 L126.8,21.6 L120.9,19.5 L112.9,17.6 L105.8,13.3 L101.6,12.0 L96.2,11.7 L92.0,8.0 L89.4,8.0 L88.3,11.4 L85.0,15.0 L79.1,20.1 L72.4,23.1 L74.8,25.8 L73.3,28.7 L68.4,29.6 L61.0,30.9 L67.3,32.9 L82.6,40.1 L89.6,44.8 L95.4,46.6 L98.8,49.0 L103.8,54.5 L111.2,55.0 L116.5,55.7 L125.1,61.0 L130.4,69.6 L136.3,75.7 L135.0,83.3 L130.2,89.7 L127.4,101.5"
-                      stroke="#ef4444"
+                      stroke="#22c55e"
                       stroke-width="5"
                     />
                   </svg>
@@ -1080,14 +1080,14 @@
                   </p>
                   <svg
                     viewBox="0 0 200 110"
-                    class="absolute right-0 top-0 w-20 h-14 opacity-70"
+                    class="absolute right-0 top-0 w-28 h-20 opacity-80"
                     fill="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
                     <path
                       d="M122.9,102.0 L127.2,97.6 L133.8,84.5 L137.4,81.4 L139.0,78.4 L136.0,75.5 L131.5,71.9 L129.5,66.8 L126.9,62.4 L130.2,53.3 L130.3,45.2 L133.4,38.8 L133.5,34.4 L135.8,28.9 L133.5,24.7 L126.8,21.6 L120.9,19.5 L112.9,17.6 L105.8,13.3 L101.6,12.0 L96.2,11.7 L92.0,8.0 L89.4,8.0 L88.3,11.4 L85.0,15.0 L79.1,20.1 L72.4,23.1 L74.8,25.8 L73.3,28.7 L68.4,29.6 L61.0,30.9 L67.3,32.9 L82.6,40.1 L89.6,44.8 L95.4,46.6 L98.8,49.0 L103.8,54.5 L111.2,55.0 L116.5,55.7 L125.1,61.0 L130.4,69.6 L136.3,75.7 L135.0,83.3 L130.2,89.7 L127.4,101.5"
-                      stroke="#ef4444"
+                      stroke="#669bbc"
                       stroke-width="5"
                     />
                   </svg>
@@ -2123,7 +2123,39 @@
           lastKort = 0;
         const lopProg = { p: 0 };
 
-        // GSAP ScrollTrigger – samtidig animering av alla löpsträckor
+        // Kumulativ distans längs banorna — båda prickarna rör sig med samma
+        // markfart, så Kort (5,5 km) går i mål när Lång passerat 5,5 km och
+        // Lång fortsätter i sin egen takt till 13,4 km.
+        function cumDist(coords) {
+          const c = [0];
+          for (let i = 1; i < coords.length; i++) {
+            c.push(c[i - 1] + haversine(coords[i - 1], coords[i]));
+          }
+          return c;
+        }
+        const langCum = cumDist(langCoords);
+        const kortCum = cumDist(kortCoords);
+        const langDist = langCum[langN - 1];
+        const kortDist = kortCum[kortN - 1];
+
+        // Kort får sin "klar"-look direkt när den går i mål,
+        // medan Lång-animeringen fortsätter
+        let kortFinished = false;
+        function finishKort() {
+          if (kortFinished) return;
+          kortFinished = true;
+          kcu.setAttribute("opacity", "0");
+          if (kortDot) map.removeLayer(kortDot);
+          addKmMarkers(map, kortCoords, "#22c55e", "green", 1000);
+          L.polyline(kortCoords, {
+            color: "#86efac",
+            weight: 2.5,
+            opacity: 0.65,
+            className: "flow-kort",
+          }).addTo(map);
+        }
+
+        // GSAP ScrollTrigger – animering med proportionell fart
         gsap
           .timeline({
             scrollTrigger: {
@@ -2137,44 +2169,38 @@
             duration: 8,
             ease: "power1.out",
             onUpdate() {
-              const tL = Math.floor(lopProg.p * langN);
-              const tK = Math.floor(lopProg.p * kortN);
-              while (lastLang < tL) {
+              const dL = lopProg.p * langDist;
+              const dK = Math.min(dL, kortDist);
+              while (lastLang < langN && langCum[lastLang] <= dL) {
                 langPoly.addLatLng(langCoords[lastLang]);
                 langDot.setLatLng(langCoords[lastLang]);
                 lastLang++;
               }
-              while (lastKort < tK) {
+              while (lastKort < kortN && kortCum[lastKort] <= dK) {
                 kortPoly.addLatLng(kortCoords[lastKort]);
                 kortDot.setLatLng(kortCoords[lastKort]);
                 lastKort++;
               }
-              const w = (lopProg.p * 1000).toFixed(1);
-              lcr.setAttribute("width", w);
-              lcu.setAttribute("x1", w);
-              lcu.setAttribute("x2", w);
-              kcr.setAttribute("width", w);
-              kcu.setAttribute("x1", w);
-              kcu.setAttribute("x2", w);
+              const wL = (lopProg.p * 1000).toFixed(1);
+              lcr.setAttribute("width", wL);
+              lcu.setAttribute("x1", wL);
+              lcu.setAttribute("x2", wL);
+              const wK = ((dK / kortDist) * 1000).toFixed(1);
+              kcr.setAttribute("width", wK);
+              kcu.setAttribute("x1", wK);
+              kcu.setAttribute("x2", wK);
+              if (dK >= kortDist) finishKort();
             },
             onComplete() {
               lcu.setAttribute("opacity", "0");
-              kcu.setAttribute("opacity", "0");
               if (langDot) map.removeLayer(langDot);
-              if (kortDot) map.removeLayer(kortDot);
+              finishKort();
               addKmMarkers(map, langCoords, "#eab308", "", 1000);
-              addKmMarkers(map, kortCoords, "#22c55e", "green", 1000);
               L.polyline(langCoords, {
                 color: "#fde047",
                 weight: 3,
                 opacity: 0.65,
                 className: "flow-lang",
-              }).addTo(map);
-              L.polyline(kortCoords, {
-                color: "#86efac",
-                weight: 2.5,
-                opacity: 0.65,
-                className: "flow-kort",
               }).addTo(map);
             },
           });

@@ -1,5 +1,7 @@
 <!doctype html>
-<!-- Områdeskarta för tävlingsområdet vid By badplats. Koordinater från "Koordinater platser.xlsx". -->
+<!-- Områdeskarta för tävlingsområdet vid By badplats.
+     Platskoordinater från "Koordinater platser.xlsx" (DMS → decimalgrader).
+     Rutter från Rutter/swimrun/*.geojson (samma filer som startsidan). -->
 <html lang="sv">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +9,7 @@
     <title>Områdeskarta — Byathlon 2026</title>
     <meta
       name="description"
-      content="Karta över tävlingsområdet vid By badplats — parkering, tält, bad, bastu, toaletter, food truck och allt annat du behöver hitta på plats."
+      content="Interaktiv karta över tävlingsområdet vid By badplats — parkering, tält, bad, bastu, toaletter, vattenstationer och båda löpbanorna (13 km & 6 km)."
     />
     <meta name="robots" content="noindex, follow" />
     <meta name="theme-color" content="#283618" />
@@ -20,6 +22,10 @@
     <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
     <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
 
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="preconnect" href="https://server.arcgisonline.com" crossorigin />
+
     <!-- Leaflet -->
     <link
       rel="stylesheet"
@@ -28,114 +34,606 @@
     <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-      /* Kategori-knappar — utseendet styrs av aria-pressed så vi slipper
-         byta Tailwind-klasser i JS */
+      /* ═══════════════ DESIGN-TOKENS ═══════════════ */
+      :root {
+        --paper: #faf6ee;
+        --paper-glass: rgba(250, 246, 238, 0.86);
+        --ink: #25231e;
+        --ink-soft: #595648;
+        --ink-faint: #7f7a67;
+        --line: rgba(37, 35, 30, 0.1);
+        --shadow-soft: 0 6px 24px rgba(24, 22, 16, 0.14),
+          0 1px 3px rgba(24, 22, 16, 0.08);
+        --shadow-lift: 0 14px 44px rgba(24, 22, 16, 0.22),
+          0 2px 6px rgba(24, 22, 16, 0.1);
+        --ease-spring: cubic-bezier(0.34, 1.4, 0.44, 1);
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* ═══════════════ KART-STOMME ═══════════════ */
+      /* Varm, lätt handkolorerad ton på bägge baslagren */
+      .basemap-karta .leaflet-tile-pane {
+        filter: saturate(1.45) sepia(0.14) brightness(1.03) contrast(0.97);
+      }
+      .basemap-flyg .leaflet-tile-pane {
+        filter: saturate(1.12) sepia(0.07) brightness(1.04) contrast(1.05);
+      }
+      /* Pappersgryn + vinjett ovanpå kartan — ger tryckt-karta-känsla */
+      .map-grain {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+        opacity: 0.05;
+      }
+      .map-vignette {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        box-shadow:
+          inset 0 0 110px rgba(37, 35, 30, 0.22),
+          inset 0 0 8px rgba(37, 35, 30, 0.1);
+      }
+      @media (min-width: 40rem) {
+        .map-vignette {
+          border-radius: 1rem;
+        }
+      }
+
+      /* ═══════════════ GLASPANELER ═══════════════ */
+      .ctl-panel {
+        background: var(--paper-glass);
+        backdrop-filter: blur(14px) saturate(1.5);
+        -webkit-backdrop-filter: blur(14px) saturate(1.5);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        outline: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow-soft);
+      }
+      .panel-label {
+        font-family: ui-monospace, monospace;
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+
+      /* ═══════════════ DISTANSVÄLJARE ═══════════════ */
+      .seg {
+        display: flex;
+        gap: 3px;
+        padding: 3px;
+        background: rgba(37, 35, 30, 0.06);
+        border-radius: 10px;
+      }
+      .seg button {
+        flex: 1;
+        font-family: ui-monospace, monospace;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 6px 10px;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: var(--ink-soft);
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          background 0.25s var(--ease-out),
+          color 0.25s,
+          box-shadow 0.25s;
+      }
+      .seg button:hover {
+        color: var(--ink);
+      }
+      .seg button[aria-checked="true"] {
+        background: #36342b;
+        color: #f3edd9;
+        box-shadow: 0 2px 8px rgba(24, 22, 16, 0.28);
+      }
+      /* Infokort för vald bana — glider mjukt in */
+      .route-info {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition:
+          grid-template-rows 0.35s var(--ease-out),
+          opacity 0.3s,
+          margin 0.35s var(--ease-out);
+        margin-top: 0;
+      }
+      .route-info.is-on {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        margin-top: 8px;
+      }
+      .route-info > div {
+        overflow: hidden;
+      }
+
+      /* ═══════════════ KATEGORI-CHIPS ═══════════════ */
       .cat-btn {
         display: inline-flex;
         align-items: center;
-        gap: 0.45rem;
+        gap: 7px;
         font-family: ui-monospace, monospace;
-        font-size: 11px;
+        font-size: 10.5px;
         font-weight: 600;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.07em;
         text-transform: uppercase;
-        padding: 0.4rem 0.85rem;
+        padding: 5px 11px 5px 7px;
         border-radius: 9999px;
-        border: 1.5px solid rgba(37, 35, 30, 0.35);
-        background: rgba(255, 255, 255, 0.85);
-        color: #36342b;
+        border: 1px solid rgba(37, 35, 30, 0.16);
+        background: rgba(255, 255, 255, 0.65);
+        color: var(--ink);
         cursor: pointer;
         white-space: nowrap;
-        transition: all 0.15s ease;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        box-shadow: 0 1px 4px rgba(17, 16, 14, 0.25);
+        transition:
+          all 0.25s var(--ease-out);
       }
       .cat-btn:hover {
+        border-color: rgba(37, 35, 30, 0.35);
         background: #fff;
       }
       .cat-btn .cat-dot {
-        width: 9px;
-        height: 9px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
         background: var(--cat-color, #669bbc);
+        border: 2px solid #fff;
+        box-shadow: 0 1px 3px rgba(24, 22, 16, 0.25);
         flex: none;
+        transition:
+          background 0.25s,
+          transform 0.25s var(--ease-spring);
       }
       .cat-btn[aria-pressed="false"] {
-        opacity: 0.55;
-        background: rgba(255, 255, 255, 0.55);
+        color: var(--ink-faint);
+        background: transparent;
         border-style: dashed;
       }
       .cat-btn[aria-pressed="false"] .cat-dot {
-        background: #a29d8b;
+        background: #c1bfb3;
+        transform: scale(0.72);
       }
 
-      /* Verktygsknappar (lagerbyte, min position) */
-      .map-tool-btn {
-        font-family: ui-monospace, monospace;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        padding: 0.45rem 0.8rem;
-        border-radius: 0.5rem;
-        border: 1.5px solid rgba(37, 35, 30, 0.35);
-        background: rgba(255, 255, 255, 0.9);
-        color: #36342b;
-        cursor: pointer;
-        white-space: nowrap;
-        box-shadow: 0 1px 4px rgba(17, 16, 14, 0.25);
-        transition: background 0.15s ease;
+      /* ═══════════════ VERKTYGSKNAPPAR ═══════════════ */
+      .tool-stack {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
       }
-      .map-tool-btn:hover {
-        background: #fff;
-      }
-
-      /* Kartnålar */
-      .spot-pin {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: #fff;
-        border: 3px solid var(--pin-color, #669bbc);
+      .tool-btn {
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 15px;
-        line-height: 1;
-        box-shadow: 0 2px 6px rgba(17, 16, 14, 0.45);
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        transition: background 0.2s;
       }
-      .spot-pin.spot-pin-solid {
-        background: var(--pin-color, #355f79);
+      .tool-btn + .tool-btn {
+        border-top: 1px solid var(--line);
+      }
+      .tool-btn:hover {
+        background: rgba(255, 255, 255, 0.85);
+      }
+      .tool-btn:active {
+        background: rgba(37, 35, 30, 0.08);
+      }
+      .tool-btn svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      /* ═══════════════ KARTNÅLAR ═══════════════ */
+      .spot-wrap {
+        position: relative;
+      }
+      .spot-pin {
+        position: relative;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--pin, #669bbc);
+        border: 2px solid rgba(255, 255, 255, 0.94);
+        box-shadow:
+          0 3px 10px rgba(24, 22, 16, 0.35),
+          0 1px 2px rgba(24, 22, 16, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: #fff;
-        font-family: ui-monospace, monospace;
-        font-size: 13px;
-        font-weight: 700;
-        border-color: #fff;
-        border-width: 2.5px;
+        transform-origin: 50% 135%;
+        transition:
+          transform 0.3s var(--ease-spring),
+          opacity 0.25s var(--ease-out);
       }
-      /* Min position-prick */
+      .spot-pin::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 10px;
+        height: 10px;
+        background: var(--pin, #669bbc);
+        border-right: 2px solid rgba(255, 255, 255, 0.94);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.94);
+        transform: translate(-50%, -6px) rotate(45deg);
+        z-index: -1;
+      }
+      .spot-pin svg {
+        width: 17px;
+        height: 17px;
+        display: block;
+      }
+      .leaflet-marker-icon:hover .spot-pin {
+        transform: scale(1.12);
+      }
+      /* Släckt kategori: krymp ihop mot nålspetsen och tona ut */
+      .is-spot-hidden {
+        pointer-events: none !important;
+      }
+      .is-spot-hidden .spot-pin,
+      .is-spot-hidden .p-face,
+      .is-spot-hidden .race-pin {
+        transform: scale(0.25);
+        opacity: 0;
+      }
+
+      /* Ytornas bricka (P / tält, mitt i ytan) */
+      .p-face {
+        width: 27px;
+        height: 27px;
+        border-radius: 8px;
+        background: var(--pin, #355f79);
+        border: 2px solid rgba(255, 255, 255, 0.94);
+        box-shadow: 0 2px 8px rgba(24, 22, 16, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        transition:
+          transform 0.3s var(--ease-spring),
+          opacity 0.25s var(--ease-out);
+      }
+      .p-face svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+      }
+
+      /* Start/Mål-flagga med etikett */
+      .race-pin {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition:
+          transform 0.3s var(--ease-spring),
+          opacity 0.25s var(--ease-out);
+        transform-origin: 50% 60%;
+      }
+      .race-cap {
+        margin-top: 10px;
+        font-family: ui-monospace, monospace;
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--ink);
+        background: rgba(250, 246, 238, 0.95);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 2px 6px;
+        white-space: nowrap;
+        box-shadow: 0 1px 4px rgba(24, 22, 16, 0.2);
+      }
+
+      /* Min position */
       .me-pin {
         width: 16px;
         height: 16px;
         border-radius: 50%;
         background: #cf2626;
         border: 3px solid #fff;
-        box-shadow: 0 0 12px 4px rgba(207, 38, 38, 0.55);
+        box-shadow: 0 0 12px 4px rgba(207, 38, 38, 0.5);
       }
 
+      /* ═══════════════ RUTTLINJER ═══════════════ */
+      .rt-casing {
+        fill: none;
+        stroke: #fffdf6;
+        stroke-opacity: 0;
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke-opacity 0.4s var(--ease-out);
+        pointer-events: none;
+      }
+      .rt-casing.is-active {
+        stroke-opacity: 0.9;
+      }
+      .rt-line {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition:
+          stroke-opacity 0.4s var(--ease-out),
+          opacity 0.4s var(--ease-out);
+        pointer-events: none;
+      }
+      .rt-line.is-dim {
+        stroke-width: 2.5;
+        stroke-opacity: 0.55;
+        stroke-dasharray: 1 8;
+      }
+      .rt-line.is-active {
+        stroke-width: 3.5;
+        stroke-opacity: 0.96;
+        stroke-dasharray: none;
+      }
+      .rt-line.is-off,
+      .rt-casing.is-off {
+        opacity: 0;
+      }
+
+      /* Parkeringspolygoner */
+      .park-poly {
+        transition:
+          opacity 0.3s var(--ease-out),
+          fill-opacity 0.3s;
+        cursor: pointer;
+      }
+      .park-poly.is-fade-hidden,
+      .is-fade-hidden {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* ═══════════════ TOOLTIPS & POPUPS ═══════════════ */
+      .spot-tip {
+        background: rgba(250, 246, 238, 0.96) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: 6px !important;
+        box-shadow: 0 2px 10px rgba(24, 22, 16, 0.18) !important;
+        color: var(--ink) !important;
+        font-family: ui-monospace, monospace;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 3px 8px !important;
+      }
+      .spot-tip::before {
+        display: none !important;
+      }
       .leaflet-popup-content-wrapper {
-        border-radius: 10px;
+        background: #fbf8f1;
+        border-radius: 14px;
+        box-shadow: var(--shadow-lift);
+        border: 1px solid rgba(37, 35, 30, 0.08);
+      }
+      .leaflet-popup-tip {
+        background: #fbf8f1;
       }
       .leaflet-popup-content {
-        margin: 12px 16px;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          sans-serif;
+        margin: 13px 16px;
+        line-height: 1.45;
       }
+      .leaflet-popup-close-button {
+        color: var(--ink-faint) !important;
+        font-size: 18px !important;
+        padding: 6px 8px 0 0 !important;
+      }
+      .pop-head {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 4px;
+      }
+      .pop-ic {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--pin, #669bbc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        flex: none;
+      }
+      .pop-ic svg {
+        width: 14px;
+        height: 14px;
+      }
+      .pop-name {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--ink);
+      }
+      .pop-cat {
+        font-family: ui-monospace, monospace;
+        font-size: 8.5px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        display: block;
+        margin-top: 1px;
+      }
+      .pop-desc {
+        font-size: 12px;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+
+      /* ═══════════════ PLATSLISTA ═══════════════ */
+      .place-sec + .place-sec {
+        margin-top: 14px;
+      }
+      .place-sec-head {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 8px;
+        margin-bottom: 3px;
+      }
+      .place-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        text-align: left;
+        border: 0;
+        background: transparent;
+        padding: 7px 8px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.18s;
+        animation: rise 0.4s var(--ease-out) both;
+      }
+      .place-item:hover {
+        background: rgba(37, 35, 30, 0.055);
+      }
+      .place-item:active {
+        background: rgba(37, 35, 30, 0.09);
+      }
+      .place-ic {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--pin, #669bbc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        flex: none;
+        box-shadow: 0 1px 4px rgba(24, 22, 16, 0.22);
+      }
+      .place-ic svg {
+        width: 14px;
+        height: 14px;
+      }
+      .place-item .chev {
+        width: 13px;
+        height: 13px;
+        color: var(--ink-faint);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition:
+          opacity 0.2s,
+          transform 0.2s var(--ease-out);
+        flex: none;
+        margin-left: auto;
+      }
+      .place-item:hover .chev {
+        opacity: 1;
+        transform: none;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(7px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ═══════════════ BOTTOM SHEET (mobil) ═══════════════ */
+      .sheet {
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        height: 78%;
+        z-index: 1250;
+        display: flex;
+        flex-direction: column;
+        background: var(--paper);
+        border-radius: 20px 20px 0 0;
+        border: 1px solid var(--line);
+        border-bottom: 0;
+        box-shadow: 0 -10px 40px rgba(24, 22, 16, 0.24);
+        transform: translateY(calc(100% - 62px));
+        transition: transform 0.42s var(--ease-out);
+        touch-action: none;
+      }
+      .sheet.is-open {
+        transform: translateY(0);
+      }
+      .sheet.is-dragging {
+        transition: none;
+      }
+      .sheet-grip {
+        flex: none;
+        border: 0;
+        background: transparent;
+        cursor: grab;
+        padding: 9px 18px 11px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        width: 100%;
+      }
+      .sheet-handle {
+        width: 40px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(37, 35, 30, 0.22);
+      }
+      .sheet-head-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .sheet-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 2px 10px calc(16px + env(safe-area-inset-bottom));
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+      }
+      .sheet:not(.is-open) .sheet-body {
+        overflow: hidden;
+      }
+
+      /* Attribution: liten, varm — och ovanför sheet-piken på mobil */
       .leaflet-control-attribution {
         font-size: 9px !important;
-        background: rgba(255, 255, 255, 0.75) !important;
+        background: rgba(250, 246, 238, 0.8) !important;
+        color: var(--ink-faint) !important;
+        border-radius: 6px 0 0 0;
+      }
+      @media (max-width: 63.98rem) {
+        .leaflet-bottom.leaflet-right {
+          bottom: 64px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .spot-pin,
+        .p-face,
+        .race-pin,
+        .sheet,
+        .rt-line,
+        .rt-casing,
+        .route-info,
+        .cat-btn,
+        .place-item {
+          transition: none !important;
+          animation: none !important;
+        }
       }
     </style>
   </head>
@@ -187,10 +685,10 @@
           <span class="flex-1 bg-GreenC-500"></span>
         </div>
         <p class="text-DGreenC-500 text-sm max-w-2xl leading-relaxed">
-          Allt du behöver hitta på tävlingsområdet — parkering, tält, bad,
-          bastu, toaletter och food truck. Tänd och släck kategorier med
-          knapparna, klicka en plats på kartan eller i listan för mer info,
-          och öppna Google Maps för exakt navigering.
+          Allt du behöver hitta på tävlingsdagen — parkering, tältområde,
+          bad, bastu och toaletter. Välj bana för att se hela löpsträckan
+          med start, mål och vattenstationer, tänd och släck kategorier,
+          och klicka på en plats för mer info.
           <a
             href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8"
             target="_blank"
@@ -204,33 +702,81 @@
       <!-- KARTA -->
       <section class="max-w-6xl mx-auto sm:px-6">
         <div
-          class="relative h-[70vh] min-h-[480px] overflow-hidden bg-DGreenC-100 sm:rounded-2xl shadow-lg border-y sm:border border-DGreenC-200"
+          class="relative h-[76vh] min-h-135 overflow-hidden bg-DGreenC-100 sm:rounded-2xl shadow-lg border-y sm:border border-DGreenC-200"
         >
           <div id="omrade-map" class="absolute inset-0 z-0"></div>
+          <div class="map-grain" aria-hidden="true"></div>
+          <div class="map-vignette" aria-hidden="true"></div>
 
-          <!-- Kategorifilter -->
+          <!-- Filter: bana + kategorier -->
           <div
-            class="absolute top-3 left-3 z-[500] flex flex-col items-start gap-1.5 max-h-[calc(100%-1.5rem)] overflow-y-auto"
-            role="group"
-            aria-label="Visa eller dölj kategorier"
-            data-cat-bar
-          ></div>
-
-          <!-- Verktyg: lagerbyte + min position -->
-          <div
-            class="absolute bottom-3 left-3 z-[500] flex flex-col items-start gap-1.5"
+            class="ctl-panel absolute top-3 left-3 right-3 lg:right-auto lg:w-59 z-1150 p-3"
           >
-            <button type="button" class="map-tool-btn" data-layer-toggle>
-              🗺️ Karta
-            </button>
-            <button type="button" class="map-tool-btn" data-locate>
-              📍 Min position
-            </button>
+            <div data-route-block>
+              <p class="panel-label m-0 mb-1.5 px-0.5">Bana</p>
+              <div class="seg" role="radiogroup" aria-label="Välj bana">
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked="true"
+                  data-route=""
+                >
+                  Område
+                </button>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked="false"
+                  data-route="lang"
+                >
+                  13 km
+                </button>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked="false"
+                  data-route="kort"
+                >
+                  6 km
+                </button>
+              </div>
+              <div class="route-info" data-route-info>
+                <div>
+                  <p
+                    class="flex items-center gap-2 text-[11px] leading-snug text-DGreenC-600 m-0 px-0.5"
+                  >
+                    <span
+                      data-route-dot
+                      class="inline-block w-2.5 h-2.5 rounded-full flex-none"
+                    ></span>
+                    <span data-route-text></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <p class="panel-label m-0 mt-3 mb-1.5 px-0.5">Visa på kartan</p>
+            <div
+              class="flex lg:flex-col items-start gap-1.5 max-lg:overflow-x-auto max-lg:pb-0.5 max-lg:[scrollbar-width:none]"
+              role="group"
+              aria-label="Visa eller dölj kategorier"
+              data-cat-bar
+            ></div>
           </div>
 
-          <!-- Lista (desktop overlay) -->
+          <!-- Verktyg: zoom, lager, min position -->
+          <div
+            class="ctl-panel tool-stack absolute left-3 bottom-21.5 lg:bottom-4 z-1150"
+            data-tools
+          >
+            <button type="button" class="tool-btn" data-zoom-in title="Zooma in" aria-label="Zooma in"></button>
+            <button type="button" class="tool-btn" data-zoom-out title="Zooma ut" aria-label="Zooma ut"></button>
+            <button type="button" class="tool-btn" data-layer-toggle title="Växla till kartläge" aria-label="Växla mellan flygfoto och karta"></button>
+            <button type="button" class="tool-btn" data-locate title="Visa min position" aria-label="Visa min position"></button>
+          </div>
+
+          <!-- Platslista (desktop) -->
           <aside
-            class="hidden lg:flex flex-col absolute top-3 right-3 bottom-3 w-[330px] z-[500] bg-TanC-50/95 backdrop-blur-md border border-DGreenC-200 rounded-xl shadow-lg overflow-hidden"
+            class="hidden lg:flex flex-col absolute top-3 right-3 bottom-3 w-[330px] z-1140 ctl-panel overflow-hidden"
           >
             <div
               class="px-5 pt-4 pb-3 border-b border-DGreenC-100 flex items-baseline justify-between gap-2"
@@ -243,25 +789,30 @@
                 class="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-DGreenC-400"
               ></span>
             </div>
-            <div data-list class="overflow-y-auto p-3 flex flex-col gap-4"></div>
+            <div data-list class="overflow-y-auto px-2 py-3"></div>
           </aside>
-        </div>
 
-        <!-- Lista (mobil/surfplatta — under kartan) -->
-        <div class="lg:hidden px-4 sm:px-0 mt-6">
-          <div class="flex items-baseline justify-between gap-2 mb-3">
-            <h2 class="text-lg font-bold text-DGreenC-800 m-0">
-              Platser på området
-            </h2>
-            <span
-              data-place-count
-              class="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-DGreenC-400"
-            ></span>
+          <!-- Platslista (mobil: bottom sheet) -->
+          <div class="sheet lg:hidden" data-sheet>
+            <button
+              type="button"
+              class="sheet-grip"
+              data-sheet-grip
+              aria-expanded="false"
+            >
+              <span class="sheet-handle" aria-hidden="true"></span>
+              <span class="sheet-head-row">
+                <span class="text-base font-bold text-DGreenC-800"
+                  >Platser på området</span
+                >
+                <span
+                  data-place-count
+                  class="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-DGreenC-400"
+                ></span>
+              </span>
+            </button>
+            <div data-list class="sheet-body"></div>
           </div>
-          <div
-            data-list
-            class="bg-white border border-DGreenC-100 rounded-xl shadow-sm p-3 flex flex-col gap-4"
-          ></div>
         </div>
       </section>
     </main>
@@ -481,10 +1032,50 @@
       </div>
     </footer>
 
-    <!-- KARTA + FILTER -->
+    <!-- KARTA, FILTER, BANOR -->
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         if (typeof L === "undefined") return;
+
+        // ── LINJEIKONER (24×24, stroke) ─────────────────────────────────
+        const ICONS = {
+          swim: '<circle cx="17" cy="6" r="2.1"/><path d="M3 11.5l5.5-3.4 4.3 2.9 2.8-1.4"/><path d="M2.5 16.3c1.6-1.3 3.2-1.3 4.8 0s3.1 1.3 4.7 0 3.2-1.3 4.8 0 3.1 1.3 4.7 0"/><path d="M2.5 20.3c1.6-1.3 3.2-1.3 4.8 0s3.1 1.3 4.7 0 3.2-1.3 4.8 0 3.1 1.3 4.7 0"/>',
+          sauna:
+            '<path d="M7.5 3.2c-.9 1.4.9 2.3 0 3.7"/><path d="M12 3.2c-.9 1.4.9 2.3 0 3.7"/><path d="M16.5 3.2c-.9 1.4.9 2.3 0 3.7"/><rect x="4" y="11.5" width="16" height="4.5" rx="1"/><path d="M6 16v4.5M18 16v4.5"/>',
+          shirt:
+            '<path d="M8.5 4 4 6.5l1.8 3.6L8 9.2V20h8V9.2l2.2.9L20 6.5 15.5 4a3.5 3.5 0 0 1-7 0z"/>',
+          fire: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+          ball: '<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5c2.8 3.6 3.4 8.3 1.6 12.7"/><path d="M3.8 9.6c4.3-.9 8.9 0 12.7 2.8"/>',
+          food: '<path d="M5 10.5c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5H5z"/><path d="M4.5 14h15"/><path d="M5 17.5h14v.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 18z"/>',
+          glass:
+            '<path d="M6 3.5h12l-1.3 15.2a2 2 0 0 1-2 1.8H9.3a2 2 0 0 1-2-1.8z"/><path d="M6.8 10.5c1.7 1.3 3.5 1.3 5.2 0s3.5-1.3 5.2 0"/>',
+          wc: '<text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">WC</text>',
+          p: '<text x="12" y="17.5" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">P</text>',
+          gift: '<rect x="4" y="11.5" width="16" height="8.5" rx="1"/><path d="M3.5 7.5h17v4h-17z"/><path d="M12 7.5V20"/><path d="M12 7.5H8.2a2.1 2.1 0 1 1 0-4.2C10.6 3.3 12 7.5 12 7.5z"/><path d="M12 7.5h3.8a2.1 2.1 0 1 0 0-4.2C13.4 3.3 12 7.5 12 7.5z"/>',
+          mic: '<path d="m3.5 11 17-5.2v11.4L3.5 14z"/><path d="M11.9 16.7a3 3 0 1 1-5.8-1.6"/>',
+          bench:
+            '<path d="M4.5 9.5V6h15v3.5"/><rect x="3" y="10.5" width="18" height="3" rx="1"/><path d="M5.5 13.5V19M18.5 13.5V19"/>',
+          tent: '<path d="M12 4 3 20h18z"/><path d="M12 13l-3.2 7M12 13l3.2 7"/>',
+          drop: '<path d="M12 3.5s6 6.2 6 9.8a6 6 0 0 1-12 0c0-3.6 6-9.8 6-9.8z"/>',
+          flag: '<path d="M6 21V4"/><path d="M6 4.5h11.5l-2.3 3.8 2.3 3.8H6"/>',
+          map: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+          photo:
+            '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9.5" r="1.6"/><path d="M4 17.5l5-5 4 4 3-3 4 4"/>',
+          locate:
+            '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>',
+          plus: '<path d="M12 6v12M6 12h12"/>',
+          minus: '<path d="M6 12h12"/>',
+          chev: '<path d="m9 6 6 6-6 6"/>',
+        };
+        function svgIcon(key, extra) {
+          return (
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' +
+            (extra ? ' class="' + extra + '"' : "") +
+            ">" +
+            ICONS[key] +
+            "</svg>"
+          );
+        }
 
         // ── KATEGORIER ──────────────────────────────────────────────────
         const CATS = {
@@ -493,51 +1084,132 @@
           parkering: { label: "Parkering", color: "#355f79" }, // BlueC-700
           talt: { label: "Tält", color: "#606c38" }, // GreenC-500
         };
+        const enabled = {
+          badbastu: true,
+          service: true,
+          parkering: true,
+          talt: true,
+        };
+        // Vattenstationerna hör till loppet, inte området — de visas
+        // tillsammans med banan när en distans är vald.
+        const WATER = { label: "Vattenstation", color: "#2a9d8f" };
 
         // ── PLATSER ─────────────────────────────────────────────────────
-        // Koordinater från "Koordinater platser.xlsx" (DMS → decimalgrader).
         const PLACES = [
           // Bad & bastu
-          { cat: "badbastu", icon: "🏊", name: "Bad", desc: "Badplatsen — avsluta loppet med ett dopp", coords: [63.300917, 18.328917] },
-          { cat: "badbastu", icon: "🧖", name: "Bastu", desc: "Bastu vid vattnet", coords: [63.300472, 18.329028] },
-          { cat: "badbastu", icon: "👕", name: "Omklädningsrum", desc: "Byt om här före och efter loppet", coords: [63.300722, 18.329611] },
-          { cat: "badbastu", icon: "🔥", name: "Eldstad", desc: "Grillplats och värme", coords: [63.300861, 18.329722] },
-          { cat: "badbastu", icon: "🏐", name: "Volleyboll", desc: "Volleybollplan", coords: [63.300639, 18.329167] },
+          { cat: "badbastu", icon: "swim", name: "Bad", desc: "Badplatsen — avsluta loppet med ett dopp i sjön.", coords: [63.300917, 18.328917] },
+          { cat: "badbastu", icon: "sauna", name: "Bastu", desc: "Bastu vid vattnet.", coords: [63.300472, 18.329028] },
+          { cat: "badbastu", icon: "shirt", name: "Omklädningsrum", desc: "Byt om här före och efter loppet.", coords: [63.300722, 18.329611] },
+          { cat: "badbastu", icon: "fire", name: "Eldstad", desc: "Grillplats och värme.", coords: [63.300861, 18.329722] },
+          { cat: "badbastu", icon: "ball", name: "Volleyboll", desc: "Volleybollplan.", coords: [63.300639, 18.329167] },
           // Service & mat
-          { cat: "service", icon: "🍔", name: "Food truck", desc: "Mat och fika på plats", coords: [63.300694, 18.331083] },
-          { cat: "service", icon: "🚰", name: "Vattenpåfyllning", desc: "Fyll på vattenflaskan", coords: [63.301083, 18.330944] },
-          { cat: "service", icon: "🚻", name: "Toalett/dass (väst)", desc: "Vid badet", coords: [63.3005, 18.329222] },
-          { cat: "service", icon: "🚻", name: "Toalett/dass (öst)", desc: "Vid parkeringen", coords: [63.300556, 18.33175] },
-          { cat: "service", icon: "🎁", name: "Gåvor & goodie bag", desc: "Hämta din goodie bag här", coords: [63.300778, 18.3315] },
-          { cat: "service", icon: "🎤", name: "Speaker", desc: "Speaker och information", coords: [63.300917, 18.33125] },
-          { cat: "service", icon: "🪑", name: "Sittplatser", desc: "Sittplatser och häng", coords: [63.300611, 18.33125] },
-          // Parkering
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 1", desc: "Bilparkering", coords: [63.301556, 18.33125] },
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 2", desc: "Bilparkering", coords: [63.300944, 18.331389] },
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 3", desc: "Bilparkering", coords: [63.301361, 18.332222] },
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 4", desc: "Bilparkering", coords: [63.301528, 18.330583] },
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 5", desc: "Bilparkering", coords: [63.301944, 18.331028] },
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 6", desc: "Bilparkering", coords: [63.302056, 18.330583] },
-          { cat: "parkering", icon: "P", solid: true, name: "Parkering 7", desc: "Bilparkering", coords: [63.301611, 18.330167] },
-          // Tält
-          { cat: "talt", icon: "⛺", solid: true, name: "Tält 1", desc: "Tältplats", coords: [63.300639, 18.330667] },
-          { cat: "talt", icon: "⛺", solid: true, name: "Tält 2", desc: "Tältplats", coords: [63.300944, 18.331111] },
-          { cat: "talt", icon: "⛺", solid: true, name: "Tält 3", desc: "Tältplats", coords: [63.300972, 18.330528] },
-          { cat: "talt", icon: "⛺", solid: true, name: "Tält 4", desc: "Tältplats", coords: [63.30075, 18.330306] },
+          { cat: "service", icon: "food", name: "Food truck", desc: "Mat och fika på plats.", coords: [63.300694, 18.331083] },
+          { cat: "service", icon: "glass", name: "Vattenpåfyllning", desc: "Fyll på vattenflaskan.", coords: [63.301083, 18.330944] },
+          { cat: "service", icon: "wc", name: "Toalett (väst)", desc: "Toalett/dass vid badet.", coords: [63.3005, 18.329222] },
+          { cat: "service", icon: "wc", name: "Toalett (öst)", desc: "Toalett/dass vid parkeringen.", coords: [63.300556, 18.33175] },
+          { cat: "service", icon: "gift", name: "Gåvor & goodie bag", desc: "Hämta din goodie bag här.", coords: [63.300778, 18.3315] },
+          { cat: "service", icon: "mic", name: "Speaker", desc: "Speaker och information.", coords: [63.300917, 18.33125] },
+          { cat: "service", icon: "bench", name: "Sittplatser", desc: "Sittplatser och häng.", coords: [63.300611, 18.33125] },
         ];
 
-        function gmapsUrl(coords) {
-          return (
-            "https://www.google.com/maps/dir/?api=1&destination=" +
-            coords[0] +
-            "," +
-            coords[1]
-          );
+        // Vattenstationer längs banan — visas när en distans är vald
+        const WATER_STATIONS = [
+          { icon: "drop", name: "Vattenstation 1", desc: "Vätska längs löpsträckan.", coords: [63.312167, 18.313028] },
+          { icon: "drop", name: "Vattenstation 2", desc: "Vätska längs löpsträckan.", coords: [63.327667, 18.326528] },
+          { icon: "drop", name: "Vattenstation 3", desc: "Vätska längs löpsträckan.", coords: [63.322667, 18.259833] },
+        ];
+
+        // Ytor — hörnen kommer från raderna i koordinatlistan:
+        // fyra hörn bildar norra parkeringen, tre den östra och
+        // fyra tältområdet.
+        const AREAS = [
+          {
+            cat: "parkering",
+            icon: "p",
+            name: "Norra parkeringen",
+            desc: "Parkeringsyta för bilar. Följ funktionärernas anvisningar.",
+            corners: [
+              [63.301528, 18.330583],
+              [63.301944, 18.331028],
+              [63.302056, 18.330583],
+              [63.301611, 18.330167],
+            ],
+          },
+          {
+            cat: "parkering",
+            icon: "p",
+            name: "Östra parkeringen",
+            desc: "Parkeringsyta för bilar. Följ funktionärernas anvisningar.",
+            corners: [
+              [63.301556, 18.33125],
+              [63.301361, 18.332222],
+              [63.300944, 18.331389],
+            ],
+          },
+          {
+            cat: "talt",
+            icon: "tent",
+            name: "Tältområdet",
+            desc: "Här slår du upp tältet under tävlingshelgen.",
+            corners: [
+              [63.300639, 18.330667],
+              [63.300944, 18.331111],
+              [63.300972, 18.330528],
+              [63.30075, 18.330306],
+            ],
+          },
+        ];
+
+        // ── HJÄLPARE ────────────────────────────────────────────────────
+        function haversine(a, b) {
+          const R = 6371000;
+          const dLat = ((b[0] - a[0]) * Math.PI) / 180;
+          const dLon = ((b[1] - a[1]) * Math.PI) / 180;
+          const s =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos((a[0] * Math.PI) / 180) *
+              Math.cos((b[0] * Math.PI) / 180) *
+              Math.sin(dLon / 2) ** 2;
+          return 2 * R * Math.asin(Math.sqrt(s));
+        }
+        function centroid(pts) {
+          let lat = 0,
+            lng = 0;
+          pts.forEach((p) => {
+            lat += p[0];
+            lng += p[1];
+          });
+          return [lat / pts.length, lng / pts.length];
+        }
+        function kmFmt(m) {
+          return ((Math.round(m / 100) / 10 + "").replace(".", ",")) + " km";
+        }
+        const isDesktop = () =>
+          window.matchMedia("(min-width: 64rem)").matches;
+        // Padding så filterpanelen/listan aldrig skymmer det vi zoomar till
+        function fitPad() {
+          return isDesktop()
+            ? {
+                paddingTopLeft: L.point(268, 32),
+                paddingBottomRight: L.point(366, 72),
+              }
+            : {
+                paddingTopLeft: L.point(20, 152),
+                paddingBottomRight: L.point(20, 112),
+              };
         }
 
-        // ── KARTA ───────────────────────────────────────────────────────
-        const map = L.map("omrade-map", { zoomControl: false });
-        L.control.zoom({ position: "bottomright" }).addTo(map);
+        // ── KARTA & BASLAGER ────────────────────────────────────────────
+        const mapEl = document.getElementById("omrade-map");
+        const map = L.map(mapEl, {
+          zoomControl: false,
+          attributionControl: false,
+          zoomSnap: 0.25,
+          maxZoom: 19,
+        });
+        L.control
+          .attribution({ prefix: false, position: "bottomright" })
+          .addTo(map);
 
         const flygfoto = L.tileLayer(
           "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -558,159 +1230,502 @@
         );
         let satellit = true;
         flygfoto.addTo(map);
+        mapEl.classList.add("basemap-flyg");
 
-        const layerBtn = document.querySelector("[data-layer-toggle]");
-        layerBtn.addEventListener("click", function () {
-          satellit = !satellit;
-          if (satellit) {
-            map.removeLayer(karta);
-            flygfoto.addTo(map);
-            layerBtn.textContent = "🗺️ Karta";
-          } else {
-            map.removeLayer(flygfoto);
-            karta.addTo(map);
-            layerBtn.textContent = "🛰️ Flygfoto";
-          }
+        // ── POPUPS ──────────────────────────────────────────────────────
+        const popOpts = () => ({
+          autoPanPaddingTopLeft: isDesktop()
+            ? L.point(260, 90)
+            : L.point(16, 150),
+          autoPanPaddingBottomRight: isDesktop()
+            ? L.point(360, 40)
+            : L.point(16, 90),
+          maxWidth: 240,
         });
-
-        // ── MARKÖRER ────────────────────────────────────────────────────
-        function makeIcon(place) {
-          const color = CATS[place.cat].color;
-          const cls = "spot-pin" + (place.solid ? " spot-pin-solid" : "");
-          return L.divIcon({
-            className: "",
-            html:
-              '<div class="' +
-              cls +
-              '" style="--pin-color:' +
-              color +
-              ';">' +
-              place.icon +
-              "</div>",
-            iconSize: [30, 30],
-            iconAnchor: [15, 15],
-            popupAnchor: [0, -16],
-          });
-        }
-
-        function popupHtml(place) {
+        function popupHtml(iconKey, color, name, catLabel, desc) {
           return (
-            '<p style="margin:0 0 2px;font-weight:700;font-size:14px;color:#25231e;">' +
-            place.icon +
-            " " +
-            place.name +
-            "</p>" +
-            '<p style="margin:0 0 8px;font-size:12px;color:#595648;">' +
-            place.desc +
-            "</p>" +
-            '<a href="' +
-            gmapsUrl(place.coords) +
-            '" target="_blank" rel="noopener" style="font-size:11px;font-weight:600;color:#355f79;">Öppna i Google Maps ↗</a>'
+            '<div class="pop-head">' +
+            '<span class="pop-ic" style="--pin:' +
+            color +
+            ';">' +
+            svgIcon(iconKey) +
+            "</span>" +
+            '<span><span class="pop-name">' +
+            name +
+            '</span><span class="pop-cat">' +
+            catLabel +
+            "</span></span>" +
+            "</div>" +
+            '<p class="pop-desc">' +
+            desc +
+            "</p>"
           );
         }
 
-        const groups = {};
-        Object.keys(CATS).forEach(function (key) {
-          groups[key] = L.layerGroup().addTo(map);
+        // ── PLATSMARKÖRER ───────────────────────────────────────────────
+        function spotIcon(iconKey, color) {
+          return L.divIcon({
+            className: "",
+            html:
+              '<div class="spot-pin" style="--pin:' +
+              color +
+              ';">' +
+              svgIcon(iconKey) +
+              "</div>",
+            iconSize: [32, 40],
+            iconAnchor: [16, 40],
+            popupAnchor: [0, -38],
+          });
+        }
+        function makeSpotMarker(iconKey, color, name, catLabel, desc, coords) {
+          return L.marker(coords, {
+            icon: spotIcon(iconKey, color),
+            riseOnHover: true,
+          })
+            .bindTooltip(name, {
+              direction: "top",
+              offset: [0, -40],
+              className: "spot-tip",
+            })
+            .bindPopup(
+              popupHtml(iconKey, color, name, catLabel, desc),
+              popOpts(),
+            )
+            .addTo(map);
+        }
+        PLACES.forEach(function (p) {
+          p.marker = makeSpotMarker(
+            p.icon,
+            CATS[p.cat].color,
+            p.name,
+            CATS[p.cat].label,
+            p.desc,
+            p.coords,
+          );
         });
-        PLACES.forEach(function (place) {
-          place.marker = L.marker(place.coords, { icon: makeIcon(place) })
-            .bindTooltip(place.name, { direction: "top", offset: [0, -16] })
-            .bindPopup(popupHtml(place));
-          place.marker.addTo(groups[place.cat]);
+        WATER_STATIONS.forEach(function (ws) {
+          ws.marker = makeSpotMarker(
+            ws.icon,
+            WATER.color,
+            ws.name,
+            WATER.label,
+            ws.desc,
+            ws.coords,
+          );
         });
 
-        // Zooma in så hela området syns; på desktop lämnar vi plats för listan
-        const bounds = L.latLngBounds(PLACES.map((p) => p.coords));
-        const isDesktop = window.matchMedia("(min-width: 64rem)").matches;
-        map.fitBounds(bounds, {
-          paddingTopLeft: [40, 40],
-          paddingBottomRight: isDesktop ? [370, 40] : [40, 40],
-          maxZoom: 18,
+        // ── YTOR (parkering & tält) ─────────────────────────────────────
+        AREAS.forEach(function (area) {
+          const color = CATS[area.cat].color;
+          area.poly = L.polygon(area.corners, {
+            className: "park-poly",
+            color: color,
+            weight: 1.5,
+            opacity: 0.9,
+            fillColor: color,
+            fillOpacity: 0.3,
+            smoothFactor: 0.5,
+          })
+            .bindTooltip(area.name, {
+              sticky: true,
+              className: "spot-tip",
+            })
+            .bindPopup(
+              popupHtml(
+                area.icon,
+                color,
+                area.name,
+                CATS[area.cat].label,
+                area.desc,
+              ),
+              popOpts(),
+            )
+            .addTo(map);
+          area.label = L.marker(centroid(area.corners), {
+            icon: L.divIcon({
+              className: "",
+              html:
+                '<div class="p-face" style="--pin:' +
+                color +
+                ';">' +
+                svgIcon(area.icon) +
+                "</div>",
+              iconSize: [27, 27],
+              iconAnchor: [13, 13],
+              popupAnchor: [0, -14],
+            }),
+          })
+            .bindPopup(
+              popupHtml(
+                area.icon,
+                color,
+                area.name,
+                CATS[area.cat].label,
+                area.desc,
+              ),
+              popOpts(),
+            )
+            .addTo(map);
         });
+
+        // ── SYNLIGHET MED MJUK ANIMATION ────────────────────────────────
+        function setMarkerShown(marker, shown) {
+          const el = marker.getElement();
+          if (el) el.classList.toggle("is-spot-hidden", !shown);
+          if (!shown && marker.isPopupOpen()) marker.closePopup();
+        }
+        function setPathShown(layer, shown) {
+          const el = layer.getElement();
+          if (el) el.classList.toggle("is-fade-hidden", !shown);
+          if (!shown && layer.isPopupOpen && layer.isPopupOpen())
+            layer.closePopup();
+        }
+        function applyCatVisibility(key) {
+          const on = enabled[key];
+          AREAS.filter((a) => a.cat === key).forEach(function (area) {
+            setPathShown(area.poly, on);
+            setMarkerShown(area.label, on);
+          });
+          PLACES.filter((p) => p.cat === key).forEach((p) =>
+            setMarkerShown(p.marker, on),
+          );
+        }
+
+        // ── BANOR (GeoJSON → Leaflet) ───────────────────────────────────
+        const ROUTES = {
+          lang: {
+            btn: "13 km",
+            label: "Lång distans",
+            color: "#d1a215", // YellowC-600
+            km: "13,4 km", // officiell distans (samma som startsidan)
+            elev: "+199 m stigning",
+            file: "Rutter/swimrun/Byathlon-sammanslagen-bana.geojson",
+          },
+          kort: {
+            btn: "6 km",
+            label: "Kort & motion",
+            color: "#606c38", // GreenC-500
+            km: "5,5 km",
+            elev: "+117 m stigning",
+            file: "Rutter/swimrun/Löpning-kort.geojson",
+          },
+        };
+        let activeRoute = null;
+        let routesReady = false;
+
+        function extractCoords(geoJson) {
+          const geom = geoJson.features[0].geometry;
+          const raw =
+            geom.type === "MultiLineString"
+              ? geom.coordinates.flat()
+              : geom.coordinates;
+          return raw.map((c) => [c[1], c[0]]);
+        }
+
+        function raceMarker(coords, caption) {
+          return L.marker(coords, {
+            icon: L.divIcon({
+              className: "",
+              html:
+                '<div class="race-pin"><div class="spot-pin" style="--pin:#36342b;">' +
+                svgIcon("flag") +
+                '</div><span class="race-cap">' +
+                caption +
+                "</span></div>",
+              iconSize: [32, 40],
+              iconAnchor: [16, 40],
+            }),
+            interactive: false,
+            zIndexOffset: 500,
+          }).addTo(map);
+        }
+
+        function initRoute(key, coords) {
+          const r = ROUTES[key];
+          r.coords = coords;
+          if (!r.km) {
+            let dist = 0;
+            for (let i = 1; i < coords.length; i++)
+              dist += haversine(coords[i - 1], coords[i]);
+            r.km = kmFmt(dist);
+          }
+          // Vilka vattenstationer ligger längs just den här banan?
+          r.stations = WATER_STATIONS.filter(function (ws) {
+            let min = Infinity;
+            for (let i = 0; i < coords.length; i += 2) {
+              const d = haversine(ws.coords, coords[i]);
+              if (d < min) min = d;
+            }
+            return min < 200;
+          });
+          r.bounds = L.latLngBounds(coords);
+          r.casing = L.polyline(coords, {
+            className: "rt-casing",
+            weight: 8,
+            interactive: false,
+            smoothFactor: 1.5,
+          }).addTo(map);
+          r.line = L.polyline(coords, {
+            className: "rt-line is-dim",
+            color: r.color,
+            weight: 3,
+            interactive: false,
+            smoothFactor: 1.5,
+          }).addTo(map);
+          // Start/mål — en gemensam flagga om banan är en slinga,
+          // annars separata start- och målflaggor
+          const a = coords[0],
+            b = coords[coords.length - 1];
+          r.raceMarkers =
+            haversine(a, b) < 60
+              ? [raceMarker(a, "START & MÅL")]
+              : [raceMarker(a, "START"), raceMarker(b, "MÅL")];
+          r.raceMarkers.forEach((m) => setMarkerShown(m, false));
+        }
+
+        // ── VYER / FITBOUNDS ────────────────────────────────────────────
+        function arenaBounds() {
+          const bounds = L.latLngBounds([]);
+          PLACES.forEach((p) => bounds.extend(p.coords));
+          AREAS.forEach((a) => a.corners.forEach((c) => bounds.extend(c)));
+          return bounds;
+        }
+        function flyToView(bounds, instant) {
+          const opts = Object.assign({ maxZoom: 17.5, duration: 1.1 }, fitPad());
+          if (instant) map.fitBounds(bounds, opts);
+          else map.flyToBounds(bounds, opts);
+        }
+
+        // ── DISTANSVÄLJARE ──────────────────────────────────────────────
+        const segBtns = document.querySelectorAll("[data-route]");
+        const routeInfo = document.querySelector("[data-route-info]");
+        const routeDot = document.querySelector("[data-route-dot]");
+        const routeText = document.querySelector("[data-route-text]");
+
+        function selectRoute(key) {
+          if (!routesReady) return;
+          activeRoute = key || null;
+          segBtns.forEach((b) =>
+            b.setAttribute(
+              "aria-checked",
+              String((b.dataset.route || null) === activeRoute),
+            ),
+          );
+          Object.keys(ROUTES).forEach(function (k) {
+            const r = ROUTES[k];
+            if (!r.line) return;
+            const lineEl = r.line.getElement();
+            const caseEl = r.casing.getElement();
+            if (!lineEl || !caseEl) return;
+            if (!activeRoute) {
+              lineEl.classList.remove("is-off", "is-active");
+              lineEl.classList.add("is-dim");
+              caseEl.classList.remove("is-active", "is-off");
+            } else if (k === activeRoute) {
+              lineEl.classList.remove("is-off", "is-dim");
+              lineEl.classList.add("is-active");
+              caseEl.classList.remove("is-off");
+              caseEl.classList.add("is-active");
+            } else {
+              lineEl.classList.add("is-off");
+              caseEl.classList.remove("is-active");
+              caseEl.classList.add("is-off");
+            }
+            r.raceMarkers.forEach((m) =>
+              setMarkerShown(m, k === activeRoute),
+            );
+          });
+
+          // Vattenstationerna hör till loppet — visa de som ligger längs
+          // vald bana, göm alla när ingen bana är vald
+          WATER_STATIONS.forEach(function (ws) {
+            setMarkerShown(
+              ws.marker,
+              !!activeRoute && ROUTES[activeRoute].stations.includes(ws),
+            );
+          });
+          renderList();
+
+          if (activeRoute) {
+            const r = ROUTES[activeRoute];
+            routeDot.style.background = r.color;
+            routeText.textContent =
+              r.label +
+              " — " +
+              r.km +
+              " · " +
+              r.elev +
+              " · " +
+              (r.stations.length === 1
+                ? "1 vattenstation"
+                : r.stations.length + " vattenstationer");
+            routeInfo.classList.add("is-on");
+            const bounds = L.latLngBounds(r.bounds.getSouthWest(), r.bounds.getNorthEast());
+            r.stations.forEach((p) => bounds.extend(p.coords));
+            flyToView(bounds);
+          } else {
+            routeInfo.classList.remove("is-on");
+            flyToView(arenaBounds());
+          }
+        }
+        segBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            selectRoute(btn.dataset.route || null);
+          });
+        });
+
+        Promise.all(
+          Object.keys(ROUTES).map(function (key) {
+            return fetch(encodeURI(ROUTES[key].file))
+              .then((r) => {
+                if (!r.ok) throw new Error(ROUTES[key].file + ": " + r.status);
+                return r.json();
+              })
+              .then((json) => initRoute(key, extractCoords(json)));
+          }),
+        )
+          .then(function () {
+            routesReady = true;
+          })
+          .catch(function (err) {
+            console.error("Kunde inte ladda banorna:", err);
+            const block = document.querySelector("[data-route-block]");
+            if (block) block.style.display = "none";
+          });
 
         // ── KATEGORIKNAPPAR ─────────────────────────────────────────────
-        const enabled = {};
         const catBar = document.querySelector("[data-cat-bar]");
+        const catBtn = {};
+        function syncCatBtn(key) {
+          catBtn[key].setAttribute("aria-pressed", String(enabled[key]));
+        }
         Object.keys(CATS).forEach(function (key) {
-          enabled[key] = true;
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = "cat-btn";
           btn.style.setProperty("--cat-color", CATS[key].color);
-          btn.setAttribute("aria-pressed", "true");
-          btn.innerHTML =
-            '<span class="cat-dot"></span>' + CATS[key].label;
+          btn.innerHTML = '<span class="cat-dot"></span>' + CATS[key].label;
           btn.addEventListener("click", function () {
             enabled[key] = !enabled[key];
-            btn.setAttribute("aria-pressed", String(enabled[key]));
-            if (enabled[key]) groups[key].addTo(map);
-            else map.removeLayer(groups[key]);
+            syncCatBtn(key);
+            applyCatVisibility(key);
             renderList();
           });
+          catBtn[key] = btn;
           catBar.appendChild(btn);
+          syncCatBtn(key);
         });
 
-        // ── LISTA ───────────────────────────────────────────────────────
+        // ── PLATSLISTA ──────────────────────────────────────────────────
+        function listItem(idx, iconKey, color, name, desc, delay, dataAttr) {
+          return (
+            '<button type="button" class="place-item" ' +
+            dataAttr +
+            '="' +
+            idx +
+            '" style="--pin:' +
+            color +
+            ";animation-delay:" +
+            delay +
+            'ms;">' +
+            '<span class="place-ic">' +
+            svgIcon(iconKey) +
+            "</span>" +
+            '<span class="min-w-0"><span class="block text-[13px] font-semibold text-DGreenC-800 leading-tight">' +
+            name +
+            '</span><span class="block text-[11px] text-DGreenC-400 leading-snug">' +
+            desc +
+            "</span></span>" +
+            svgIcon("chev", "chev") +
+            "</button>"
+          );
+        }
+        function sectionHtml(color, label, items) {
+          return (
+            '<div class="place-sec">' +
+            '<p class="place-sec-head panel-label m-0">' +
+            '<span class="inline-block w-2 h-2 rounded-full" style="background:' +
+            color +
+            ';"></span>' +
+            label +
+            "</p>" +
+            items +
+            "</div>"
+          );
+        }
         function renderList() {
           let count = 0;
-          const html = Object.keys(CATS)
+          let delay = 0;
+          const sections = [];
+          // Vald banas vattenstationer överst
+          if (activeRoute && ROUTES[activeRoute].stations) {
+            const r = ROUTES[activeRoute];
+            const items = r.stations
+              .map(function (ws) {
+                count++;
+                delay += 25;
+                return listItem(
+                  WATER_STATIONS.indexOf(ws),
+                  ws.icon,
+                  WATER.color,
+                  ws.name,
+                  ws.desc,
+                  delay,
+                  "data-station",
+                );
+              })
+              .join("");
+            if (items)
+              sections.push(
+                sectionHtml(WATER.color, "Längs banan · " + r.btn, items),
+              );
+          }
+          Object.keys(CATS)
             .filter((key) => enabled[key])
-            .map(function (key) {
-              const places = PLACES.filter((p) => p.cat === key);
-              count += places.length;
-              const items = places
-                .map(function (p) {
-                  const idx = PLACES.indexOf(p);
-                  return (
-                    '<li class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-TanC-100 transition-colors cursor-pointer" data-place="' +
-                    idx +
-                    '">' +
-                    '<span class="text-base leading-none mt-0.5">' +
-                    p.icon +
-                    "</span>" +
-                    '<span class="min-w-0 flex-1">' +
-                    '<span class="block text-sm font-semibold text-DGreenC-800 leading-tight">' +
-                    p.name +
-                    "</span>" +
-                    '<span class="block text-xs text-DGreenC-400 leading-snug">' +
-                    p.desc +
-                    "</span>" +
-                    "</span>" +
-                    '<a href="' +
-                    gmapsUrl(p.coords) +
-                    '" target="_blank" rel="noopener" aria-label="Öppna ' +
-                    p.name +
-                    ' i Google Maps" class="font-mono text-[0.6rem] font-semibold text-BlueC-700 hover:text-BlueC-500 mt-1 whitespace-nowrap">GPS ↗</a>' +
-                    "</li>"
+            .forEach(function (key) {
+              let items = AREAS.filter((a) => a.cat === key)
+                .map(function (area) {
+                  count++;
+                  delay += 25;
+                  return listItem(
+                    AREAS.indexOf(area),
+                    area.icon,
+                    CATS[key].color,
+                    area.name,
+                    area.desc,
+                    delay,
+                    "data-area",
                   );
                 })
                 .join("");
-              return (
-                "<div>" +
-                '<p class="flex items-center gap-2 font-mono text-[0.6rem] font-semibold tracking-[0.18em] uppercase text-DGreenC-400 mb-1 px-2">' +
-                '<span class="inline-block w-2 h-2 rounded-full" style="background:' +
-                CATS[key].color +
-                ';"></span>' +
-                CATS[key].label +
-                "</p>" +
-                '<ul class="list-none m-0 p-0 flex flex-col">' +
-                items +
-                "</ul>" +
-                "</div>"
-              );
-            })
-            .join("");
+              items += PLACES.filter((p) => p.cat === key)
+                .map(function (p) {
+                  count++;
+                  delay += 25;
+                  return listItem(
+                    PLACES.indexOf(p),
+                    p.icon,
+                    CATS[key].color,
+                    p.name,
+                    p.desc,
+                    delay,
+                    "data-place",
+                  );
+                })
+                .join("");
+              if (items)
+                sections.push(sectionHtml(CATS[key].color, CATS[key].label, items));
+            });
+          const html = sections.join("");
           document.querySelectorAll("[data-list]").forEach(function (el) {
             el.innerHTML =
               html ||
-              '<p class="text-sm text-DGreenC-400 p-2 m-0">Inga kategorier valda.</p>';
+              '<p class="text-sm text-DGreenC-400 p-3 m-0">Inga kategorier valda.</p>';
           });
           document
             .querySelectorAll("[data-place-count]")
             .forEach(function (el) {
-              el.textContent =
-                count === 1 ? "1 plats" : count + " platser";
+              el.textContent = count === 1 ? "1 plats" : count + " platser";
             });
         }
         renderList();
@@ -718,65 +1733,158 @@
         // Klick i listan → flyg till platsen och öppna popup
         document.querySelectorAll("[data-list]").forEach(function (el) {
           el.addEventListener("click", function (e) {
-            if (e.target.closest("a")) return; // GPS-länken sköter sig själv
-            const item = e.target.closest("[data-place]");
+            const item = e.target.closest(
+              "[data-place],[data-area],[data-station]",
+            );
             if (!item) return;
-            const place = PLACES[Number(item.dataset.place)];
-            const mapEl = document.getElementById("omrade-map");
-            if (mapEl.getBoundingClientRect().bottom < 0) {
-              mapEl.scrollIntoView({ behavior: "smooth" });
+            closeSheet();
+            if (item.dataset.area !== undefined) {
+              const area = AREAS[Number(item.dataset.area)];
+              map.flyToBounds(area.poly.getBounds(), {
+                maxZoom: 17.5,
+                duration: 0.8,
+                paddingTopLeft: fitPad().paddingTopLeft,
+                paddingBottomRight: fitPad().paddingBottomRight,
+              });
+              area.poly.openPopup();
+            } else if (item.dataset.station !== undefined) {
+              const ws = WATER_STATIONS[Number(item.dataset.station)];
+              map.flyTo(ws.coords, 15.5, { duration: 0.8 });
+              ws.marker.openPopup();
+            } else {
+              const place = PLACES[Number(item.dataset.place)];
+              map.flyTo(place.coords, Math.max(map.getZoom(), 17), {
+                duration: 0.8,
+              });
+              place.marker.openPopup();
             }
-            map.flyTo(place.coords, Math.max(map.getZoom(), 17), {
-              duration: 0.7,
-            });
-            place.marker.openPopup();
           });
         });
 
-        // ── MIN POSITION ────────────────────────────────────────────────
-        let meMarker = null;
-        let meCircle = null;
-        document
-          .querySelector("[data-locate]")
-          .addEventListener("click", function () {
-            if (!navigator.geolocation) {
-              alert("Din webbläsare stödjer inte positionering.");
-              return;
-            }
-            navigator.geolocation.getCurrentPosition(
-              function (pos) {
-                const ll = [pos.coords.latitude, pos.coords.longitude];
-                if (meMarker) {
-                  meMarker.setLatLng(ll);
-                  meCircle.setLatLng(ll).setRadius(pos.coords.accuracy);
-                } else {
-                  meMarker = L.marker(ll, {
-                    icon: L.divIcon({
-                      className: "",
-                      html: '<div class="me-pin"></div>',
-                      iconSize: [16, 16],
-                      iconAnchor: [8, 8],
-                    }),
-                  })
-                    .bindTooltip("Du är här")
-                    .addTo(map);
-                  meCircle = L.circle(ll, {
-                    radius: pos.coords.accuracy,
-                    color: "#cf2626",
-                    weight: 1,
-                    fillOpacity: 0.08,
-                  }).addTo(map);
-                }
-                map.flyTo(ll, Math.max(map.getZoom(), 16), { duration: 0.7 });
-              },
-              function () {
-                alert(
-                  "Kunde inte hämta din position. Kontrollera att platstjänster är påslagna.",
-                );
-              },
-              { enableHighAccuracy: true, timeout: 10000 },
-            );
-          });
+        // ── VERKTYG ─────────────────────────────────────────────────────
+        const zin = document.querySelector("[data-zoom-in]");
+        const zout = document.querySelector("[data-zoom-out]");
+        const layerBtn = document.querySelector("[data-layer-toggle]");
+        const locateBtn = document.querySelector("[data-locate]");
+        zin.innerHTML = svgIcon("plus");
+        zout.innerHTML = svgIcon("minus");
+        layerBtn.innerHTML = svgIcon("map");
+        locateBtn.innerHTML = svgIcon("locate");
+        zin.addEventListener("click", () => map.zoomIn());
+        zout.addEventListener("click", () => map.zoomOut());
+
+        layerBtn.addEventListener("click", function () {
+          satellit = !satellit;
+          if (satellit) {
+            map.removeLayer(karta);
+            flygfoto.addTo(map);
+            layerBtn.innerHTML = svgIcon("map");
+            layerBtn.title = "Växla till kartläge";
+          } else {
+            map.removeLayer(flygfoto);
+            karta.addTo(map);
+            layerBtn.innerHTML = svgIcon("photo");
+            layerBtn.title = "Växla till flygfoto";
+          }
+          mapEl.classList.toggle("basemap-flyg", satellit);
+          mapEl.classList.toggle("basemap-karta", !satellit);
+        });
+
+        let meMarker = null,
+          meCircle = null;
+        locateBtn.addEventListener("click", function () {
+          if (!navigator.geolocation) {
+            alert("Din webbläsare stödjer inte positionering.");
+            return;
+          }
+          navigator.geolocation.getCurrentPosition(
+            function (pos) {
+              const ll = [pos.coords.latitude, pos.coords.longitude];
+              if (meMarker) {
+                meMarker.setLatLng(ll);
+                meCircle.setLatLng(ll).setRadius(pos.coords.accuracy);
+              } else {
+                meMarker = L.marker(ll, {
+                  icon: L.divIcon({
+                    className: "",
+                    html: '<div class="me-pin"></div>',
+                    iconSize: [16, 16],
+                    iconAnchor: [8, 8],
+                  }),
+                  interactive: false,
+                }).addTo(map);
+                meCircle = L.circle(ll, {
+                  radius: pos.coords.accuracy,
+                  color: "#cf2626",
+                  weight: 1,
+                  fillOpacity: 0.08,
+                  interactive: false,
+                }).addTo(map);
+              }
+              map.flyTo(ll, Math.max(map.getZoom(), 16), { duration: 0.8 });
+            },
+            function () {
+              alert(
+                "Kunde inte hämta din position. Kontrollera att platstjänster är påslagna.",
+              );
+            },
+            { enableHighAccuracy: true, timeout: 10000 },
+          );
+        });
+
+        // ── BOTTOM SHEET (mobil) ────────────────────────────────────────
+        const sheet = document.querySelector("[data-sheet]");
+        const grip = document.querySelector("[data-sheet-grip]");
+        let sheetOpen = false;
+        function setSheet(open) {
+          sheetOpen = open;
+          sheet.classList.toggle("is-open", open);
+          grip.setAttribute("aria-expanded", String(open));
+        }
+        function closeSheet() {
+          if (sheetOpen && !isDesktop()) setSheet(false);
+        }
+        let dragStartY = null,
+          dragMoved = false;
+        grip.addEventListener("pointerdown", function (e) {
+          dragStartY = e.clientY;
+          dragMoved = false;
+          sheet.classList.add("is-dragging");
+          grip.setPointerCapture(e.pointerId);
+        });
+        grip.addEventListener("pointermove", function (e) {
+          if (dragStartY === null) return;
+          const dy = e.clientY - dragStartY;
+          if (Math.abs(dy) > 6) dragMoved = true;
+          const h = sheet.getBoundingClientRect().height;
+          const closedOffset = h - 62;
+          const base = sheetOpen ? 0 : closedOffset;
+          const y = Math.min(closedOffset, Math.max(0, base + dy));
+          sheet.style.transform = "translateY(" + y + "px)";
+        });
+        grip.addEventListener("pointerup", function (e) {
+          if (dragStartY === null) return;
+          const dy = e.clientY - dragStartY;
+          sheet.classList.remove("is-dragging");
+          sheet.style.transform = "";
+          if (dragMoved) {
+            if (dy < -50) setSheet(true);
+            else if (dy > 50) setSheet(false);
+          } else {
+            setSheet(!sheetOpen);
+          }
+          dragStartY = null;
+        });
+        grip.addEventListener("pointercancel", function () {
+          sheet.classList.remove("is-dragging");
+          sheet.style.transform = "";
+          dragStartY = null;
+        });
+
+        // ── STARTVY ─────────────────────────────────────────────────────
+        Object.keys(CATS).forEach(applyCatVisibility);
+        WATER_STATIONS.forEach((ws) => setMarkerShown(ws.marker, false));
+        flyToView(arenaBounds(), true);
       });
     </script>
   </body>

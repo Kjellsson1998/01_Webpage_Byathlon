@@ -9,10 +9,26 @@
     <title>Områdeskarta — Byathlon 2026</title>
     <meta
       name="description"
-      content="Interaktiv karta över tävlingsområdet vid By badplats — parkering, bad, bastu, toaletter, vattenstationer och båda löpbanorna (13 km & 6 km)."
+      content="Interaktiv karta över tävlingsområdet vid By badplats — parkering, start & mål, sekretariat, bad, bastu, vattenstationer, båda löpbanorna (13 km & 6 km) och dagens tidtabell."
     />
-    <meta name="robots" content="noindex, follow" />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#283618" />
+    <link rel="canonical" href="https://byathlon.se/omradeskarta.html" />
+
+    <!-- Open Graph (Facebook, Messenger, WhatsApp) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Byathlon" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:url" content="https://byathlon.se/omradeskarta.html" />
+    <meta property="og:title" content="Områdeskarta — Byathlon 2026" />
+    <meta
+      property="og:description"
+      content="Hitta rätt på tävlingsdagen: parkering, start & mål, sekretariat, bad, bastu och vattenstationer vid By badplats — och dagens tidtabell."
+    />
+    <meta
+      property="og:image"
+      content="https://byathlon.se/Image/Byathlon_Loga.png"
+    />
     <link href="src/output.css" rel="stylesheet" />
     <link
       rel="icon"
@@ -686,15 +702,21 @@
         </div>
         <p class="text-DGreenC-500 text-sm max-w-2xl leading-relaxed">
           Allt du behöver hitta på tävlingsdagen — parkering,
-          bad, bastu och toaletter. Välj bana för att se hela löpsträckan
-          med start, mål och vattenstationer, tänd och släck kategorier,
-          och klicka på en plats för mer info.
+          sekretariat, bad, bastu och toaletter. Välj bana för att se hela
+          löpsträckan med start, mål och vattenstationer, tänd och släck
+          kategorier, och klicka på en plats för mer info.
           <a
             href="https://maps.app.goo.gl/jntzb9tVsKfoDEnt8"
             target="_blank"
             rel="noopener"
             class="text-DGreenC-700 font-medium underline underline-offset-4 hover:text-YellowC-600 transition-colors"
             >Hitta till By badplats&nbsp;&#8599;</a
+          >
+          &middot;
+          <a
+            href="#tidtabell"
+            class="text-DGreenC-700 font-medium underline underline-offset-4 hover:text-YellowC-600 transition-colors"
+            >Dagens tidtabell&nbsp;&#8595;</a
           >
         </p>
       </div>
@@ -812,6 +834,97 @@
               </span>
             </button>
             <div data-list class="sheet-body"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIDTABELL -->
+      <section
+        id="tidtabell"
+        class="max-w-6xl mx-auto px-4 sm:px-6 mt-10 sm:mt-14 scroll-mt-24"
+      >
+        <div
+          class="bg-white/70 border border-DGreenC-200 rounded-2xl shadow-lg p-5 sm:p-7 max-w-2xl"
+        >
+          <p
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+          >
+            Lördag 25 juli
+          </p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-DGreenC-800 mb-2">
+            Tidtabell
+          </h2>
+          <div class="flex h-[3px] rounded-sm overflow-hidden w-24 mb-6">
+            <span class="flex-1 bg-BlueC-500"></span>
+            <span class="flex-1 bg-YellowC-400"></span>
+            <span class="flex-1 bg-GreenC-500"></span>
+          </div>
+          <div class="relative ml-2 pl-8 border-l-2 border-DGreenC-200">
+            <div class="relative pb-5">
+              <div
+                class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-white"
+              ></div>
+              <p class="font-mono text-xs font-bold text-DGreenC-500">15:00</p>
+              <p class="text-sm font-semibold text-DGreenC-700">
+                Välkommen — området öppnar
+              </p>
+            </div>
+            <div class="relative pb-5">
+              <div
+                class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-white"
+              ></div>
+              <p class="font-mono text-xs font-bold text-DGreenC-500">
+                15:00&ndash;15:50
+              </p>
+              <p class="text-sm font-semibold text-DGreenC-700">
+                Uthämtning av nummerlappar
+              </p>
+              <p class="text-xs text-DGreenC-500 mt-0.5">
+                Vid sekretariatet — se kartan ovan
+              </p>
+            </div>
+            <div class="relative pb-5">
+              <div
+                class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-white"
+              ></div>
+              <p class="font-mono text-xs font-bold text-DGreenC-500">15:45</p>
+              <p class="text-sm font-semibold text-DGreenC-700">
+                Gemensam genomgång
+              </p>
+            </div>
+            <div class="relative pb-5">
+              <div
+                class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-YellowC-400 border-2 border-white shadow"
+              ></div>
+              <p class="font-mono text-xs font-bold text-YellowC-700">16:00</p>
+              <p class="text-[0.95rem] font-bold text-DGreenC-800">
+                START — gemensam start för alla klasser
+              </p>
+              <p class="text-xs text-DGreenC-500 mt-0.5">
+                Startled: Lång först, sedan Kort, sist Motion (motionärer med
+                hund längst bak)
+              </p>
+            </div>
+            <div class="relative pb-5">
+              <div
+                class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-white"
+              ></div>
+              <p class="font-mono text-xs font-bold text-DGreenC-500">
+                ~17:00
+              </p>
+              <p class="text-sm font-semibold text-DGreenC-700">
+                Foodtruck — PMP strEATfood
+              </p>
+            </div>
+            <div class="relative">
+              <div
+                class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-DGreenC-300 border-2 border-white"
+              ></div>
+              <p class="font-mono text-xs font-bold text-DGreenC-500">17:15</p>
+              <p class="text-sm font-semibold text-DGreenC-700">
+                Varm bastu &amp; volleyboll
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -1051,8 +1164,10 @@
             '<path d="M6 3.5h12l-1.3 15.2a2 2 0 0 1-2 1.8H9.3a2 2 0 0 1-2-1.8z"/><path d="M6.8 10.5c1.7 1.3 3.5 1.3 5.2 0s3.5-1.3 5.2 0"/>',
           wc: '<text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">WC</text>',
           p: '<text x="12" y="17.5" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" stroke="none" font-family="ui-monospace,monospace">P</text>',
-          gift: '<rect x="4" y="11.5" width="16" height="8.5" rx="1"/><path d="M3.5 7.5h17v4h-17z"/><path d="M12 7.5V20"/><path d="M12 7.5H8.2a2.1 2.1 0 1 1 0-4.2C10.6 3.3 12 7.5 12 7.5z"/><path d="M12 7.5h3.8a2.1 2.1 0 1 0 0-4.2C13.4 3.3 12 7.5 12 7.5z"/>',
-          mic: '<path d="m3.5 11 17-5.2v11.4L3.5 14z"/><path d="M11.9 16.7a3 3 0 1 1-5.8-1.6"/>',
+          info: '<circle cx="12" cy="12" r="8.5"/><path d="M12 8.1h.01"/><path d="M12 11.6v4.9"/>',
+          clipboard:
+            '<rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="M8.5 12h7M8.5 15.5h4.5"/>',
+          kubb: '<rect x="4" y="9.5" width="4.2" height="10" rx="0.8"/><rect x="15.8" y="9.5" width="4.2" height="10" rx="0.8"/><rect x="9.9" y="5.5" width="4.2" height="14" rx="0.8"/>',
           bench:
             '<path d="M4.5 9.5V6h15v3.5"/><rect x="3" y="10.5" width="18" height="3" rx="1"/><path d="M5.5 13.5V19M18.5 13.5V19"/>',
           drop: '<path d="M12 3.5s6 6.2 6 9.8a6 6 0 0 1-12 0c0-3.6 6-9.8 6-9.8z"/>',
@@ -1099,47 +1214,52 @@
           { cat: "badbastu", icon: "shirt", name: "Omklädningsrum", desc: "Byt om här före och efter loppet.", coords: [63.300722, 18.329611] },
           { cat: "badbastu", icon: "fire", name: "Eldstad", desc: "Grillplats och värme.", coords: [63.300861, 18.329722] },
           { cat: "badbastu", icon: "ball", name: "Volleyboll", desc: "Volleybollplan.", coords: [63.300639, 18.329167] },
+          { cat: "badbastu", icon: "kubb", name: "Kubbspel", desc: "Kubbspel för stora och små.", coords: [63.300889, 18.330861] },
           // Service & mat
           { cat: "service", icon: "food", name: "Food truck", desc: "Mat och fika på plats.", coords: [63.300694, 18.331083] },
           { cat: "service", icon: "glass", name: "Vattenpåfyllning", desc: "Fyll på vattenflaskan.", coords: [63.301083, 18.330944] },
           { cat: "service", icon: "wc", name: "Toalett (väst)", desc: "Toalett/dass vid badet.", coords: [63.3005, 18.329222] },
           { cat: "service", icon: "wc", name: "Toalett (öst)", desc: "Toalett/dass vid parkeringen.", coords: [63.300556, 18.33175] },
-          { cat: "service", icon: "gift", name: "Gåvor & goodie bag", desc: "Hämta din goodie bag här.", coords: [63.300778, 18.3315] },
-          { cat: "service", icon: "mic", name: "Speaker", desc: "Speaker och information.", coords: [63.300917, 18.33125] },
+          // Egna pin-färger så att sekretariat och info sticker ut från övrig service
+          { cat: "service", icon: "clipboard", name: "Sekretariat & nummerlappar", desc: "Här hämtar du din nummerlapp före loppet.", coords: [63.301, 18.331056], color: "#cf2626" }, // RedC-500
+          { cat: "service", icon: "info", name: "Information", desc: "Information och frågor.", coords: [63.300806, 18.33075], color: "#606c38" }, // GreenC-500
+
           { cat: "service", icon: "bench", name: "Sittplatser", desc: "Sittplatser och häng.", coords: [63.300611, 18.33125] },
         ];
 
-        // Vattenstationer längs banan — visas när en distans är vald
+        // Vattenstationer längs banorna — visas när en distans är vald.
+        // routes anger vilka banor stationen hör till (lang = 13 km, kort = 6 km).
         const WATER_STATIONS = [
-          { icon: "drop", name: "Vattenstation 1", desc: "Vätska längs löpsträckan.", coords: [63.312167, 18.313028] },
-          { icon: "drop", name: "Vattenstation 2", desc: "Vätska längs löpsträckan.", coords: [63.327667, 18.326528] },
-          { icon: "drop", name: "Vattenstation 3", desc: "Vätska längs löpsträckan.", coords: [63.322667, 18.259833] },
+          { icon: "drop", name: "Vattenstation 1", desc: "Vätska längs löpsträckan.", coords: [63.31225, 18.334361], routes: ["lang", "kort"] },
+          { icon: "drop", name: "Vattenstation 2", desc: "Vätska längs löpsträckan.", coords: [63.31175, 18.308611], routes: ["lang", "kort"] },
+          { icon: "drop", name: "Vattenstation 3", desc: "Vätska längs löpsträckan.", coords: [63.322694, 18.259944], routes: ["lang"] },
+          { icon: "drop", name: "Vattenstation 4", desc: "Vätska längs löpsträckan.", coords: [63.324028, 18.334361], routes: ["lang"] },
         ];
 
-        // Ytor — hörnen kommer från raderna i koordinatlistan:
-        // fyra hörn bildar norra parkeringen och tre den östra.
+        // Start & mål — gemensam fast punkt för båda banorna
+        const START_MAL = [63.301028, 18.331222];
+
+        // Ytor — parkeringens hörn i samma ordning som koordinatlistan.
+        // labelPos: P-brickans läge (ytan är vinklad så centroiden hamnar utanför).
         const AREAS = [
           {
             cat: "parkering",
             icon: "p",
-            name: "Norra parkeringen",
+            name: "Parkering",
             desc: "Parkeringsyta för bilar. Följ funktionärernas anvisningar.",
-            corners: [
-              [63.301528, 18.330583],
-              [63.301944, 18.331028],
-              [63.302056, 18.330583],
-              [63.301611, 18.330167],
-            ],
-          },
-          {
-            cat: "parkering",
-            icon: "p",
-            name: "Östra parkeringen",
-            desc: "Parkeringsyta för bilar. Följ funktionärernas anvisningar.",
+            labelPos: [63.30105, 18.33235],
             corners: [
               [63.301556, 18.33125],
-              [63.301361, 18.332222],
-              [63.300944, 18.331389],
+              [63.301361, 18.331194],
+              [63.301083, 18.331306],
+              [63.300889, 18.331528],
+              [63.300667, 18.332639],
+              [63.301306, 18.333194],
+              [63.3015, 18.332444],
+              [63.300944, 18.331889],
+              [63.300972, 18.331611],
+              [63.301139, 18.331417],
+              [63.301556, 18.331306],
             ],
           },
         ];
@@ -1280,7 +1400,7 @@
         PLACES.forEach(function (p) {
           p.marker = makeSpotMarker(
             p.icon,
-            CATS[p.cat].color,
+            p.color || CATS[p.cat].color,
             p.name,
             CATS[p.cat].label,
             p.desc,
@@ -1325,7 +1445,7 @@
               popOpts(),
             )
             .addTo(map);
-          area.label = L.marker(centroid(area.corners), {
+          area.label = L.marker(area.labelPos || centroid(area.corners), {
             icon: L.divIcon({
               className: "",
               html:
@@ -1433,15 +1553,8 @@
               dist += haversine(coords[i - 1], coords[i]);
             r.km = kmFmt(dist);
           }
-          // Vilka vattenstationer ligger längs just den här banan?
-          r.stations = WATER_STATIONS.filter(function (ws) {
-            let min = Infinity;
-            for (let i = 0; i < coords.length; i += 2) {
-              const d = haversine(ws.coords, coords[i]);
-              if (d < min) min = d;
-            }
-            return min < 200;
-          });
+          // Stationerna är fast knutna till respektive bana
+          r.stations = WATER_STATIONS.filter((ws) => ws.routes.includes(key));
           r.bounds = L.latLngBounds(coords);
           r.casing = L.polyline(coords, {
             className: "rt-casing",
@@ -1456,14 +1569,8 @@
             interactive: false,
             smoothFactor: 1.5,
           }).addTo(map);
-          // Start/mål — en gemensam flagga om banan är en slinga,
-          // annars separata start- och målflaggor
-          const a = coords[0],
-            b = coords[coords.length - 1];
-          r.raceMarkers =
-            haversine(a, b) < 60
-              ? [raceMarker(a, "START & MÅL")]
-              : [raceMarker(a, "START"), raceMarker(b, "MÅL")];
+          // Start och mål ligger på samma fasta punkt för båda banorna
+          r.raceMarkers = [raceMarker(START_MAL, "START & MÅL")];
           r.raceMarkers.forEach((m) => setMarkerShown(m, false));
         }
 
@@ -1689,7 +1796,7 @@
                   return listItem(
                     PLACES.indexOf(p),
                     p.icon,
-                    CATS[key].color,
+                    p.color || CATS[key].color,
                     p.name,
                     p.desc,
                     delay,

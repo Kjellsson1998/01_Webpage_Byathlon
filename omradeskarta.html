@@ -147,7 +147,7 @@
       .seg button:hover {
         color: var(--ink);
       }
-      .seg button[aria-checked="true"] {
+      .seg button[aria-pressed="true"] {
         background: #36342b;
         color: #f3edd9;
         box-shadow: 0 2px 8px rgba(24, 22, 16, 0.28);
@@ -294,9 +294,13 @@
       .leaflet-marker-icon:hover .spot-pin {
         transform: scale(1.12);
       }
-      /* Släckt kategori: krymp ihop mot nålspetsen och tona ut */
+      /* Släckt kategori: krymp ihop mot nålspetsen och tona ut.
+         visibility tar även bort dolda markörer ur tabbordningen —
+         fördröjningen låter uttoningen spela klart först. */
       .is-spot-hidden {
         pointer-events: none !important;
+        visibility: hidden;
+        transition: visibility 0s 0.25s;
       }
       .is-spot-hidden .spot-pin,
       .is-spot-hidden .p-face,
@@ -412,6 +416,10 @@
       .is-fade-hidden {
         opacity: 0 !important;
         pointer-events: none !important;
+        visibility: hidden;
+        transition:
+          opacity 0.3s var(--ease-out),
+          visibility 0s 0.3s;
       }
 
       /* ═══════════════ TOOLTIPS & POPUPS ═══════════════ */
@@ -637,6 +645,17 @@
         }
       }
 
+      /* Större touch-ytor på mobil — banväljaren och kategori-chipsen
+         är sidans primära kontroller på pekskärm */
+      @media (max-width: 63.98rem) {
+        .seg button {
+          padding: 10px 10px;
+        }
+        .cat-btn {
+          padding: 9px 12px 9px 8px;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .spot-pin,
         .p-face,
@@ -724,7 +743,7 @@
       <!-- KARTA -->
       <section class="max-w-6xl mx-auto sm:px-6">
         <div
-          class="relative h-[76vh] min-h-135 overflow-hidden bg-DGreenC-100 sm:rounded-2xl shadow-lg border-y sm:border border-DGreenC-200"
+          class="relative h-[76svh] max-h-[calc(100svh-7rem)] min-h-100 overflow-hidden bg-DGreenC-100 sm:rounded-2xl shadow-lg border-y sm:border border-DGreenC-200"
         >
           <div id="omrade-map" class="absolute inset-0 z-0"></div>
           <div class="map-grain" aria-hidden="true"></div>
@@ -736,29 +755,14 @@
           >
             <div data-route-block>
               <p class="panel-label m-0 mb-1.5 px-0.5">Bana</p>
-              <div class="seg" role="radiogroup" aria-label="Välj bana">
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked="true"
-                  data-route=""
-                >
+              <div class="seg" role="group" aria-label="Välj bana">
+                <button type="button" aria-pressed="true" data-route="">
                   Område
                 </button>
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked="false"
-                  data-route="lang"
-                >
+                <button type="button" aria-pressed="false" data-route="lang">
                   13 km
                 </button>
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked="false"
-                  data-route="kort"
-                >
+                <button type="button" aria-pressed="false" data-route="kort">
                   6 km
                 </button>
               </div>
@@ -833,7 +837,7 @@
                 ></span>
               </span>
             </button>
-            <div data-list class="sheet-body"></div>
+            <div data-list class="sheet-body" inert></div>
           </div>
         </div>
       </section>
@@ -847,7 +851,7 @@
           class="bg-white/70 border border-DGreenC-200 rounded-2xl shadow-lg p-5 sm:p-7 max-w-2xl"
         >
           <p
-            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-400 mb-1"
+            class="font-mono text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-DGreenC-500 mb-1"
           >
             Lördag 25 juli
           </p>
@@ -896,7 +900,7 @@
               <div
                 class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-YellowC-400 border-2 border-white shadow"
               ></div>
-              <p class="font-mono text-xs font-bold text-YellowC-700">16:00</p>
+              <p class="font-mono text-xs font-bold text-DGreenC-800">16:00</p>
               <p class="text-[0.95rem] font-bold text-DGreenC-800">
                 START — gemensam start för alla klasser
               </p>
@@ -1216,7 +1220,7 @@
           { cat: "badbastu", icon: "ball", name: "Volleyboll", desc: "Volleybollplan.", coords: [63.300639, 18.329167] },
           { cat: "badbastu", icon: "kubb", name: "Kubbspel", desc: "Kubbspel för stora och små.", coords: [63.300889, 18.330861] },
           // Service & mat
-          { cat: "service", icon: "food", name: "Food truck", desc: "Mat och fika på plats.", coords: [63.300694, 18.331083] },
+          { cat: "service", icon: "food", name: "Foodtruck", desc: "Mat och fika på plats.", coords: [63.300694, 18.331083] },
           { cat: "service", icon: "glass", name: "Vattenpåfyllning", desc: "Fyll på vattenflaskan.", coords: [63.301083, 18.330944] },
           { cat: "service", icon: "wc", name: "Toalett (väst)", desc: "Toalett/dass vid badet.", coords: [63.3005, 18.329222] },
           { cat: "service", icon: "wc", name: "Toalett (öst)", desc: "Toalett/dass vid parkeringen.", coords: [63.300556, 18.33175] },
@@ -1298,7 +1302,9 @@
                 paddingBottomRight: L.point(366, 72),
               }
             : {
-                paddingTopLeft: L.point(20, 152),
+                // Rymmer filterpanelen även med expanderad route-info
+                // och de förstorade touch-knapparna på mobil
+                paddingTopLeft: L.point(20, 216),
                 paddingBottomRight: L.point(20, 112),
               };
         }
@@ -1338,9 +1344,11 @@
 
         // ── POPUPS ──────────────────────────────────────────────────────
         const popOpts = () => ({
+          // Mobil: x går fri från verktygsstapeln (52 px bred),
+          // y från filterpanelen även i expanderat läge
           autoPanPaddingTopLeft: isDesktop()
             ? L.point(260, 90)
-            : L.point(16, 150),
+            : L.point(64, 210),
           autoPanPaddingBottomRight: isDesktop()
             ? L.point(360, 40)
             : L.point(16, 90),
@@ -1593,12 +1601,18 @@
         const routeDot = document.querySelector("[data-route-dot]");
         const routeText = document.querySelector("[data-route-text]");
 
+        // Tryck på en banknapp innan GeoJSON laddats köas och körs
+        // så fort banorna är klara — knappen känns inte död
+        let pendingRoute;
         function selectRoute(key) {
-          if (!routesReady) return;
+          if (!routesReady) {
+            pendingRoute = key || null;
+            return;
+          }
           activeRoute = key || null;
           segBtns.forEach((b) =>
             b.setAttribute(
-              "aria-checked",
+              "aria-pressed",
               String((b.dataset.route || null) === activeRoute),
             ),
           );
@@ -1677,6 +1691,7 @@
         )
           .then(function () {
             routesReady = true;
+            if (pendingRoute !== undefined) selectRoute(pendingRoute);
           })
           .catch(function (err) {
             console.error("Kunde inte ladda banorna:", err);
@@ -1724,7 +1739,7 @@
             "</span>" +
             '<span class="min-w-0"><span class="block text-[13px] font-semibold text-DGreenC-800 leading-tight">' +
             name +
-            '</span><span class="block text-[11px] text-DGreenC-400 leading-snug">' +
+            '</span><span class="block text-[11px] text-DGreenC-500 leading-snug">' +
             desc +
             "</span></span>" +
             svgIcon("chev", "chev") +
@@ -1931,6 +1946,8 @@
           sheetOpen = open;
           sheet.classList.toggle("is-open", open);
           grip.setAttribute("aria-expanded", String(open));
+          // Stängd sheets platsknappar ska inte ligga kvar i tabbordningen
+          sheet.querySelector("[data-list]").toggleAttribute("inert", !open);
         }
         function closeSheet() {
           if (sheetOpen && !isDesktop()) setSheet(false);
@@ -1970,6 +1987,11 @@
           sheet.classList.remove("is-dragging");
           sheet.style.transform = "";
           dragStartY = null;
+        });
+        // Tangentbord: Enter/Space ger click med detail 0
+        // (pekklick har detail >= 1 och hanteras av pointerup ovan)
+        grip.addEventListener("click", function (e) {
+          if (e.detail === 0) setSheet(!sheetOpen);
         });
 
         // ── STARTVY ─────────────────────────────────────────────────────

@@ -66,6 +66,10 @@ Mailet är ett massutskick till maillistan — inga dynamiska fält behövs.
                               <td style="padding: 4px 0; color: #25231e; font-size: 14px;">Uthämtning av nummerlappar</td>
                             </tr>
                             <tr>
+                              <td style="padding: 4px 16px 4px 0; color: #7f7a67; font-size: 13px; white-space: nowrap;">15:45</td>
+                              <td style="padding: 4px 0; color: #25231e; font-size: 14px;">Gemensam genomgång</td>
+                            </tr>
+                            <tr>
                               <td style="padding: 4px 16px 4px 0; color: #25231e; font-size: 13px; font-weight: bold; white-space: nowrap;">16:00</td>
                               <td style="padding: 4px 0; color: #25231e; font-size: 14px; font-weight: bold;">START (gemensam start för alla klasser)</td>
                             </tr>

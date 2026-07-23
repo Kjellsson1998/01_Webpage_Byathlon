@@ -6,6 +6,5 @@ Disallow: /redan-anmald.html
 Disallow: /loppestimat.html
 Disallow: /node_modules/
 Disallow: /Rutter/
-Disallow: /src/
 
 Sitemap: https://byathlon.se/sitemap.xml

@@ -521,8 +521,8 @@
   .h-\[3px\] {
     height: 3px;
   }
-  .h-\[76vh\] {
-    height: 76vh;
+  .h-\[76svh\] {
+    height: 76svh;
   }
   .h-full {
     height: 100%;
@@ -533,8 +533,11 @@
   .max-h-20 {
     max-height: calc(var(--spacing) * 20);
   }
-  .min-h-135 {
-    min-height: calc(var(--spacing) * 135);
+  .max-h-\[calc\(100svh-7rem\)\] {
+    max-height: calc(100svh - 7rem);
+  }
+  .min-h-100 {
+    min-height: calc(var(--spacing) * 100);
   }
   .min-h-\[100svh\] {
     min-height: 100svh;

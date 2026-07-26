@@ -674,6 +674,86 @@
         display: block;
       }
 
+      /* ── tabell pa smartphone ──
+         Alla fem kolumnerna ska rymmas utan sidoscroll pa en iPhone (~375 px).
+         Placeringen kramas ihop mest: den ar minst intressant i ett motionslopp,
+         sa den far liten stil och nastan ingen bredd. Tid och namn behaller
+         lasbar storlek. */
+      @media (max-width: 560px) {
+        thead th {
+          font-size: 0.5rem;
+          letter-spacing: 0.09em;
+          padding: 0.6rem 0.3rem;
+        }
+        thead th:first-child {
+          padding-left: 0.8rem;
+        }
+        thead th:last-child {
+          padding-right: 0.8rem;
+        }
+        tbody td {
+          padding: 0.55rem 0.3rem;
+          font-size: 0.84rem;
+        }
+        .plac {
+          padding-left: 0.8rem !important;
+          width: 2.5rem;
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: var(--ink-faint);
+          white-space: nowrap;
+        }
+        .nr {
+          width: 2.2rem;
+          font-size: 0.7rem;
+        }
+        .namn {
+          font-size: 0.84rem;
+          line-height: 1.35;
+        }
+        .tid {
+          width: 4.6rem;
+          font-size: 0.8rem;
+        }
+        .tempo {
+          width: 3.3rem;
+          padding-right: 0.8rem !important;
+          font-size: 0.72rem;
+        }
+        tr.seger .tid {
+          font-size: 0.86rem;
+        }
+        /* "delad" far inte plats i den smala placeringskolumnen - visa likhets-
+           tecknet i stallet, forklaringen finns kvar i title-attributet. */
+        .tie {
+          font-size: 0;
+          padding: 0;
+          background: none;
+        }
+        .tie::after {
+          content: "=";
+          font-size: 0.66rem;
+          letter-spacing: 0;
+        }
+        .vinnare {
+          font-size: 0.47rem;
+          gap: 0.2rem;
+          margin-left: 0.35rem;
+          padding: 0.14rem 0.4rem 0.14rem 0.28rem;
+        }
+        .v-i {
+          width: 0.68rem;
+          height: 0.68rem;
+        }
+        .tab-fot {
+          padding: 0.8rem 0.8rem 1.1rem;
+          font-size: 0.74rem;
+        }
+        .ingen-traff {
+          padding: 1.6rem 0.8rem;
+        }
+      }
+
       /* ═══════════════ UTOM TÄVLAN ═══════════════ */
       .utom-lista {
         list-style: none;

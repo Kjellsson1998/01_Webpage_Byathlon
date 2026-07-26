@@ -347,6 +347,11 @@
           >
         </a>
         <div class="hidden md:flex gap-8 text-TanC-200 text-sm font-medium">
+          <a
+            href="resultat.html"
+            class="text-YellowC-400 font-semibold hover:text-YellowC-300 transition-colors"
+            >Resultat 2026</a
+          >
           <a href="#om" class="hover:text-YellowC-400 transition-colors"
             >Om evenemanget</a
           >
@@ -383,7 +388,9 @@
           class="absolute bottom-20 right-10 w-96 h-96 bg-BlueC-400 rounded-full blur-3xl"
         ></div>
       </div>
-      <div class="relative text-center px-6 max-w-4xl mx-auto">
+      <!-- w-full/min-w-0: hjälten är ett flex-item, och utan dem kan den inte
+           krympa under sitt min-content — då klipps innehållet på smal mobil. -->
+      <div class="relative w-full min-w-0 text-center px-6 max-w-4xl mx-auto">
         <div
           class="inline-flex items-start sm:items-center gap-2.5 bg-YellowC-400/15 ring-1 ring-YellowC-400/40 rounded-2xl sm:rounded-full px-5 py-2.5 mb-6 text-left max-w-xl"
         >
@@ -417,33 +424,58 @@
         <p class="text-base sm:text-lg text-TanC-300 mb-8 sm:mb-10">
           25 juli 2026 &middot; By badplats &middot; Sidensjöveckan
         </p>
-        <a
-          href="anmalan.html"
-          data-tap-anim
-          class="group relative inline-block bg-YellowC-400 hover:bg-YellowC-500 rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-1.5 shadow-lg hover:shadow-2xl"
+        <div
+          class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4"
         >
-          <span
-            class="relative z-10 block text-DGreenC-800 font-extrabold px-14 py-5 text-xl tracking-wide"
+          <!-- Loppet är avgjort, så resultatsidan ligger jämsides med anmälan. -->
+          <a
+            href="resultat.html"
+            data-tap-anim
+            class="group inline-flex w-full sm:w-auto items-center justify-center gap-3 bg-TanC-100 hover:bg-white text-DGreenC-800 font-extrabold px-6 sm:px-10 py-5 text-base sm:text-xl tracking-wide rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-200"
           >
-            Anmäl dig nu
-          </span>
-          <svg
-            class="absolute inset-0 w-full h-full z-20 pointer-events-none"
-            viewBox="0 0 400 80"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,40 L6.6,25 L13.2,30 L19.7,32 L26.3,23 L32.9,28 L39.5,32 L46.0,39 L52.6,39 L59.2,33 L65.8,34 L72.3,23 L78.9,28 L85.5,31 L92.1,40 L98.6,48 L105.2,57 L111.8,58 L118.4,60 L124.9,68 L131.5,68 L138.1,52 L144.7,48 L151.2,32 L157.8,34 L164.4,37 L171.0,35 L177.5,46 L184.1,56 L190.7,57 L197.3,58 L203.8,55 L210.4,53 L217.0,56 L223.6,45 L230.1,60 L236.7,69 L243.3,68 L249.9,62 L256.4,63 L263.0,74 L269.6,69 L276.2,68 L282.7,55 L289.3,45 L295.9,49 L302.5,48 L309.0,51 L315.6,55 L322.2,56 L328.8,49 L335.3,41 L341.9,41 L348.5,53 L355.1,48 L361.6,34 L368.2,29 L374.8,19 L381.4,16 L387.9,20 L394.5,29 L400,40"
+            <svg
+              class="w-6 h-6 shrink-0 text-YellowC-600 transition-transform duration-300 group-hover:scale-110"
+              viewBox="0 0 24 24"
               fill="none"
-              stroke="rgba(37,35,30,0.2)"
-              stroke-width="2"
+              stroke="currentColor"
+              stroke-width="1.8"
               stroke-linecap="round"
-              stroke-dasharray="1200"
-              stroke-dashoffset="1200"
-              class="group-hover:[stroke-dashoffset:0]! transition-[stroke-dashoffset] duration-[1.5s] ease-out"
-            />
-          </svg>
-        </a>
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="9" r="5.2" />
+              <path d="M8.8 13.4 7.5 21l4.5-2.3 4.5 2.3-1.3-7.6" />
+            </svg>
+            Resultat Byathlon 2026
+          </a>
+          <a
+            href="anmalan.html"
+            data-tap-anim
+            class="group relative inline-block w-full sm:w-auto bg-YellowC-400 hover:bg-YellowC-500 rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-1.5 shadow-lg hover:shadow-2xl"
+          >
+            <span
+              class="relative z-10 block text-DGreenC-800 font-extrabold px-10 sm:px-14 py-5 text-base sm:text-xl tracking-wide"
+            >
+              Anmäl dig nu
+            </span>
+            <svg
+              class="absolute inset-0 w-full h-full z-20 pointer-events-none"
+              viewBox="0 0 400 80"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,40 L6.6,25 L13.2,30 L19.7,32 L26.3,23 L32.9,28 L39.5,32 L46.0,39 L52.6,39 L59.2,33 L65.8,34 L72.3,23 L78.9,28 L85.5,31 L92.1,40 L98.6,48 L105.2,57 L111.8,58 L118.4,60 L124.9,68 L131.5,68 L138.1,52 L144.7,48 L151.2,32 L157.8,34 L164.4,37 L171.0,35 L177.5,46 L184.1,56 L190.7,57 L197.3,58 L203.8,55 L210.4,53 L217.0,56 L223.6,45 L230.1,60 L236.7,69 L243.3,68 L249.9,62 L256.4,63 L263.0,74 L269.6,69 L276.2,68 L282.7,55 L289.3,45 L295.9,49 L302.5,48 L309.0,51 L315.6,55 L322.2,56 L328.8,49 L335.3,41 L341.9,41 L348.5,53 L355.1,48 L361.6,34 L368.2,29 L374.8,19 L381.4,16 L387.9,20 L394.5,29 L400,40"
+                fill="none"
+                stroke="rgba(37,35,30,0.2)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-dasharray="1200"
+                stroke-dashoffset="1200"
+                class="group-hover:[stroke-dashoffset:0]! transition-[stroke-dashoffset] duration-[1.5s] ease-out"
+              />
+            </svg>
+          </a>
+        </div>
         <p class="mt-4">
           <a
             href="#distanser"

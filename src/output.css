@@ -65,6 +65,7 @@
     --default-mono-font-family: var(--font-mono);
     --color-YellowC-50: #fdf9ec;
     --color-YellowC-100: #fbf1d5;
+    --color-YellowC-300: #f3d886;
     --color-YellowC-400: #efca5c;
     --color-YellowC-500: #ebbd33;
     --color-YellowC-600: #d1a215;
@@ -466,6 +467,9 @@
   .inline-flex {
     display: inline-flex;
   }
+  .table {
+    display: table;
+  }
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -678,6 +682,9 @@
   }
   .shrink-0 {
     flex-shrink: 0;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -1653,6 +1660,16 @@
       }
     }
   }
+  .group-hover\:scale-110 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        --tw-scale-x: 110%;
+        --tw-scale-y: 110%;
+        --tw-scale-z: 110%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
+    }
+  }
   .group-hover\:\[stroke-dashoffset\:0\]\! {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1769,6 +1786,13 @@
       }
     }
   }
+  .hover\:bg-white {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-white);
+      }
+    }
+  }
   .hover\:text-BlueC-600 {
     &:hover {
       @media (hover: hover) {
@@ -1787,6 +1811,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-DGreenC-800);
+      }
+    }
+  }
+  .hover\:text-YellowC-300 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-YellowC-300);
       }
     }
   }
@@ -2020,6 +2051,16 @@
   .sm\:px-6 {
     @media (width >= 40rem) {
       padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:px-10 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 10);
+    }
+  }
+  .sm\:px-14 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 14);
     }
   }
   .sm\:py-0 {

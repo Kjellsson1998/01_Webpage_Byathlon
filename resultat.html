@@ -1,0 +1,2463 @@
+<!doctype html>
+<!-- Resultatsida för Byathlon 2026.
+     Bandata (distans, höjdmeter, höjdprofil) beräknas ur Strava-exporterna
+     Rutter/Byathlon 13,5km.tcx och Rutter/Byathlon 5,5km.tcx av
+     Rutter/generera-resultat.py — redigera inte den här filen för hand.
+
+     Distansen är Stravas egen <DistanceMeters> längs banan. "Total klättring"
+     är summerad uppförsbacke med 2 m brusfilter; eftersom båda banorna är
+     rundslingor är nettohöjdskillnaden noll.
+
+     Klassegrare dam/herr är bekräftade av arrangören — könsuppgift finns inte
+     i anmälningsdatan.
+
+     Hero-filmen Image/video/start-2026.mp4 är hela drönarklippet från masstarten,
+     25,5 sekunder, beskuret ur källans stående ruta (bildytan ligger som 1440x808
+     vid y=876 i Image/Dronar bild/StartByathlon2026.mp4) och nedskalat till
+     1280x718 för att hela längden ska rymmas på dryga 3 MB. In- och uttoning mot
+     svart är inbränd, så loopskarven blir en svart övergång.
+     Image/video/start-2026.jpg är samma motiv som stillbild och används bara
+     när besökaren bett om mindre rörelse.
+
+     Sidan är självbärande: all CSS ligger i <style> nedan, så src/output.css
+     behöver inte byggas om. Inga emojis, bara SVG-ikoner. -->
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-ZG424Y5TYS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-ZG424Y5TYS");
+    </script>
+
+    <title>Resultat &mdash; Byathlon 2026 | Sidensj&ouml; 25 juli</title>
+    <meta
+      name="description"
+      content="Officiella resultat från Byathlon 2026 i Sidensjö. 38 löpare på 13,53 km, 30 på 5,43 km och 17 i motionsklassen — med banstatistik, tempon och höjdprofiler."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#283618" />
+    <link rel="canonical" href="https://byathlon.se/resultat.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Byathlon" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:url" content="https://byathlon.se/resultat.html" />
+    <meta property="og:title" content="Resultat — Byathlon 2026" />
+    <meta
+      property="og:description"
+      content="85 personer i mål, 769 kilometer och 15 792 höjdmeter. Här är alla resultat från Byathlon 2026."
+    />
+    <meta
+      property="og:image"
+      content="https://byathlon.se/Image/Byathlon_Loga.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Resultat — Byathlon 2026" />
+    <meta
+      name="twitter:image"
+      content="https://byathlon.se/Image/Byathlon_Loga.png"
+    />
+
+    <link href="src/output.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      href="Image/HK logo Master Version.svg"
+      type="image/svg+xml"
+    />
+    <link rel="apple-touch-icon" href="Image/Byathlon_Loga.png" />
+    <link rel="shortcut icon" href="Image/Byathlon_Loga.png" />
+
+    <style>
+      /* ═══════════════ DESIGN-TOKENS ═══════════════ */
+      :root {
+        --paper: #faf6ee;
+        --card: #ffffff;
+        --ink: #25231e;
+        --ink-soft: #595648;
+        --ink-faint: #7f7a67;
+        --line: rgba(37, 35, 30, 0.1);
+        --line-strong: rgba(37, 35, 30, 0.16);
+        --dgreen-800: #25231e;
+        --tan-100: #eae1d7;
+        --tan-200: #e3d7c9;
+        --tan-300: #dbcbb8;
+
+        --lang: #b88f12;
+        --lang-line: #eab308;
+        --lang-soft: #fbf1d5;
+        --kort: #2f8f4e;
+        --kort-line: #22c55e;
+        --kort-soft: #e4f5e9;
+        --motion: #4780a3;
+        --motion-line: #669bbc;
+        --motion-soft: #dfeaf1;
+
+        --shadow:
+          0 1px 2px rgba(24, 22, 16, 0.04), 0 6px 24px rgba(24, 22, 16, 0.07);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 8.5rem;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .wrap {
+        max-width: 68rem;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+      }
+      .mono {
+        font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+      }
+
+      /* ═══════════════ NAV ═══════════════ */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        background: rgba(54, 52, 43, 0.96);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 14px rgba(24, 22, 16, 0.18);
+      }
+      .nav-in {
+        max-width: 68rem;
+        margin: 0 auto;
+        padding: 0.75rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        text-decoration: none;
+      }
+      .nav-brand img {
+        height: 2.25rem;
+        width: 2.25rem;
+      }
+      .nav-brand span {
+        color: var(--tan-100);
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .nav-back {
+        color: var(--tan-200);
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-back:hover {
+        color: #efca5c;
+      }
+
+      /* ═══════════════ HERO ═══════════════ */
+      /* Dronarklippet fran starten tacker hela sektionen och loopar. Klippet
+         tonar in och ut mot svart, sa loopskarven blir en svart overgang. */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        background: #14130e;
+        color: #fff;
+        min-height: min(84vh, 46rem);
+        display: flex;
+        align-items: center;
+        padding: 5rem 0 4rem;
+      }
+      .hero-film {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        user-select: none;
+      }
+      /* Sloja sa den vita texten haller sig lasbar aven over MAL-bagen och
+         de utbranda vita partierna i klippet. */
+      .hero-sloja {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(16, 15, 11, 0.8) 0%,
+            rgba(16, 15, 11, 0.48) 34%,
+            rgba(16, 15, 11, 0.58) 72%,
+            rgba(16, 15, 11, 0.92) 100%
+          ),
+          radial-gradient(
+            ellipse 76% 66% at 50% 46%,
+            rgba(16, 15, 11, 0.26),
+            rgba(16, 15, 11, 0.68)
+          );
+      }
+      .hero-in {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        text-align: center;
+      }
+      /* Ljusare gult och gradbrutet an ovrig text pa sidan: den har texten star
+         over rorlig bild och maste klara klippets ljusaste ogonblick. */
+      .kicker {
+        font-family: ui-monospace, monospace;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: #f7d977;
+        margin-bottom: 1rem;
+        text-shadow: 0 1px 12px rgba(10, 9, 6, 0.6);
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 8vw, 4.25rem);
+        font-weight: 800;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.9rem;
+        text-shadow:
+          0 2px 26px rgba(10, 9, 6, 0.5),
+          0 1px 3px rgba(10, 9, 6, 0.45);
+      }
+      .hero-sub {
+        color: #f8f3ec;
+        font-size: 1.02rem;
+        max-width: 40rem;
+        margin: 0 auto;
+        text-shadow: 0 1px 10px rgba(10, 9, 6, 0.65);
+      }
+
+      .tiles {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin-top: 2.5rem;
+      }
+      @media (min-width: 720px) {
+        .tiles {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .tile {
+        background: rgba(18, 17, 12, 0.36);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 14px;
+        padding: 1rem 0.75rem;
+        backdrop-filter: blur(7px);
+      }
+      .tile-v {
+        font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+        font-weight: 800;
+        line-height: 1.1;
+        text-shadow: 0 1px 8px rgba(10, 9, 6, 0.5);
+      }
+      .tile-l {
+        font-family: ui-monospace, monospace;
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--tan-300);
+        margin-top: 0.4rem;
+      }
+
+      /* ═══════════════ SÖKFÄLT ═══════════════ */
+      .sokrad {
+        position: sticky;
+        top: 3.75rem;
+        z-index: 50;
+        background: rgba(250, 246, 238, 0.93);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+        padding: 0.7rem 0;
+      }
+      .sok-in {
+        max-width: 68rem;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+      }
+      .sok-falt {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        background: #fff;
+        border: 1px solid var(--line-strong);
+        border-radius: 11px;
+        padding: 0.55rem 0.85rem;
+        box-shadow: 0 1px 2px rgba(24, 22, 16, 0.04);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .sok-falt:focus-within {
+        border-color: #a8b875;
+        box-shadow: 0 0 0 3px rgba(168, 184, 117, 0.22);
+      }
+      .sok-falt > svg {
+        width: 1.05rem;
+        height: 1.05rem;
+        color: var(--ink-faint);
+        flex: none;
+      }
+      .sok-falt input {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        font-size: 0.95rem;
+        color: var(--ink);
+        min-width: 0;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+      .sok-falt input::-webkit-search-decoration,
+      .sok-falt input::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .sok-rensa {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        padding: 0.15rem 0.3rem;
+        color: var(--ink-faint);
+        line-height: 0;
+        display: none;
+      }
+      .sok-rensa svg {
+        width: 1rem;
+        height: 1rem;
+      }
+      .sok-rensa:hover {
+        color: var(--ink);
+      }
+      .sok-status {
+        font-family: ui-monospace, monospace;
+        font-size: 0.7rem;
+        color: var(--ink-faint);
+        white-space: nowrap;
+      }
+      @media (max-width: 560px) {
+        .sok-status {
+          display: none;
+        }
+      }
+
+      /* ═══════════════ SEKTION ═══════════════ */
+      .sektion {
+        padding: 3.5rem 0 1rem;
+      }
+      .sek-huvud {
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+      .sek-etikett {
+        font-family: ui-monospace, monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 0.45rem;
+      }
+      .sek-huvud h2 {
+        font-size: clamp(1.85rem, 5vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.015em;
+        line-height: 1.05;
+      }
+      .sek-dist {
+        font-family: ui-monospace, monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        margin-left: auto;
+        white-space: nowrap;
+      }
+
+      .kort-panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .band {
+        height: 5px;
+      }
+
+      /* ── banfakta ── */
+      .banfakta {
+        padding: 1.5rem 1.5rem 0.5rem;
+      }
+      .banfakta > h3 {
+        font-family: ui-monospace, monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin-bottom: 1rem;
+      }
+      .chips {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+      }
+      @media (min-width: 640px) {
+        .chips {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (min-width: 960px) {
+        .chips {
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+      .chip {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0.85rem 0.7rem;
+        text-align: center;
+      }
+      .chip-i {
+        width: 1.25rem;
+        height: 1.25rem;
+        display: block;
+        margin: 0 auto 0.5rem;
+        color: var(--ink-faint);
+      }
+      .chip-v {
+        display: block;
+        font-weight: 800;
+        font-size: 1.02rem;
+        letter-spacing: -0.01em;
+      }
+      .chip-l {
+        display: block;
+        font-family: ui-monospace, monospace;
+        font-size: 0.55rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin-top: 0.3rem;
+        line-height: 1.35;
+      }
+
+      /* ── höjdprofil ── */
+      .profil {
+        margin: 1.25rem 1.5rem 0;
+      }
+      .profil svg {
+        width: 100%;
+        height: 92px;
+        display: block;
+      }
+      .profil-txt {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-family: ui-monospace, monospace;
+        font-size: 0.62rem;
+        color: var(--ink-faint);
+        margin-top: 0.3rem;
+        letter-spacing: 0.04em;
+      }
+      .profil-topp {
+        font-weight: 700;
+      }
+
+      /* ── brödtext ── */
+      .berattelse {
+        padding: 1.5rem;
+        border-top: 1px solid var(--line);
+        margin-top: 1.25rem;
+      }
+      .berattelse p {
+        color: var(--ink-soft);
+        line-height: 1.7;
+        max-width: 46rem;
+      }
+      .berattelse p + p {
+        margin-top: 0.85rem;
+      }
+      .berattelse strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      /* ═══════════════ TABELL ═══════════════ */
+      .tabellsvep {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-variant-numeric: tabular-nums;
+      }
+      thead th {
+        font-family: ui-monospace, monospace;
+        font-size: 0.57rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        text-align: left;
+        padding: 0.7rem 0.6rem;
+        border-bottom: 1px solid var(--line-strong);
+        background: var(--paper);
+      }
+      thead th:first-child {
+        padding-left: 1.5rem;
+      }
+      thead th:last-child {
+        padding-right: 1.5rem;
+      }
+      th.h-tid,
+      th.h-tempo {
+        text-align: right;
+      }
+      tbody td {
+        padding: 0.62rem 0.6rem;
+        border-bottom: 1px solid var(--line);
+        font-size: 0.94rem;
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      tbody tr {
+        transition: background 0.15s;
+      }
+      tbody tr:hover {
+        background: var(--paper);
+      }
+      .plac {
+        padding-left: 1.5rem !important;
+        width: 4.5rem;
+        font-family: ui-monospace, monospace;
+        font-weight: 700;
+        color: var(--ink-soft);
+      }
+      .nr {
+        width: 3.5rem;
+        font-family: ui-monospace, monospace;
+        color: var(--ink-faint);
+        font-size: 0.85rem;
+      }
+      .namn {
+        font-weight: 600;
+      }
+      .tid {
+        text-align: right;
+        font-family: ui-monospace, monospace;
+        font-weight: 700;
+        width: 6.5rem;
+      }
+      .tempo {
+        text-align: right;
+        padding-right: 1.5rem !important;
+        width: 6rem;
+        font-family: ui-monospace, monospace;
+        font-size: 0.82rem;
+        color: var(--ink-faint);
+      }
+      .tie {
+        font-family: ui-monospace, monospace;
+        font-size: 0.52rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        background: var(--tan-100);
+        border-radius: 4px;
+        padding: 0.1rem 0.28rem;
+        vertical-align: middle;
+      }
+
+      /* ── klassegrare dam/herr ── */
+      tr.seger {
+        background: linear-gradient(
+          90deg,
+          rgba(235, 189, 51, 0.14),
+          transparent 68%
+        );
+      }
+      tr.seger:hover {
+        background: linear-gradient(
+          90deg,
+          rgba(235, 189, 51, 0.2),
+          transparent 68%
+        );
+      }
+      tr.seger .namn {
+        font-weight: 800;
+      }
+      tr.seger .tid {
+        font-size: 1rem;
+      }
+      .vinnare {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+        margin-left: 0.55rem;
+        font-family: ui-monospace, monospace;
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        color: #7d6208;
+        background: #fbf1d5;
+        border: 1px solid rgba(209, 162, 21, 0.35);
+        border-radius: 999px;
+        padding: 0.16rem 0.5rem 0.16rem 0.36rem;
+        vertical-align: 1px;
+      }
+      .v-i {
+        width: 0.8rem;
+        height: 0.8rem;
+        flex: none;
+      }
+      tr.dold {
+        display: none;
+      }
+
+      .tab-fot {
+        padding: 0.9rem 1.5rem 1.25rem;
+        border-top: 1px solid var(--line);
+        font-size: 0.8rem;
+        color: var(--ink-faint);
+        background: var(--paper);
+      }
+      .ingen-traff {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        color: var(--ink-faint);
+        font-size: 0.9rem;
+        display: none;
+      }
+      .ingen-traff.visa {
+        display: block;
+      }
+
+      /* ═══════════════ UTOM TÄVLAN ═══════════════ */
+      .utom-lista {
+        list-style: none;
+        margin: 0;
+        padding: 1.5rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+      .utom-post {
+        background: var(--paper);
+        border: 1px dashed var(--line-strong);
+        border-radius: 13px;
+        padding: 1rem 1.1rem;
+      }
+      .utom-post.dold {
+        display: none;
+      }
+      .utom-topp {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .utom-nr {
+        font-family: ui-monospace, monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--ink-faint);
+        background: var(--tan-100);
+        border-radius: 7px;
+        padding: 0.25rem 0.45rem;
+        flex: none;
+      }
+      .utom-namn {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .utom-tid {
+        margin-left: auto;
+        font-family: ui-monospace, monospace;
+        font-weight: 700;
+        font-size: 1rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .utom-notis {
+        color: var(--ink-soft);
+        font-size: 0.88rem;
+        margin-top: 0.5rem;
+        line-height: 1.55;
+      }
+      .utom-jamf {
+        color: var(--ink-faint);
+        font-size: 0.82rem;
+        margin-top: 0.3rem;
+        line-height: 1.55;
+      }
+      .utom-jamf strong {
+        color: var(--ink-soft);
+      }
+
+      /* ═══════════════ MOTION ═══════════════ */
+      .motion-lista {
+        list-style: none;
+        padding: 1.5rem;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        gap: 0.6rem;
+      }
+      .deltagare {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        padding: 0.65rem 0.85rem;
+        transition:
+          transform 0.25s var(--ease),
+          box-shadow 0.25s var(--ease);
+      }
+      .deltagare:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+      .deltagare.dold {
+        display: none;
+      }
+      .d-nr {
+        font-family: ui-monospace, monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--motion);
+        background: var(--motion-soft);
+        border-radius: 7px;
+        padding: 0.25rem 0.45rem;
+        flex: none;
+      }
+      .d-namn {
+        font-weight: 600;
+        font-size: 0.93rem;
+      }
+
+      /* ═══════════════ STATISTIK ═══════════════ */
+      .statlista {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 0.7rem;
+      }
+      @media (min-width: 760px) {
+        .statlista {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .statlista li {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 1rem 1.1rem;
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        line-height: 1.55;
+        color: var(--ink-soft);
+        font-size: 0.93rem;
+      }
+      .stat-v {
+        font-family: ui-monospace, monospace;
+        font-weight: 800;
+        font-size: 1.02rem;
+        color: var(--ink);
+        flex: none;
+        letter-spacing: -0.02em;
+      }
+      .statlista strong {
+        color: var(--ink);
+      }
+
+      /* ═══════════════ KÄLLA & FOT ═══════════════ */
+      .kalla {
+        margin-top: 3rem;
+        padding: 1.25rem 1.4rem;
+        border-radius: 13px;
+        background: var(--tan-100);
+        border: 1px solid var(--line);
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+        line-height: 1.65;
+      }
+      .kalla h4 {
+        font-family: ui-monospace, monospace;
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin-bottom: 0.5rem;
+      }
+      .kalla p + p {
+        margin-top: 0.7rem;
+      }
+      footer {
+        background: var(--dgreen-800);
+        color: var(--tan-300);
+        padding: 3.5rem 0 2rem;
+        margin-top: 4rem;
+        text-align: center;
+      }
+      footer .brand {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      footer .brand img {
+        height: 3rem;
+        width: 3rem;
+      }
+      footer .brand span {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--tan-100);
+        letter-spacing: 0.02em;
+      }
+      footer .devis {
+        font-family: ui-monospace, monospace;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: #efca5c;
+        margin-bottom: 1.25rem;
+      }
+      footer a {
+        color: var(--tan-200);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      footer a:hover {
+        color: #efca5c;
+      }
+      .fot-lank {
+        margin-top: 1.5rem;
+        font-size: 0.85rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+        }
+        .hero-film {
+          display: none;
+        }
+        .hero {
+          background: #14130e url("Image/video/start-2026.jpg") center / cover
+            no-repeat;
+        }
+      }
+      /* Webblasare skriver inte ut bakgrundsfarger som standard. Hero maste
+         darfor byta till mork text pa vitt, annars forsvinner rubriken helt. */
+      @media print {
+        .nav,
+        .sokrad,
+        footer,
+        .hero-film,
+        .hero-sloja {
+          display: none !important;
+        }
+        .hero {
+          min-height: 0;
+          padding: 1.5rem 0 1rem;
+          background: none;
+          color: var(--ink);
+        }
+        .hero h1,
+        .hero-sub,
+        .kicker,
+        .tile-v {
+          text-shadow: none;
+        }
+        .kicker {
+          color: #6b5a12;
+        }
+        .hero-sub {
+          color: var(--ink-soft);
+        }
+        .tiles {
+          margin-top: 1.25rem;
+        }
+        .tile {
+          background: none;
+          border-color: #ccc;
+          backdrop-filter: none;
+        }
+        .tile-l {
+          color: var(--ink-faint);
+        }
+        body {
+          background: #fff;
+        }
+        .kort-panel {
+          box-shadow: none;
+          border-color: #ccc;
+          break-inside: avoid;
+        }
+        .sektion {
+          padding-top: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans">
+    <nav class="nav">
+      <div class="nav-in">
+        <a href="index.html" class="nav-brand">
+          <img
+            src="Image/Byathlon_Loga.png"
+            alt="Byathlon logotyp"
+            width="36"
+            height="36"
+          />
+          <span>Byathlon</span>
+        </a>
+        <a href="index.html" class="nav-back">&larr; Till startsidan</a>
+      </div>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <header class="hero">
+      <!-- Medvetet utan poster: filmens forsta bildruta ar helsvart och .hero ar
+           redan nastan svart, sa filmen tonar upp ur bakgrunden i stallet for att
+           blinka till fran en ljus stillbild. Stillbilden anvands vid reduced-motion. -->
+      <video
+        class="hero-film"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+        tabindex="-1"
+        disablepictureinpicture
+        disableremoteplayback
+      >
+        <source src="Image/video/start-2026.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-sloja"></div>
+      <div class="wrap hero-in">
+        <p class="kicker">
+          25 juli 2026 &middot; By badplats &middot; Sidensj&ouml;veckan
+        </p>
+        <h1>Resultat<br />Byathlon&nbsp;2026</h1>
+        <p class="hero-sub">
+          85 personer tog sig runt banorna genom Sidensj&ouml;bygden.
+        </p>
+        <div class="tiles">
+          <div class="tile">
+            <div class="tile-v">85</div>
+            <div class="tile-l">I m&aring;l</div>
+          </div>
+          <div class="tile">
+            <div class="tile-v">769 km</div>
+            <div class="tile-l">Sammanlagt</div>
+          </div>
+          <div class="tile">
+            <div class="tile-v">15 792</div>
+            <div class="tile-l">H&ouml;jdmeter</div>
+          </div>
+          <div class="tile">
+            <div class="tile-v">69 h 43 min</div>
+            <div class="tile-l">Total l&ouml;ptid</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════════ SÖK ═══════════════ -->
+    <div class="sokrad">
+      <div class="sok-in">
+        <label class="sok-falt">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.6-3.6" />
+          </svg>
+          <input
+            id="sok"
+            type="search"
+            autocomplete="off"
+            placeholder="S&ouml;k p&aring; namn eller startnummer&hellip;"
+            aria-label="S&ouml;k bland deltagarna"
+          />
+          <button
+            type="button"
+            class="sok-rensa"
+            id="rensa"
+            aria-label="Rensa s&ouml;kningen"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </label>
+        <span class="sok-status" id="sok-status">85 deltagare</span>
+      </div>
+    </div>
+
+    <main class="wrap">
+      <!-- ═══════════════ LÅNG ═══════════════ -->
+      <section class="sektion" id="lang">
+        <div class="sek-huvud">
+          <div>
+            <p class="sek-etikett" style="color: var(--lang)">
+              L&aring;ng distans
+            </p>
+            <h2>13,53 kilometer</h2>
+          </div>
+          <span
+            class="sek-dist"
+            style="background: var(--lang-soft); color: var(--lang)"
+            >38 i m&aring;l</span
+          >
+        </div>
+
+        <div class="kort-panel">
+          <div class="band" style="background: var(--lang-line)"></div>
+
+          <div class="banfakta">
+            <h3>Banan i siffror</h3>
+            <div class="chips">
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 8.5v7M21 8.5v7M3 12h18" />
+                  <path d="M8 10.5v3M12 10v4M16 10.5v3" /></svg
+                ><span class="chip-v">13,53&nbsp;km</span
+                ><span class="chip-l">Distans</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 17.5l5.5-5.5 3.5 3.5L20 7" />
+                  <path d="M15 7h5v5" /></svg
+                ><span class="chip-v">226&nbsp;m</span
+                ><span class="chip-l">Total kl&auml;ttring</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M8.2 10.2h7.6M8.2 13.8h7.6" /></svg
+                ><span class="chip-v">&plusmn;0&nbsp;m</span
+                ><span class="chip-l">Nettoh&ouml;jd &mdash; rundslinga</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M2 19l6.5-10.5 4.2 6.5 2.6-3.8L21.5 19z" />
+                  <circle cx="8.5" cy="8.5" r="1.5" /></svg
+                ><span class="chip-v">187&nbsp;m</span
+                ><span class="chip-l">H&ouml;gsta punkt &ouml;.h.</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3.5 19.5h17" />
+                  <path d="M3.5 19.5L19 6.5" />
+                  <path d="M9.8 19.5a6.3 6.3 0 0 0-1.1-3.5" /></svg
+                ><span class="chip-v">16,7&nbsp;m</span
+                ><span class="chip-l">Kl&auml;ttring per km</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3.5 19.5h17M3.5 19.5 17.5 5.5" />
+                  <path d="M13.3 5.5h4.2v4.2" /></svg
+                ><span class="chip-v">11,4&nbsp;%</span
+                ><span class="chip-l">Brantaste partiet</span>
+              </div>
+            </div>
+          </div>
+
+          <figure class="profil">
+            <svg
+              viewBox="0 0 1000 100"
+              preserveAspectRatio="none"
+              role="img"
+              aria-label="Höjdprofil från 108 till 187 meter över havet"
+            >
+              <defs>
+                <linearGradient id="g-lang" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#eab308" stop-opacity="0.42" />
+                  <stop
+                    offset="100%"
+                    stop-color="#eab308"
+                    stop-opacity="0.02"
+                  />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0.0,79.1 L3.1,79.8 L7.3,81.0 L11.5,81.8 L15.7,82.3 L20.2,81.9 L21.2,81.9 L21.2,81.9 L22.7,81.7 L22.7,81.7 L24.4,81.5 L24.4,81.5 L28.9,79.9 L29.7,79.9 L29.7,80.0 L31.3,79.0 L31.7,79.0 L36.0,76.3 L36.7,75.9 L43.3,70.4 L45.9,70.1 L47.2,70.0 L50.8,69.7 L53.7,69.8 L56.6,69.6 L59.3,67.9 L63.6,61.0 L67.9,57.0 L67.9,57.4 L70.4,54.3 L74.6,50.7 L78.7,51.2 L80.1,53.3 L81.2,54.3 L83.4,52.7 L86.9,48.0 L89.5,44.8 L91.9,36.0 L93.6,31.1 L95.7,33.9 L99.7,29.6 L102.4,25.6 L104.9,23.2 L107.1,21.1 L109.8,17.4 L112.9,19.1 L115.1,15.0 L117.9,11.0 L119.9,15.7 L122.3,16.8 L124.3,16.9 L126.2,16.5 L127.9,13.8 L129.9,11.3 L132.0,9.6 L133.7,8.0 L137.2,27.2 L139.7,30.5 L142.9,33.1 L145.7,35.0 L149.3,38.8 L152.8,40.4 L158.6,40.1 L160.9,38.9 L164.2,39.0 L166.9,39.5 L169.6,42.9 L172.4,45.4 L175.2,47.9 L177.1,52.3 L179.8,56.3 L181.6,58.6 L183.8,62.1 L186.0,66.5 L189.2,71.8 L191.0,75.1 L191.0,60.5 L193.1,62.9 L197.1,67.6 L199.8,70.9 L201.3,72.2 L205.2,77.2 L209.5,82.3 L210.8,83.4 L213.6,87.0 L215.6,89.3 L217.0,90.5 L221.7,92.0 L222.5,91.7 L224.0,91.6 L225.5,91.4 L225.5,91.4 L226.4,91.2 L228.3,90.2 L229.8,89.1 L230.8,87.7 L231.6,86.8 L235.1,86.5 L238.2,85.9 L244.8,81.6 L246.8,78.9 L250.8,77.0 L252.6,77.0 L252.6,77.0 L255.4,76.8 L260.7,76.0 L261.2,75.9 L267.5,70.0 L269.3,66.1 L274.1,59.8 L278.1,57.5 L282.2,58.5 L288.6,59.5 L295.0,60.1 L299.8,63.2 L304.5,66.8 L307.6,69.4 L312.3,75.7 L313.7,76.6 L313.7,76.6 L315.3,77.5 L320.4,78.4 L320.4,78.4 L324.1,78.3 L326.5,78.2 L326.5,78.2 L329.3,77.7 L331.9,76.5 L334.7,73.6 L336.5,71.0 L336.5,71.0 L337.1,69.4 L339.1,65.1 L341.3,63.7 L341.3,63.7 L346.4,54.0 L348.2,52.2 L348.2,52.2 L349.7,50.6 L354.6,51.6 L358.2,52.0 L358.2,52.0 L360.5,52.3 L363.2,52.8 L363.2,52.8 L367.8,54.2 L373.7,54.4 L375.3,54.3 L375.3,54.3 L378.0,53.6 L383.4,53.8 L390.0,53.5 L390.0,53.5 L395.5,55.6 L401.8,58.7 L408.3,62.4 L414.8,65.7 L419.0,66.4 L424.7,65.5 L430.5,65.3 L434.8,65.5 L439.1,65.7 L443.3,66.2 L448.7,65.6 L454.4,66.2 L456.4,66.5 L456.4,66.5 L461.7,66.9 L467.0,66.5 L467.0,66.5 L472.6,65.8 L478.3,64.0 L478.3,64.0 L484.0,61.6 L489.6,63.0 L489.6,63.0 L495.0,63.4 L498.7,62.9 L502.5,61.4 L502.5,61.3 L506.6,58.6 L510.8,54.7 L510.8,54.7 L514.5,52.6 L518.2,50.7 L524.0,54.6 L524.0,54.6 L529.0,57.0 L534.1,59.1 L534.1,59.1 L539.7,61.2 L544.8,59.9 L544.8,59.9 L550.3,57.1 L554.8,55.9 L560.6,59.5 L561.3,60.0 L561.3,60.0 L565.3,61.2 L569.3,62.4 L569.3,62.4 L574.7,65.7 L580.2,67.8 L580.2,67.8 L585.9,71.2 L591.7,75.1 L597.4,77.5 L597.4,77.5 L603.6,78.9 L609.8,79.2 L609.8,79.2 L615.9,79.5 L621.4,78.6 L623.5,78.4 L628.0,79.1 L628.0,79.1 L630.8,79.7 L634.1,80.3 L635.7,80.3 L635.7,80.3 L639.6,80.2 L643.4,79.9 L644.9,79.7 L646.6,80.0 L647.2,80.0 L650.9,79.4 L652.0,79.2 L652.0,79.2 L657.5,73.7 L664.1,62.7 L666.8,59.3 L666.8,59.3 L667.5,58.9 L670.7,57.9 L676.6,52.8 L677.7,52.0 L677.7,52.0 L678.0,51.8 L679.3,51.3 L683.8,51.2 L684.6,50.8 L688.8,49.7 L690.0,50.1 L691.8,50.5 L693.7,49.4 L696.2,48.1 L697.5,48.1 L700.2,48.3 L703.6,47.5 L706.6,46.5 L708.9,45.2 L708.9,45.3 L712.6,43.3 L715.3,43.5 L719.3,43.4 L723.2,44.1 L724.7,44.9 L727.4,45.6 L733.4,44.4 L737.5,43.3 L740.0,43.8 L741.8,44.8 L746.2,45.1 L749.2,47.6 L749.2,47.5 L754.9,51.9 L759.2,57.9 L760.1,57.8 L760.1,57.8 L766.2,59.9 L770.0,57.5 L772.7,55.5 L773.7,54.6 L777.6,53.2 L781.5,53.6 L785.6,54.0 L789.7,54.7 L793.7,54.4 L797.7,53.7 L803.3,53.0 L808.9,50.6 L811.6,50.1 L817.0,52.4 L822.4,54.2 L823.5,54.7 L830.1,57.9 L836.8,59.7 L841.8,59.5 L846.9,61.1 L852.8,67.5 L858.7,73.9 L864.6,76.5 L868.7,78.5 L872.8,80.7 L878.2,81.7 L883.4,80.9 L886.1,79.2 L888.8,76.7 L893.2,71.3 L895.2,69.7 L896.5,69.0 L899.2,67.2 L901.8,68.8 L905.2,69.6 L907.6,69.6 L911.3,68.3 L914.3,65.6 L917.0,63.3 L917.0,63.2 L920.7,61.7 L924.3,62.2 L927.6,61.9 L930.9,61.8 L937.4,68.4 L944.0,69.6 L946.9,69.8 L949.8,69.7 L953.4,70.0 L957.3,70.4 L958.8,71.5 L958.8,71.5 L964.5,76.3 L967.6,78.3 L969.3,79.3 L971.7,80.2 L975.7,81.5 L980.3,82.1 L984.9,82.3 L984.9,82.3 L988.9,81.8 L992.6,81.0 L996.3,80.1 L996.3,80.0 L997.3,80.0 L1000.0,79.2 L1000.0,100.0 L0,100.0 Z"
+                fill="url(#g-lang)"
+              />
+              <path
+                d="M0.0,79.1 L3.1,79.8 L7.3,81.0 L11.5,81.8 L15.7,82.3 L20.2,81.9 L21.2,81.9 L21.2,81.9 L22.7,81.7 L22.7,81.7 L24.4,81.5 L24.4,81.5 L28.9,79.9 L29.7,79.9 L29.7,80.0 L31.3,79.0 L31.7,79.0 L36.0,76.3 L36.7,75.9 L43.3,70.4 L45.9,70.1 L47.2,70.0 L50.8,69.7 L53.7,69.8 L56.6,69.6 L59.3,67.9 L63.6,61.0 L67.9,57.0 L67.9,57.4 L70.4,54.3 L74.6,50.7 L78.7,51.2 L80.1,53.3 L81.2,54.3 L83.4,52.7 L86.9,48.0 L89.5,44.8 L91.9,36.0 L93.6,31.1 L95.7,33.9 L99.7,29.6 L102.4,25.6 L104.9,23.2 L107.1,21.1 L109.8,17.4 L112.9,19.1 L115.1,15.0 L117.9,11.0 L119.9,15.7 L122.3,16.8 L124.3,16.9 L126.2,16.5 L127.9,13.8 L129.9,11.3 L132.0,9.6 L133.7,8.0 L137.2,27.2 L139.7,30.5 L142.9,33.1 L145.7,35.0 L149.3,38.8 L152.8,40.4 L158.6,40.1 L160.9,38.9 L164.2,39.0 L166.9,39.5 L169.6,42.9 L172.4,45.4 L175.2,47.9 L177.1,52.3 L179.8,56.3 L181.6,58.6 L183.8,62.1 L186.0,66.5 L189.2,71.8 L191.0,75.1 L191.0,60.5 L193.1,62.9 L197.1,67.6 L199.8,70.9 L201.3,72.2 L205.2,77.2 L209.5,82.3 L210.8,83.4 L213.6,87.0 L215.6,89.3 L217.0,90.5 L221.7,92.0 L222.5,91.7 L224.0,91.6 L225.5,91.4 L225.5,91.4 L226.4,91.2 L228.3,90.2 L229.8,89.1 L230.8,87.7 L231.6,86.8 L235.1,86.5 L238.2,85.9 L244.8,81.6 L246.8,78.9 L250.8,77.0 L252.6,77.0 L252.6,77.0 L255.4,76.8 L260.7,76.0 L261.2,75.9 L267.5,70.0 L269.3,66.1 L274.1,59.8 L278.1,57.5 L282.2,58.5 L288.6,59.5 L295.0,60.1 L299.8,63.2 L304.5,66.8 L307.6,69.4 L312.3,75.7 L313.7,76.6 L313.7,76.6 L315.3,77.5 L320.4,78.4 L320.4,78.4 L324.1,78.3 L326.5,78.2 L326.5,78.2 L329.3,77.7 L331.9,76.5 L334.7,73.6 L336.5,71.0 L336.5,71.0 L337.1,69.4 L339.1,65.1 L341.3,63.7 L341.3,63.7 L346.4,54.0 L348.2,52.2 L348.2,52.2 L349.7,50.6 L354.6,51.6 L358.2,52.0 L358.2,52.0 L360.5,52.3 L363.2,52.8 L363.2,52.8 L367.8,54.2 L373.7,54.4 L375.3,54.3 L375.3,54.3 L378.0,53.6 L383.4,53.8 L390.0,53.5 L390.0,53.5 L395.5,55.6 L401.8,58.7 L408.3,62.4 L414.8,65.7 L419.0,66.4 L424.7,65.5 L430.5,65.3 L434.8,65.5 L439.1,65.7 L443.3,66.2 L448.7,65.6 L454.4,66.2 L456.4,66.5 L456.4,66.5 L461.7,66.9 L467.0,66.5 L467.0,66.5 L472.6,65.8 L478.3,64.0 L478.3,64.0 L484.0,61.6 L489.6,63.0 L489.6,63.0 L495.0,63.4 L498.7,62.9 L502.5,61.4 L502.5,61.3 L506.6,58.6 L510.8,54.7 L510.8,54.7 L514.5,52.6 L518.2,50.7 L524.0,54.6 L524.0,54.6 L529.0,57.0 L534.1,59.1 L534.1,59.1 L539.7,61.2 L544.8,59.9 L544.8,59.9 L550.3,57.1 L554.8,55.9 L560.6,59.5 L561.3,60.0 L561.3,60.0 L565.3,61.2 L569.3,62.4 L569.3,62.4 L574.7,65.7 L580.2,67.8 L580.2,67.8 L585.9,71.2 L591.7,75.1 L597.4,77.5 L597.4,77.5 L603.6,78.9 L609.8,79.2 L609.8,79.2 L615.9,79.5 L621.4,78.6 L623.5,78.4 L628.0,79.1 L628.0,79.1 L630.8,79.7 L634.1,80.3 L635.7,80.3 L635.7,80.3 L639.6,80.2 L643.4,79.9 L644.9,79.7 L646.6,80.0 L647.2,80.0 L650.9,79.4 L652.0,79.2 L652.0,79.2 L657.5,73.7 L664.1,62.7 L666.8,59.3 L666.8,59.3 L667.5,58.9 L670.7,57.9 L676.6,52.8 L677.7,52.0 L677.7,52.0 L678.0,51.8 L679.3,51.3 L683.8,51.2 L684.6,50.8 L688.8,49.7 L690.0,50.1 L691.8,50.5 L693.7,49.4 L696.2,48.1 L697.5,48.1 L700.2,48.3 L703.6,47.5 L706.6,46.5 L708.9,45.2 L708.9,45.3 L712.6,43.3 L715.3,43.5 L719.3,43.4 L723.2,44.1 L724.7,44.9 L727.4,45.6 L733.4,44.4 L737.5,43.3 L740.0,43.8 L741.8,44.8 L746.2,45.1 L749.2,47.6 L749.2,47.5 L754.9,51.9 L759.2,57.9 L760.1,57.8 L760.1,57.8 L766.2,59.9 L770.0,57.5 L772.7,55.5 L773.7,54.6 L777.6,53.2 L781.5,53.6 L785.6,54.0 L789.7,54.7 L793.7,54.4 L797.7,53.7 L803.3,53.0 L808.9,50.6 L811.6,50.1 L817.0,52.4 L822.4,54.2 L823.5,54.7 L830.1,57.9 L836.8,59.7 L841.8,59.5 L846.9,61.1 L852.8,67.5 L858.7,73.9 L864.6,76.5 L868.7,78.5 L872.8,80.7 L878.2,81.7 L883.4,80.9 L886.1,79.2 L888.8,76.7 L893.2,71.3 L895.2,69.7 L896.5,69.0 L899.2,67.2 L901.8,68.8 L905.2,69.6 L907.6,69.6 L911.3,68.3 L914.3,65.6 L917.0,63.3 L917.0,63.2 L920.7,61.7 L924.3,62.2 L927.6,61.9 L930.9,61.8 L937.4,68.4 L944.0,69.6 L946.9,69.8 L949.8,69.7 L953.4,70.0 L957.3,70.4 L958.8,71.5 L958.8,71.5 L964.5,76.3 L967.6,78.3 L969.3,79.3 L971.7,80.2 L975.7,81.5 L980.3,82.1 L984.9,82.3 L984.9,82.3 L988.9,81.8 L992.6,81.0 L996.3,80.1 L996.3,80.0 L997.3,80.0 L1000.0,79.2"
+                fill="none"
+                stroke="#eab308"
+                stroke-width="2"
+                vector-effect="non-scaling-stroke"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="133.8"
+                y1="0"
+                x2="133.8"
+                y2="100"
+                stroke="#eab308"
+                stroke-width="1"
+                stroke-dasharray="3 3"
+                opacity="0.55"
+                vector-effect="non-scaling-stroke"
+              />
+            </svg>
+            <figcaption class="profil-txt">
+              <span>Lägst 108&nbsp;m ö.h.</span>
+              <span class="profil-topp">Högst 187&nbsp;m ö.h. vid km 1,81</span>
+              <span>13,53&nbsp;km</span>
+            </figcaption>
+          </figure>
+
+          <div class="berattelse">
+            <p>
+              Redan under f&ouml;rsta kilometern b&ouml;rjar det b&auml;ra
+              upp&aring;t, och fram till km 1,81 kl&auml;ttras 70 h&ouml;jdmeter
+              upp till banans h&ouml;gsta punkt p&aring; 187 meter &ouml;ver
+              havet.
+            </p>
+            <p>
+              <strong
+                >226 h&ouml;jdmeter uppf&ouml;r och lika m&aring;nga
+                nedf&ouml;r</strong
+              >. Tv&aring; tredjedelar av stigningen ligger i f&ouml;rsta
+              halvan.
+            </p>
+            <p>
+              <strong>Steffen Dalsgaard</strong> utnyttjade det till fullo:
+              54:02 &ouml;ver 13,53 km betyder <strong>4:00 min/km</strong> hela
+              v&auml;gen. Snabbaste dam blev
+              <strong>Karin H&auml;gglund</strong> p&aring; imponerande 1:06:09,
+              femma totalt.
+            </p>
+            <p>
+              En annan imponerande prestation var
+              <strong>Hilding Kjellqvist</strong> 15 år som tog en 6 plats.
+            </p>
+          </div>
+
+          <div class="tabellsvep">
+            <table>
+              <caption class="sr-only">
+                Resultat l&aring;ng distans, 13,53 km
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Plac</th>
+                  <th scope="col">Nr</th>
+                  <th scope="col">Namn</th>
+                  <th scope="col" class="h-tid">Tid</th>
+                  <th scope="col" class="h-tempo">Min/km</th>
+                </tr>
+              </thead>
+              <tbody data-tabell>
+                <tr class="rad seger" data-sok="steffen dalsgaard 128">
+                  <td class="plac">1</td>
+                  <td class="nr">128</td>
+                  <td class="namn">
+                    Steffen Dalsgaard<span class="vinnare"
+                      ><svg
+                        class="v-i"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <circle cx="12" cy="9" r="5.2" />
+                        <path
+                          d="M8.8 13.4 7.5 21l4.5-2.3 4.5 2.3-1.3-7.6"
+                        /></svg
+                      >1:a herr</span
+                    >
+                  </td>
+                  <td class="tid">00:54:02</td>
+                  <td class="tempo">4:00</td>
+                </tr>
+                <tr class="rad" data-sok="alfred hellgren 101">
+                  <td class="plac">2</td>
+                  <td class="nr">101</td>
+                  <td class="namn">Alfred Hellgren</td>
+                  <td class="tid">01:03:53</td>
+                  <td class="tempo">4:43</td>
+                </tr>
+                <tr class="rad" data-sok="tord berggren 132">
+                  <td class="plac">3</td>
+                  <td class="nr">132</td>
+                  <td class="namn">Tord Berggren</td>
+                  <td class="tid">01:04:48</td>
+                  <td class="tempo">4:47</td>
+                </tr>
+                <tr class="rad" data-sok="willy westman 133">
+                  <td class="plac">4</td>
+                  <td class="nr">133</td>
+                  <td class="namn">Willy Westman</td>
+                  <td class="tid">01:05:22</td>
+                  <td class="tempo">4:50</td>
+                </tr>
+                <tr class="rad seger" data-sok="karin hägglund 114">
+                  <td class="plac">5</td>
+                  <td class="nr">114</td>
+                  <td class="namn">
+                    Karin Hägglund<span class="vinnare"
+                      ><svg
+                        class="v-i"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <circle cx="12" cy="9" r="5.2" />
+                        <path
+                          d="M8.8 13.4 7.5 21l4.5-2.3 4.5 2.3-1.3-7.6"
+                        /></svg
+                      >1:a dam</span
+                    >
+                  </td>
+                  <td class="tid">01:06:09</td>
+                  <td class="tempo">4:53</td>
+                </tr>
+                <tr class="rad" data-sok="hilding kjellqvist 110">
+                  <td class="plac">6</td>
+                  <td class="nr">110</td>
+                  <td class="namn">Hilding Kjellqvist</td>
+                  <td class="tid">01:07:10</td>
+                  <td class="tempo">4:58</td>
+                </tr>
+                <tr class="rad" data-sok="isak nordberg 112">
+                  <td class="plac">7</td>
+                  <td class="nr">112</td>
+                  <td class="namn">Isak Nordberg</td>
+                  <td class="tid">01:08:25</td>
+                  <td class="tempo">5:03</td>
+                </tr>
+                <tr class="rad" data-sok="robert bruce 123">
+                  <td class="plac">8</td>
+                  <td class="nr">123</td>
+                  <td class="namn">Robert Bruce</td>
+                  <td class="tid">01:09:35</td>
+                  <td class="tempo">5:09</td>
+                </tr>
+                <tr class="rad" data-sok="ida näslund 111">
+                  <td class="plac">9</td>
+                  <td class="nr">111</td>
+                  <td class="namn">Ida Näslund</td>
+                  <td class="tid">01:09:50</td>
+                  <td class="tempo">5:10</td>
+                </tr>
+                <tr class="rad" data-sok="christian häggström 105">
+                  <td class="plac">10</td>
+                  <td class="nr">105</td>
+                  <td class="namn">Christian Häggström</td>
+                  <td class="tid">01:10:50</td>
+                  <td class="tempo">5:14</td>
+                </tr>
+                <tr class="rad" data-sok="philip sundström 122">
+                  <td class="plac">11</td>
+                  <td class="nr">122</td>
+                  <td class="namn">Philip Sundström</td>
+                  <td class="tid">01:11:01</td>
+                  <td class="tempo">5:15</td>
+                </tr>
+                <tr class="rad" data-sok="tobias axandersson 131">
+                  <td class="plac">12</td>
+                  <td class="nr">131</td>
+                  <td class="namn">Tobias Axandersson</td>
+                  <td class="tid">01:11:15</td>
+                  <td class="tempo">5:16</td>
+                </tr>
+                <tr class="rad" data-sok="emil petersson 107">
+                  <td class="plac">13</td>
+                  <td class="nr">107</td>
+                  <td class="namn">Emil Petersson</td>
+                  <td class="tid">01:12:55</td>
+                  <td class="tempo">5:23</td>
+                </tr>
+                <tr class="rad" data-sok="klara sundberg 115">
+                  <td class="plac">14</td>
+                  <td class="nr">115</td>
+                  <td class="namn">Klara Sundberg</td>
+                  <td class="tid">01:13:23</td>
+                  <td class="tempo">5:26</td>
+                </tr>
+                <tr class="rad" data-sok="conny eriksson 134">
+                  <td class="plac">15</td>
+                  <td class="nr">134</td>
+                  <td class="namn">Conny Eriksson</td>
+                  <td class="tid">01:13:26</td>
+                  <td class="tempo">5:26</td>
+                </tr>
+                <tr class="rad" data-sok="fredrik rosenblom 135">
+                  <td class="plac">16</td>
+                  <td class="nr">135</td>
+                  <td class="namn">Fredrik Rosenblom</td>
+                  <td class="tid">01:14:11</td>
+                  <td class="tempo">5:29</td>
+                </tr>
+                <tr class="rad" data-sok="filip andersson 109">
+                  <td class="plac">17</td>
+                  <td class="nr">109</td>
+                  <td class="namn">Filip Andersson</td>
+                  <td class="tid">01:15:54</td>
+                  <td class="tempo">5:37</td>
+                </tr>
+                <tr class="rad" data-sok="jonatan hjeltman 113">
+                  <td class="plac">18</td>
+                  <td class="nr">113</td>
+                  <td class="namn">Jonatan Hjeltman</td>
+                  <td class="tid">01:16:08</td>
+                  <td class="tempo">5:38</td>
+                </tr>
+                <tr class="rad" data-sok="ann-caroline wiberg 103">
+                  <td class="plac">19</td>
+                  <td class="nr">103</td>
+                  <td class="namn">Ann-Caroline Wiberg</td>
+                  <td class="tid">01:17:08</td>
+                  <td class="tempo">5:42</td>
+                </tr>
+                <tr class="rad" data-sok="simon lundberg 127">
+                  <td class="plac">20</td>
+                  <td class="nr">127</td>
+                  <td class="namn">Simon Lundberg</td>
+                  <td class="tid">01:17:36</td>
+                  <td class="tempo">5:44</td>
+                </tr>
+                <tr class="rad" data-sok="sabina hermansson 125">
+                  <td class="plac">21</td>
+                  <td class="nr">125</td>
+                  <td class="namn">Sabina Hermansson</td>
+                  <td class="tid">01:18:59</td>
+                  <td class="tempo">5:50</td>
+                </tr>
+                <tr class="rad" data-sok="brian thorsén 104">
+                  <td class="plac">22</td>
+                  <td class="nr">104</td>
+                  <td class="namn">Brian Thorsén</td>
+                  <td class="tid">01:19:07</td>
+                  <td class="tempo">5:51</td>
+                </tr>
+                <tr class="rad" data-sok="david kjellqvist 106">
+                  <td class="plac">23</td>
+                  <td class="nr">106</td>
+                  <td class="namn">David Kjellqvist</td>
+                  <td class="tid">01:20:40</td>
+                  <td class="tempo">5:58</td>
+                </tr>
+                <tr class="rad" data-sok="saga näslund 139">
+                  <td class="plac">24</td>
+                  <td class="nr">139</td>
+                  <td class="namn">Saga Näslund</td>
+                  <td class="tid">01:21:46</td>
+                  <td class="tempo">6:03</td>
+                </tr>
+                <tr class="rad" data-sok="jon pynesius 142">
+                  <td class="plac">25</td>
+                  <td class="nr">142</td>
+                  <td class="namn">Jon Pynesius</td>
+                  <td class="tid">01:22:13</td>
+                  <td class="tempo">6:05</td>
+                </tr>
+                <tr class="rad" data-sok="alva karlsson 102">
+                  <td class="plac">26</td>
+                  <td class="nr">102</td>
+                  <td class="namn">Alva Karlsson</td>
+                  <td class="tid">01:23:01</td>
+                  <td class="tempo">6:08</td>
+                </tr>
+                <tr class="rad" data-sok="mats karlsson 119">
+                  <td class="plac">27</td>
+                  <td class="nr">119</td>
+                  <td class="namn">Mats Karlsson</td>
+                  <td class="tid">01:23:04</td>
+                  <td class="tempo">6:08</td>
+                </tr>
+                <tr class="rad" data-sok="michaela häggström 120">
+                  <td class="plac">28</td>
+                  <td class="nr">120</td>
+                  <td class="namn">Michaela Häggström</td>
+                  <td class="tid">01:24:18</td>
+                  <td class="tempo">6:14</td>
+                </tr>
+                <tr class="rad" data-sok="lena-maria vallrud 116">
+                  <td class="plac">29</td>
+                  <td class="nr">116</td>
+                  <td class="namn">Lena-Maria Vallrud</td>
+                  <td class="tid">01:24:58</td>
+                  <td class="tempo">6:17</td>
+                </tr>
+                <tr class="rad" data-sok="evelina strandberg 108">
+                  <td class="plac">
+                    30 <span class="tie" title="Delad placering">delad</span>
+                  </td>
+                  <td class="nr">108</td>
+                  <td class="namn">Evelina Strandberg</td>
+                  <td class="tid">01:25:43</td>
+                  <td class="tempo">6:20</td>
+                </tr>
+                <tr class="rad" data-sok="erik holmgren 141">
+                  <td class="plac">
+                    30 <span class="tie" title="Delad placering">delad</span>
+                  </td>
+                  <td class="nr">141</td>
+                  <td class="namn">Erik Holmgren</td>
+                  <td class="tid">01:25:43</td>
+                  <td class="tempo">6:20</td>
+                </tr>
+                <tr class="rad" data-sok="ronja mella 124">
+                  <td class="plac">32</td>
+                  <td class="nr">124</td>
+                  <td class="namn">Ronja Mella</td>
+                  <td class="tid">01:28:27</td>
+                  <td class="tempo">6:32</td>
+                </tr>
+                <tr class="rad" data-sok="jesper nordström 140">
+                  <td class="plac">33</td>
+                  <td class="nr">140</td>
+                  <td class="namn">Jesper Nordström</td>
+                  <td class="tid">01:37:57</td>
+                  <td class="tempo">7:14</td>
+                </tr>
+                <tr class="rad" data-sok="arvid dynesius 143">
+                  <td class="plac">34</td>
+                  <td class="nr">143</td>
+                  <td class="namn">Arvid Dynesius</td>
+                  <td class="tid">01:38:06</td>
+                  <td class="tempo">7:15</td>
+                </tr>
+                <tr class="rad" data-sok="terese eidenmark 130">
+                  <td class="plac">35</td>
+                  <td class="nr">130</td>
+                  <td class="namn">Terese Eidenmark</td>
+                  <td class="tid">01:39:49</td>
+                  <td class="tempo">7:23</td>
+                </tr>
+                <tr class="rad" data-sok="julia höglund 137">
+                  <td class="plac">36</td>
+                  <td class="nr">137</td>
+                  <td class="namn">Julia Höglund</td>
+                  <td class="tid">02:01:55</td>
+                  <td class="tempo">9:01</td>
+                </tr>
+                <tr class="rad" data-sok="victor höglund 138">
+                  <td class="plac">37</td>
+                  <td class="nr">138</td>
+                  <td class="namn">Victor Höglund</td>
+                  <td class="tid">02:01:57</td>
+                  <td class="tempo">9:01</td>
+                </tr>
+                <tr class="rad" data-sok="lova höglund 136">
+                  <td class="plac">38</td>
+                  <td class="nr">136</td>
+                  <td class="namn">Lova Höglund</td>
+                  <td class="tid">02:02:32</td>
+                  <td class="tempo">9:04</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="ingen-traff" data-tom>
+            Ingen tr&auml;ff i den h&auml;r klassen.
+          </p>
+          <p class="tab-fot">
+            38 i m&aring;l &middot; mediantid 01:17:22 (5:43 min/km) &middot;
+            nio l&ouml;pare under 1:10 och trettiotv&aring; under 1:30.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ KORT ═══════════════ -->
+      <section class="sektion" id="kort">
+        <div class="sek-huvud">
+          <div>
+            <p class="sek-etikett" style="color: var(--kort)">Kort distans</p>
+            <h2>5,43 kilometer</h2>
+          </div>
+          <span
+            class="sek-dist"
+            style="background: var(--kort-soft); color: var(--kort)"
+            >30 i m&aring;l</span
+          >
+        </div>
+
+        <div class="kort-panel">
+          <div class="band" style="background: var(--kort-line)"></div>
+
+          <div class="banfakta">
+            <h3>Banan i siffror</h3>
+            <div class="chips">
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 8.5v7M21 8.5v7M3 12h18" />
+                  <path d="M8 10.5v3M12 10v4M16 10.5v3" /></svg
+                ><span class="chip-v">5,43&nbsp;km</span
+                ><span class="chip-l">Distans</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 17.5l5.5-5.5 3.5 3.5L20 7" />
+                  <path d="M15 7h5v5" /></svg
+                ><span class="chip-v">153&nbsp;m</span
+                ><span class="chip-l">Total kl&auml;ttring</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M8.2 10.2h7.6M8.2 13.8h7.6" /></svg
+                ><span class="chip-v">&plusmn;0&nbsp;m</span
+                ><span class="chip-l">Nettoh&ouml;jd &mdash; rundslinga</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M2 19l6.5-10.5 4.2 6.5 2.6-3.8L21.5 19z" />
+                  <circle cx="8.5" cy="8.5" r="1.5" /></svg
+                ><span class="chip-v">227&nbsp;m</span
+                ><span class="chip-l">H&ouml;gsta punkt &ouml;.h.</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3.5 19.5h17" />
+                  <path d="M3.5 19.5L19 6.5" />
+                  <path d="M9.8 19.5a6.3 6.3 0 0 0-1.1-3.5" /></svg
+                ><span class="chip-v">28,3&nbsp;m</span
+                ><span class="chip-l">Kl&auml;ttring per km</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3.5 19.5h17M3.5 19.5 17.5 5.5" />
+                  <path d="M13.3 5.5h4.2v4.2" /></svg
+                ><span class="chip-v">14,4&nbsp;%</span
+                ><span class="chip-l">Brantaste partiet</span>
+              </div>
+            </div>
+          </div>
+
+          <figure class="profil">
+            <svg
+              viewBox="0 0 1000 100"
+              preserveAspectRatio="none"
+              role="img"
+              aria-label="Höjdprofil från 117 till 227 meter över havet"
+            >
+              <defs>
+                <linearGradient id="g-kort" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#22c55e" stop-opacity="0.42" />
+                  <stop
+                    offset="100%"
+                    stop-color="#22c55e"
+                    stop-opacity="0.02"
+                  />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0.0,89.6 L3.8,89.8 L10.6,90.1 L25.5,91.2 L25.5,91.2 L31.9,91.6 L36.6,91.8 L36.6,91.8 L42.4,92.0 L53.5,91.9 L57.6,91.6 L57.6,91.6 L64.9,91.4 L75.0,90.5 L77.5,90.3 L77.5,90.3 L81.1,89.9 L92.9,87.7 L111.0,83.5 L119.5,85.4 L128.1,83.5 L137.4,83.2 L146.8,83.0 L154.0,83.1 L161.3,82.9 L162.4,83.0 L162.4,82.9 L169.1,81.7 L183.9,75.8 L194.7,71.9 L207.5,70.2 L216.6,69.9 L224.1,72.0 L230.4,70.2 L237.6,68.2 L245.5,63.4 L251.3,58.4 L257.1,57.4 L263.4,56.6 L271.6,53.4 L280.9,50.6 L283.4,50.0 L287.7,48.2 L297.7,43.2 L306.8,36.4 L314.4,33.6 L321.7,28.0 L330.0,24.4 L339.0,24.5 L346.9,29.1 L355.0,27.7 L361.6,26.7 L367.5,25.1 L378.7,24.9 L387.4,25.7 L396.0,27.1 L399.2,28.2 L404.0,29.3 L408.8,26.2 L415.1,21.5 L424.0,17.3 L431.1,17.3 L437.9,16.9 L444.6,12.7 L452.3,11.9 L458.1,9.9 L462.3,8.0 L466.0,10.1 L470.1,12.1 L473.4,12.5 L477.3,10.5 L481.0,10.3 L484.9,11.4 L488.1,11.4 L492.7,13.6 L496.7,22.5 L500.7,27.3 L505.3,22.6 L510.7,32.6 L515.7,36.1 L521.2,39.3 L528.1,43.7 L534.4,46.9 L540.4,48.9 L546.3,51.8 L554.2,53.8 L557.4,55.0 L559.5,56.9 L562.4,58.9 L566.1,61.3 L570.3,64.1 L575.4,67.7 L577.8,70.1 L580.4,71.0 L585.3,69.7 L591.1,75.2 L601.1,74.7 L608.8,75.0 L617.7,78.4 L617.7,78.3 L623.9,79.5 L629.1,81.3 L642.0,85.2 L655.0,87.4 L668.0,88.9 L680.4,90.8 L693.8,91.6 L697.2,91.5 L697.2,91.5 L706.9,91.0 L720.3,88.0 L729.1,84.5 L731.2,84.1 L739.4,82.5 L746.2,81.2 L752.7,82.4 L762.5,83.0 L762.5,83.0 L767.0,82.9 L776.2,82.0 L783.7,80.6 L785.5,79.7 L785.5,79.7 L791.9,77.9 L799.7,77.3 L808.7,77.7 L815.7,77.5 L825.1,77.4 L841.4,82.1 L857.7,82.9 L863.0,83.1 L865.0,83.1 L872.2,83.0 L881.2,83.2 L890.9,83.5 L909.0,87.7 L912.6,88.5 L920.8,89.9 L926.7,90.5 L936.8,91.4 L948.2,91.9 L957.6,92.0 L957.6,92.0 L959.0,92.0 L969.6,91.6 L981.2,90.8 L981.2,90.8 L990.4,90.1 L997.3,89.8 L1000.0,89.6 L1000.0,100.0 L0,100.0 Z"
+                fill="url(#g-kort)"
+              />
+              <path
+                d="M0.0,89.6 L3.8,89.8 L10.6,90.1 L25.5,91.2 L25.5,91.2 L31.9,91.6 L36.6,91.8 L36.6,91.8 L42.4,92.0 L53.5,91.9 L57.6,91.6 L57.6,91.6 L64.9,91.4 L75.0,90.5 L77.5,90.3 L77.5,90.3 L81.1,89.9 L92.9,87.7 L111.0,83.5 L119.5,85.4 L128.1,83.5 L137.4,83.2 L146.8,83.0 L154.0,83.1 L161.3,82.9 L162.4,83.0 L162.4,82.9 L169.1,81.7 L183.9,75.8 L194.7,71.9 L207.5,70.2 L216.6,69.9 L224.1,72.0 L230.4,70.2 L237.6,68.2 L245.5,63.4 L251.3,58.4 L257.1,57.4 L263.4,56.6 L271.6,53.4 L280.9,50.6 L283.4,50.0 L287.7,48.2 L297.7,43.2 L306.8,36.4 L314.4,33.6 L321.7,28.0 L330.0,24.4 L339.0,24.5 L346.9,29.1 L355.0,27.7 L361.6,26.7 L367.5,25.1 L378.7,24.9 L387.4,25.7 L396.0,27.1 L399.2,28.2 L404.0,29.3 L408.8,26.2 L415.1,21.5 L424.0,17.3 L431.1,17.3 L437.9,16.9 L444.6,12.7 L452.3,11.9 L458.1,9.9 L462.3,8.0 L466.0,10.1 L470.1,12.1 L473.4,12.5 L477.3,10.5 L481.0,10.3 L484.9,11.4 L488.1,11.4 L492.7,13.6 L496.7,22.5 L500.7,27.3 L505.3,22.6 L510.7,32.6 L515.7,36.1 L521.2,39.3 L528.1,43.7 L534.4,46.9 L540.4,48.9 L546.3,51.8 L554.2,53.8 L557.4,55.0 L559.5,56.9 L562.4,58.9 L566.1,61.3 L570.3,64.1 L575.4,67.7 L577.8,70.1 L580.4,71.0 L585.3,69.7 L591.1,75.2 L601.1,74.7 L608.8,75.0 L617.7,78.4 L617.7,78.3 L623.9,79.5 L629.1,81.3 L642.0,85.2 L655.0,87.4 L668.0,88.9 L680.4,90.8 L693.8,91.6 L697.2,91.5 L697.2,91.5 L706.9,91.0 L720.3,88.0 L729.1,84.5 L731.2,84.1 L739.4,82.5 L746.2,81.2 L752.7,82.4 L762.5,83.0 L762.5,83.0 L767.0,82.9 L776.2,82.0 L783.7,80.6 L785.5,79.7 L785.5,79.7 L791.9,77.9 L799.7,77.3 L808.7,77.7 L815.7,77.5 L825.1,77.4 L841.4,82.1 L857.7,82.9 L863.0,83.1 L865.0,83.1 L872.2,83.0 L881.2,83.2 L890.9,83.5 L909.0,87.7 L912.6,88.5 L920.8,89.9 L926.7,90.5 L936.8,91.4 L948.2,91.9 L957.6,92.0 L957.6,92.0 L959.0,92.0 L969.6,91.6 L981.2,90.8 L981.2,90.8 L990.4,90.1 L997.3,89.8 L1000.0,89.6"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="2"
+                vector-effect="non-scaling-stroke"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="462.4"
+                y1="0"
+                x2="462.4"
+                y2="100"
+                stroke="#22c55e"
+                stroke-width="1"
+                stroke-dasharray="3 3"
+                opacity="0.55"
+                vector-effect="non-scaling-stroke"
+              />
+            </svg>
+            <figcaption class="profil-txt">
+              <span>Lägst 117&nbsp;m ö.h.</span>
+              <span class="profil-topp">Högst 227&nbsp;m ö.h. vid km 2,51</span>
+              <span>5,43&nbsp;km</span>
+            </figcaption>
+          </figure>
+
+          <div class="berattelse">
+            <p>
+              Kort betyder inte l&auml;tt. Kortbanan &auml;r den brantaste av de
+              tv&aring; &mdash; den kl&auml;ttrar rakt upp fr&aring;n sj&ouml;n
+              till <strong>227 meter &ouml;ver havet</strong>, allts&aring; 41
+              meter h&ouml;gre &auml;n vad l&aring;ngbanan n&aring;gonsin
+              n&aring;r. R&auml;knat per kilometer kl&auml;ttrar den
+              <strong>1,7 g&aring;nger s&aring; mycket</strong> som l&aring;nga
+              banan: 28,3 mot 16,7 h&ouml;jdmeter per kilometer.
+            </p>
+            <p>
+              I praktiken &auml;r det <em>en enda</em> stigning: 109
+              h&ouml;jdmeter fr&aring;n startlinjen upp till toppen vid km 2,51,
+              med 14,4 procents lutning som brantast kring km 1,56.
+            </p>
+            <p>
+              <strong>Anton H&auml;gglund</strong> vann p&aring; 26:40 &mdash;
+              4:55 min/km &mdash; efter en tajt duell med
+              P&auml;r&nbsp;Bystr&ouml;m, 21 sekunder bakom. Snabbaste dam blev
+              <strong>Louise Bystr&ouml;m</strong> p&aring; 29:42, fj&auml;rde
+              plats totalt och tv&aring; sekunder f&ouml;re
+              Hanna&nbsp;Bystr&ouml;m.
+            </p>
+          </div>
+
+          <div class="tabellsvep">
+            <table>
+              <caption class="sr-only">
+                Resultat kort distans, 5,43 km
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Plac</th>
+                  <th scope="col">Nr</th>
+                  <th scope="col">Namn</th>
+                  <th scope="col" class="h-tid">Tid</th>
+                  <th scope="col" class="h-tempo">Min/km</th>
+                </tr>
+              </thead>
+              <tbody data-tabell>
+                <tr class="rad seger" data-sok="anton hägglund 225">
+                  <td class="plac">1</td>
+                  <td class="nr">225</td>
+                  <td class="namn">
+                    Anton Hägglund<span class="vinnare"
+                      ><svg
+                        class="v-i"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <circle cx="12" cy="9" r="5.2" />
+                        <path
+                          d="M8.8 13.4 7.5 21l4.5-2.3 4.5 2.3-1.3-7.6"
+                        /></svg
+                      >1:a herr</span
+                    >
+                  </td>
+                  <td class="tid">00:26:40</td>
+                  <td class="tempo">4:55</td>
+                </tr>
+                <tr class="rad" data-sok="pär byström 218">
+                  <td class="plac">2</td>
+                  <td class="nr">218</td>
+                  <td class="namn">Pär Byström</td>
+                  <td class="tid">00:27:01</td>
+                  <td class="tempo">4:58</td>
+                </tr>
+                <tr class="rad" data-sok="johan westman 219">
+                  <td class="plac">3</td>
+                  <td class="nr">219</td>
+                  <td class="namn">Johan Westman</td>
+                  <td class="tid">00:28:01</td>
+                  <td class="tempo">5:09</td>
+                </tr>
+                <tr class="rad seger" data-sok="louise byström 211">
+                  <td class="plac">4</td>
+                  <td class="nr">211</td>
+                  <td class="namn">
+                    Louise Byström<span class="vinnare"
+                      ><svg
+                        class="v-i"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <circle cx="12" cy="9" r="5.2" />
+                        <path
+                          d="M8.8 13.4 7.5 21l4.5-2.3 4.5 2.3-1.3-7.6"
+                        /></svg
+                      >1:a dam</span
+                    >
+                  </td>
+                  <td class="tid">00:29:42</td>
+                  <td class="tempo">5:28</td>
+                </tr>
+                <tr class="rad" data-sok="hanna byström 216">
+                  <td class="plac">5</td>
+                  <td class="nr">216</td>
+                  <td class="namn">Hanna Byström</td>
+                  <td class="tid">00:29:44</td>
+                  <td class="tempo">5:28</td>
+                </tr>
+                <tr class="rad" data-sok="therese westman 215">
+                  <td class="plac">6</td>
+                  <td class="nr">215</td>
+                  <td class="namn">Therese Westman</td>
+                  <td class="tid">00:30:11</td>
+                  <td class="tempo">5:33</td>
+                </tr>
+                <tr class="rad" data-sok="klara byström 221">
+                  <td class="plac">7</td>
+                  <td class="nr">221</td>
+                  <td class="namn">Klara Byström</td>
+                  <td class="tid">00:30:20</td>
+                  <td class="tempo">5:35</td>
+                </tr>
+                <tr class="rad" data-sok="jonas westman 223">
+                  <td class="plac">8</td>
+                  <td class="nr">223</td>
+                  <td class="namn">Jonas Westman</td>
+                  <td class="tid">00:30:49</td>
+                  <td class="tempo">5:40</td>
+                </tr>
+                <tr class="rad" data-sok="lukas palm 276">
+                  <td class="plac">9</td>
+                  <td class="nr">276</td>
+                  <td class="namn">Lukas Palm</td>
+                  <td class="tid">00:32:03</td>
+                  <td class="tempo">5:54</td>
+                </tr>
+                <tr class="rad" data-sok="vega kjellsson 229">
+                  <td class="plac">10</td>
+                  <td class="nr">229</td>
+                  <td class="namn">Vega Kjellsson</td>
+                  <td class="tid">00:32:04</td>
+                  <td class="tempo">5:54</td>
+                </tr>
+                <tr class="rad" data-sok="rasmus kjellqvist 213">
+                  <td class="plac">11</td>
+                  <td class="nr">213</td>
+                  <td class="namn">Rasmus Kjellqvist</td>
+                  <td class="tid">00:32:16</td>
+                  <td class="tempo">5:56</td>
+                </tr>
+                <tr class="rad" data-sok="lina kjellqvist 210">
+                  <td class="plac">12</td>
+                  <td class="nr">210</td>
+                  <td class="namn">Lina Kjellqvist</td>
+                  <td class="tid">00:32:51</td>
+                  <td class="tempo">6:03</td>
+                </tr>
+                <tr class="rad" data-sok="maja gidlund 212">
+                  <td class="plac">13</td>
+                  <td class="nr">212</td>
+                  <td class="namn">Maja Gidlund</td>
+                  <td class="tid">00:32:53</td>
+                  <td class="tempo">6:03</td>
+                </tr>
+                <tr class="rad" data-sok="hugo kjellsson 237">
+                  <td class="plac">14</td>
+                  <td class="nr">237</td>
+                  <td class="namn">Hugo Kjellsson</td>
+                  <td class="tid">00:32:55</td>
+                  <td class="tempo">6:04</td>
+                </tr>
+                <tr class="rad" data-sok="björn dynesius 227">
+                  <td class="plac">15</td>
+                  <td class="nr">227</td>
+                  <td class="namn">Björn Dynesius</td>
+                  <td class="tid">00:32:57</td>
+                  <td class="tempo">6:04</td>
+                </tr>
+                <tr class="rad" data-sok="hannah gidlund 206">
+                  <td class="plac">16</td>
+                  <td class="nr">206</td>
+                  <td class="namn">Hannah Gidlund</td>
+                  <td class="tid">00:33:43</td>
+                  <td class="tempo">6:12</td>
+                </tr>
+                <tr class="rad" data-sok="eva svensson 220">
+                  <td class="plac">17</td>
+                  <td class="nr">220</td>
+                  <td class="namn">Eva Svensson</td>
+                  <td class="tid">00:33:51</td>
+                  <td class="tempo">6:14</td>
+                </tr>
+                <tr class="rad" data-sok="carina söderlund 222">
+                  <td class="plac">18</td>
+                  <td class="nr">222</td>
+                  <td class="namn">Carina Söderlund</td>
+                  <td class="tid">00:33:54</td>
+                  <td class="tempo">6:14</td>
+                </tr>
+                <tr class="rad" data-sok="elvira nyberg 203">
+                  <td class="plac">
+                    19 <span class="tie" title="Delad placering">delad</span>
+                  </td>
+                  <td class="nr">203</td>
+                  <td class="namn">Elvira Nyberg</td>
+                  <td class="tid">00:35:21</td>
+                  <td class="tempo">6:30</td>
+                </tr>
+                <tr class="rad" data-sok="judith näslund 208">
+                  <td class="plac">
+                    19 <span class="tie" title="Delad placering">delad</span>
+                  </td>
+                  <td class="nr">208</td>
+                  <td class="namn">Judith Näslund</td>
+                  <td class="tid">00:35:21</td>
+                  <td class="tempo">6:30</td>
+                </tr>
+                <tr class="rad" data-sok="lilly källgren 226">
+                  <td class="plac">21</td>
+                  <td class="nr">226</td>
+                  <td class="namn">Lilly Källgren</td>
+                  <td class="tid">00:35:34</td>
+                  <td class="tempo">6:33</td>
+                </tr>
+                <tr class="rad" data-sok="lars höglund 217">
+                  <td class="plac">22</td>
+                  <td class="nr">217</td>
+                  <td class="namn">Lars Höglund</td>
+                  <td class="tid">00:40:18</td>
+                  <td class="tempo">7:25</td>
+                </tr>
+                <tr class="rad" data-sok="emil björkqvist 204">
+                  <td class="plac">23</td>
+                  <td class="nr">204</td>
+                  <td class="namn">Emil Björkqvist</td>
+                  <td class="tid">00:40:29</td>
+                  <td class="tempo">7:27</td>
+                </tr>
+                <tr class="rad" data-sok="kristi poldeja 224">
+                  <td class="plac">24</td>
+                  <td class="nr">224</td>
+                  <td class="namn">Kristi Poldeja</td>
+                  <td class="tid">00:41:05</td>
+                  <td class="tempo">7:34</td>
+                </tr>
+                <tr class="rad" data-sok="albin björkqvist 201">
+                  <td class="plac">
+                    25 <span class="tie" title="Delad placering">delad</span>
+                  </td>
+                  <td class="nr">201</td>
+                  <td class="namn">Albin Björkqvist</td>
+                  <td class="tid">00:48:00</td>
+                  <td class="tempo">8:50</td>
+                </tr>
+                <tr class="rad" data-sok="anna björkqvist 202">
+                  <td class="plac">
+                    25 <span class="tie" title="Delad placering">delad</span>
+                  </td>
+                  <td class="nr">202</td>
+                  <td class="namn">Anna Björkqvist</td>
+                  <td class="tid">00:48:00</td>
+                  <td class="tempo">8:50</td>
+                </tr>
+                <tr class="rad" data-sok="ulrika edholm 214">
+                  <td class="plac">27</td>
+                  <td class="nr">214</td>
+                  <td class="namn">Ulrika Edholm</td>
+                  <td class="tid">00:51:54</td>
+                  <td class="tempo">9:33</td>
+                </tr>
+                <tr class="rad" data-sok="elvira carlsson 228">
+                  <td class="plac">28</td>
+                  <td class="nr">228</td>
+                  <td class="namn">Elvira Carlsson</td>
+                  <td class="tid">01:00:38</td>
+                  <td class="tempo">11:10</td>
+                </tr>
+                <tr class="rad" data-sok="julia byström 209">
+                  <td class="plac">29</td>
+                  <td class="nr">209</td>
+                  <td class="namn">Julia Byström</td>
+                  <td class="tid">01:00:42</td>
+                  <td class="tempo">11:11</td>
+                </tr>
+                <tr class="rad" data-sok="emmy berggren 205">
+                  <td class="plac">30</td>
+                  <td class="nr">205</td>
+                  <td class="namn">Emmy Berggren</td>
+                  <td class="tid">01:00:56</td>
+                  <td class="tempo">11:13</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="ingen-traff" data-tom>
+            Ingen tr&auml;ff i den h&auml;r klassen.
+          </p>
+          <p class="tab-fot">
+            30 i m&aring;l &middot; mediantid 00:33:20 (6:08 min/km) &middot;
+            t&auml;tast i f&auml;ltet: fr&aring;n 12:e till 15:e plats skiljde
+            bara 6 sekunder.
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ MOTION ═══════════════ -->
+      <section class="sektion" id="motion">
+        <div class="sek-huvud">
+          <div>
+            <p class="sek-etikett" style="color: var(--motion)">Motion</p>
+            <h2>Alla som tog sig runt</h2>
+          </div>
+          <span
+            class="sek-dist"
+            style="background: var(--motion-soft); color: var(--motion)"
+            >17 deltagare</span
+          >
+        </div>
+
+        <div class="kort-panel">
+          <div class="band" style="background: var(--motion-line)"></div>
+
+          <div class="banfakta">
+            <h3>Banan i siffror</h3>
+            <div class="chips">
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 8.5v7M21 8.5v7M3 12h18" />
+                  <path d="M8 10.5v3M12 10v4M16 10.5v3" /></svg
+                ><span class="chip-v">5,43&nbsp;km</span
+                ><span class="chip-l">Samma bana som kort</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 17.5l5.5-5.5 3.5 3.5L20 7" />
+                  <path d="M15 7h5v5" /></svg
+                ><span class="chip-v">153&nbsp;m</span
+                ><span class="chip-l">Total kl&auml;ttring</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M2 19l6.5-10.5 4.2 6.5 2.6-3.8L21.5 19z" />
+                  <circle cx="8.5" cy="8.5" r="1.5" /></svg
+                ><span class="chip-v">227&nbsp;m</span
+                ><span class="chip-l">Byathlons h&ouml;gsta punkt</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <ellipse cx="7.3" cy="10.2" rx="1.9" ry="2.5" />
+                  <ellipse cx="12" cy="8.4" rx="1.9" ry="2.6" />
+                  <ellipse cx="16.7" cy="10.2" rx="1.9" ry="2.5" />
+                  <path
+                    d="M12 20.4c-2.5 0-4.5-1.5-4.5-3.4 0-1.9 2-3.3 4.5-3.3s4.5 1.4 4.5 3.3c0 1.9-2 3.4-4.5 3.4z"
+                  /></svg
+                ><span class="chip-v">V&auml;lkomna</span
+                ><span class="chip-l">Hundar</span>
+              </div>
+              <div class="chip">
+                <svg
+                  class="chip-i"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="12" cy="13.5" r="7" />
+                  <path d="M12 9.8v3.7M9.8 2.8h4.4M12 2.8v2.3" />
+                  <path d="M6.2 19.8 18.4 6.6" /></svg
+                ><span class="chip-v">Ingen</span
+                ><span class="chip-l">Tidtagning</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="berattelse">
+            <p>
+              Motionsklassen handlar om en enda sak: att ta sig runt. Samma
+              backar, samma utsikt fr&aring;n 227 meter men helt utan klocka.
+              H&auml;r g&aring;r man, pratar, stannar och tittar, och kommer i
+              m&aring;l precis lika mycket som alla andra.
+            </p>
+            <p>
+              Att g&aring; eller springa 5,43 kilometer med 153 h&ouml;jdmeter
+              &auml;r en riktig prestation, oavsett vad urtavlan s&auml;ger.
+              <strong>Stort hurra till er alla.</strong>
+            </p>
+          </div>
+
+          <ul class="motion-lista" data-tabell>
+            <li class="deltagare" data-sok="rasmus sjöblom 277">
+              <span class="d-nr">277</span
+              ><span class="d-namn">Rasmus Sjöblom</span>
+            </li>
+            <li class="deltagare" data-sok="britta palén 278">
+              <span class="d-nr">278</span
+              ><span class="d-namn">Britta Palén</span>
+            </li>
+            <li class="deltagare" data-sok="klara sundell 279">
+              <span class="d-nr">279</span
+              ><span class="d-namn">Klara Sundell</span>
+            </li>
+            <li class="deltagare" data-sok="cornelia vidmark 281">
+              <span class="d-nr">281</span
+              ><span class="d-namn">Cornelia Vidmark</span>
+            </li>
+            <li class="deltagare" data-sok="madelaine höglund 282">
+              <span class="d-nr">282</span
+              ><span class="d-namn">Madelaine Höglund</span>
+            </li>
+            <li class="deltagare" data-sok="ove höglund 285">
+              <span class="d-nr">285</span
+              ><span class="d-namn">Ove Höglund</span>
+            </li>
+            <li class="deltagare" data-sok="michael dolhai 286">
+              <span class="d-nr">286</span
+              ><span class="d-namn">Michael Dolhai</span>
+            </li>
+            <li class="deltagare" data-sok="maria häggström 287">
+              <span class="d-nr">287</span
+              ><span class="d-namn">Maria Häggström</span>
+            </li>
+            <li class="deltagare" data-sok="lena kristoffersson 289">
+              <span class="d-nr">289</span
+              ><span class="d-namn">Lena Kristoffersson</span>
+            </li>
+            <li class="deltagare" data-sok="lars-olof häggström 290">
+              <span class="d-nr">290</span
+              ><span class="d-namn">Lars-Olof Häggström</span>
+            </li>
+            <li class="deltagare" data-sok="kerstin sundwall 292">
+              <span class="d-nr">292</span
+              ><span class="d-namn">Kerstin Sundwall</span>
+            </li>
+            <li class="deltagare" data-sok="tilda holmgren 294">
+              <span class="d-nr">294</span
+              ><span class="d-namn">Tilda Holmgren</span>
+            </li>
+            <li class="deltagare" data-sok="emelie sjölander 295">
+              <span class="d-nr">295</span
+              ><span class="d-namn">Emelie Sjölander</span>
+            </li>
+            <li class="deltagare" data-sok="ellen holmgren 296">
+              <span class="d-nr">296</span
+              ><span class="d-namn">Ellen Holmgren</span>
+            </li>
+            <li class="deltagare" data-sok="dennis ludén 297">
+              <span class="d-nr">297</span
+              ><span class="d-namn">Dennis Ludén</span>
+            </li>
+            <li class="deltagare" data-sok="anna uhlin 298">
+              <span class="d-nr">298</span
+              ><span class="d-namn">Anna Uhlin</span>
+            </li>
+            <li class="deltagare" data-sok="alexander gustavsson 299">
+              <span class="d-nr">299</span
+              ><span class="d-namn">Alexander Gustavsson</span>
+            </li>
+          </ul>
+          <p class="ingen-traff" data-tom>
+            Ingen tr&auml;ff i den h&auml;r klassen.
+          </p>
+          <p class="tab-fot">17 deltagare runt banan.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ STATISTIK ═══════════════ -->
+      <section class="sektion" id="statistik">
+        <div class="sek-huvud">
+          <div>
+            <p class="sek-etikett" style="color: var(--ink-faint)">
+              Kul att veta
+            </p>
+            <h2>Dagen i siffror</h2>
+          </div>
+        </div>
+
+        <ul class="statlista">
+          <li>
+            <span class="stat-v">85</span
+            ><span
+              >personer i m&aring;l &mdash; 38 p&aring; 13,53 km, 30 p&aring;
+              5,43 km och 17 i motionsklassen.</span
+            >
+          </li>
+          <li>
+            <span class="stat-v">769 km</span
+            ><span
+              >sammanlagt tillryggalagda. Det &auml;r v&auml;gen
+              h&auml;rifr&aring;n ner till Stockholm och en bra bit tillbaka
+              igen.</span
+            >
+          </li>
+          <li>
+            <span class="stat-v">15 792 m</span
+            ><span
+              >kl&auml;ttrade tillsammans &mdash; motsvarande
+              <strong>7,5 bestigningar av Kebnekaise</strong>.</span
+            >
+          </li>
+          <li>
+            <span class="stat-v">4:00</span
+            ><span
+              >min/km &mdash; Steffen Dalsgaards snitt &ouml;ver hela
+              l&aring;ngbanan, p&aring; sekunden j&auml;mnt.</span
+            >
+          </li>
+          <li>
+            <span class="stat-v">+41 m</span
+            ><span
+              >h&ouml;gre n&aring;r <strong>kortbanan</strong> (227 m &ouml;.h.)
+              &auml;n l&aring;ngbanan (187 m &ouml;.h.). Kort &auml;r inte
+              detsamma som platt.</span
+            >
+          </li>
+          <li>
+            <span class="stat-v">14,4 %</span
+            ><span
+              >brantaste lutningen p&aring; hela Byathlon, vid km 1,56 p&aring;
+              kortbanan.</span
+            >
+          </li>
+          <li>
+            <span class="stat-v">3 st</span
+            ><span
+              >delade placeringar, alla p&aring; samma sekund &mdash;
+              d&auml;ribland Albin och Anna Bj&ouml;rkqvist som gick i m&aring;l
+              tillsammans p&aring; 48:00.</span
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="brand">
+          <img
+            src="Image/Byathlon_Loga.png"
+            alt="Byathlon logotyp"
+            width="48"
+            height="48"
+            loading="lazy"
+          />
+          <span>Byathlon</span>
+        </div>
+        <p class="devis">Spring &middot; G&aring; &middot; Bada</p>
+        <p style="font-size: 0.9rem; max-width: 34rem; margin: 0 auto">
+          Tack till alla deltagare, funktion&auml;rer och publik som gjorde
+          Byathlon 2026 till vad det blev &mdash; och tack till v&aring;ra
+          sponsorer. Vi ses vid startlinjen n&auml;sta &aring;r.
+        </p>
+        <p class="fot-lank">
+          <a href="index.html">Till startsidan</a> &nbsp;&middot;&nbsp;
+          <a href="omradeskarta.html">Omr&aring;deskarta</a>
+        </p>
+        <p style="margin-top: 2rem; font-size: 0.75rem; opacity: 0.65">
+          By Intressef&ouml;rening
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Dronarfilmen i hero: sta still om besokaren bett om mindre rorelse,
+      // och forsok igen om webblasaren blockerar autospelningen.
+      (function () {
+        var film = document.querySelector(".hero-film");
+        if (!film) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          film.removeAttribute("autoplay");
+          film.pause();
+          return;
+        }
+        var spela = function () {
+          var p = film.play();
+          if (p && p.catch) p.catch(function () {});
+        };
+        spela();
+        document.addEventListener("visibilitychange", function () {
+          if (!document.hidden) spela();
+        });
+      })();
+
+      // Live-filtrering: matchar mot namn och startnummer i data-sok.
+      (function () {
+        var falt = document.getElementById("sok");
+        var rensa = document.getElementById("rensa");
+        var status = document.getElementById("sok-status");
+        var poster = Array.prototype.slice.call(
+          document.querySelectorAll("[data-sok]"),
+        );
+        var block = Array.prototype.slice.call(
+          document.querySelectorAll("[data-tabell]"),
+        );
+        // Utom-tavlan-posterna ar sokbara men raknas inte som tavlande.
+        var totalt = document.querySelectorAll(
+          "[data-sok]:not([data-utom])",
+        ).length;
+
+        function filtrera() {
+          var q = falt.value.trim().toLowerCase();
+          rensa.style.display = q ? "block" : "none";
+
+          var traffar = 0;
+          poster.forEach(function (p) {
+            var visa = !q || p.getAttribute("data-sok").indexOf(q) !== -1;
+            p.classList.toggle("dold", !visa);
+            if (visa) traffar++;
+          });
+
+          block.forEach(function (b) {
+            var kvar = b.querySelectorAll("[data-sok]:not(.dold)").length;
+            var panel = b.closest(".kort-panel");
+            var tom = panel && panel.querySelector("[data-tom]");
+            if (tom) tom.classList.toggle("visa", q !== "" && kvar === 0);
+          });
+
+          status.textContent = q
+            ? traffar + (traffar === 1 ? " träff" : " träffar")
+            : totalt + " deltagare";
+        }
+
+        falt.addEventListener("input", filtrera);
+        rensa.addEventListener("click", function () {
+          falt.value = "";
+          falt.focus();
+          filtrera();
+        });
+        falt.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            falt.value = "";
+            filtrera();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
